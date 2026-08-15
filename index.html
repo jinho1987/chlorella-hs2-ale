@@ -266,6 +266,7 @@ footer{ padding:44px 0 60px; }
       <a href="#genes">Candidates</a>
       <a href="#rigor">Rigor</a>
       <a href="#convergence">HS19 &amp; HMF</a>
+      <a href="#phenotype">Phenotype</a>
       <a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report8.html" class="cta">Full report →</a>
     </div>
   </div>
@@ -555,6 +556,26 @@ footer{ padding:44px 0 60px; }
     <figure class="fig reveal" style="margin-top:44px;">
       <img src="assets/fig22_saltstress_barcharts_heatmap.png" alt="Per-gene log fold change bar charts and expression heatmap across salt-stress conditions" loading="lazy">
       <div class="fig-cap"><span class="k">Expression evidence</span>Per-gene fold-change under salt stress (left) and a normalized expression heatmap across all four sampled conditions (right), for the nine key ALE pathway candidates.</div>
+    </figure>
+  </div>
+</section>
+
+<section id="phenotype">
+  <div class="wrap">
+    <div class="section-tag">08 — Phenotype</div>
+    <div class="section-head reveal">
+      <h2>What the genome predicts, the flask confirms</h2>
+      <p>Genomics and transcriptomics say ALE should be more hydrolysate-tolerant. Direct measurement says the same thing, independently: a clean, dose-dependent growth advantage with a plausible mechanism, and a consistent single-cell physiological signature across hundreds of individually imaged cells.</p>
+    </div>
+
+    <figure class="fig reveal">
+      <img src="assets/fig23_growth_mechanism.png" alt="HS2 vs ALE growth curves under increasing hydrolysate stress, light vs dark, and residual glucose consumption" loading="lazy">
+      <div class="fig-cap"><span class="k">Growth &amp; mechanism</span>Flask-scale growth (n=2) across a hydrolysate dose series: HS2 and ALE converge in standard media, diverge under stress, and HS2 fails outright at the harshest concentration — while leaving nearly all the glucose in the medium unconsumed. The advantage is markedly reduced in the dark, pointing to a photosynthesis-linked mechanism rather than pure heterotrophic detoxification.</div>
+    </figure>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig24_singlecell_phenotype.png" alt="Single-cell boxplots of cell area, Nile red lipid staining, autofluorescence, and their ratio, HS2 vs ALE across four conditions" loading="lazy">
+      <div class="fig-cap"><span class="k">Single-cell resolution</span>Fluorescence microscopy, 100 cells per group, Mann-Whitney U with FDR correction. Under stress, HS2 cells swell dramatically (consistent with stress-induced cell-cycle arrest) while ALE keeps dividing at a normal size. ALE also shows a consistent shift toward lipid storage over pigment content (elevated Nile red, reduced autofluorescence) present even without stress.</div>
     </figure>
   </div>
 </section>
