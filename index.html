@@ -267,6 +267,7 @@ footer{ padding:44px 0 60px; }
       <a href="#rigor">Rigor</a>
       <a href="#convergence">HS19 &amp; HMF</a>
       <a href="#phenotype">Phenotype</a>
+      <a href="#temporal">Decade check</a>
       <a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report8.html" class="cta">Full report →</a>
     </div>
   </div>
@@ -586,6 +587,21 @@ footer{ padding:44px 0 60px; }
     <figure class="fig reveal" style="margin-top:44px;">
       <img src="assets/fig26_fame_profile.png" alt="Fatty acid methyl ester composition comparing HS2 and ALE across the hydrolysate dose series" loading="lazy">
       <div class="fig-cap"><span class="k">Fatty acid profile</span>GC-derived FAME analysis. The saturation profile (SFA/MUFA/PUFA ratio) is remarkably stable between strains and conditions (~65% SFA throughout) — the divergence is in total fatty acid yield, not composition, echoing the total-lipid and growth results above. HS2 has no measurable FAME at the severe condition, consistent with insufficient biomass to extract from.</div>
+    </figure>
+  </div>
+</section>
+
+<section id="temporal">
+  <div class="wrap">
+    <div class="section-tag">09 — A decade of background</div>
+    <div class="section-head reveal">
+      <h2>Is the ALE signal bigger than normal drift?</h2>
+      <p>A 2015 PacBio assembly of HS2 itself — the same lineage, eleven years earlier, before the ALE experiment existed — gives a rare chance to ask what "normal" looks like: how much does this genome drift under nothing but routine lab culture, and does any of that background noise touch the ALE findings above?</p>
+    </div>
+
+    <figure class="fig reveal">
+      <img src="assets/fig27_temporal_comparison.png" alt="Comparison of the 2015 and 2026 HS2 genome assemblies, SNP funnel, and overlap with ALE candidates" loading="lazy">
+      <div class="fig-cap"><span class="k">Eleven years, same lineage</span>99.68% of the current genome aligns into the 2015 assembly at 99.85% identity. The same repeat-isolation filter used throughout this project narrows 781 raw differences to 76 candidates — with an honest caveat: their transversion-biased signature (Ts/Tv 0.29) suggests this set still carries some 2015-era sequencing-technology noise, not a clean mutation-rate estimate. The finding that matters: of the 30 ALE sure candidates, the 8 that coincide with a 2015-vs-2026 difference are <em>all</em> in the standing-heterozygosity category — explained by which allele two independent assemblies happened to capture at a real het site, not by drift. Zero of the novel-mutation candidates, including EPHA, are touched.</div>
     </figure>
   </div>
 </section>
