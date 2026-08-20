@@ -275,12 +275,11 @@ footer{ padding:44px 0 60px; }
     <div class="brand">Chlorella <em>HS2 → ALE</em></div>
     <div class="nav-links">
       <a href="#experiment">The experiment</a>
-      <a href="#timeline">Timeline</a>
-      <a href="#genes">Candidates</a>
-      <a href="#rigor">Rigor</a>
-      <a href="#convergence">HS19 &amp; HMF</a>
       <a href="#phenotype">Phenotype</a>
-      <a href="#temporal">Decade check</a>
+      <a href="#timeline">Genotype</a>
+      <a href="#convergence">HS19 &amp; HMF</a>
+      <a href="#sanger">Wet-lab</a>
+      <a href="#econ">Why it matters</a>
       <a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report8.html" class="cta">Full report →</a>
     </div>
   </div>
@@ -354,12 +353,57 @@ footer{ padding:44px 0 60px; }
   </div>
 </section>
 
+<section id="phenotype">
+  <div class="wrap">
+    <div class="section-tag">02 — Phenotype</div>
+    <div class="section-head reveal">
+      <h2>Eighteen months of selection produced a measurably different alga</h2>
+      <p>Before asking what changed in the genome, here is what changed in the flask: a clean, dose-dependent growth advantage under hydrolysate stress, a plausible light-linked mechanism behind it, and a consistent biochemical and single-cell signature across seven independent measurement types. The genotype sections below exist to explain this.</p>
+    </div>
+
+    <figure class="fig reveal">
+      <img src="assets/fig23_growth_mechanism.png" alt="HS2 vs ALE growth curves under increasing hydrolysate stress, light vs dark, and residual glucose consumption" loading="lazy">
+      <div class="fig-cap"><span class="k">Growth &amp; mechanism</span>Flask-scale growth (n=2) across a hydrolysate dose series: HS2 and ALE converge in standard media, diverge under stress, and HS2 fails outright at the harshest concentration — while leaving nearly all the glucose in the medium unconsumed. The advantage is markedly reduced in the dark, pointing to a photosynthesis-linked mechanism rather than pure heterotrophic detoxification.</div>
+    </figure>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig30_ojip_fvfm.png" alt="Photosynthetic efficiency (Fv/Fm) of HS2 and ALE across the hydrolysate dose series, light vs dark" loading="lazy">
+      <div class="fig-cap"><span class="k">Photosynthetic efficiency</span>OJIP chlorophyll-fluorescence induction (F<sub>v</sub>/F<sub>m</sub>), a direct physiological read on PSII integrity. Baseline F<sub>v</sub>/F<sub>m</sub> (~0.47) is indistinguishable between strains. At severe (3:1, 0.5M HCl) stress, HS2 shows a sharp transient PSII disruption at 24h (dropping to ~0.20) that ALE does not share, though by 96h both strains converge to a similar range (HS2 0.51 vs. ALE 0.47) — a transient-injury signature that only partially mirrors the growth-failure phenotype, a reminder that independent measurements don't always reinforce each other to the same degree. In the dark, where PSII isn't being actively driven, strain and dose differences compress overall, consistent with the light-linked mechanism the growth curves already pointed to.</div>
+    </figure>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig24_singlecell_phenotype.png" alt="Single-cell boxplots of cell area, Nile red lipid staining, autofluorescence, and their ratio, HS2 vs ALE across four conditions" loading="lazy">
+      <div class="fig-cap"><span class="k">Single-cell resolution</span>Fluorescence microscopy, 100 cells per group, Mann-Whitney U with FDR correction. Under stress, HS2 cells swell dramatically (consistent with stress-induced cell-cycle arrest) while ALE keeps dividing at a normal size. ALE also shows a consistent shift toward lipid storage over pigment content (elevated Nile red, reduced autofluorescence) present even without stress.</div>
+    </figure>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig25_ftir_spectra.png" alt="FTIR absorbance spectra comparing HS2 and ALE across the hydrolysate dose series, with band-region annotations" loading="lazy">
+      <div class="fig-cap"><span class="k">Whole-cell biochemistry</span>FTIR absorbance spectra of whole-cell biomass. At the severe (3:1) hydrolysate condition, ALE shows reduced Amide I (protein) signal relative to HS2 alongside a modest increase in ester C=O (storage lipid) — consistent with the lipid-over-protein/pigment reallocation seen at single-cell resolution, now confirmed by an independent, label-free biochemical method.</div>
+    </figure>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig26_fame_profile.png" alt="Fatty acid methyl ester composition comparing HS2 and ALE across the hydrolysate dose series" loading="lazy">
+      <div class="fig-cap"><span class="k">Fatty acid profile</span>GC-derived FAME analysis. The saturation profile (SFA/MUFA/PUFA ratio) is remarkably stable between strains and conditions (~65% SFA throughout) — the divergence is in total fatty acid yield, not composition, echoing the total-lipid and growth results above. HS2 has no measurable FAME at the severe condition, consistent with insufficient biomass to extract from.</div>
+    </figure>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig31_total_lipid.png" alt="Gravimetric total lipid yield comparing HS2 and ALE across the hydrolysate dose series, light and dark" loading="lazy">
+      <div class="fig-cap"><span class="k">Total lipid yield</span>Gravimetric extraction, independent of the Nile red imaging and FAME composition above. ALE out-yields HS2 at every condition, including the unstressed YM control (20.3% vs 19.6%) — the lipid-storage bias is not purely stress-induced. The gap widens under stress (36.7% vs 21.0% at 1:3) and persists into the dark at the matched 1:1 condition.</div>
+    </figure>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig28_chns_composition.png" alt="CHNS elemental composition comparing HS2 and ALE across both hydrolysate acid strengths and dilutions" loading="lazy">
+      <div class="fig-cap"><span class="k">Elemental composition (CHNS)</span>Whole-cell nitrogen content is condition-dependent, not a fixed strain trait: under the milder 0.25M HCl hydrolysate, ALE runs consistently higher in nitrogen than HS2 (e.g. 17.0% vs 8.8% at 1:1) — consistent with elevated protein/amino-nitrogen biomass under this stress. Under the harsher 0.5M HCl condition the gap narrows and reverses at the most severe dilution, matching the same acid-strength-dependent divergence already seen in growth and single-cell data.</div>
+    </figure>
+  </div>
+</section>
+
 <section id="timeline">
   <div class="wrap">
-    <div class="section-tag">02 — Temporal validation</div>
+    <div class="section-tag">03 — Temporal validation</div>
     <div class="section-head reveal">
       <h2>Watching mutations rise in real time</h2>
-      <p>Genome assembly tells you what's different between two endpoints. It doesn't tell you when a change happened, or whether it was still moving. For that we went back to independent short-read resequencing at three real collection dates spanning the ALE evolutionary timeline, and tracked allele fraction at all 30 high-confidence candidate sites across every sample.</p>
+      <p>That phenotypic advantage has a genetic basis, and genome assembly alone can't show when it arose or whether it was still moving. For that we went back to independent short-read resequencing at three real collection dates spanning the ALE evolutionary timeline, and tracked allele fraction at all 30 high-confidence candidate sites across every sample.</p>
     </div>
 
     <div class="timeline reveal">
@@ -398,7 +442,7 @@ footer{ padding:44px 0 60px; }
 
 <section id="modes">
   <div class="wrap">
-    <div class="section-tag">03 — Two evolutionary modes</div>
+    <div class="section-tag">04 — Two evolutionary modes</div>
     <div class="section-head reveal">
       <h2>Not every mutation gets fixed the same way</h2>
       <p><em>EPHA</em> and <em>CLPB3</em> are the two most temporally-resolved candidates in the dataset, and they illustrate two genuinely different routes to fixation — a distinction that only the timepoint data can make visible.</p>
@@ -442,7 +486,7 @@ footer{ padding:44px 0 60px; }
 
 <section id="genes">
   <div class="wrap">
-    <div class="section-tag">04 — Candidate genes</div>
+    <div class="section-tag">05 — Candidate genes</div>
     <div class="section-head reveal">
       <h2>What the surviving candidates point toward</h2>
       <p>Nine named, high-confidence candidates cluster into four loosely related functional themes. These are presented as hypothesis-generating leads, not established <em>Chlorella</em> biology — every functional label comes from a best-hit match in a different organism, from <em>Mycobacterium</em> to <em>Arabidopsis</em> to human.</p>
@@ -480,7 +524,7 @@ footer{ padding:44px 0 60px; }
 
 <section id="rigor">
   <div class="wrap">
-    <div class="section-tag">05 — Rigor</div>
+    <div class="section-tag">06 — Rigor</div>
     <div class="section-head reveal">
       <h2>Most of what we found isn't real — and that's the point</h2>
       <p>Of 4,146 raw differences between the two genomes, 87% turned out to be repeat- or assembly-driven artifacts, not real mutations. Getting from "different in the alignment" to "confidently different in the biology" was most of the actual work.</p>
@@ -512,7 +556,7 @@ footer{ padding:44px 0 60px; }
 
 <section id="convergence">
   <div class="wrap">
-    <div class="section-tag">06 — Convergent evolution</div>
+    <div class="section-tag">07 — Convergent evolution</div>
     <div class="section-head reveal">
       <h2>Two other lineages, evolved under different stress</h2>
       <p>HS2 is the shared ancestor of three independently-selected lines, not just ALE. <strong style="color:var(--accent-hs2)">HS19</strong> was selected under sodium hypochlorite (oxidative-chlorine) stress; <strong style="color:var(--accent-ale)">HMF</strong> was selected against 5-hydroxymethylfurfural alone — the specific furanic sub-component of ALE's full hydrolysate cocktail. Comparing all three asks whether unrelated selective pressures converge on the same biology. An initial single-caller comparison found three exact-position matches; none survived re-calling with the same rigor applied everywhere else in this project, and were retracted as convergence evidence rather than kept for a good headline.</p>
@@ -556,7 +600,7 @@ footer{ padding:44px 0 60px; }
 
 <section id="expression">
   <div class="wrap">
-    <div class="section-tag">07 — Independent corroboration</div>
+    <div class="section-tag">08 — Independent corroboration</div>
     <div class="section-head reveal">
       <h2>A second, non-genomic line of evidence</h2>
       <p>Genome comparison alone can't show a gene is stress-relevant — only that it changed. We cross-checked all 19 named candidates (ALE plus the two convergence lines) against a public RNA-seq dataset of HS2 grown under fresh vs. marine (salt-stress) conditions, at exponential and stationary phase.</p>
@@ -570,41 +614,6 @@ footer{ padding:44px 0 60px; }
     <figure class="fig reveal" style="margin-top:44px;">
       <img src="assets/fig22_saltstress_barcharts_heatmap.png" alt="Per-gene log fold change bar charts and expression heatmap across salt-stress conditions" loading="lazy">
       <div class="fig-cap"><span class="k">Expression evidence</span>Per-gene fold-change under salt stress (left) and a normalized expression heatmap across all four sampled conditions (right), for the nine key ALE pathway candidates.</div>
-    </figure>
-  </div>
-</section>
-
-<section id="phenotype">
-  <div class="wrap">
-    <div class="section-tag">08 — Phenotype</div>
-    <div class="section-head reveal">
-      <h2>What the genome predicts, the flask confirms</h2>
-      <p>Genomics and transcriptomics say ALE should be more hydrolysate-tolerant. Direct measurement says the same thing, independently: a clean, dose-dependent growth advantage with a plausible mechanism, and a consistent single-cell physiological signature across hundreds of individually imaged cells.</p>
-    </div>
-
-    <figure class="fig reveal">
-      <img src="assets/fig23_growth_mechanism.png" alt="HS2 vs ALE growth curves under increasing hydrolysate stress, light vs dark, and residual glucose consumption" loading="lazy">
-      <div class="fig-cap"><span class="k">Growth &amp; mechanism</span>Flask-scale growth (n=2) across a hydrolysate dose series: HS2 and ALE converge in standard media, diverge under stress, and HS2 fails outright at the harshest concentration — while leaving nearly all the glucose in the medium unconsumed. The advantage is markedly reduced in the dark, pointing to a photosynthesis-linked mechanism rather than pure heterotrophic detoxification.</div>
-    </figure>
-
-    <figure class="fig reveal" style="margin-top:44px;">
-      <img src="assets/fig24_singlecell_phenotype.png" alt="Single-cell boxplots of cell area, Nile red lipid staining, autofluorescence, and their ratio, HS2 vs ALE across four conditions" loading="lazy">
-      <div class="fig-cap"><span class="k">Single-cell resolution</span>Fluorescence microscopy, 100 cells per group, Mann-Whitney U with FDR correction. Under stress, HS2 cells swell dramatically (consistent with stress-induced cell-cycle arrest) while ALE keeps dividing at a normal size. ALE also shows a consistent shift toward lipid storage over pigment content (elevated Nile red, reduced autofluorescence) present even without stress.</div>
-    </figure>
-
-    <figure class="fig reveal" style="margin-top:44px;">
-      <img src="assets/fig25_ftir_spectra.png" alt="FTIR absorbance spectra comparing HS2 and ALE across the hydrolysate dose series, with band-region annotations" loading="lazy">
-      <div class="fig-cap"><span class="k">Whole-cell biochemistry</span>FTIR absorbance spectra of whole-cell biomass. At the severe (3:1) hydrolysate condition, ALE shows reduced Amide I (protein) signal relative to HS2 alongside a modest increase in ester C=O (storage lipid) — consistent with the lipid-over-protein/pigment reallocation seen at single-cell resolution, now confirmed by an independent, label-free biochemical method.</div>
-    </figure>
-
-    <figure class="fig reveal" style="margin-top:44px;">
-      <img src="assets/fig26_fame_profile.png" alt="Fatty acid methyl ester composition comparing HS2 and ALE across the hydrolysate dose series" loading="lazy">
-      <div class="fig-cap"><span class="k">Fatty acid profile</span>GC-derived FAME analysis. The saturation profile (SFA/MUFA/PUFA ratio) is remarkably stable between strains and conditions (~65% SFA throughout) — the divergence is in total fatty acid yield, not composition, echoing the total-lipid and growth results above. HS2 has no measurable FAME at the severe condition, consistent with insufficient biomass to extract from.</div>
-    </figure>
-
-    <figure class="fig reveal" style="margin-top:44px;">
-      <img src="assets/fig28_chns_composition.png" alt="CHNS elemental composition comparing HS2 and ALE across both hydrolysate acid strengths and dilutions" loading="lazy">
-      <div class="fig-cap"><span class="k">Elemental composition (CHNS)</span>Whole-cell nitrogen content is condition-dependent, not a fixed strain trait: under the milder 0.25M HCl hydrolysate, ALE runs consistently higher in nitrogen than HS2 (e.g. 17.0% vs 8.8% at 1:1) — consistent with elevated protein/amino-nitrogen biomass under this stress. Under the harsher 0.5M HCl condition the gap narrows and reverses at the most severe dilution, matching the same acid-strength-dependent divergence already seen in growth and single-cell data.</div>
     </figure>
   </div>
 </section>
@@ -687,6 +696,31 @@ footer{ padding:44px 0 60px; }
         <div class="primer-row"><span class="primer-label">F</span><span class="mono">CAGACGCTGCTACCCTACAG</span><span class="tm">59.9&deg;C</span></div>
         <div class="primer-row"><span class="primer-label">R</span><span class="mono">GTCCCCTCTACCTTCCCCATC</span><span class="tm">61.0&deg;C</span></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="econ">
+  <div class="wrap">
+    <div class="section-tag">11 — Why it matters</div>
+    <div class="section-head reveal">
+      <h2>From lab bench to bioprocess: what the advantage is worth</h2>
+      <p>Genotype explains the mechanism; phenotype proves it works. The last question is whether it's worth anything outside a flask. A screening-level techno-economic and carbon-footprint analysis, built from the same measured biomass yields above and literature-anchored unit costs, says yes — concentrated exactly where it should be.</p>
+    </div>
+
+    <figure class="fig reveal">
+      <img src="assets/fig29_cultivation_tea.png" alt="Cultivation-stage techno-economic screening comparing hydrolysate feedstock cost and HS2 vs ALE productivity" loading="lazy">
+      <div class="fig-cap"><span class="k">Cost</span>Hydrolysate feedstock is 6–190× cheaper per liter than conventional media regardless of strain — the baseline waste-valorization case. ALE's yield advantage compounds this specifically at severe stress: $175/kg (HS2) vs. $93/kg (ALE) cultivation cost, a gap driven entirely by biomass yield, not by any cost input changing. At mild stress the strains are cost-equivalent — ALE's economic edge sits exactly where HS2's tolerance fails.</div>
+    </figure>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig32_cultivation_lca.png" alt="Cultivation-stage carbon footprint screening comparing hydrolysate feedstock and HS2 vs ALE productivity" loading="lazy">
+      <div class="fig-cap"><span class="k">Carbon footprint</span>Same measured yields, extended with literature GWP factors under a waste-stream cut-off allocation (ISO 14044). Grid-electricity for illumination dominates the light-culture footprint at every dose, so the strain-level result again tracks yield: 175 (HS2) vs. 93 (ALE) kgCO<sub>2</sub>e/kg at severe stress — mirroring the cost result almost exactly, because both are downstream of the same underlying biomass-yield advantage.</div>
+    </figure>
+
+    <div class="callout reveal">
+      <div class="k">Scope, stated plainly</div>
+      <p>Both models cover cultivation only — feedstock and illumination, no harvesting, downstream processing, or capital cost. They are screening-level estimates built to show where the strain-productivity advantage does and doesn't translate into economic or environmental value, not a bankable process design.</p>
     </div>
   </div>
 </section>
