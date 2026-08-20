@@ -215,6 +215,19 @@ section{ padding:76px 0; border-top:1px solid var(--rule); }
 .stat-cell .v{ font-family:'IBM Plex Mono'; font-size:28px; font-weight:600; color:var(--ink); }
 .stat-cell .l{ font-size:13px; color:var(--ink-dim); margin-top:8px; line-height:1.4; }
 
+.primer-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px; }
+@media (max-width:900px){ .primer-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:600px){ .primer-grid{ grid-template-columns:1fr; } }
+.primer-card{ background:var(--surface); border:1px solid var(--rule); border-radius:4px; padding:18px 20px; }
+.primer-card-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; gap:10px; }
+.gene-name{ font-family:'IBM Plex Mono'; font-weight:600; font-size:15px; color:var(--ink); }
+.cat-tag{ font-family:'IBM Plex Mono'; font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; white-space:nowrap; }
+.primer-pos{ font-size:12px; color:var(--ink-faint); margin-bottom:12px; }
+.primer-row{ display:flex; align-items:center; gap:8px; font-size:12.5px; padding:4px 0; }
+.primer-label{ font-family:'IBM Plex Mono'; font-weight:700; color:var(--accent-chl); width:14px; flex-shrink:0; }
+.primer-row .mono{ overflow-wrap:anywhere; }
+.tm{ margin-left:auto; color:var(--ink-faint); font-size:11px; white-space:nowrap; }
+
 .funnel{ display:flex; align-items:center; gap:0; margin-top:52px; flex-wrap:wrap; }
 .funnel-step{ text-align:center; padding:0 18px; }
 .funnel-step .v{ font-family:'IBM Plex Mono'; font-size:24px; font-weight:600; }
@@ -608,6 +621,73 @@ footer{ padding:44px 0 60px; }
       <img src="assets/fig27_temporal_comparison.png" alt="Comparison of the 2015 and 2026 HS2 genome assemblies, SNP funnel, and overlap with ALE candidates" loading="lazy">
       <div class="fig-cap"><span class="k">Eleven years, same lineage</span>99.68% of the current genome aligns into the 2015 assembly at 99.85% identity. The same repeat-isolation filter used throughout this project narrows 781 raw differences to 76 candidates — with an honest caveat: their transversion-biased signature (Ts/Tv 0.29) suggests this set still carries some 2015-era sequencing-technology noise, not a clean mutation-rate estimate. The finding that matters: of the 30 ALE sure candidates, the 8 that coincide with a 2015-vs-2026 difference are <em>all</em> in the standing-heterozygosity category — explained by which allele two independent assemblies happened to capture at a real het site, not by drift. Zero of the novel-mutation candidates, including EPHA, are touched.</div>
     </figure>
+  </div>
+</section>
+
+
+<section id="sanger">
+  <div class="wrap">
+    <div class="section-tag">10 &mdash; Wet-lab confirmation</div>
+    <div class="section-head reveal">
+      <h2>Sanger/PCR primers for the named candidates</h2>
+      <p>Every gene discussed above traces to a specific base pair. We designed PCR primer pairs in silico for all 9 named candidates &mdash; product sizes and melting temperatures suited to routine Sanger confirmation &mdash; using &plusmn;300bp of flanking sequence from the corrected assembly as template, with primer placement steered away from any tandem-repeat run &ge;20bp to avoid slippage/mispriming artifacts. These are designed, not yet wet-lab validated.</p>
+    </div>
+    <div class="primer-grid reveal">
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">UBP12</span><span class="cat-tag" style="color:var(--accent-ale)">ALE-specific</span></div>
+        <div class="primer-pos mono">ptg000005l:764831 &middot; A&rarr;C &middot; 443 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">TGCTCCCTCTTCTTCTTTTCCC</span><span class="tm">60.0&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">CTTGACCTTTGAGTCCTTTGGC</span><span class="tm">59.7&deg;C</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">ACOX4</span><span class="cat-tag" style="color:var(--accent-ale)">ALE-specific</span></div>
+        <div class="primer-pos mono">ptg000006l:711536 &middot; C&rarr;A &middot; 420 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">CCTTGTTCGTGTCGCCAAAG</span><span class="tm">60.0&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">CAGCGCCAAGAAAATGGAAAAC</span><span class="tm">59.5&deg;C</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">EPHA</span><span class="cat-tag" style="color:var(--accent-ale)">ALE-specific</span></div>
+        <div class="primer-pos mono">ptg000051l:296388 &middot; C&rarr;A &middot; 305 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">AGAGGGCTACACAATTAGCAGG</span><span class="tm">59.8&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">TGTATGCGTGTGTGTATGTGTG</span><span class="tm">59.3&deg;C</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">MASY</span><span class="cat-tag" style="color:var(--accent-hs2)">shifted AF</span></div>
+        <div class="primer-pos mono">ptg000014l:1366657 &middot; A&rarr;G &middot; 343 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">CACCTTGCGTGTTAAAAGGGG</span><span class="tm">60.0&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">CAGTCTGTGAAGTAGCGTCACC</span><span class="tm">60.9&deg;C</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">TLP13</span><span class="cat-tag" style="color:var(--accent-hs2)">shifted AF</span></div>
+        <div class="primer-pos mono">ptg000012l:3118063 &middot; T&rarr;G &middot; 522 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">GTGATGGAGGCGGAAGAGATG</span><span class="tm">60.5&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">GAGATCCAGGCTGGCAAGTC</span><span class="tm">60.5&deg;C</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">CLCN7</span><span class="cat-tag" style="color:var(--accent-hs2)">shifted AF</span></div>
+        <div class="primer-pos mono">ptg000010l:888172 &middot; T&rarr;C &middot; 464 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">ATCGAATGATAGGGAGGCAAGG</span><span class="tm">59.7&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">CAAGGACATCATCTCAGGCGG</span><span class="tm">60.8&deg;C</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">SCP46</span><span class="cat-tag" style="color:var(--accent-hs2)">shifted AF</span></div>
+        <div class="primer-pos mono">ptg000019l:859524 &middot; T&rarr;G &middot; 399 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">CCAGTCCAAACATGTTGAGCTG</span><span class="tm">60.0&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">CTGTTTCAGCATCAGGATGTGG</span><span class="tm">59.6&deg;C</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">RIMO</span><span class="cat-tag" style="color:var(--accent-hs2)">shifted AF</span></div>
+        <div class="primer-pos mono">ptg000018l:2555061 &middot; A&rarr;C &middot; 415 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">ACCGAGGATGGCGAGATCTAC</span><span class="tm">61.2&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">CTCGAGGTCAAAGATGGAGGTG</span><span class="tm">60.4&deg;C</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">CLPB3</span><span class="cat-tag" style="color:var(--accent-hs2)">shifted AF</span></div>
+        <div class="primer-pos mono">ptg000007l:1269122 &middot; A&rarr;C &middot; 322 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">CAGACGCTGCTACCCTACAG</span><span class="tm">59.9&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">GTCCCCTCTACCTTCCCCATC</span><span class="tm">61.0&deg;C</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
