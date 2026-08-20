@@ -276,7 +276,7 @@ footer{ padding:44px 0 60px; }
     <div class="nav-links">
       <a href="#experiment">The experiment</a>
       <a href="#phenotype">Phenotype</a>
-      <a href="#timeline">Genotype</a>
+      <a href="#genes">Genotype</a>
       <a href="#convergence">HS19 &amp; HMF</a>
       <a href="#sanger">Wet-lab</a>
       <a href="#econ">Why it matters</a>
@@ -287,11 +287,11 @@ footer{ padding:44px 0 60px; }
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">Adaptive laboratory evolution · long-read whole-genome sequencing</div>
-    <h1>A gene absent in April 2023. By October 2024, it was in <span class="num">98%</span> of the population.</h1>
-    <p class="hero-sub">We sequenced an ancestor strain of the microalga <em>Chlorella</em> sp. HS2 and ALE, its descendant after eighteen months of continuous selection under lignocellulosic hydrolysate — an industrial byproduct stream toxic to most microbes — and tracked which mutations rose, which held steady, and which turned out to be noise.</p>
+    <div class="eyebrow">Direct long-read genome comparison · 2026 · <em>Chlorella</em> HS2 vs. ALE</div>
+    <h1>Under severe hydrolysate stress, one strain reaches OD<span class="num">5.7</span>. Its ancestor never clears <span class="num">0.05</span>.</h1>
+    <p class="hero-sub">We sequenced and compared the genomes of <em>Chlorella</em> sp. HS2 and its hydrolysate-evolved descendant ALE directly from PacBio HiFi long reads, then grounded that comparison in flask-scale phenotyping: a clean, dose-dependent growth advantage under stress, a higher lipid yield at every condition — including the unstressed control — and a plausible photosynthesis-linked mechanism behind both.</p>
     <div class="hero-actions">
-      <a href="#timeline" class="btn btn-primary">Follow the trajectory ↓</a>
+      <a href="#phenotype" class="btn btn-primary">See the phenotype data ↓</a>
       <a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report8.html" class="btn btn-ghost">Full technical report & methods →</a>
     </div>
 
@@ -300,25 +300,27 @@ footer{ padding:44px 0 60px; }
         <!-- gridlines -->
         <line x1="60" y1="20" x2="60" y2="180" stroke="var(--rule)" stroke-width="1"/>
         <line x1="60" y1="180" x2="820" y2="180" stroke="var(--rule)" stroke-width="1"/>
-        <text x="46" y="24" class="traj-label" text-anchor="end">100%</text>
-        <text x="46" y="184" class="traj-label" text-anchor="end">0%</text>
-        <!-- HS2 flat line near 0 -->
-        <polyline class="traj-line hs2" points="120,178 460,175 800,178"/>
-        <!-- ALE line: batch1 0% (d=23) -> batch2 low-depth ~ off-axis dashed omitted, using batch1->batch3 per manuscript -> batch3 98% (d=51) -->
-        <polyline class="traj-line ale" points="120,178 460,170 800,26"/>
+        <text x="46" y="24" class="traj-label" text-anchor="end">OD 6</text>
+        <text x="46" y="184" class="traj-label" text-anchor="end">OD 0</text>
+        <!-- HS2: stays flat near zero the entire 96h at severe (3:1, 0.5M HCl) stress -->
+        <polyline class="traj-line hs2" points="120,178 290,180 460,179.3 630,179.1 800,178.7"/>
+        <!-- ALE: rises from the same starting point to OD 5.73 by 96h -->
+        <polyline class="traj-line ale" points="120,178.1 290,173.9 460,146.8 630,73.1 800,27.1"/>
         <g class="traj-dot">
-          <circle cx="120" cy="178" r="4" fill="var(--accent-ale)"/>
-          <circle cx="800" cy="26" r="5" fill="var(--accent-ale)"/>
-          <circle cx="120" cy="178" r="4" fill="var(--accent-hs2)" opacity="0.001"/>
-          <circle cx="800" cy="178" r="4" fill="var(--accent-hs2)"/>
+          <circle cx="120" cy="178.1" r="4" fill="var(--accent-ale)"/>
+          <circle cx="800" cy="27.1" r="5" fill="var(--accent-ale)"/>
+          <circle cx="120" cy="178" r="4" fill="var(--accent-hs2)"/>
+          <circle cx="800" cy="178.7" r="4" fill="var(--accent-hs2)"/>
         </g>
-        <text x="120" y="200" class="traj-label" text-anchor="middle">Apr 2023</text>
-        <text x="460" y="200" class="traj-label" text-anchor="middle">Nov 2023</text>
-        <text x="800" y="200" class="traj-label" text-anchor="middle">Oct 2024</text>
-        <text x="810" y="22" class="traj-label strong" text-anchor="end" fill="var(--accent-ale)">ALE · EPHA → 98%</text>
-        <text x="810" y="172" class="traj-label" text-anchor="end" fill="var(--accent-hs2)">HS2 · EPHA stays at 0%</text>
+        <text x="120" y="200" class="traj-label" text-anchor="middle">0h</text>
+        <text x="290" y="200" class="traj-label" text-anchor="middle">24h</text>
+        <text x="460" y="200" class="traj-label" text-anchor="middle">48h</text>
+        <text x="630" y="200" class="traj-label" text-anchor="middle">72h</text>
+        <text x="800" y="200" class="traj-label" text-anchor="middle">96h</text>
+        <text x="810" y="20" class="traj-label strong" text-anchor="end" fill="var(--accent-ale)">ALE · OD 5.73</text>
+        <text x="810" y="172" class="traj-label" text-anchor="end" fill="var(--accent-hs2)">HS2 · OD 0.05</text>
       </svg>
-      <div class="hero-chart-cap">Allele fraction of <span class="mono">EPHA</span> (epoxide hydrolase, xenobiotic detoxification), independently resequenced at three collection dates. HS2 batch 2 shows one low-depth 3% blip (d=31); ALE reaches 98% by batch 3 at d=51 — a clean emergence-and-fixation trajectory. See the full six-category trajectory analysis for all 30 candidates in the report.</div>
+      <div class="hero-chart-cap">Flask-scale OD<sub>680</sub> growth (n=2 biological replicates) at the most severe hydrolysate condition tested (3:1 dilution, 0.5M HCl hydrolysate). Both strains start from the same density; HS2 never leaves baseline noise while ALE grows exponentially to OD 5.73 by 96h. This is this year's direct measurement, not a multi-year trajectory — see the phenotype section below for the full dose series, and the genotype sections for the mutations underlying it.</div>
     </div>
   </div>
 </header>
@@ -398,95 +400,9 @@ footer{ padding:44px 0 60px; }
   </div>
 </section>
 
-<section id="timeline">
-  <div class="wrap">
-    <div class="section-tag">03 — Temporal validation</div>
-    <div class="section-head reveal">
-      <h2>Watching mutations rise in real time</h2>
-      <p>That phenotypic advantage has a genetic basis, and genome assembly alone can't show when it arose or whether it was still moving. For that we went back to independent short-read resequencing at three real collection dates spanning the ALE evolutionary timeline, and tracked allele fraction at all 30 high-confidence candidate sites across every sample.</p>
-    </div>
-
-    <div class="timeline reveal">
-      <div class="tl-node">
-        <div class="tl-date">Batch 1 · April 2023</div>
-        <h3>Baseline</h3>
-        <p>HS2 and ALE both resequenced. Nearly every ALE-private candidate that will eventually fix is still at or near zero — the population hasn't caught up to the genome yet.</p>
-      </div>
-      <div class="tl-node">
-        <div class="tl-date">Batch 2 · November 2023</div>
-        <h3>Midpoint</h3>
-        <p>HS2-only checkpoint. Confirms the ancestor background stays put — no drift, no contamination — while ALE continues under selection between the flanking timepoints.</p>
-      </div>
-      <div class="tl-node">
-        <div class="tl-date">Batch 3 · October 2024</div>
-        <h3>Eighteen months in</h3>
-        <p>Both strains resequenced again. This is where the two strongest, cleanest trajectories in the dataset land:</p>
-        <div class="tl-stat-row">
-          <div class="tl-stat ale">
-            <div class="v tabular">0% → 98%</div>
-            <div class="l">EPHA · emerged from nothing (ale_only)</div>
-          </div>
-          <div class="tl-stat ale">
-            <div class="v tabular">4% → 83%</div>
-            <div class="l">CLPB3 · standing variant, selected up</div>
-          </div>
-          <div class="tl-stat hs2">
-            <div class="v tabular">33–36%</div>
-            <div class="l">CLPB3 in HS2 · stable across all 3 dates</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="modes">
-  <div class="wrap">
-    <div class="section-tag">04 — Two evolutionary modes</div>
-    <div class="section-head reveal">
-      <h2>Not every mutation gets fixed the same way</h2>
-      <p><em>EPHA</em> and <em>CLPB3</em> are the two most temporally-resolved candidates in the dataset, and they illustrate two genuinely different routes to fixation — a distinction that only the timepoint data can make visible.</p>
-    </div>
-
-    <div class="mode-grid reveal">
-      <div class="mode-card">
-        <div class="gene-name">EPHA</div>
-        <div class="mode-label">De novo emergence · ALE-private</div>
-        <p>Epoxide hydrolase — xenobiotic/epoxide detoxification. Absent from HS2 at all three collection dates. A new mutation arose within the ALE lineage and was driven to near-fixation entirely within the sampled window.</p>
-        <div class="mini-bars">
-          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill ale" style="height:2%"></div></div><div class="mini-bar-val">0%</div><div class="mini-bar-lbl">ALE<br>Apr '23</div></div>
-          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill ale" style="height:98%"></div></div><div class="mini-bar-val">98%</div><div class="mini-bar-lbl">ALE<br>Oct '24</div></div>
-          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill hs2" style="height:2%"></div></div><div class="mini-bar-val">0%</div><div class="mini-bar-lbl">HS2<br>all 3 dates</div></div>
-        </div>
-      </div>
-      <div class="mode-card">
-        <div class="gene-name">CLPB3</div>
-        <div class="mode-label">Selection on standing variation · shifted</div>
-        <p>ClpB chaperone/ATPase — proteostasis under stress. Already segregating at 33–36% in HS2 at every date, meaning it predates the ALE/HS2 split. Selection pushed the same variant from 4% to 83% in ALE — old variation, newly favored.</p>
-        <div class="mini-bars">
-          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill ale" style="height:4%"></div></div><div class="mini-bar-val">4%</div><div class="mini-bar-lbl">ALE<br>Apr '23</div></div>
-          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill ale" style="height:83%"></div></div><div class="mini-bar-val">83%</div><div class="mini-bar-lbl">ALE<br>Oct '24</div></div>
-          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill hs2" style="height:35%"></div></div><div class="mini-bar-val">33–36%</div><div class="mini-bar-lbl">HS2<br>all 3 dates</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="fig-2col reveal">
-      <figure class="fig">
-        <img src="assets/fig15_pileup_evidence.png" alt="Read pileup evidence at EPHA and CLPB3 loci, HS2 vs ALE" loading="lazy">
-        <div class="fig-cap"><span class="k">Direct evidence</span>Long-read pileups at the EPHA and CLPB3 loci — not a variant caller's summary, but the actual aligned reads each call is based on.</div>
-      </figure>
-      <figure class="fig">
-        <img src="assets/fig16_circos_mutation_map.png" alt="Genome-wide circular map of ALE vs HS2 mutations and structural duplications" loading="lazy">
-        <div class="fig-cap"><span class="k">Genome-wide view</span>Every high-confidence candidate and structural variant plotted against its position across all HS2 contigs, with self-synteny blocks marking duplicated genome regions.</div>
-      </figure>
-    </div>
-  </div>
-</section>
-
 <section id="genes">
   <div class="wrap">
-    <div class="section-tag">05 — Candidate genes</div>
+    <div class="section-tag">03 — Candidate genes</div>
     <div class="section-head reveal">
       <h2>What the surviving candidates point toward</h2>
       <p>Nine named, high-confidence candidates cluster into four loosely related functional themes. These are presented as hypothesis-generating leads, not established <em>Chlorella</em> biology — every functional label comes from a best-hit match in a different organism, from <em>Mycobacterium</em> to <em>Arabidopsis</em> to human.</p>
@@ -524,7 +440,7 @@ footer{ padding:44px 0 60px; }
 
 <section id="rigor">
   <div class="wrap">
-    <div class="section-tag">06 — Rigor</div>
+    <div class="section-tag">04 — Rigor</div>
     <div class="section-head reveal">
       <h2>Most of what we found isn't real — and that's the point</h2>
       <p>Of 4,146 raw differences between the two genomes, 87% turned out to be repeat- or assembly-driven artifacts, not real mutations. Getting from "different in the alignment" to "confidently different in the biology" was most of the actual work.</p>
@@ -556,7 +472,7 @@ footer{ padding:44px 0 60px; }
 
 <section id="convergence">
   <div class="wrap">
-    <div class="section-tag">07 — Convergent evolution</div>
+    <div class="section-tag">05 — Convergent evolution</div>
     <div class="section-head reveal">
       <h2>Two other lineages, evolved under different stress</h2>
       <p>HS2 is the shared ancestor of three independently-selected lines, not just ALE. <strong style="color:var(--accent-hs2)">HS19</strong> was selected under sodium hypochlorite (oxidative-chlorine) stress; <strong style="color:var(--accent-ale)">HMF</strong> was selected against 5-hydroxymethylfurfural alone — the specific furanic sub-component of ALE's full hydrolysate cocktail. Comparing all three asks whether unrelated selective pressures converge on the same biology. An initial single-caller comparison found three exact-position matches; none survived re-calling with the same rigor applied everywhere else in this project, and were retracted as convergence evidence rather than kept for a good headline.</p>
@@ -600,7 +516,7 @@ footer{ padding:44px 0 60px; }
 
 <section id="expression">
   <div class="wrap">
-    <div class="section-tag">08 — Independent corroboration</div>
+    <div class="section-tag">06 — Independent corroboration</div>
     <div class="section-head reveal">
       <h2>A second, non-genomic line of evidence</h2>
       <p>Genome comparison alone can't show a gene is stress-relevant — only that it changed. We cross-checked all 19 named candidates (ALE plus the two convergence lines) against a public RNA-seq dataset of HS2 grown under fresh vs. marine (salt-stress) conditions, at exponential and stationary phase.</p>
@@ -615,6 +531,92 @@ footer{ padding:44px 0 60px; }
       <img src="assets/fig22_saltstress_barcharts_heatmap.png" alt="Per-gene log fold change bar charts and expression heatmap across salt-stress conditions" loading="lazy">
       <div class="fig-cap"><span class="k">Expression evidence</span>Per-gene fold-change under salt stress (left) and a normalized expression heatmap across all four sampled conditions (right), for the nine key ALE pathway candidates.</div>
     </figure>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="wrap">
+    <div class="section-tag">07 — Temporal trajectory (preliminary)</div>
+    <div class="section-head reveal">
+      <h2>Watching mutations rise in real time — a preliminary look</h2>
+      <p>Everything above is a direct, single-timepoint comparison between the HS2 and ALE genomes as they exist today, from this year's long-read sequencing. A separate, earlier line of work asked a different question — not <em>what</em> differs, but <em>when</em> it arose — using independent short-read resequencing at three collection dates spanning the ALE evolutionary timeline (April 2023–October 2024). It's included here for context, not as part of the primary comparison; extending it properly is planned as its own future study.</p>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="tl-node">
+        <div class="tl-date">Batch 1 · April 2023</div>
+        <h3>Baseline</h3>
+        <p>HS2 and ALE both resequenced. Nearly every ALE-private candidate that will eventually fix is still at or near zero — the population hasn't caught up to the genome yet.</p>
+      </div>
+      <div class="tl-node">
+        <div class="tl-date">Batch 2 · November 2023</div>
+        <h3>Midpoint</h3>
+        <p>HS2-only checkpoint. Confirms the ancestor background stays put — no drift, no contamination — while ALE continues under selection between the flanking timepoints.</p>
+      </div>
+      <div class="tl-node">
+        <div class="tl-date">Batch 3 · October 2024</div>
+        <h3>Eighteen months in</h3>
+        <p>Both strains resequenced again. This is where the two strongest, cleanest trajectories in the dataset land:</p>
+        <div class="tl-stat-row">
+          <div class="tl-stat ale">
+            <div class="v tabular">0% → 98%</div>
+            <div class="l">EPHA · emerged from nothing (ale_only)</div>
+          </div>
+          <div class="tl-stat ale">
+            <div class="v tabular">4% → 83%</div>
+            <div class="l">CLPB3 · standing variant, selected up</div>
+          </div>
+          <div class="tl-stat hs2">
+            <div class="v tabular">33–36%</div>
+            <div class="l">CLPB3 in HS2 · stable across all 3 dates</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="modes">
+  <div class="wrap">
+    <div class="section-tag">08 — Two evolutionary modes</div>
+    <div class="section-head reveal">
+      <h2>Not every mutation gets fixed the same way</h2>
+      <p><em>EPHA</em> and <em>CLPB3</em> are the two most temporally-resolved candidates in this preliminary trajectory dataset, and they illustrate two genuinely different routes to fixation — a distinction that only the timepoint data can make visible.</p>
+    </div>
+
+    <div class="mode-grid reveal">
+      <div class="mode-card">
+        <div class="gene-name">EPHA</div>
+        <div class="mode-label">De novo mutation · ALE-private</div>
+        <p>Epoxide hydrolase — xenobiotic/epoxide detoxification. The gene itself is present in both genomes; a new point mutation within it was undetectable in ALE at all three collection dates until it arose and was driven to near-fixation entirely within the sampled window.</p>
+        <div class="mini-bars">
+          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill ale" style="height:2%"></div></div><div class="mini-bar-val">0%</div><div class="mini-bar-lbl">ALE<br>Apr '23</div></div>
+          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill ale" style="height:98%"></div></div><div class="mini-bar-val">98%</div><div class="mini-bar-lbl">ALE<br>Oct '24</div></div>
+          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill hs2" style="height:2%"></div></div><div class="mini-bar-val">0%</div><div class="mini-bar-lbl">HS2<br>all 3 dates</div></div>
+        </div>
+      </div>
+      <div class="mode-card">
+        <div class="gene-name">CLPB3</div>
+        <div class="mode-label">Selection on standing variation · shifted</div>
+        <p>ClpB chaperone/ATPase — proteostasis under stress. Already segregating at 33–36% in HS2 at every date, meaning it predates the ALE/HS2 split. Selection pushed the same variant from 4% to 83% in ALE — old variation, newly favored.</p>
+        <div class="mini-bars">
+          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill ale" style="height:4%"></div></div><div class="mini-bar-val">4%</div><div class="mini-bar-lbl">ALE<br>Apr '23</div></div>
+          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill ale" style="height:83%"></div></div><div class="mini-bar-val">83%</div><div class="mini-bar-lbl">ALE<br>Oct '24</div></div>
+          <div class="mini-bar-group"><div class="mini-bar-track"><div class="mini-bar-fill hs2" style="height:35%"></div></div><div class="mini-bar-val">33–36%</div><div class="mini-bar-lbl">HS2<br>all 3 dates</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fig-2col reveal">
+      <figure class="fig">
+        <img src="assets/fig15_pileup_evidence.png" alt="Read pileup evidence at EPHA and CLPB3 loci, HS2 vs ALE" loading="lazy">
+        <div class="fig-cap"><span class="k">Direct evidence</span>Long-read pileups at the EPHA and CLPB3 loci — not a variant caller's summary, but the actual aligned reads each call is based on.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/fig16_circos_mutation_map.png" alt="Genome-wide circular map of ALE vs HS2 mutations and structural duplications" loading="lazy">
+        <div class="fig-cap"><span class="k">Genome-wide view</span>Every high-confidence candidate and structural variant plotted against its position across all HS2 contigs, with self-synteny blocks marking duplicated genome regions.</div>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -707,6 +709,69 @@ footer{ padding:44px 0 60px; }
       <h2>From lab bench to bioprocess: what the advantage is worth</h2>
       <p>Genotype explains the mechanism; phenotype proves it works. The last question is whether it's worth anything outside a flask. A screening-level techno-economic and carbon-footprint analysis, built from the same measured biomass yields above and literature-anchored unit costs, says yes — concentrated exactly where it should be.</p>
     </div>
+
+    <figure class="fig reveal" style="margin-bottom:44px;">
+      <svg viewBox="0 0 920 260" style="width:100%;height:auto;font-family:'IBM Plex Sans',sans-serif;">
+        <!-- feedstock box -->
+        <rect x="16" y="55" width="168" height="150" rx="4" fill="var(--surface)" stroke="var(--rule)"/>
+        <text x="100" y="45" text-anchor="middle" font-size="12" fill="var(--ink-faint)" font-family="'IBM Plex Mono',monospace" letter-spacing="0.04em">FEEDSTOCK (choice)</text>
+        <rect x="28" y="67" width="144" height="60" rx="3" fill="var(--accent-chl)" fill-opacity="0.12" stroke="var(--accent-chl)"/>
+        <text x="100" y="92" text-anchor="middle" font-size="13" font-weight="600" fill="var(--ink)">Hydrolysate</text>
+        <text x="100" y="110" text-anchor="middle" font-size="11" fill="var(--ink-dim)">waste stream</text>
+        <rect x="28" y="133" width="144" height="60" rx="3" fill="var(--surface-2)" stroke="var(--rule)"/>
+        <text x="100" y="158" text-anchor="middle" font-size="13" font-weight="600" fill="var(--ink)">Conventional</text>
+        <text x="100" y="176" text-anchor="middle" font-size="11" fill="var(--ink-dim)">YM media</text>
+
+        <path d="M186 130 H222" stroke="var(--ink-faint)" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+        <!-- cultivation box -->
+        <rect x="228" y="35" width="192" height="190" rx="4" fill="var(--surface)" stroke="var(--rule)"/>
+        <text x="324" y="25" text-anchor="middle" font-size="12" fill="var(--ink-faint)" font-family="'IBM Plex Mono',monospace" letter-spacing="0.04em">CULTIVATION</text>
+        <text x="324" y="60" text-anchor="middle" font-size="13" font-weight="600" fill="var(--ink)">Flask-scale</text>
+        <text x="324" y="80" text-anchor="middle" font-size="11" fill="var(--ink-dim)">light or dark</text>
+        <line x1="252" y1="95" x2="396" y2="95" stroke="var(--rule)"/>
+        <rect x="248" y="108" width="66" height="34" rx="3" fill="var(--accent-hs2)" fill-opacity="0.15" stroke="var(--accent-hs2)"/>
+        <text x="281" y="129" text-anchor="middle" font-size="12" font-weight="600" fill="var(--accent-hs2)">HS2</text>
+        <rect x="338" y="108" width="66" height="34" rx="3" fill="var(--accent-ale)" fill-opacity="0.15" stroke="var(--accent-ale)"/>
+        <text x="371" y="129" text-anchor="middle" font-size="12" font-weight="600" fill="var(--accent-ale)">ALE</text>
+        <text x="324" y="165" text-anchor="middle" font-size="11" fill="var(--ink-dim)">dose series ×</text>
+        <text x="324" y="180" text-anchor="middle" font-size="11" fill="var(--ink-dim)">light/dark</text>
+        <text x="324" y="205" text-anchor="middle" font-size="10.5" fill="var(--ink-faint)" font-style="italic">measured DCW yield</text>
+
+        <path d="M424 130 H460" stroke="var(--ink-faint)" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+        <!-- biomass box -->
+        <rect x="466" y="90" width="140" height="80" rx="4" fill="var(--surface)" stroke="var(--rule)" stroke-width="1.5"/>
+        <text x="536" y="80" text-anchor="middle" font-size="12" fill="var(--ink-faint)" font-family="'IBM Plex Mono',monospace" letter-spacing="0.04em">OUTPUT</text>
+        <text x="536" y="122" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)">Biomass</text>
+        <text x="536" y="140" text-anchor="middle" font-size="11" fill="var(--ink-dim)">dry cell weight</text>
+
+        <!-- boundary -->
+        <line x1="646" y1="15" x2="646" y2="245" stroke="var(--accent-warn)" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="646" y="10" text-anchor="middle" font-size="10.5" fill="var(--accent-warn)" font-family="'IBM Plex Mono',monospace">SYSTEM BOUNDARY — cultivation stage ends here</text>
+
+        <path d="M606 130 H636" stroke="var(--ink-faint)" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+        <rect x="656" y="90" width="248" height="80" rx="4" fill="none" stroke="var(--ink-faint)" stroke-dasharray="4,3"/>
+        <text x="780" y="115" text-anchor="middle" font-size="12.5" fill="var(--ink-faint)">Downstream processing</text>
+        <text x="780" y="133" text-anchor="middle" font-size="10.5" fill="var(--ink-faint)">(harvest, extraction, upgrading)</text>
+        <text x="780" y="151" text-anchor="middle" font-size="10.5" fill="var(--ink-faint)" font-style="italic">not modeled here</text>
+
+        <!-- TEA/LCA outputs branching down from biomass -->
+        <path d="M536 170 V210" stroke="var(--ink-faint)" stroke-width="1.5" fill="none"/>
+        <path d="M536 210 H430 M536 210 H642" stroke="var(--ink-faint)" stroke-width="1.5" fill="none"/>
+        <path d="M430 210 V228" stroke="var(--ink-faint)" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+        <path d="M642 210 V228" stroke="var(--ink-faint)" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+        <text x="430" y="245" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink)">$/kg — TEA</text>
+        <text x="642" y="245" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink)">kgCO&#8322;e/kg — LCA</text>
+
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0L10 5L0 10z" fill="var(--ink-faint)"/>
+          </marker>
+        </defs>
+      </svg>
+      <div class="fig-cap"><span class="k">Model boundary</span>Both the TEA and LCA cover the same cultivation stage only — feedstock choice through biomass harvest — using this year's directly measured HS2/ALE dry-cell-weight yields at each condition. Downstream processing (harvesting, extraction, upgrading) is explicitly out of scope, not implicitly assumed away.</div>
+    </figure>
 
     <figure class="fig reveal">
       <img src="assets/fig29_cultivation_tea.png" alt="Cultivation-stage techno-economic screening comparing hydrolysate feedstock cost and HS2 vs ALE productivity" loading="lazy">
