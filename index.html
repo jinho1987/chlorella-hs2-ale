@@ -278,6 +278,7 @@ footer{ padding:44px 0 60px; }
       <a href="#phenotype">Phenotype</a>
       <a href="#genes">Genotype</a>
       <a href="#convergence">HS19 &amp; HMF</a>
+      <a href="#organelle">Organelle</a>
       <a href="#sanger">Wet-lab</a>
       <a href="#landing">Landing pads</a>
       <a href="#methylation">Epigenetics</a>
@@ -637,10 +638,36 @@ footer{ padding:44px 0 60px; }
   </div>
 </section>
 
+<section id="organelle">
+  <div class="wrap">
+    <div class="section-tag">10 — Organelle vs. nuclear mutation rate</div>
+    <div class="section-head reveal">
+      <h2>Chloroplast, mitochondrion, and nucleus don't change at the same rate</h2>
+      <p>HS2 and ALE were also independently HiFi-assembled at the organelle level &mdash; both a chloroplast and a mitochondrial genome per strain &mdash; letting us ask the same question three times: how much did each genomic compartment actually change over 18 months of selection?</p>
+    </div>
+
+    <div class="stat-grid reveal">
+      <div class="stat-cell"><div class="v">0 / Mb</div><div class="l">chloroplast (158 kb) &mdash; zero differences detected anywhere across the alignable genome</div></div>
+      <div class="stat-cell"><div class="v">57 / Mb</div><div class="l">mitochondrion (122 kb) &mdash; 7 distinct events, all outside protein-coding genes</div></div>
+      <div class="stat-cell"><div class="v">84 / Mb</div><div class="l">nuclear (51.2 Mb) &mdash; 4,309 events, same nucmer method</div></div>
+      <div class="stat-cell"><div class="v">4 / 86bp</div><div class="l">four of the seven mitochondrial events cluster in a single 86bp non-coding stretch near a duplicated <span class="mono">atp1</span> copy</div></div>
+    </div>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig33_organelle_mutations.png" alt="Mutation density and genomic location comparison across chloroplast, mitochondrion, and nuclear genomes, HS2 vs ALE" loading="lazy">
+      <div class="fig-cap"><span class="k">Where the changes are, and aren't</span>Gene positions identified by BLASTX against <em>Chlorella variabilis</em> NC64A organelle proteomes (atp1, nad5, nad7 on the mitochondrion; rpoC2 on the chloroplast, both shown twice as an artifact of circularized-genome linearization, not real duplication). Every one of the 7 mitochondrial differences falls outside every identified protein-coding gene &mdash; no evidence of a metabolic-pathway consequence from any of them.</div>
+    </figure>
+
+    <div class="callout reveal">
+      <div class="k">The pattern, and why it's the opposite of animals</div>
+      <p>Chloroplast most conserved, mitochondrion intermediate, nucleus fastest-changing &mdash; this is the plant/algal pattern, not the animal one (where mitochondrial mutation rate typically <em>exceeds</em> the nuclear rate). Plastid genomes are usually under the strongest purifying selection of any compartment in a photosynthetic eukaryote, which fits the zero-difference chloroplast result cleanly. One honest limit: the organelle side of this rests on very small absolute numbers (7 events across 280 kb total, vs. 51.2 Mb nuclear), so the precise rate ratio carries real statistical uncertainty even though the zero-chloroplast result itself is solid. We also can't yet say whether the 7 mitochondrial changes arose in the ALE lineage specifically or during HS2's own parallel culturing &mdash; that needs a temporal organelle series, which doesn't exist yet, unlike the nuclear genome's 3-timepoint resequencing.</p>
+    </div>
+  </div>
+</section>
 
 <section id="sanger">
   <div class="wrap">
-    <div class="section-tag">10 &mdash; Wet-lab confirmation</div>
+    <div class="section-tag">11 &mdash; Wet-lab confirmation</div>
     <div class="section-head reveal">
       <h2>Sanger/PCR primers for the named candidates</h2>
       <p>Every gene discussed above traces to a specific base pair. We designed PCR primer pairs in silico for all 9 named candidates &mdash; product sizes and melting temperatures suited to routine Sanger confirmation &mdash; using &plusmn;300bp of flanking sequence from the corrected assembly as template, with primer placement steered away from any tandem-repeat run &ge;20bp to avoid slippage/mispriming artifacts. These are designed, not yet wet-lab validated.</p>
@@ -706,7 +733,7 @@ footer{ padding:44px 0 60px; }
 
 <section id="landing">
   <div class="wrap">
-    <div class="section-tag">11 — Genome engineering targets</div>
+    <div class="section-tag">12 — Genome engineering targets</div>
     <div class="section-head reveal">
       <h2>Where to build next: candidate landing-pad loci</h2>
       <p>ALE's advantage — and its lipid-storage bias in particular — is a natural starting point for further metabolic engineering (e.g. pathway genes to push lipid accumulation further). That means identifying <em>landing pads</em>: genomic sites where a construct can be inserted without disrupting anything that matters, and without landing in an unstable or ambiguous region of the assembly.</p>
@@ -756,7 +783,7 @@ footer{ padding:44px 0 60px; }
 
 <section id="methylation">
   <div class="wrap">
-    <div class="section-tag">12 — Epigenetic signature</div>
+    <div class="section-tag">13 — Epigenetic signature</div>
     <div class="section-head reveal">
       <h2>A sequence-only trace of where methylation has concentrated</h2>
       <p>Direct methylation calling needs PacBio kinetics data (IPD/PW values) preserved in the original instrument BAM &mdash; this project's raw reads exist only as FASTQ, so that signal is gone and no direct 5mC call is possible here. What sequence composition alone can still show is an indirect, historical proxy: CpG observed/expected ratio (CpG O/E). Methylated cytosines spontaneously deaminate to thymine over evolutionary time, so regions with a long history of methylation accumulate a measurable CpG deficit &mdash; a mutational scar, not a live readout.</p>
@@ -778,7 +805,7 @@ footer{ padding:44px 0 60px; }
 
 <section id="econ">
   <div class="wrap">
-    <div class="section-tag">13 — Why it matters</div>
+    <div class="section-tag">14 — Why it matters</div>
     <div class="section-head reveal">
       <h2>From lab bench to bioprocess: what the advantage is worth</h2>
       <p>Genotype explains the mechanism; phenotype proves it works. The last question is whether it's worth anything outside a flask. A screening-level techno-economic and carbon-footprint analysis, built from the same measured biomass yields above and literature-anchored unit costs, says yes — concentrated exactly where it should be.</p>
