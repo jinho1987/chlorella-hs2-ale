@@ -280,6 +280,7 @@ footer{ padding:44px 0 60px; }
       <a href="#convergence">HS19 &amp; HMF</a>
       <a href="#sanger">Wet-lab</a>
       <a href="#landing">Landing pads</a>
+      <a href="#methylation">Epigenetics</a>
       <a href="#econ">Why it matters</a>
       <a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report8.html" class="cta">Full report →</a>
     </div>
@@ -753,9 +754,31 @@ footer{ padding:44px 0 60px; }
   </div>
 </section>
 
+<section id="methylation">
+  <div class="wrap">
+    <div class="section-tag">12 — Epigenetic signature</div>
+    <div class="section-head reveal">
+      <h2>A sequence-only trace of where methylation has concentrated</h2>
+      <p>Direct methylation calling needs PacBio kinetics data (IPD/PW values) preserved in the original instrument BAM &mdash; this project's raw reads exist only as FASTQ, so that signal is gone and no direct 5mC call is possible here. What sequence composition alone can still show is an indirect, historical proxy: CpG observed/expected ratio (CpG O/E). Methylated cytosines spontaneously deaminate to thymine over evolutionary time, so regions with a long history of methylation accumulate a measurable CpG deficit &mdash; a mutational scar, not a live readout.</p>
+    </div>
+
+    <div class="stat-grid reveal">
+      <div class="stat-cell"><div class="v">0.702</div><div class="l">mean CpG O/E, genic regions (9,388 AUGUSTUS genes, n=16,615 windows)</div></div>
+      <div class="stat-cell"><div class="v">0.692</div><div class="l">mean CpG O/E, repeat/duplicated blocks (11,928 self-synteny blocks, n=8,561 windows)</div></div>
+      <div class="stat-cell"><div class="v tabular">z = 13.4</div><div class="l">Mann-Whitney genic vs. repeat &mdash; statistically robust given the sample size, though the absolute gap is modest (~1.4% relative)</div></div>
+      <div class="stat-cell"><div class="v">0.685</div><div class="l">mean CpG O/E at the 14 landing-pad candidate loci &mdash; indistinguishable from the general intergenic baseline (0.686), no genic-like or repeat-like lean</div></div>
+    </div>
+
+    <div class="callout reveal">
+      <div class="k">What this does and doesn't say</div>
+      <p>The genome-wide split (genic vs. repeat) is real and consistent with the general pattern documented in green algae: methylation concentrating on repetitive/duplicated DNA more than on genes. It says nothing about whether ALE and HS2 differ from each other &mdash; 18 months of divergence is far too short for a new CpG-depletion signature to accumulate, so this proxy is structurally blind to any real epigenetic change that may have happened during the ALE selection experiment itself, in either direction. We also checked whether the landing-pad candidates specifically carry a favorable (gene-like) signature: they don't, one way or the other &mdash; a neutral result, reported as neutral rather than left unchecked.</p>
+    </div>
+  </div>
+</section>
+
 <section id="econ">
   <div class="wrap">
-    <div class="section-tag">12 — Why it matters</div>
+    <div class="section-tag">13 — Why it matters</div>
     <div class="section-head reveal">
       <h2>From lab bench to bioprocess: what the advantage is worth</h2>
       <p>Genotype explains the mechanism; phenotype proves it works. The last question is whether it's worth anything outside a flask. A screening-level techno-economic and carbon-footprint analysis, built from the same measured biomass yields above and literature-anchored unit costs, says yes — concentrated exactly where it should be.</p>
