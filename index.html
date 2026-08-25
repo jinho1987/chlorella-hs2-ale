@@ -711,44 +711,44 @@ footer{ padding:44px 0 60px; }
       <p>ALE's advantage — and its lipid-storage bias in particular — is a natural starting point for further metabolic engineering (e.g. pathway genes to push lipid accumulation further). That means identifying <em>landing pads</em>: genomic sites where a construct can be inserted without disrupting anything that matters, and without landing in an unstable or ambiguous region of the assembly.</p>
     </div>
 
-    <p style="color:var(--ink-dim); font-size:15px; max-width:70ch; margin-bottom:8px;">We screened the purged HS2 assembly against every category of site a landing pad should avoid: all 1,495 BUSCO-complete essential genes, all 30 confirmed HS2/ALE candidate mutations, both confirmed structural variants, 3,014 repeat-artifact-flagged positions, 11,928 self-synteny duplicated blocks, all 76 positions unstable across the 2015-vs-2026 decade comparison, and the first/last 5kb of every contig — each with a buffer zone. <strong>1,513 windows &ge;3kb survive.</strong> The six largest:</p>
+    <p style="color:var(--ink-dim); font-size:15px; max-width:70ch; margin-bottom:8px;">We screened the purged HS2 assembly against every category of site a landing pad should avoid: all 9,388 AUGUSTUS-predicted genes (ab initio, <em>Chlorella</em> species model &mdash; a proper gene prediction, not the redundant Trinity-transcript mapping an earlier pass of this analysis mistakenly relied on), all 30 confirmed HS2/ALE candidate mutations, both confirmed structural variants, 3,014 repeat-artifact-flagged positions, 11,928 self-synteny duplicated blocks, all 76 positions unstable across the 2015-vs-2026 decade comparison, and the first/last 5kb of every contig &mdash; each with a buffer zone. <strong>Only 14 windows &ge;3kb survive</strong> &mdash; the six largest, on contigs large enough to trust:</p>
 
     <div class="primer-grid reveal">
       <div class="primer-card">
-        <div class="primer-card-head"><span class="gene-name">ptg000014l</span><span class="cat-tag" style="color:var(--accent-chl)">95.3 kb</span></div>
-        <div class="primer-pos mono">99,863&ndash;195,136</div>
-        <div class="primer-row" style="display:block;">nearest gene: HAD superfamily phosphatase <span class="tm">2.0 kb away</span></div>
+        <div class="primer-card-head"><span class="gene-name">ptg000046l</span><span class="cat-tag" style="color:var(--accent-chl)">7.3 kb</span></div>
+        <div class="primer-pos mono">190,455&ndash;197,760</div>
+        <div class="primer-row" style="display:block;">595 kb contig <span class="tm">not near contig end</span></div>
       </div>
       <div class="primer-card">
-        <div class="primer-card-head"><span class="gene-name">ptg000010l</span><span class="cat-tag" style="color:var(--accent-chl)">85.4 kb</span></div>
-        <div class="primer-pos mono">783,595&ndash;868,989</div>
-        <div class="primer-row" style="display:block;">nearest gene: Exportin-1, C-term <span class="tm">68.2 kb away</span></div>
+        <div class="primer-card-head"><span class="gene-name">ptg000001l</span><span class="cat-tag" style="color:var(--accent-chl)">6.3 kb</span></div>
+        <div class="primer-pos mono">1,113,773&ndash;1,120,084</div>
+        <div class="primer-row" style="display:block;">1.39 Mb contig <span class="tm">not near contig end</span></div>
       </div>
       <div class="primer-card">
-        <div class="primer-card-head"><span class="gene-name">ptg000021l</span><span class="cat-tag" style="color:var(--accent-chl)">85.2 kb</span></div>
-        <div class="primer-pos mono">547,777&ndash;632,927</div>
-        <div class="primer-row" style="display:block;">nearest gene: SOS-response peptidase-like <span class="tm">2.0 kb away</span></div>
+        <div class="primer-card-head"><span class="gene-name">ptg000016l</span><span class="cat-tag" style="color:var(--accent-chl)">5.6 kb</span></div>
+        <div class="primer-pos mono">1,127,627&ndash;1,133,205</div>
+        <div class="primer-row" style="display:block;">2.09 Mb contig <span class="tm">not near contig end</span></div>
       </div>
       <div class="primer-card">
-        <div class="primer-card-head"><span class="gene-name">ptg000019l</span><span class="cat-tag" style="color:var(--accent-chl)">76.1 kb</span></div>
-        <div class="primer-pos mono">425,016&ndash;501,127</div>
-        <div class="primer-row" style="display:block;">flanked both sides <span class="tm">2.0 kb away</span></div>
+        <div class="primer-card-head"><span class="gene-name">ptg000002l</span><span class="cat-tag" style="color:var(--accent-chl)">4.7 kb</span></div>
+        <div class="primer-pos mono">3,624,538&ndash;3,629,235</div>
+        <div class="primer-row" style="display:block;">3.82 Mb contig <span class="tm">largest contig in the assembly</span></div>
       </div>
       <div class="primer-card">
-        <div class="primer-card-head"><span class="gene-name">ptg000004l</span><span class="cat-tag" style="color:var(--accent-chl)">75.6 kb</span></div>
-        <div class="primer-pos mono">932,263&ndash;1,007,876</div>
-        <div class="primer-row" style="display:block;">nearest gene: Trehalose-phosphatase <span class="tm">9.1 kb away</span></div>
+        <div class="primer-card-head"><span class="gene-name">ptg000010l</span><span class="cat-tag" style="color:var(--accent-chl)">4.7 kb</span></div>
+        <div class="primer-pos mono">2,032,965&ndash;2,037,631</div>
+        <div class="primer-row" style="display:block;">2.23 Mb contig <span class="tm">not near contig end</span></div>
       </div>
       <div class="primer-card">
-        <div class="primer-card-head"><span class="gene-name">ptg000014l</span><span class="cat-tag" style="color:var(--accent-chl)">72.1 kb</span></div>
-        <div class="primer-pos mono">1,561,219&ndash;1,633,295</div>
-        <div class="primer-row" style="display:block;">nearest gene: Violaxanthin de-epoxidase <span class="tm">2.0 kb away</span></div>
+        <div class="primer-card-head"><span class="gene-name">ptg000004l</span><span class="cat-tag" style="color:var(--accent-chl)">4.6 kb</span></div>
+        <div class="primer-pos mono">957,965&ndash;962,552</div>
+        <div class="primer-row" style="display:block;">1.01 Mb contig <span class="tm">not near contig end</span></div>
       </div>
     </div>
 
     <div class="callout reveal">
-      <div class="k">Screening-level, not final</div>
-      <p><strong>ptg000010l:783,595&ndash;868,989</strong> is the strongest candidate — the only one genuinely isolated from the nearest essential gene (68.2 kb) rather than sitting exactly at the edge of our exclusion buffer (2.0 kb, mechanical, not evidence of real isolation). One caveat stated plainly: these sites are confirmed clear of essential genes, known variants, repeats/duplications, and structural variants, but not yet confirmed non-transcribed — the only broader gene-body evidence available (a Trinity transcriptome mapped via GMAP) was too redundant to trust as a precision filter, so we could not rule out overlap with non-essential genes. A proper ab initio gene prediction (AUGUSTUS, <em>Chlorella</em> species model) is running now to resolve this; this list will update once it finishes.</p>
+      <div class="k">Revised after a proper gene prediction &mdash; and that revision is the finding</div>
+      <p>An earlier pass of this analysis, screening only against the 1,495 universal BUSCO essential genes, found windows up to 95 kb and flagged that it couldn't rule out overlap with non-essential genes. Running AUGUSTUS ab initio prediction (9,388 genes genome-wide, a realistic count for this genome size) to close that gap changed the answer substantially: the largest genuinely clear window anywhere in the HS2 genome is 12.7 kb, and among candidates on well-assembled, non-fragmentary contigs, none exceed 7.3 kb. That's not a failure of the search &mdash; it's a real property of this genome. A ~51 Mb chlorophyte assembly with 9,388 predicted genes is gene-dense enough that long gene-free intergenic stretches are simply scarce. Practically: a landing pad here should plan around a construct that fits in single-digit kilobases, not tens of kilobases, and <strong>ptg000046l:190,455&ndash;197,760</strong> (7.3 kb, mid-contig on a 595 kb contig) is the best-supported starting candidate.</p>
     </div>
   </div>
 </section>
