@@ -279,6 +279,7 @@ footer{ padding:44px 0 60px; }
       <a href="#genes">Genotype</a>
       <a href="#convergence">HS19 &amp; HMF</a>
       <a href="#sanger">Wet-lab</a>
+      <a href="#landing">Landing pads</a>
       <a href="#econ">Why it matters</a>
       <a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report8.html" class="cta">Full report →</a>
     </div>
@@ -702,9 +703,59 @@ footer{ padding:44px 0 60px; }
   </div>
 </section>
 
+<section id="landing">
+  <div class="wrap">
+    <div class="section-tag">11 — Genome engineering targets</div>
+    <div class="section-head reveal">
+      <h2>Where to build next: candidate landing-pad loci</h2>
+      <p>ALE's advantage — and its lipid-storage bias in particular — is a natural starting point for further metabolic engineering (e.g. pathway genes to push lipid accumulation further). That means identifying <em>landing pads</em>: genomic sites where a construct can be inserted without disrupting anything that matters, and without landing in an unstable or ambiguous region of the assembly.</p>
+    </div>
+
+    <p style="color:var(--ink-dim); font-size:15px; max-width:70ch; margin-bottom:8px;">We screened the purged HS2 assembly against every category of site a landing pad should avoid: all 1,495 BUSCO-complete essential genes, all 30 confirmed HS2/ALE candidate mutations, both confirmed structural variants, 3,014 repeat-artifact-flagged positions, 11,928 self-synteny duplicated blocks, all 76 positions unstable across the 2015-vs-2026 decade comparison, and the first/last 5kb of every contig — each with a buffer zone. <strong>1,513 windows &ge;3kb survive.</strong> The six largest:</p>
+
+    <div class="primer-grid reveal">
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">ptg000014l</span><span class="cat-tag" style="color:var(--accent-chl)">95.3 kb</span></div>
+        <div class="primer-pos mono">99,863&ndash;195,136</div>
+        <div class="primer-row" style="display:block;">nearest gene: HAD superfamily phosphatase <span class="tm">2.0 kb away</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">ptg000010l</span><span class="cat-tag" style="color:var(--accent-chl)">85.4 kb</span></div>
+        <div class="primer-pos mono">783,595&ndash;868,989</div>
+        <div class="primer-row" style="display:block;">nearest gene: Exportin-1, C-term <span class="tm">68.2 kb away</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">ptg000021l</span><span class="cat-tag" style="color:var(--accent-chl)">85.2 kb</span></div>
+        <div class="primer-pos mono">547,777&ndash;632,927</div>
+        <div class="primer-row" style="display:block;">nearest gene: SOS-response peptidase-like <span class="tm">2.0 kb away</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">ptg000019l</span><span class="cat-tag" style="color:var(--accent-chl)">76.1 kb</span></div>
+        <div class="primer-pos mono">425,016&ndash;501,127</div>
+        <div class="primer-row" style="display:block;">flanked both sides <span class="tm">2.0 kb away</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">ptg000004l</span><span class="cat-tag" style="color:var(--accent-chl)">75.6 kb</span></div>
+        <div class="primer-pos mono">932,263&ndash;1,007,876</div>
+        <div class="primer-row" style="display:block;">nearest gene: Trehalose-phosphatase <span class="tm">9.1 kb away</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">ptg000014l</span><span class="cat-tag" style="color:var(--accent-chl)">72.1 kb</span></div>
+        <div class="primer-pos mono">1,561,219&ndash;1,633,295</div>
+        <div class="primer-row" style="display:block;">nearest gene: Violaxanthin de-epoxidase <span class="tm">2.0 kb away</span></div>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <div class="k">Screening-level, not final</div>
+      <p><strong>ptg000010l:783,595&ndash;868,989</strong> is the strongest candidate — the only one genuinely isolated from the nearest essential gene (68.2 kb) rather than sitting exactly at the edge of our exclusion buffer (2.0 kb, mechanical, not evidence of real isolation). One caveat stated plainly: these sites are confirmed clear of essential genes, known variants, repeats/duplications, and structural variants, but not yet confirmed non-transcribed — the only broader gene-body evidence available (a Trinity transcriptome mapped via GMAP) was too redundant to trust as a precision filter, so we could not rule out overlap with non-essential genes. A proper ab initio gene prediction (AUGUSTUS, <em>Chlorella</em> species model) is running now to resolve this; this list will update once it finishes.</p>
+    </div>
+  </div>
+</section>
+
 <section id="econ">
   <div class="wrap">
-    <div class="section-tag">11 — Why it matters</div>
+    <div class="section-tag">12 — Why it matters</div>
     <div class="section-head reveal">
       <h2>From lab bench to bioprocess: what the advantage is worth</h2>
       <p>Genotype explains the mechanism; phenotype proves it works. The last question is whether it's worth anything outside a flask. A screening-level techno-economic and carbon-footprint analysis, built from the same measured biomass yields above and literature-anchored unit costs, says yes — concentrated exactly where it should be.</p>
