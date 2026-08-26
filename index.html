@@ -282,6 +282,7 @@ footer{ padding:44px 0 60px; }
       <a href="#sanger">Wet-lab</a>
       <a href="#landing">Landing pads</a>
       <a href="#methylation">Epigenetics</a>
+      <a href="#nicem">Independent replication</a>
       <a href="#econ">Why it matters</a>
       <a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report8.html" class="cta">Full report →</a>
     </div>
@@ -808,9 +809,36 @@ footer{ padding:44px 0 60px; }
   </div>
 </section>
 
+<section id="nicem">
+  <div class="wrap">
+    <div class="section-tag">14 — Independent replication</div>
+    <div class="section-head reveal">
+      <h2>A third-party facility assembled the same reads — and found the same mutations</h2>
+      <p>NICEM (National Instrumentation Center for Environmental Management) independently assembled our raw PacBio HiFi reads from scratch, with no access to our pipeline, and ran their own annotation. One correction for the record: NICEM's own files and reports label our HS2 ancestor strain simply as &ldquo;HS&rdquo; &mdash; that's a naming shorthand on their end, not a different strain; it refers to the same HS2 line used throughout this project.</p>
+    </div>
+
+    <div class="stat-grid reveal">
+      <div class="stat-cell"><div class="v">78 vs. 721</div><div class="l">contigs, our purged HS2 vs. NICEM's raw HS assembly &mdash; same reads, same organism</div></div>
+      <div class="stat-cell"><div class="v">1.62 Mb vs. 0.26 Mb</div><div class="l">contig N50, ours vs. NICEM's &mdash; ours is ~6x more contiguous</div></div>
+      <div class="stat-cell"><div class="v">69&ndash;86%</div><div class="l">of NICEM's raw HS/ALE assemblies is self-similar duplicate sequence &mdash; unpurged diploid haplotigs, not real extra genome</div></div>
+      <div class="stat-cell"><div class="v">3 / 9 + 1 / 2</div><div class="l">named point-mutation candidates and structural variants independently reproduced at exact coordinates in NICEM's assembly</div></div>
+    </div>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig35_nicem_validation.png" alt="Comparison of assembly contiguity, genome size vs completeness, substitution mutation-type signature, and candidate cross-validation between our pipeline and NICEM's independent assembly" loading="lazy">
+      <div class="fig-cap"><span class="k">Bigger isn't better, and the signal isn't noise</span>NICEM's assemblies are ~2x larger in raw base pairs, but that's unpurged diploid haplotig redundancy, not additional biology: BUSCO completeness is actually slightly lower and contiguity is roughly 6&ndash;14x worse. A genome-wide re-screen of NICEM's independent HS-vs-ALE comparison for additional candidates beyond our own found nothing credible &mdash; restricting to single-copy regions made the signal-to-noise ratio (Ts/Tv) worse, not better, the opposite of what real mutations would do, and 82% of the indel calls sit inside GC-homopolymer runs, a known artifact of assembly-to-assembly alignment. By contrast, our own ALE-specific substitution set is enriched 44% for the C&gt;A/G&gt;T oxidative-damage signature (chance level: 33%) &mdash; a real, non-random mutational fingerprint, not noise.</div>
+    </figure>
+
+    <div class="callout reveal">
+      <div class="k">Does this mean our purged (&ldquo;truncated&rdquo;) genome could be hiding something?</div>
+      <p>No &mdash; if anything, this cross-check argues the opposite. purge_dups removes <em>redundant</em> haplotig copies, not unique sequence: our purged assemblies retain 98.9&ndash;99.1% complete single-copy BUSCO genes with only 0.5&ndash;1.2% residual duplication, which is exactly what successful purging of a diploid genome should look like, not evidence of lost content. More directly: EPHA, CLPB3, SCP46, and the 16 kb duplication were found independently in NICEM's completely separate, unpurged, differently-assembled contigs &mdash; if our purging step had somehow fabricated or masked these loci, they couldn't possibly reappear at the same coordinates in an assembly built by a different team with a different pipeline. Two independent assemblies converging on the same four loci is stronger evidence for them being real than either assembly alone could provide. The one caveat purging can genuinely introduce is at heterozygous sites, where collapsing two haplotigs into one can hide the non-reference allele &mdash; a separate issue from truncation, and one already addressed in the temporal cross-check (Section 9).</p>
+    </div>
+  </div>
+</section>
+
 <section id="econ">
   <div class="wrap">
-    <div class="section-tag">14 — Why it matters</div>
+    <div class="section-tag">15 — Why it matters</div>
     <div class="section-head reveal">
       <h2>From lab bench to bioprocess: what the advantage is worth</h2>
       <p>Genotype explains the mechanism; phenotype proves it works. The last question is whether it's worth anything outside a flask. A screening-level techno-economic and carbon-footprint analysis, built from the same measured biomass yields above and literature-anchored unit costs, says yes — concentrated exactly where it should be.</p>
