@@ -995,7 +995,24 @@ footer{ padding:44px 0 60px; }
       <div class="stat-cell"><div class="v">1</div><div class="l">of four genes with an actual furan-metabolism rationale to begin with (EPHA, epoxide hydrolase)</div></div>
     </div>
 
+        <div class="section-head reveal" style="margin-top:56px;">
+      <h2 style="font-size:22px;">Does the fold itself change?</h2>
+      <p>ESMFold predicts each sequence independently &mdash; it isn't simulating a before/after transition, so a difference between the WT and mutant prediction means "the model's best independent guess differs," not "we watched the protein refold." That's a meaningful signal when the surrounding structure is confidently predicted; it's easy to mistake for noise when it isn't. We superimposed each WT/mutant pair and measured both whole-protein backbone RMSD and local RMSD in a &plusmn;7-residue window around the mutation.</p>
+    </div>
+
+    <div class="stat-grid reveal">
+      <div class="stat-cell"><div class="v">0.05Å</div><div class="l">EPHA global backbone RMSD &mdash; essentially identical fold everywhere else</div></div>
+      <div class="stat-cell"><div class="v">4.67Å</div><div class="l">EPHA local RMSD at the mutation &mdash; loop &rarr; helix, right where furfural/5-HMF binding also shifted</div></div>
+      <div class="stat-cell"><div class="v">0.14Å</div><div class="l">PPA3 local RMSD &mdash; no structural change anywhere, matching its "tolerated" ESM2 score</div></div>
+      <div class="stat-cell"><div class="v">4.03Å</div><div class="l">Unnamed site local RMSD (helix &rarr; loop) &mdash; notable, but at only ~51 pLDDT confidence</div></div>
+    </div>
+
     <div class="callout reveal">
+      <div class="k">Three independent methods, one convergent answer for EPHA</div>
+      <p>ESM2 flags the substitution as mildly disruptive. The predicted fold reorganizes locally &mdash; a loop becomes a helix right at the mutation &mdash; while the rest of the protein stays essentially superimposable (0.05Å global RMSD, so this isn't just noise from an uncertain structure). And docking independently shows weaker predicted binding to both stressor molecules at that same spot. None of these three methods was built to agree with the others; the fact that they do is the strongest piece of evidence in this section. TRPA shows the opposite pattern &mdash; its local RMSD (1.84Å) is no larger than its already-loose global RMSD (1.33Å), consistent with a genuinely low-confidence, disordered prediction rather than a localized mutation effect.</p>
+    </div>
+
+<div class="callout reveal">
       <div class="k">What this does and doesn't show</div>
       <p>EPHA is the one result worth taking seriously here: the largest shift of all eight gene&times;ligand comparisons, in the same direction for both stressor molecules, in the one gene that plausibly interacts with furanic compounds at all (epoxide hydrolase activity). PPA3, TRPA, and the unnamed site were docked against the same two ligands with no prior expectation they'd bind them &mdash; they don't have a furan-metabolism function, and the small, inconsistent deltas they show (all under 0.3 kcal/mol, within this method's typical scoring noise) read as a negative result, which is itself informative rather than a data gap. None of this replaces a binding assay: ESMFold confidence here tops out at "confident" (pLDDT ~76 for EPHA), never "very high," and the docking box is centered on the mutated residue rather than a confirmed catalytic pocket.</p>
     </div>
