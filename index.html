@@ -1012,6 +1012,23 @@ footer{ padding:44px 0 60px; }
       <p>ESM2 flags the substitution as mildly disruptive. The predicted fold reorganizes locally &mdash; a loop becomes a helix right at the mutation &mdash; while the rest of the protein stays essentially superimposable (0.05Å global RMSD, so this isn't just noise from an uncertain structure). And docking independently shows weaker predicted binding to both stressor molecules at that same spot. None of these three methods was built to agree with the others; the fact that they do is the strongest piece of evidence in this section. TRPA shows the opposite pattern &mdash; its local RMSD (1.84Å) is no larger than its already-loose global RMSD (1.33Å), consistent with a genuinely low-confidence, disordered prediction rather than a localized mutation effect.</p>
     </div>
 
+    <div class="section-head reveal" style="margin-top:56px;">
+      <h2 style="font-size:22px;">Is any of this near the enzyme's actual catalytic residue?</h2>
+      <p>UniProt annotates a curated catalytic residue for the EPHA, PPA3, and TRPA orthologs. We mapped each onto our protein by sequence alignment, then measured the real 3D distance in the folded structure &mdash; not just how many residues apart they sit in the sequence, which turned out to be a misleading proxy.</p>
+    </div>
+
+    <div class="stat-grid reveal">
+      <div class="stat-cell"><div class="v">16.6Å</div><div class="l">PPA3 &mdash; closest in sequence (8aa) but not in the fold</div></div>
+      <div class="stat-cell"><div class="v">27.4Å</div><div class="l">EPHA &mdash; the mutation sits far from the catalytic proton-acceptor residue</div></div>
+      <div class="stat-cell"><div class="v">30.1Å</div><div class="l">TRPA &mdash; farthest, consistent with no localized effect at all</div></div>
+      <div class="stat-cell"><div class="v">~5-8Å</div><div class="l">rule-of-thumb distance for a mutation to plausibly sit in the catalytic pocket itself</div></div>
+    </div>
+
+    <div class="callout reveal">
+      <div class="k">None of these mutations touch the known active site &mdash; and that's not a weaker result</div>
+      <p>All three sit well outside the ~5&ndash;8&Aring; range where a substitution would plausibly interfere with catalysis directly. For EPHA specifically, that reframes what the loop&rarr;helix shift and docking result actually mean: this isn't a mutation sitting in the catalytic pocket, it's a <em>distal</em> conformational change &mdash; the mutation reshapes a region 27&Aring; away from the known catalytic residue, and that reshaping is what the docking search (centered on the mutation, not the catalytic site) is picking up. Distal mutations that alter substrate access or a secondary binding surface without touching the chemistry itself are a normal, well-documented enzymology mechanism &mdash; arguably a more interesting finding than a direct hit would be, since it implies a structural rather than purely catalytic route to altered function. It's also a firm boundary on the claim: this is evidence of a real, convergent structural signal at the mutation site, not evidence that catalysis itself is impaired.</p>
+    </div>
+
 <div class="callout reveal">
       <div class="k">What this does and doesn't show</div>
       <p>EPHA is the one result worth taking seriously here: the largest shift of all eight gene&times;ligand comparisons, in the same direction for both stressor molecules, in the one gene that plausibly interacts with furanic compounds at all (epoxide hydrolase activity). PPA3, TRPA, and the unnamed site were docked against the same two ligands with no prior expectation they'd bind them &mdash; they don't have a furan-metabolism function, and the small, inconsistent deltas they show (all under 0.3 kcal/mol, within this method's typical scoring noise) read as a negative result, which is itself informative rather than a data gap. None of this replaces a binding assay: ESMFold confidence here tops out at "confident" (pLDDT ~76 for EPHA), never "very high," and the docking box is centered on the mutated residue rather than a confirmed catalytic pocket.</p>
