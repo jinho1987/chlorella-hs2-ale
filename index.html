@@ -497,6 +497,32 @@ footer{ padding:44px 0 60px; }
       <div class="k">Reported, not hidden</div>
       <p>A reciprocal check against a 2023 short-read vendor report found no gene-level overlap with its findings — and two of that report's three indel calls carry the exact repeat-artifact signatures this project's filter was built to catch, independent evidence the filtering approach is calibrated correctly rather than overzealous. A previously reported ~2 Mb inversion near an ABC-transporter locus also did not replicate under the corrected, cross-validated pipeline; we say so directly rather than quietly dropping it.</p>
     </div>
+
+    <div class="section-head reveal" style="margin-top:44px;">
+      <h3>Is HS2 actually diploid? The direct evidence, not just the inference</h3>
+      <p>Every heterozygosity/coverage number elsewhere on this page assumes a diploid genome. That assumption was challenged in the original expert review (a single-peak read on the raw k-mer spectrum looked inconsistent with the reported heterozygosity) and is worth showing plainly rather than asserting. Calibration: <strong>nearly certain, not certain</strong> — three independent lines of evidence agree, but none of them individually rules out every alternative.</p>
+    </div>
+    <div class="stat-grid reveal" style="margin-top:0;">
+      <div class="stat-cell"><div class="v">1.0&ndash;2.0%</div><div class="l">GenomeScope2 (k=21, p=2 model) heterozygosity estimate, both strains &mdash; supersedes an earlier, inconsistent 0.0036% figure that triggered the original review question</div></div>
+      <div class="stat-cell"><div class="v">AB, no AAB</div><div class="l">Smudgeplot k-mer-pair shape, both strains &mdash; the direct, purpose-built diploidy test: minor-allele-frequency density concentrates toward 0.5 with no secondary cluster at the 1:2 (triploid AAB) line</div></div>
+      <div class="stat-cell"><div class="v">14.9%&rarr;0.5% <span class="mono" style="font-size:12px;">/</span> 10.1%&rarr;1.2%</div><div class="l">BUSCO duplication rate, HS2/ALE, before&rarr;after purge_dups &mdash; confirms duplication and heterozygosity are two real, <em>separate</em> properties of this genome, not one being mistaken for the other</div></div>
+      <div class="stat-cell"><div class="v">158x <span class="mono" style="font-size:12px;">/</span> 204x</div><div class="l">HiFi 1n (monoploid) coverage, HS2/ALE (hifiasm) &mdash; the 2n coverage line in both smudgeplots below sits at exactly double this, as a diploid model predicts</div></div>
+    </div>
+
+    <div class="fig-2col reveal">
+      <figure class="fig">
+        <img src="assets/HS2_smudgeplot_manual.png" alt="Smudgeplot k-mer pair analysis for HS2, showing AB heterozygosity shape with no secondary AAB peak" loading="lazy">
+        <div class="fig-cap"><span class="k">HS2</span>Left: all k-mer pairs. Right: clustered pairs only, isolating real signal from background. Density concentrates toward minor-allele-frequency 0.5 (the AB/diploid-heterozygous line), thinning out with no distinct cluster at the red 1:2 dashed line (the AAB/triploid expectation).</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/ALE_smudgeplot_manual.png" alt="Smudgeplot k-mer pair analysis for ALE, showing AB heterozygosity shape with no secondary AAB peak" loading="lazy">
+        <div class="fig-cap"><span class="k">ALE</span>Same pattern, independently: no evidence of a triploid or higher-ploidy signature in the descendant strain either &mdash; ploidy did not shift over the 18-month selection.</div>
+      </figure>
+    </div>
+    <div class="callout reveal" style="margin-top:28px;">
+      <div class="k">Being honest about what this doesn't prove</div>
+      <p>Neither test is a chromosome count. Smudgeplot's AB shape is consistent with diploidy and rules out the most likely confound the reviewer raised (duplication content masquerading as heterozygosity) — but a purely computational k-mer analysis cannot fully exclude every unusual ploidy/structural scenario the way a karyotype or flow cytometry measurement would. "Nearly certain" is the honest ceiling for this kind of evidence, not "certain."</p>
+    </div>
   </div>
 </section>
 
