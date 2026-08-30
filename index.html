@@ -687,7 +687,7 @@ footer{ padding:44px 0 60px; }
     <div class="section-tag">11 &mdash; Wet-lab confirmation</div>
     <div class="section-head reveal">
       <h2>Sanger/PCR primers for the named candidates</h2>
-      <p>Every gene discussed above traces to a specific base pair. We designed PCR primer pairs in silico for all 9 named candidates &mdash; product sizes and melting temperatures suited to routine Sanger confirmation &mdash; using &plusmn;300bp of flanking sequence from the corrected assembly as template, with primer placement steered away from any tandem-repeat run &ge;20bp to avoid slippage/mispriming artifacts. These are designed, not yet wet-lab validated.</p>
+      <p>Every gene discussed above traces to a specific base pair. We designed PCR primer pairs in silico for all 9 named candidates, plus 3 additional missense sites (previously unannotated genes) identified by classifying the full 30-candidate funnel output for coding consequence &mdash; 12 sites total &mdash; product sizes and melting temperatures suited to routine Sanger confirmation, using &plusmn;300bp of flanking sequence from the corrected assembly as template, with primer placement steered away from any tandem-repeat run &ge;20bp to avoid slippage/mispriming artifacts. These are designed, not yet wet-lab validated.</p>
     </div>
     <div class="primer-grid reveal">
       <div class="primer-card">
@@ -744,7 +744,26 @@ footer{ padding:44px 0 60px; }
         <div class="primer-row"><span class="primer-label">F</span><span class="mono">CAGACGCTGCTACCCTACAG</span><span class="tm">59.9&deg;C</span></div>
         <div class="primer-row"><span class="primer-label">R</span><span class="mono">GTCCCCTCTACCTTCCCCATC</span><span class="tm">61.0&deg;C</span></div>
       </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">g8767</span><span class="cat-tag" style="color:var(--accent-ale)">ALE-specific</span></div>
+        <div class="primer-pos mono">ptg000061l:329542 &middot; A&rarr;G &middot; Leu82Pro &middot; 342 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">GATTACAATGGCCGAGGGGTAG</span><span class="tm">60.5&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">CTGATCCCGGTGTACATGTACC</span><span class="tm">60.2&deg;C</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">g5108</span><span class="cat-tag" style="color:var(--accent-hs2)">shifted AF</span></div>
+        <div class="primer-pos mono">ptg000016l:2079104 &middot; C&rarr;A &middot; Ala350Asp &middot; 376 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">CCGTTTTGATTGGTGCCTACTG</span><span class="tm">60.1&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">CACCAAAAGACTGCTCCAACTG</span><span class="tm">60.0&deg;C</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">g1283</span><span class="cat-tag" style="color:var(--accent-hs2)">shifted AF</span></div>
+        <div class="primer-pos mono">ptg000004l:320441 &middot; A&rarr;G &middot; Phe207Ser &middot; 301 bp product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">GATTTCGAACACCCACCAACAG</span><span class="tm">60.0&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">TGGGAGTTTCTGCTCATCTGTC</span><span class="tm">60.0&deg;C</span></div>
+      </div>
     </div>
+    <p class="reveal" style="margin-top:20px;font-size:14px;color:var(--ink-dim);">g8767, g5108, and g1283 are the only three missense substitutions found anywhere in the 30-candidate funnel-validated set besides MASY &mdash; every other candidate is intronic or intergenic. g1283 sits inside the 16&nbsp;kb tandem duplication discussed below (&sect;14), one of six genes in that duplicated block.</p>
   </div>
 </section>
 
