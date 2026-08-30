@@ -802,6 +802,38 @@ footer{ padding:44px 0 60px; }
         <div class="primer-row"><span class="primer-label">R</span><span class="mono">TTCGTGTGTGATTCTTTGTGCC</span><span class="tm">60.0&deg;C</span></div>
       </div>
     </div>
+
+    <div class="section-head reveal" style="margin-top:44px;">
+      <h3>ESM2 variant-effect scoring &amp; structure comparison</h3>
+      <p>All four missense candidates scored with ESM2-650M (masked-marginal variant effect prediction, a protein language model score — not a physical simulation) and folded with ESMFold, wild-type vs. mutant, to check whether the structural picture agrees with the sequence-based score. Three of the four (MASY, g5108, g1283) exceed the public ESMFold API's ~400-residue length cap; those were folded as a 380-residue window centered on the mutation site, which is why the long peripheral loops in those renders shouldn't be read as meaningful — confirmed by their own pLDDT confidence (~0.7 at the mutation site vs. ~0.4 at the periphery, PDB B-factor column). g8767 fits under the cap and was folded full-length.</p>
+    </div>
+    <div class="stat-grid reveal" style="margin-top:0;">
+      <div class="stat-cell"><div class="v" style="color:var(--accent-ale);">&minus;12.16</div><div class="l"><span class="mono">g8767 L82P</span> &mdash; most disruptive. Proline breaks the local &alpha;-helix H-bonding pattern; the render shows real packing displacement propagating into neighboring turns, not just at residue 82.</div></div>
+      <div class="stat-cell"><div class="v" style="color:var(--accent-ale);">&minus;4.13</div><div class="l"><span class="mono">g5108 A350D</span> &mdash; disruptive. Backbone overlaps almost perfectly WT vs. mutant; the small-hydrophobic&rarr;bulky-charged swap looks like a chemical/packing disruption, not a fold-breaking one. Protein ID itself is a weak hit (25&ndash;33%), hold loosely.</div></div>
+      <div class="stat-cell"><div class="v">+0.19</div><div class="l"><span class="mono">g1283 F207S</span> &mdash; near-neutral. Near-perfect WT/mutant overlap. Same weak-identity caveat as g5108 (24&ndash;27%).</div></div>
+      <div class="stat-cell"><div class="v">+4.50</div><div class="l"><span class="mono">MASY W38R</span> &mdash; tolerated. Large chemical change (Trp&rarr;Arg) but at a surface/loop position; structure argues against this variant being ALE's functional lever, despite sitting in a well-identified essential enzyme (malate synthase).</div></div>
+    </div>
+
+    <div class="fig-2col reveal">
+      <figure class="fig">
+        <img src="assets/esm_g8767_L82P_closeup.png" alt="ESMFold structure comparison, WT vs mutant, g8767 Leu82Pro, showing helix packing displacement" loading="lazy">
+        <div class="fig-cap"><span class="k">g8767 L82P &mdash; structure agrees with the score</span>WT (blue) vs. mutant (red) overlaid, full-length fold. Visible divergence beyond the mutated residue itself, consistent with the most disruptive ESM2 score of the four.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/esm_g5108_A350D_closeup.png" alt="ESMFold structure comparison, WT vs mutant, g5108 Ala350Asp, windowed fold" loading="lazy">
+        <div class="fig-cap"><span class="k">g5108 A350D &mdash; chemical, not geometric, disruption</span>380-residue window centered on the mutation (full protein is 1220 aa, over the public API's length cap). Backbone traces overlap tightly; the disruptive score likely reflects sidechain chemistry, not a broken fold.</div>
+      </figure>
+    </div>
+    <div class="fig-2col reveal" style="margin-top:40px;">
+      <figure class="fig">
+        <img src="assets/esm_MASY_W38R_closeup.png" alt="ESMFold structure comparison, WT vs mutant, MASY Trp38Arg, windowed fold" loading="lazy">
+        <div class="fig-cap"><span class="k">MASY W38R &mdash; tolerated, and the structure agrees</span>380-residue window (full protein 589 aa). Near-identical backbone; mutant Arg sidechain simply points a different direction than WT Trp at this surface-exposed position.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/esm_g1283_F207S_closeup.png" alt="ESMFold structure comparison, WT vs mutant, g1283 Phe207Ser, windowed fold" loading="lazy">
+        <div class="fig-cap"><span class="k">g1283 F207S &mdash; near-neutral, structure agrees</span>380-residue window (full protein 535 aa). Near-perfect overlap. Note ESM2's fold-stability score doesn't rule out a localized functional effect at a specific binding surface.</div>
+      </figure>
+    </div>
   </div>
 </section>
 
