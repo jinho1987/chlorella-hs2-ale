@@ -774,6 +774,25 @@ footer{ padding:44px 0 60px; }
       </div>
     </div>
     <p class="reveal" style="margin-top:20px;font-size:14px;color:var(--ink-dim);">g8767, g5108, and g1283 are the only three missense substitutions found anywhere in the 30-candidate funnel-validated set besides MASY &mdash; every other candidate is intronic or intergenic. g1283 sits inside the 16&nbsp;kb tandem duplication discussed below (&sect;14), one of six genes in that duplicated block.</p>
+
+    <div class="section-head reveal" style="margin-top:40px;">
+      <h3>Structural-variant junction primers</h3>
+      <p>Primers spanning the breakpoints themselves, for the two confirmed ALE-specific structural variants. For the duplication, a synthetic junction template (last 400&nbsp;bp + first 400&nbsp;bp of the repeat unit) was used to place primers that are divergent in a single-copy genome (no product) but convergent across a real copy1/copy2 junction &mdash; a positive product also lets Sanger reads resolve the exact breakpoint sequence and distinguish clean vs. microhomology-mediated joins.</p>
+    </div>
+    <div class="primer-grid reveal">
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">Insertion junction</span><span class="cat-tag" style="color:var(--accent-ale)">ALE-specific</span></div>
+        <div class="primer-pos mono">ptg000012l:2064929 &middot; +1511 bp insertion &middot; HS2 447 bp / ALE 1958 bp</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">GTGTGTGTGTGTTTACAGAGGC</span><span class="tm">60.0&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">TGTATAGCGTTCTGAGCCACTC</span><span class="tm">59.9&deg;C</span></div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-head"><span class="gene-name">16 kb duplication junction</span><span class="cat-tag" style="color:var(--accent-ale)">ALE-specific</span></div>
+        <div class="primer-pos mono">ptg000004l:319003&ndash;335190 &middot; synthetic junction template &middot; ALE 398 bp / HS2 no product</div>
+        <div class="primer-row"><span class="primer-label">F</span><span class="mono">GTCCTGCTTGGTGTTGAATTCC</span><span class="tm">60.0&deg;C</span></div>
+        <div class="primer-row"><span class="primer-label">R</span><span class="mono">TTCGTGTGTGATTCTTTGTGCC</span><span class="tm">60.0&deg;C</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -872,6 +891,11 @@ footer{ padding:44px 0 60px; }
     <div class="callout reveal">
       <div class="k">Does this mean our purged (&ldquo;truncated&rdquo;) genome could be hiding something?</div>
       <p>No &mdash; if anything, this cross-check argues the opposite. purge_dups removes <em>redundant</em> haplotig copies, not unique sequence: our purged assemblies retain 98.9&ndash;99.1% complete single-copy BUSCO genes with only 0.5&ndash;1.2% residual duplication, which is exactly what successful purging of a diploid genome should look like, not evidence of lost content. More directly: EPHA, CLPB3, SCP46, and the 16 kb duplication were found independently in NICEM's completely separate, unpurged, differently-assembled contigs &mdash; if our purging step had somehow fabricated or masked these loci, they couldn't possibly reappear at the same coordinates in an assembly built by a different team with a different pipeline. Two independent assemblies converging on the same four loci is stronger evidence for them being real than either assembly alone could provide. The one caveat purging can genuinely introduce is at heterozygous sites, where collapsing two haplotigs into one can hide the non-reference allele &mdash; a separate issue from truncation, and one already addressed in the temporal cross-check (Section 9).</p>
+    </div>
+
+    <div class="callout reveal">
+      <div class="k">What's actually inside the 16 kb duplication?</div>
+      <p>Six genes, identified by local BLASTp against Swiss-Prot with graded confidence. Four are a coherent, high-confidence chromatin block: core histones <strong>H3</strong> and <strong>H4</strong>, a linker histone (<strong>H1</strong>), and a <strong>Myb-family transcription factor</strong>. The remaining two are lower-confidence: <strong>g1283</strong> (24&ndash;27% identity to chitin deacetylases &mdash; below the safe-homology threshold; this is the same locus carrying the confirmed ALE missense mutation Phe207Ser, above) and <strong>g1287</strong> (32.5% identity to a UBX-domain-containing protein, e-value 4.96&times;10<sup>&minus;70</sup> over a near-full-length 495 aa alignment &mdash; a moderate-confidence call, since alignment length and e-value carry more weight than raw %identity for remote homology). Flanking-sequence analysis argues against classical NAHR (non-allelic homologous recombination) as the mechanism: the sequence immediately outside the repeat unit is non-repetitive on both sides, which NAHR &mdash; which requires flanking homologous repeats to recombine against &mdash; would not produce. A replication-based (FoSTeS/MMBIR) or NHEJ-mediated origin is more consistent with what's observed.</p>
     </div>
 
     <p class="reveal" style="margin-top:28px;font-size:15px;"><a href="nicem_comparison.html">&rarr; Full methods comparison: our pipeline vs. NICEM's, combined with the original six-point expert review and its resolutions</a></p>
