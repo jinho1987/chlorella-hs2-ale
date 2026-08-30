@@ -417,6 +417,16 @@ footer{ padding:44px 0 60px; }
       <img src="assets/fig28_chns_composition.png" alt="CHNS elemental composition comparing HS2 and ALE across both hydrolysate acid strengths and dilutions" loading="lazy">
       <div class="fig-cap"><span class="k">Elemental composition (CHNS)</span>Whole-cell nitrogen content is condition-dependent, not a fixed strain trait: under the milder 0.25M HCl hydrolysate, ALE runs consistently higher in nitrogen than HS2 (e.g. 17.0% vs 8.8% at 1:1) — consistent with elevated protein/amino-nitrogen biomass under this stress. Under the harsher 0.5M HCl condition the gap narrows and reverses at the most severe dilution, matching the same acid-strength-dependent divergence already seen in growth and single-cell data.</div>
     </figure>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig38_ftir_pca.png" alt="Principal component analysis of full FTIR spectra, HS2 vs ALE, light vs dark, all doses" loading="lazy">
+      <div class="fig-cap"><span class="k">FTIR alone, unsupervised</span>PCA on the full absorbance spectrum (900&ndash;3600 cm<sup>-1</sup>), every sample, no group-averaging. Reported honestly rather than oversold: PC1 (74% of variance) is dominated by the strong ~1000 cm<sup>-1</sup> carbohydrate band and tracks overall spectral magnitude, not strain identity &mdash; HS2 and ALE overlap substantially in this space. Dark-condition samples cluster tightly regardless of strain; light samples spread far more broadly. FTIR alone does not cleanly separate the strains; the signal that does is elsewhere (below).</div>
+    </figure>
+
+    <figure class="fig reveal" style="margin-top:44px;">
+      <img src="assets/fig39_integrated_multivariate.png" alt="Integrated multivariate analysis combining FTIR band intensities, FAME saturation profile, biodiesel quality indices, and total lipid yield" loading="lazy">
+      <div class="fig-cap"><span class="k">Where the real integrated signal is</span>Combining FTIR band intensities with the FAME saturation profile, fuel-quality indices, and total lipid yield (z-scored, PCA + hierarchical clustering; CHNS excluded here as it used a different acid-strength experimental design, not directly comparable to the rest). PC1 (51% of variance) is loaded almost entirely by the lipid-quality axis &mdash; MUFA, cetane number, PUFA, iodine value &mdash; not by FTIR. The single largest outlier in the entire dataset is HS2 at the 1:1 dose, driven by its unusually high PUFA/low MUFA at exactly the condition ALE was evolved under. The lipid-composition shift, not the whole-cell FTIR fingerprint, is the dominant cross-modality signal distinguishing the strains.</div>
+    </figure>
   </div>
 </section>
 
