@@ -526,28 +526,339 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
     <span><i style="background:#E4032E;"></i>Missing 13 <span class="mono" style="color:var(--ink-faint);">(0.9%)</span></span>
   </div>
 
-  <div class="callout">
-    <div class="label">In progress</div>
-    <p>NICEM annotated ALE and HS independently (11,132 vs. 11,005 genes). Our own pipeline's gene models and every downstream analysis (missense candidates, duplication content, mutational signature) are built on HS2's AUGUSTUS annotation as the coordinate reference &mdash; we had not previously run an independent AUGUSTUS gene prediction on the ALE assembly itself. That run is in progress now, specifically to make this comparison complete; the annotation summary and GO breakdown below will be filled in once it finishes.</p>
+  <div class="callout good">
+    <div class="label">Run to close this comparison</div>
+    <p>NICEM annotated ALE and HS independently (11,132 vs. 11,005 genes). Our own pipeline's gene models and every downstream analysis (missense candidates, duplication content, mutational signature) are built on HS2's AUGUSTUS annotation as the coordinate reference &mdash; we had not previously run an independent AUGUSTUS gene prediction on the ALE assembly itself. Run specifically to make this comparison complete, using the identical chlorella species model as HS2: 9,365 genes predicted, protein-annotated the same way below.</p>
   </div>
 
   <div class="sub-head2">Annotation Summary</div>
   <table class="datatable2">
     <thead><tr><th>Metric</th><th class="num2">Genes</th><th class="num2">(%)</th></tr></thead>
     <tbody>
-      <tr><td>Total genes (AUGUSTUS ab initio, chlorella model)</td><td class="num2" colspan="2">Running &mdash; check back shortly</td></tr>
+      <tr><td>Total genes (AUGUSTUS ab initio, chlorella model)</td><td class="num2">9,365</td><td class="num2">100.0%</td></tr>
+      <tr><td>Hits to UniProtKB/Swiss-Prot (DIAMOND, e&le;1e-5)</td><td class="num2">5,395</td><td class="num2">57.6%</td></tr>
+      <tr><td>GO annotated (BP/MF/CC, any aspect)</td><td class="num2">5,365</td><td class="num2">57.3%</td></tr>
     </tbody>
   </table>
 
   <div class="sub-head2">Direct GO Count <span class="en2">(Top 20 + Others)</span></div>
-  <div class="go-grid"><div class="go-card"><div class="go-card-title">Biological Process</div><p style="font-size:12px;color:var(--ink-400);">AUGUSTUS gene prediction + DIAMOND/UniProt annotation still running for ALE — will be added once complete.</p></div><div class="go-card"><div class="go-card-title">Molecular Function</div><p style="font-size:12px;color:var(--ink-400);">Pending.</p></div><div class="go-card"><div class="go-card-title">Cellular Component</div><p style="font-size:12px;color:var(--ink-400);">Pending.</p></div></div>
+  <div class="go-grid"><div class="go-card"><div class="go-card-title">Biological Process</div><div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="DNA-templated transcription">DNA-templated transcription</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:100.0%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">248</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="proteolysis">proteolysis</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:65.7%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">163</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="signal transduction">signal transduction</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:56.0%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">139</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="DNA repair">DNA repair</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:47.6%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">118</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="cell division">cell division</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:44.0%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">109</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="translation">translation</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:41.9%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">104</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="protein transport">protein transport</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:41.1%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">102</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="mRNA splicing, via spliceosome">mRNA splicing, via spliceosome</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:38.7%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">96</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="regulation of DNA-templated transcription">regulation of DNA-templated transcription</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:35.9%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">89</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="embryo development ending in seed dormancy">embryo development ending in seed dormancy</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:35.5%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">88</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="methylation">methylation</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:35.5%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">88</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="mRNA processing">mRNA processing</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:33.9%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">84</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="protein ubiquitination">protein ubiquitination</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:33.5%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">83</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="rRNA processing">rRNA processing</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:33.5%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">83</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="protein folding">protein folding</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:31.0%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">77</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="ubiquitin-dependent protein catabolic process">ubiquitin-dependent protein catabolic process</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:29.4%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">73</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="response to heat">response to heat</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:25.0%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">62</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="transmembrane transport">transmembrane transport</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:23.8%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">59</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="proteasome-mediated ubiquitin-dependent protein catabolic process">proteasome-mediated ubiquitin-dependent protein catabolic process</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:23.8%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">59</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="response to salt stress">response to salt stress</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:23.8%;height:100%;background:#2a78d6;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">59</span>
+</div><div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-400);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Others</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:100%;height:100%;background:var(--ink-300b);border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">13,917</span>
+</div><div style="font-size:10px;color:var(--ink-300);margin-top:6px;">Others = remaining GO terms beyond the top 20 (scale excludes them; bars for reference only)</div></div><div class="go-card"><div class="go-card-title">Cellular Component</div><div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="nucleus">nucleus</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:100.0%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">1,658</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="cytoplasm">cytoplasm</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:79.1%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">1,311</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="cytosol">cytosol</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:58.6%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">971</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="chloroplast">chloroplast</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:53.1%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">881</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="mitochondrion">mitochondrion</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:37.1%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">615</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="plasma membrane">plasma membrane</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:34.9%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">579</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="membrane">membrane</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:24.4%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">404</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="endoplasmic reticulum">endoplasmic reticulum</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:15.9%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">263</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="extracellular region">extracellular region</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:14.7%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">244</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="nucleolus">nucleolus</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:14.4%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">239</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="endoplasmic reticulum membrane">endoplasmic reticulum membrane</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:13.8%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">228</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="Golgi apparatus">Golgi apparatus</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:13.3%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">221</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="nucleoplasm">nucleoplasm</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:13.0%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">216</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="chloroplast stroma">chloroplast stroma</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:12.5%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">207</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="plastid">plastid</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:12.0%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">199</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="Golgi membrane">Golgi membrane</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:9.5%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">158</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="chloroplast envelope">chloroplast envelope</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:9.4%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">156</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="chloroplast thylakoid membrane">chloroplast thylakoid membrane</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:9.2%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">153</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="plasmodesma">plasmodesma</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:7.9%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">131</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="mitochondrial inner membrane">mitochondrial inner membrane</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:7.2%;height:100%;background:#898781;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">120</span>
+</div><div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-400);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Others</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:100%;height:100%;background:var(--ink-300b);border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">5,563</span>
+</div><div style="font-size:10px;color:var(--ink-300);margin-top:6px;">Others = remaining GO terms beyond the top 20 (scale excludes them; bars for reference only)</div></div><div class="go-card"><div class="go-card-title">Molecular Function</div><div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="ATP binding">ATP binding</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:100.0%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">1,046</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="metal ion binding">metal ion binding</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:63.9%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">668</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="zinc ion binding">zinc ion binding</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:42.3%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">442</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="ATP hydrolysis activity">ATP hydrolysis activity</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:31.5%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">329</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="RNA binding">RNA binding</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:27.2%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">284</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="DNA binding">DNA binding</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:27.0%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">282</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="protein serine kinase activity">protein serine kinase activity</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:21.8%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">228</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="protein serine/threonine kinase activity">protein serine/threonine kinase activity</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:20.9%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">219</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="mRNA binding">mRNA binding</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:19.9%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">208</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="hydrolase activity">hydrolase activity</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:12.7%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">133</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="identical protein binding">identical protein binding</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:12.2%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">128</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="structural constituent of ribosome">structural constituent of ribosome</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:11.8%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">123</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="GTP binding">GTP binding</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:11.2%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">117</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="magnesium ion binding">magnesium ion binding</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:9.8%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">103</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="protein homodimerization activity">protein homodimerization activity</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:9.3%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">97</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="protein kinase activity">protein kinase activity</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:9.2%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">96</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="oxidoreductase activity">oxidoreductase activity</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:8.9%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">93</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="protein heterodimerization activity">protein heterodimerization activity</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:7.8%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">82</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="serine-type endopeptidase activity">serine-type endopeptidase activity</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:7.6%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">80</span>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;" title="GTPase activity">GTPase activity</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:7.3%;height:100%;background:#e34948;border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">76</span>
+</div><div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(30px,1fr) 34px;align-items:center;gap:6px;padding:3px 0;">
+  <span style="font-size:11px;color:var(--ink-400);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Others</span>
+  <div style="height:10px;background:var(--track);border-radius:3px;overflow:hidden;min-width:0;"><div style="width:100%;height:100%;background:var(--ink-300b);border-radius:3px;"></div></div>
+  <span class="mono" style="font-size:10px;color:var(--ink-500);text-align:right;">8,519</span>
+</div><div style="font-size:10px;color:var(--ink-300);margin-top:6px;">Others = remaining GO terms beyond the top 20 (scale excludes them; bars for reference only)</div></div></div>
 </section>
 
 <section id="disclaimer">
   <div class="section-head"><span class="section-num">05</span><h2>Notes &amp; known methodological differences</h2></div>
   <div class="callout">
     <div class="label">Read honestly, not glossed over</div>
-    <p>Every &ldquo;differs from NICEM&rdquo; tag above is a genuine methods choice, not an error on either side &mdash; each is called out explicitly in &sect;01 rather than left implicit. The two that most affect number-for-number comparability: (1) our purge_dups step removes duplicate haplotig content NICEM's unpurged assemblies retain, so raw contig/length totals should not be compared directly &mdash; use the purged, final numbers in &sect;02; (2) our GO annotation uses a much smaller, curated database (Swiss-Prot, ~487K sequences) than NICEM's nr (hundreds of millions), which is the primary reason our hit rate (57.5%) reads lower than NICEM's (87.2%/87.0%) &mdash; this reflects database coverage, not gene-model quality. One number we checked and could not fully reconcile: NICEM reports Q32&ndash;33 median per-read quality; our own seqkit-computed mean base quality for the identical read files comes out at Q23.5&ndash;23.7 &mdash; likely a different quality-metric definition (median vs. mean, per-read HiFi consensus QV vs. per-base Phred average) rather than a real discrepancy in the underlying data, but flagged here rather than silently reconciled.</p>
+    <p>Every &ldquo;differs from NICEM&rdquo; tag above is a genuine methods choice, not an error on either side &mdash; each is called out explicitly in &sect;01 rather than left implicit. The two that most affect number-for-number comparability: (1) our purge_dups step removes duplicate haplotig content NICEM's unpurged assemblies retain, so raw contig/length totals should not be compared directly &mdash; use the purged, final numbers in &sect;02; (2) our GO annotation uses a much smaller, curated database (Swiss-Prot, ~487K sequences) than NICEM's nr (hundreds of millions), which is the primary reason our hit rate (57.5% HS2, 57.6% ALE) reads lower than NICEM's (87.2% ALE, 87.0% HS) &mdash; this reflects database coverage, not gene-model quality. One number we checked and could not fully reconcile: NICEM reports Q32&ndash;33 median per-read quality; our own seqkit-computed mean base quality for the identical read files comes out at Q23.5&ndash;23.7 &mdash; likely a different quality-metric definition (median vs. mean, per-read HiFi consensus QV vs. per-base Phred average) rather than a real discrepancy in the underlying data, but flagged here rather than silently reconciled.</p>
   </div>
   <p style="font-family:var(--sans);font-size:0.82rem;color:var(--ink-faint);">Full command-by-command pipeline, every non-default parameter, and the reasoning behind each: <a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report8.html#methods">report8.html &sect; Methods</a>. Six-point original review + independent-replication cross-check: <a href="nicem_comparison.html">nicem_comparison.html</a>.</p>
 </section>
