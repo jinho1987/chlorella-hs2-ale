@@ -805,33 +805,83 @@ footer{ padding:44px 0 60px; }
 
     <div class="section-head reveal" style="margin-top:44px;">
       <h3>ESM2 variant-effect scoring &amp; structure comparison</h3>
-      <p>All four missense candidates scored with ESM2-650M (masked-marginal variant effect prediction, a protein language model score — not a physical simulation) and folded with ESMFold, wild-type vs. mutant, to check whether the structural picture agrees with the sequence-based score. Three of the four (MASY, g5108, g1283) exceed the public ESMFold API's ~400-residue length cap; those were folded as a 380-residue window centered on the mutation site, which is why the long peripheral loops in those renders shouldn't be read as meaningful — confirmed by their own pLDDT confidence (~0.7 at the mutation site vs. ~0.4 at the periphery, PDB B-factor column). g8767 fits under the cap and was folded full-length.</p>
+      <p>All four missense candidates scored with ESM2-650M (masked-marginal variant effect prediction, a protein language model score — not a physical simulation) and folded with ESMFold, wild-type vs. mutant, to check whether the structural picture agrees with the sequence-based score. Three of the four (MASY, g5108, g1283) exceed the public ESMFold API's ~400-residue length cap; those were folded as a 380-residue window centered on the mutation site, which is why the long peripheral loops in those renders shouldn't be read as meaningful — confirmed by their own pLDDT confidence (~0.7 at the mutation site vs. ~0.4 at the periphery, PDB B-factor column). g8767 fits under the cap and was folded full-length. Three resolutions are shown for each: whole-fold context, atomic-detail close-up, and a solvent-accessible-surface view with the mutated residue's actual %RSA (relative solvent accessibility, Tien et al. 2013 reference scale) — burial context that a single backbone-overlap image can't give you, and the single most useful number here for guessing at functional consequence.</p>
     </div>
     <div class="stat-grid reveal" style="margin-top:0;">
-      <div class="stat-cell"><div class="v" style="color:var(--accent-ale);">&minus;12.16</div><div class="l"><span class="mono">g8767 L82P</span> &mdash; most disruptive. Proline breaks the local &alpha;-helix H-bonding pattern; the render shows real packing displacement propagating into neighboring turns, not just at residue 82.</div></div>
-      <div class="stat-cell"><div class="v" style="color:var(--accent-ale);">&minus;4.13</div><div class="l"><span class="mono">g5108 A350D</span> &mdash; disruptive. Backbone overlaps almost perfectly WT vs. mutant; the small-hydrophobic&rarr;bulky-charged swap looks like a chemical/packing disruption, not a fold-breaking one. Protein ID itself is a weak hit (25&ndash;33%), hold loosely.</div></div>
-      <div class="stat-cell"><div class="v">+0.19</div><div class="l"><span class="mono">g1283 F207S</span> &mdash; near-neutral. Near-perfect WT/mutant overlap. Same weak-identity caveat as g5108 (24&ndash;27%).</div></div>
-      <div class="stat-cell"><div class="v">+4.50</div><div class="l"><span class="mono">MASY W38R</span> &mdash; tolerated. Large chemical change (Trp&rarr;Arg) but at a surface/loop position; structure argues against this variant being ALE's functional lever, despite sitting in a well-identified essential enzyme (malate synthase).</div></div>
+      <div class="stat-cell"><div class="v" style="color:var(--accent-ale);">&minus;12.16</div><div class="l"><span class="mono">g8767 L82P</span> &mdash; most disruptive. Proline breaks the local &alpha;-helix H-bonding pattern; the render shows real packing displacement propagating into neighboring turns. 21% RSA (partially exposed) &mdash; disruption here is backbone geometry, not deep burial.</div></div>
+      <div class="stat-cell"><div class="v" style="color:var(--accent-ale);">&minus;4.13</div><div class="l"><span class="mono">g5108 A350D</span> &mdash; disruptive. Backbone overlaps almost perfectly WT vs. mutant; the small-hydrophobic&rarr;bulky-charged swap looks chemical, not fold-breaking. 26% RSA (windowed &mdash; true value may be more buried). Protein ID is a weak hit (25&ndash;33%), hold loosely.</div></div>
+      <div class="stat-cell"><div class="v">+0.19</div><div class="l"><span class="mono">g1283 F207S</span> &mdash; ESM2 says near-neutral, but this residue is <strong>99.5% buried</strong> (0.5% RSA) &mdash; a large hydrophobic ring swapped for a tiny polar sidechain at a fully buried position, a classic destabilizing pattern the fold-level score may be underselling. The one candidate where the two lines of evidence disagree.</div></div>
+      <div class="stat-cell"><div class="v">+4.50</div><div class="l"><span class="mono">MASY W38R</span> &mdash; tolerated. Large chemical change (Trp&rarr;Arg) but 65% RSA, clearly solvent-exposed; structure and burial both argue against this being ALE's functional lever, despite sitting in a well-identified essential enzyme (malate synthase).</div></div>
     </div>
 
+    <div class="callout reveal" style="margin-top:28px;">
+      <div class="k">The one place the evidence disagrees</div>
+      <p>g1283's F207S sits at 0.5% relative solvent accessibility &mdash; essentially zero surface exposure, confirmed visually below (the phenylalanine ring is entirely hidden under the surface). Burying a small polar serine where a bulky hydrophobic phenylalanine ring used to fill the packing pocket is a well-known destabilizing pattern in protein biophysics, even when a single static structure prediction shows a tolerable backbone (which is exactly what ESM2's fold-level score and the close-up overlay both show here). This doesn't overturn the near-neutral call, but it's reason enough to prioritize g1283 alongside g8767 for wet-lab follow-up rather than deprioritizing it on the ESM2 score alone. Windowing makes this finding <em>more</em> credible, not less: truncating the protein can only expose a residue that would otherwise be more buried in the full-length context, never hide one artificially.</p>
+    </div>
+
+    <p class="reveal" style="margin-top:36px;font-size:14px;color:var(--ink-dim);font-weight:600;">Fold context (whole structure, WT vs. mutant overlay)</p>
+    <div class="fig-2col reveal">
+      <figure class="fig">
+        <img src="assets/esm_g8767_L82P_wide.png" alt="Whole-fold view, WT vs mutant, g8767 Leu82Pro" loading="lazy">
+        <div class="fig-cap"><span class="k">g8767 L82P</span>Full-length fold, mutation site marked (sphere). Sits within a tightly-packed helix bundle &mdash; consistent with a proline substitution having broad reach.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/esm_g5108_A350D_wide.png" alt="Whole-fold view, WT vs mutant, g5108 Ala350Asp, windowed" loading="lazy">
+        <div class="fig-cap"><span class="k">g5108 A350D</span>380-residue window. Well-folded core domain with the mutation near a beta-sheet region; peripheral loops here are low-confidence (see pLDDT note above).</div>
+      </figure>
+    </div>
+    <div class="fig-2col reveal" style="margin-top:40px;">
+      <figure class="fig">
+        <img src="assets/esm_MASY_W38R_wide.png" alt="Whole-fold view, WT vs mutant, MASY Trp38Arg, windowed" loading="lazy">
+        <div class="fig-cap"><span class="k">MASY W38R</span>380-residue window. Mutation site sits at the fold's edge, consistent with the high surface exposure measured below.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/esm_g1283_F207S_wide.png" alt="Whole-fold view, WT vs mutant, g1283 Phe207Ser, windowed" loading="lazy">
+        <div class="fig-cap"><span class="k">g1283 F207S</span>380-residue window. Mutation site sits inside a well-defined globular core (helices + beta-sheet) &mdash; the structural context behind the 99.5%-buried measurement below.</div>
+      </figure>
+    </div>
+
+    <p class="reveal" style="margin-top:40px;font-size:14px;color:var(--ink-dim);font-weight:600;">Mutation-site detail (WT blue vs. mutant red, atomic resolution)</p>
     <div class="fig-2col reveal">
       <figure class="fig">
         <img src="assets/esm_g8767_L82P_closeup.png" alt="ESMFold structure comparison, WT vs mutant, g8767 Leu82Pro, showing helix packing displacement" loading="lazy">
-        <div class="fig-cap"><span class="k">g8767 L82P &mdash; structure agrees with the score</span>WT (blue) vs. mutant (red) overlaid, full-length fold. Visible divergence beyond the mutated residue itself, consistent with the most disruptive ESM2 score of the four.</div>
+        <div class="fig-cap"><span class="k">g8767 L82P &mdash; structure agrees with the score</span>Visible divergence beyond the mutated residue itself, consistent with the most disruptive ESM2 score of the four.</div>
       </figure>
       <figure class="fig">
         <img src="assets/esm_g5108_A350D_closeup.png" alt="ESMFold structure comparison, WT vs mutant, g5108 Ala350Asp, windowed fold" loading="lazy">
-        <div class="fig-cap"><span class="k">g5108 A350D &mdash; chemical, not geometric, disruption</span>380-residue window centered on the mutation (full protein is 1220 aa, over the public API's length cap). Backbone traces overlap tightly; the disruptive score likely reflects sidechain chemistry, not a broken fold.</div>
+        <div class="fig-cap"><span class="k">g5108 A350D &mdash; chemical, not geometric, disruption</span>Backbone traces overlap tightly; the disruptive score likely reflects sidechain chemistry, not a broken fold.</div>
       </figure>
     </div>
     <div class="fig-2col reveal" style="margin-top:40px;">
       <figure class="fig">
         <img src="assets/esm_MASY_W38R_closeup.png" alt="ESMFold structure comparison, WT vs mutant, MASY Trp38Arg, windowed fold" loading="lazy">
-        <div class="fig-cap"><span class="k">MASY W38R &mdash; tolerated, and the structure agrees</span>380-residue window (full protein 589 aa). Near-identical backbone; mutant Arg sidechain simply points a different direction than WT Trp at this surface-exposed position.</div>
+        <div class="fig-cap"><span class="k">MASY W38R &mdash; tolerated, and the structure agrees</span>Near-identical backbone; mutant Arg sidechain simply points a different direction than WT Trp at this surface-exposed position.</div>
       </figure>
       <figure class="fig">
         <img src="assets/esm_g1283_F207S_closeup.png" alt="ESMFold structure comparison, WT vs mutant, g1283 Phe207Ser, windowed fold" loading="lazy">
-        <div class="fig-cap"><span class="k">g1283 F207S &mdash; near-neutral, structure agrees</span>380-residue window (full protein 535 aa). Near-perfect overlap. Note ESM2's fold-stability score doesn't rule out a localized functional effect at a specific binding surface.</div>
+        <div class="fig-cap"><span class="k">g1283 F207S &mdash; overlap looks fine; burial context below says otherwise</span>Near-perfect backbone overlap alone would read as boring &mdash; the surface view below is what actually flags this one.</div>
+      </figure>
+    </div>
+
+    <p class="reveal" style="margin-top:40px;font-size:14px;color:var(--ink-dim);font-weight:600;">Buried vs. exposed (translucent solvent-accessible surface, mutated residue in amber)</p>
+    <div class="fig-2col reveal">
+      <figure class="fig">
+        <img src="assets/esm_g1283_F207S_surface_closeup.png" alt="Solvent-accessible surface view, g1283 Phe207, showing the residue fully buried under the surface" loading="lazy">
+        <div class="fig-cap"><span class="k">g1283 Phe207 &mdash; 0.5% RSA, fully buried</span>The phenylalanine ring is entirely hidden beneath the translucent surface &mdash; no part reaches solvent. This is the visual behind the disagreement flagged above.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/esm_MASY_W38R_surface_closeup.png" alt="Solvent-accessible surface view, MASY Trp38, showing the residue protruding through the surface" loading="lazy">
+        <div class="fig-cap"><span class="k">MASY Trp38 &mdash; 65% RSA, solvent-exposed</span>The indole ring visibly protrudes through the surface &mdash; the opposite extreme from g1283, and exactly what "tolerated" should look like structurally.</div>
+      </figure>
+    </div>
+    <div class="fig-2col reveal" style="margin-top:40px;">
+      <figure class="fig">
+        <img src="assets/esm_g8767_L82P_surface_closeup.png" alt="Solvent-accessible surface view, g8767 Leu82, partially exposed" loading="lazy">
+        <div class="fig-cap"><span class="k">g8767 Leu82 &mdash; 21% RSA, partially exposed</span>A small fragment cresting the surface &mdash; consistent with "partially exposed," between g1283's full burial and MASY's full exposure.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/esm_g5108_A350D_surface_closeup.png" alt="Solvent-accessible surface view, g5108 Ala350, partially exposed" loading="lazy">
+        <div class="fig-cap"><span class="k">g5108 Ala350 &mdash; 26% RSA, partially exposed</span>Similar partial-burial profile to g8767. Measured within the 380-residue window &mdash; the full-length protein could show this position as more buried, not less.</div>
       </figure>
     </div>
   </div>
