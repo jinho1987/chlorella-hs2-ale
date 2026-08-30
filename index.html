@@ -277,7 +277,6 @@ footer{ padding:44px 0 60px; }
       <a href="#experiment">The experiment</a>
       <a href="#phenotype">Phenotype</a>
       <a href="#genes">Genotype</a>
-      <a href="#ai-validation">AI structural validation</a>
       <a href="#convergence">HS19 &amp; HMF</a>
       <a href="#organelle">Organelle</a>
       <a href="#sanger">Wet-lab</a>
@@ -924,119 +923,6 @@ footer{ padding:44px 0 60px; }
     </div>
   </div>
 </section>
-
-<section id="ai-validation">
-  <div class="wrap">
-    <div class="section-tag">16 — AI-driven structural validation</div>
-    <div class="section-head reveal">
-      <h2>Scoring the mutations themselves: a protein language model's opinion</h2>
-      <p>Section 3's candidates carry a homology-based functional label — a best-hit match in a different organism. That says what the gene probably does, not what this specific amino-acid substitution does to it. We ran every ALE-vs-HS2 missense mutation through ESM2 (a protein language model, zero-shot masked-marginal scoring) to ask exactly that, then predicted 3D structure for the mutated proteins with ESMFold, and docked two hydrolysate-relevant small molecules against the result.</p>
-    </div>
-
-    <div class="callout reveal">
-      <div class="k">The filtering correction, stated plainly</div>
-      <p>The first pass scored all 14 missense sites turned up by this project's variant caller, including what looked like the single most disruptive hit (a ribosomal-protein substitution, ESM2 score &minus;8.0). Cross-checking that list against the same 4-criterion funnel used everywhere else on this page (GATK agreement, reciprocal-mapping consistency, short-read support, clear-of-duplication) found that 8 of those 14 sites &mdash; including that top hit &mdash; don't survive validation at all. One of them was <span class="mono">PEL1/SLAD</span>, already known from this project's own re-validation to be HS2's own background heterozygosity, not an ALE-specific mutation; it should never have been in the input list, and wasn't a deliberate negative control. The corrected, funnel-validated set is four sites. Everything below is scored from those four only.</p>
-    </div>
-
-    <div class="theme-list reveal" style="margin-top:36px;">
-      <div class="theme-row">
-        <div class="theme-name">Survived validation (4/4 &mdash; strongest)</div>
-        <div class="theme-genes"><span class="gene-pill">EPHA <span class="status">ale_only</span></span></div>
-      </div>
-      <div class="theme-row">
-        <div class="theme-name">Survived validation (3/4)</div>
-        <div class="theme-genes"><span class="gene-pill">PPA3 <span class="status">shifted</span></span><span class="gene-pill">unnamed (ptg000050l:76251) <span class="status">ale_only</span></span></div>
-      </div>
-      <div class="theme-row">
-        <div class="theme-name">Survived validation (2/4 &mdash; weakest)</div>
-        <div class="theme-genes"><span class="gene-pill">TRPA <span class="status">ale_only</span></span></div>
-      </div>
-      <div class="theme-row">
-        <div class="theme-name">Dropped &mdash; not in the rigorous funnel at all</div>
-        <div class="theme-genes"><span class="gene-pill">RL182</span><span class="gene-pill">PEL1/SLAD</span><span class="gene-pill">SYKM</span><span class="gene-pill">RH1</span></div>
-      </div>
-    </div>
-
-    <div class="stat-grid reveal" style="margin-top:44px;">
-      <div class="stat-cell"><div class="v">&minus;0.38</div><div class="l">EPHA p.Gly460Val &mdash; ESM2 score (negative = predicted disruptive)</div></div>
-      <div class="stat-cell"><div class="v">+1.38</div><div class="l">PPA3 p.His40Gln &mdash; ESM2 score (positive = predicted tolerated)</div></div>
-      <div class="stat-cell"><div class="v">&minus;0.68</div><div class="l">Unnamed p.Arg29Gln &mdash; ESM2 score</div></div>
-      <div class="stat-cell"><div class="v">&minus;1.19</div><div class="l">TRPA p.Arg97His &mdash; ESM2 score</div></div>
-    </div>
-
-    <div class="fig-2col reveal" style="display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:48px;">
-      <figure class="fig">
-        <img src="assets/fig36_epha_overlay.png" alt="EPHA WT vs mutant ESMFold structure overlay, mutation site zoom" loading="lazy">
-        <div class="fig-cap"><span class="k">EPHA, the strongest candidate</span>ESMFold structure (confident-tier pLDDT ~75&ndash;76), mutation site zoomed, WT (grey) vs. Gly460Val mutant.</div>
-      </figure>
-      <figure class="fig">
-        <img src="assets/fig37_ppa3_overlay.png" alt="PPA3 WT vs mutant ESMFold structure overlay, mutation site zoom" loading="lazy">
-        <div class="fig-cap"><span class="k">PPA3</span>Highest-confidence fold of the four (pLDDT ~83), His40Gln shown at the mutation site.</div>
-      </figure>
-      <figure class="fig">
-        <img src="assets/fig38_unnamed_overlay.png" alt="Unnamed candidate WT vs mutant ESMFold structure overlay, mutation site zoom" loading="lazy">
-        <div class="fig-cap"><span class="k">Unnamed candidate (ptg000050l:76251)</span>No functional annotation exists for this locus; structure confidence is borderline-low (pLDDT ~51).</div>
-      </figure>
-      <figure class="fig">
-        <img src="assets/fig39_trpa_overlay.png" alt="TRPA WT vs mutant ESMFold structure overlay, mutation site zoom" loading="lazy">
-        <div class="fig-cap"><span class="k">TRPA</span>Weakest funnel support (2/4) and the lowest structure confidence of the four (pLDDT ~31, mostly disordered prediction).</div>
-      </figure>
-    </div>
-
-    <div class="section-head reveal" style="margin-top:56px;">
-      <h2 style="font-size:22px;">Does the mutation change predicted binding to the stressor molecules themselves?</h2>
-      <p>For each of the four, we docked furfural and 5-HMF &mdash; the furanic aldehydes in lignocellulosic hydrolysate &mdash; against both the WT and mutant ESMFold structures, with the search box centered on the mutated residue itself. This is a local-pocket screen, not a validated active-site study: it asks whether the mutation's immediate environment measurably shifts predicted affinity, regardless of whether we've correctly identified the true catalytic site.</p>
-    </div>
-
-    <div class="stat-grid reveal">
-      <div class="stat-cell"><div class="v">+0.76</div><div class="l">EPHA vs. furfural, &Delta;&Delta;G mutant&minus;WT (kcal/mol) &mdash; mutant binds measurably weaker</div></div>
-      <div class="stat-cell"><div class="v">+0.52</div><div class="l">EPHA vs. 5-HMF, &Delta;&Delta;G &mdash; same direction, both stressor molecules</div></div>
-      <div class="stat-cell"><div class="v">&le;0.29</div><div class="l">largest |&Delta;&Delta;G| among PPA3, TRPA, and the unnamed site, either direction</div></div>
-      <div class="stat-cell"><div class="v">1</div><div class="l">of four genes with an actual furan-metabolism rationale to begin with (EPHA, epoxide hydrolase)</div></div>
-    </div>
-
-        <div class="section-head reveal" style="margin-top:56px;">
-      <h2 style="font-size:22px;">Does the fold itself change?</h2>
-      <p>ESMFold predicts each sequence independently &mdash; it isn't simulating a before/after transition, so a difference between the WT and mutant prediction means "the model's best independent guess differs," not "we watched the protein refold." That's a meaningful signal when the surrounding structure is confidently predicted; it's easy to mistake for noise when it isn't. We superimposed each WT/mutant pair and measured both whole-protein backbone RMSD and local RMSD in a &plusmn;7-residue window around the mutation.</p>
-    </div>
-
-    <div class="stat-grid reveal">
-      <div class="stat-cell"><div class="v">0.05Å</div><div class="l">EPHA global backbone RMSD &mdash; essentially identical fold everywhere else</div></div>
-      <div class="stat-cell"><div class="v">4.67Å</div><div class="l">EPHA local RMSD at the mutation &mdash; loop &rarr; helix, right where furfural/5-HMF binding also shifted</div></div>
-      <div class="stat-cell"><div class="v">0.14Å</div><div class="l">PPA3 local RMSD &mdash; no structural change anywhere, matching its "tolerated" ESM2 score</div></div>
-      <div class="stat-cell"><div class="v">4.03Å</div><div class="l">Unnamed site local RMSD (helix &rarr; loop) &mdash; notable, but at only ~51 pLDDT confidence</div></div>
-    </div>
-
-    <div class="callout reveal">
-      <div class="k">Three independent methods, one convergent answer for EPHA</div>
-      <p>ESM2 flags the substitution as mildly disruptive. The predicted fold reorganizes locally &mdash; a loop becomes a helix right at the mutation &mdash; while the rest of the protein stays essentially superimposable (0.05Å global RMSD, so this isn't just noise from an uncertain structure). And docking independently shows weaker predicted binding to both stressor molecules at that same spot. None of these three methods was built to agree with the others; the fact that they do is the strongest piece of evidence in this section. TRPA shows the opposite pattern &mdash; its local RMSD (1.84Å) is no larger than its already-loose global RMSD (1.33Å), consistent with a genuinely low-confidence, disordered prediction rather than a localized mutation effect.</p>
-    </div>
-
-    <div class="section-head reveal" style="margin-top:56px;">
-      <h2 style="font-size:22px;">Is any of this near the enzyme's actual catalytic residue?</h2>
-      <p>UniProt annotates a curated catalytic residue for the EPHA, PPA3, and TRPA orthologs. We mapped each onto our protein by sequence alignment, then measured the real 3D distance in the folded structure &mdash; not just how many residues apart they sit in the sequence, which turned out to be a misleading proxy.</p>
-    </div>
-
-    <div class="stat-grid reveal">
-      <div class="stat-cell"><div class="v">16.6Å</div><div class="l">PPA3 &mdash; closest in sequence (8aa) but not in the fold</div></div>
-      <div class="stat-cell"><div class="v">27.4Å</div><div class="l">EPHA &mdash; the mutation sits far from the catalytic proton-acceptor residue</div></div>
-      <div class="stat-cell"><div class="v">30.1Å</div><div class="l">TRPA &mdash; farthest, consistent with no localized effect at all</div></div>
-      <div class="stat-cell"><div class="v">~5-8Å</div><div class="l">rule-of-thumb distance for a mutation to plausibly sit in the catalytic pocket itself</div></div>
-    </div>
-
-    <div class="callout reveal">
-      <div class="k">None of these mutations touch the known active site &mdash; and that's not a weaker result</div>
-      <p>All three sit well outside the ~5&ndash;8&Aring; range where a substitution would plausibly interfere with catalysis directly. For EPHA specifically, that reframes what the loop&rarr;helix shift and docking result actually mean: this isn't a mutation sitting in the catalytic pocket, it's a <em>distal</em> conformational change &mdash; the mutation reshapes a region 27&Aring; away from the known catalytic residue, and that reshaping is what the docking search (centered on the mutation, not the catalytic site) is picking up. Distal mutations that alter substrate access or a secondary binding surface without touching the chemistry itself are a normal, well-documented enzymology mechanism &mdash; arguably a more interesting finding than a direct hit would be, since it implies a structural rather than purely catalytic route to altered function. It's also a firm boundary on the claim: this is evidence of a real, convergent structural signal at the mutation site, not evidence that catalysis itself is impaired.</p>
-    </div>
-
-<div class="callout reveal">
-      <div class="k">What this does and doesn't show</div>
-      <p>EPHA is the one result worth taking seriously here: the largest shift of all eight gene&times;ligand comparisons, in the same direction for both stressor molecules, in the one gene that plausibly interacts with furanic compounds at all (epoxide hydrolase activity). PPA3, TRPA, and the unnamed site were docked against the same two ligands with no prior expectation they'd bind them &mdash; they don't have a furan-metabolism function, and the small, inconsistent deltas they show (all under 0.3 kcal/mol, within this method's typical scoring noise) read as a negative result, which is itself informative rather than a data gap. None of this replaces a binding assay: ESMFold confidence here tops out at "confident" (pLDDT ~76 for EPHA), never "very high," and the docking box is centered on the mutated residue rather than a confirmed catalytic pocket.</p>
-    </div>
-  </div>
-</section>
-
-
 
 <div class="cta-band">
   <div class="wrap reveal">
