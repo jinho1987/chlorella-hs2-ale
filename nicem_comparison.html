@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chlorella sp. HS2 × ALE — Independent Replication &amp; Reviewer Response</title>
+<style>
+:root {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", "Liberation Mono", monospace;
+  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, ui-serif, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+    --line: #263129; --line-strong: #34412F;
+    --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+    --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+    --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+    --status-open: #E08079; --status-open-wash: #2C1917;
+  }
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); margin: 0; }
+a { color: var(--accent); }
+.doc { font-family: var(--serif); color: var(--ink); max-width: 900px; margin: 0 auto; padding: 4rem 2.5rem 6rem; line-height: 1.62; }
+.doc p { max-width: 68ch; }
+h1, h2, h3 { font-family: var(--serif); color: var(--ink); }
+.backlink { font-family: var(--sans); font-size: 0.78rem; color: var(--ink-faint); text-decoration: none; margin-bottom: 1.6rem; display: inline-block; }
+.backlink:hover { color: var(--accent); }
+.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 1.4rem; margin-bottom: 2.4rem; }
+.eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent-ink); font-weight: 600; margin: 0 0 0.6rem; }
+.masthead h1 { font-size: 1.9rem; margin: 0 0 0.8rem; line-height: 1.25; }
+.masthead .dek { font-size: 1.05rem; color: var(--ink-soft); margin: 0 0 1rem; max-width: 68ch; font-family: var(--sans); }
+.meta-row { display: flex; flex-wrap: wrap; gap: 1.4rem; font-family: var(--mono); font-size: 0.76rem; color: var(--ink-faint); }
+.meta-row strong { color: var(--ink-soft); font-weight: 600; }
+nav.toc { font-family: var(--sans); font-size: 0.86rem; background: var(--paper-raised); border: 1px solid var(--line); padding: 1.1rem 1.4rem; margin: 2rem 0 3rem; border-radius: 3px; }
+nav.toc .label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.6rem; }
+nav.toc ol { margin: 0; padding-left: 1.2rem; columns: 2; }
+nav.toc a { text-decoration: none; color: var(--ink-soft); }
+nav.toc a:hover { color: var(--accent); }
+section { margin-bottom: 3.2rem; }
+.section-head { display: flex; align-items: baseline; gap: 0.7rem; margin-bottom: 1.1rem; border-bottom: 1px solid var(--line-strong); padding-bottom: 0.5rem; }
+.section-num { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.06em; }
+.thesis { background: var(--paper-raised); border-left: 3px solid var(--accent); padding: 1.3rem 1.6rem; border-radius: 2px; font-size: 1.03rem; }
+.thesis .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); font-weight: 700; margin-bottom: 0.5rem; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 1.4rem 0; font-family: var(--sans); }
+.stat { background: var(--paper-raised); padding: 1rem 1.1rem; }
+.stat .k { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.35rem; }
+.stat .v { font-variant-numeric: tabular-nums; font-size: 1.32rem; font-weight: 600; color: var(--ink); font-family: var(--serif); }
+.stat .v small { font-size: 0.62em; color: var(--ink-faint); font-weight: 400; font-family: var(--sans); }
+.stat .delta { font-size: 0.76rem; color: var(--accent-ink); margin-top: 0.2rem; }
+table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 0.85rem; }
+.table-wrap { overflow-x: auto; margin: 1.2rem 0; border: 1px solid var(--line); }
+th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { background: var(--accent-wash); color: var(--accent-ink); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--line-strong); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--paper-raised); }
+td .locus { font-family: var(--mono); font-size: 0.79rem; color: var(--ink-soft); white-space: nowrap; }
+td .gene { font-family: var(--mono); font-weight: 700; color: var(--ink); }
+td code { font-family: var(--mono); font-size: 0.82em; background: var(--accent-wash); color: var(--accent-ink); padding: 0.1em 0.35em; border-radius: 2px; }
+.pill { display: inline-flex; align-items: center; gap: 0.35em; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.22em 0.6em; border-radius: 3px; white-space: nowrap; }
+.pill.confirmed { background: var(--status-confirmed-wash); color: var(--status-confirmed); }
+.pill.pending { background: var(--status-pending-wash); color: var(--status-pending); }
+.pill.open { background: var(--status-open-wash); color: var(--status-open); }
+.pill::before { content: "\25CF"; font-size: 0.7em; }
+.matrix-cell-yes { color: var(--status-confirmed); font-weight: 700; text-align: center; }
+.matrix-cell-partial { color: var(--status-pending); font-weight: 700; text-align: center; }
+.matrix-cell-no { color: var(--ink-faint); text-align: center; }
+.callout { border: 1px solid var(--status-pending); background: var(--status-pending-wash); border-radius: 3px; padding: 1.2rem 1.5rem; margin: 1.4rem 0; }
+.callout.good { border-color: var(--accent); background: var(--accent-wash); }
+.callout .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--status-pending); margin-bottom: 0.6rem; }
+.callout.good .label { color: var(--accent-ink); }
+.callout ul { margin: 0; padding-left: 1.2rem; } .callout li { margin-bottom: 0.5rem; } .callout li:last-child { margin-bottom: 0; }
+.review-item { border: 1px solid var(--line); border-radius: 3px; margin-bottom: 1.4rem; overflow: hidden; }
+.review-q { background: var(--paper-raised); padding: 0.9rem 1.3rem; font-family: var(--sans); font-size: 0.9rem; color: var(--ink-soft); border-bottom: 1px solid var(--line); }
+.review-q .num { font-family: var(--mono); font-weight: 700; color: var(--accent-ink); margin-right: 0.5em; }
+.review-a { padding: 1.1rem 1.3rem; }
+.review-a .tag-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-ink); font-weight: 700; margin-bottom: 0.5rem; }
+.review-a p { font-size: 0.92rem; }
+.review-rev { background: var(--accent-wash); padding: 0.9rem 1.3rem; font-size: 0.88rem; color: var(--ink-soft); }
+.review-rev b { color: var(--accent-ink); }
+.pipeline-stage { display: grid; grid-template-columns: 190px 1fr; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--line); align-items: start; }
+.pipeline-stage:first-child { border-top: none; }
+.pipeline-stage .stage-name { font-family: var(--sans); font-size: 0.78rem; font-weight: 700; color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.03em; padding-top: 0.15rem; }
+.pipeline-stage .stage-detail { font-family: var(--sans); font-size: 0.88rem; color: var(--ink-soft); }
+.pipeline-stage .stage-detail p { max-width: none; font-size: inherit; margin-bottom: 0.4rem; }
+.pipeline-stage code { font-family: var(--mono); font-size: 0.82em; background: var(--paper-raised); border: 1px solid var(--line); color: var(--ink); padding: 0.12em 0.4em; border-radius: 2px; }
+footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-family: var(--sans); font-size: 0.74rem; color: var(--ink-faint); }
+@media (max-width: 600px) {
+  .doc { padding: 2.4rem 1.2rem 4rem; }
+  .masthead h1 { font-size: 1.55rem; }
+  nav.toc ol { columns: 1; }
+  .pipeline-stage { grid-template-columns: 1fr; gap: 0.3rem; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<a class="backlink" href="index.html">&larr; Back to project summary</a>
+
+<div class="masthead">
+  <p class="eyebrow">Methods review &middot; for external re-review</p>
+  <h1>Independent replication and reviewer response: our pipeline vs. NICEM's</h1>
+  <p class="dek">A focused, self-contained document combining the original six-point expert review (all resolved) with a fully independent replication of the analysis by a third-party facility (NICEM), assembling the same raw PacBio HiFi reads from scratch with no access to our pipeline. Built to be read on its own, without needing the full technical report.</p>
+  <div class="meta-row">
+    <span><strong>Organism:</strong> Chlorella sp. HS2 (ancestor) &amp; ALE (hydrolysate-evolved descendant)</span>
+    <span><strong>Independent assembler:</strong> NICEM (National Instrumentation Center for Environmental Management)</span>
+    <span><strong>Status:</strong> 6/6 original review points resolved; independent replication complete</span>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="label">Contents</div>
+  <ol>
+    <li><a href="#original-review">Original review — six points, resolved</a></li>
+    <li><a href="#methods-compare">Methods comparison: our pipeline vs. NICEM's</a></li>
+    <li><a href="#assembly-qc">Assembly quality: independently converging on the same picture</a></li>
+    <li><a href="#candidate-crossval">Candidate-level cross-validation</a></li>
+    <li><a href="#missense-reconcile">Why missense counts differ between the two analyses</a></li>
+    <li><a href="#genome-rescreen">Genome-wide re-screen for new candidates</a></li>
+    <li><a href="#verdict">Summary verdict &amp; what remains open</a></li>
+  </ol>
+</nav>
+
+<section id="original-review">
+  <div class="section-head"><span class="section-num">01</span><h2>Original review — six points, resolved</h2></div>
+  <p>An expert reviewer raised six methodological concerns on an earlier version of this analysis, before NICEM's independent replication existed. All six were resolved at the time; they are reproduced here in full because the new NICEM evidence (§03) independently reinforces two of them in a way the reviewer could not have seen originally.</p>
+
+  <div class="review-item">
+    <div class="review-q"><span class="num">1</span>Reported heterozygosity (0.0036%) is inconsistent with an apparent two-peak k-mer spectrum; the second peak may reflect duplication or repeat content rather than true heterozygosity. Recommended Smudgeplot and self-synteny analysis.</div>
+    <div class="review-a">
+      <p class="tag-label">Response</p>
+      <p>Confirmed founded, and now directly measured. Self-synteny blocks at 100.0% identity, elevated pre-purge BUSCO duplication (14.9%/10.1%, collapsing to 0.5%/1.2% post-correction), and purge_dups flagging 23%/19% of each raw assembly as duplicate content together explained the original inconsistency. Smudgeplot &mdash; the direct, purpose-built test &mdash; independently confirms a genuine AB heterozygosity signal in both strains with no secondary AAB duplication peak: heterozygosity and duplication are two real, coexisting properties of this genome, not one masking the other.</p>
+    </div>
+    <div class="review-rev"><b>Status:</b> <span class="pill confirmed">resolved</span></div>
+  </div>
+
+  <div class="review-item">
+    <div class="review-q"><span class="num">2</span>HS2 (66.6 Mb) and ALE (64.5 Mb) assembly sizes differ by ~2.1 Mb &mdash; real deletion, or an assembly-processing artifact?</div>
+    <div class="review-a">
+      <p class="tag-label">Response</p>
+      <p>Traced to root cause: purge_dups had been applied to HS2 only, with miscalibrated automatic cutoffs. Rerun consistently on both assemblies with coverage-anchored manual cutoffs. Once purged identically, the gap shrinks from 2.1 Mb to 0.87 Mb and reverses direction &mdash; the original difference was predominantly a processing artifact, not a real ALE-lineage deletion. Current corrected sizes: HS2 51.2 Mb, ALE 52.1 Mb.</p>
+    </div>
+    <div class="review-rev"><b>Status:</b> <span class="pill confirmed">resolved</span></div>
+  </div>
+
+  <div class="review-item">
+    <div class="review-q"><span class="num">3</span>T2T completion isn't required for this comparison, but caution is warranted for SNPs/SVs near contig ends.</div>
+    <div class="review-a">
+      <p class="tag-label">Response</p>
+      <p>Agreed. Per-contig telomere classification is propagated as a confidence annotation on every reported variant. This figure was found stale during a later audit and recomputed against the corrected assembly and current 30-candidate funnel. Of 78 current HS2 contigs, none have confirmed telomere signal at both ends (24 single-end, 54 neither) &mdash; stated plainly, as expected for a draft, non-T2T assembly. Of the 30 sure candidates, 4 (all unnamed, intergenic) sit within 20kb of an unconfirmed contig end; 0 of the 9 named candidates discussed anywhere in this project are affected.</p>
+    </div>
+    <div class="review-rev"><b>Status:</b> <span class="pill confirmed">resolved</span> &mdash; corrected: 4/30 sure candidates flagged (0/9 named)</div>
+  </div>
+
+  <div class="review-item">
+    <div class="review-q"><span class="num">4</span>If ALE is a direct HS2-derived mutant, structural differences should be minimal &mdash; given the duplication signal, the synteny figure should show duplicated regions as boxes, which it currently does not.</div>
+    <div class="review-a">
+      <p class="tag-label">Response</p>
+      <p>Correctly identified a gap between two analyses run separately but never combined: the existing figure showed only cross-genome synteny restricted to uniquely-matching contigs, which by construction excludes duplicated/multi-mapping content.</p>
+    </div>
+    <div class="review-rev"><b>Status:</b> <span class="pill confirmed">resolved</span> &mdash; figure rebuilt combining cross-genome synteny (184 blocks) with within-genome duplicated-block coordinates (10,248 HS2 / 10,291 ALE)</div>
+  </div>
+
+  <div class="review-item">
+    <div class="review-q"><span class="num">5</span>In a duplicated genome, "1:1" orthology/synteny assignments risk misassigning paralogs.</div>
+    <div class="review-a">
+      <p class="tag-label">Response</p>
+      <p>Agreed &mdash; a material risk given confirmed duplication content. Every candidate is cross-referenced against self-synteny duplicated-block coordinates, extended into an explicit, unconditional pass/fail criterion applied genome-wide, not a spot-check on pre-selected genes.</p>
+    </div>
+    <div class="review-rev"><b>Status:</b> <span class="pill confirmed">resolved</span> &mdash; "clear of duplication" is 1 of 5 criteria applied to all ~4,146 genome-wide candidate sites</div>
+  </div>
+
+  <div class="review-item">
+    <div class="review-q"><span class="num">6</span>Requested the k-mer analysis, Smudgeplot, self-synteny analysis, and exact workflow/options for closer review.</div>
+    <div class="review-a">
+      <p class="tag-label">Response</p>
+      <p>The complete pipeline is documented command-by-command in the full technical report, including every non-default parameter and the reasoning behind it.</p>
+    </div>
+    <div class="review-rev"><b>Status:</b> <span class="pill confirmed">resolved</span></div>
+  </div>
+</section>
+
+<section id="methods-compare">
+  <div class="section-head"><span class="section-num">02</span><h2>Methods comparison: our pipeline vs. NICEM's</h2></div>
+  <p>NICEM received the same raw PacBio HiFi reads and worked entirely independently, with no access to our assembly, our annotation, or our candidate list. One naming note for the record: NICEM's own files and reports label the HS2 ancestor strain simply as &ldquo;HS&rdquo; &mdash; a shorthand on their end, not a different strain.</p>
+
+  <div class="pipeline-stage">
+    <div class="stage-name">Assembly</div>
+    <div class="stage-detail"><p><strong>Ours:</strong> hifiasm &rarr; <code>purge_dups</code> with coverage-anchored manual cutoffs, applied identically to both strains &rarr; polishing.</p>
+    <p><strong>NICEM:</strong> hifiasm, no haplotig purging applied to either strain.</p></div>
+  </div>
+  <div class="pipeline-stage">
+    <div class="stage-name">Annotation</div>
+    <div class="stage-detail"><p><strong>Ours:</strong> AUGUSTUS ab initio (species model, 9,388 genes) cross-checked against GMAP/Trinity transcript evidence.</p>
+    <p><strong>NICEM:</strong> AUGUSTUS ab initio on their own assembly (11,005 genes) with Blast2GO functional annotation.</p></div>
+  </div>
+  <div class="pipeline-stage">
+    <div class="stage-name">Variant calling</div>
+    <div class="stage-detail"><p><strong>Ours:</strong> bcftools + GATK, cross-validated in both reference directions, plus pbsv/Sniffles2 for structural variants.</p>
+    <p><strong>NICEM comparison:</strong> minimap2 (asm5) + <code>paftools.js call</code>, restricted to uniquely-alignable regions &mdash; the correct choice for a heavily duplicated genome, but it means only 22.6% of the genome (26.3 Mb) is testable at all.</p></div>
+  </div>
+  <div class="pipeline-stage">
+    <div class="stage-name">Candidate validation</div>
+    <div class="stage-detail"><p><strong>Ours:</strong> explicit 5-criterion funnel (GATK agreement, reciprocal-mapping consistency, short-read support, clear-of-duplication, repeat-artifact screening) applied genome-wide, yielding 30 sure candidates.</p>
+    <p><strong>NICEM:</strong> raw <code>paftools.js</code> output, no equivalent multi-criterion funnel applied.</p></div>
+  </div>
+</section>
+
+<section id="assembly-qc">
+  <div class="section-head"><span class="section-num">03</span><h2>Assembly quality: independently converging on the same picture</h2></div>
+  <div class="thesis">
+    <div class="label">The key connection to the original review</div>
+    <p>Review point 1 asked whether an apparent second k-mer peak reflected duplication rather than heterozygosity. NICEM's raw, unpurged assembly &mdash; built with zero knowledge of our purge_dups results &mdash; shows exactly that pattern independently: massive apparent size inflation from unpurged duplicate content, which collapses once purging is applied. A second, fully independent team hit the same wall our own earlier draft hit, for the same underlying reason.</p>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="k">NICEM HS &mdash; contigs / size</div><div class="v">721 <small>/ 116.2 Mb</small></div></div>
+    <div class="stat"><div class="k">NICEM ALE &mdash; contigs / size</div><div class="v">915 <small>/ 102.1 Mb</small></div></div>
+    <div class="stat"><div class="k">Ours HS2 &mdash; contigs / size</div><div class="v">78 <small>/ 51.2 Mb</small></div></div>
+    <div class="stat"><div class="k">Ours ALE &mdash; contigs / size</div><div class="v">72 <small>/ 52.1 Mb</small></div></div>
+    <div class="stat"><div class="k">NICEM HS / ALE self-synteny duplication</div><div class="v">69.4% <small>/ 85.7%</small></div></div>
+    <div class="stat"><div class="k">Ours HS2 / ALE BUSCO duplication (post-purge)</div><div class="v">0.5% <small>/ 1.2%</small></div></div>
+    <div class="stat"><div class="k">NICEM HS BUSCO complete</div><div class="v">96.0% <small>(0.3% dup)</small></div></div>
+    <div class="stat"><div class="k">Ours HS2 / ALE BUSCO complete</div><div class="v">98.9% <small>/ 99.1%</small></div></div>
+    <div class="stat"><div class="k">Contig N50, NICEM HS / ALE</div><div class="v">0.26 Mb <small>/ 0.12 Mb</small></div></div>
+    <div class="stat"><div class="k">Contig N50, ours HS2 / ALE</div><div class="v">1.62 Mb <small>/ 1.64 Mb</small></div></div>
+  </div>
+  <p>NICEM's assemblies are ~2x larger in raw bp, but this is unpurged diploid haplotig redundancy, not additional biology &mdash; BUSCO completeness is in fact slightly lower and contiguity is 6&ndash;14x worse. Bigger is not better here, and a second independent pipeline landing on the same conclusion is stronger evidence than either analysis alone.</p>
+</section>
+
+<section id="candidate-crossval">
+  <div class="section-head"><span class="section-num">04</span><h2>Candidate-level cross-validation</h2></div>
+  <p>Using NICEM's independent assembly, our named candidates were located by direct DNA sequence alignment (minimap2, 1001bp flanks lifted over from our reference into NICEM's contigs at MAPQ 60 &mdash; unique, confident placement) &mdash; not by matching gene annotations, which differ between the two pipelines. NICEM's independent <code>paftools.js</code> variant calls were then checked at each lifted-over position.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Candidate</th><th>Type</th><th>NICEM result</th></tr></thead>
+      <tbody>
+        <tr><td><span class="gene">EPHA</span></td><td>point mutation</td><td class="matrix-cell-yes">Confirmed &mdash; exact coordinate match</td></tr>
+        <tr><td><span class="gene">CLPB3</span></td><td>point mutation</td><td class="matrix-cell-yes">Confirmed &mdash; exact coordinate match</td></tr>
+        <tr><td><span class="gene">SCP46</span></td><td>point mutation</td><td class="matrix-cell-yes">Confirmed &mdash; exact coordinate match</td></tr>
+        <tr><td>16 kb duplication</td><td>structural variant</td><td class="matrix-cell-yes">Confirmed &mdash; exact coordinate &amp; size match (16,188bp)</td></tr>
+        <tr><td><span class="gene">UBP12, ACOX4, MASY, TLP13, CLCN7, RIMO</span></td><td>point mutations</td><td class="matrix-cell-partial">Untestable &mdash; outside NICEM's 22.6% uniquely-alignable span</td></tr>
+        <tr><td>~1.5 kb insertion</td><td>structural variant</td><td class="matrix-cell-partial">Untestable &mdash; same reason</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>3 of 9 point candidates and 1 of 2 structural variants were directly, independently confirmed. The remainder are not contradicted &mdash; they simply fall outside the fraction of the genome NICEM's raw, unpurged assembly can uniquely align.</p>
+</section>
+
+<section id="missense-reconcile">
+  <div class="section-head"><span class="section-num">05</span><h2>Why missense counts differ between the two analyses</h2></div>
+  <p>Our own funnel-validated "sure candidates" (n=30) were individually classified for coding consequence against the AUGUSTUS gene model: 20 intronic, 5 intergenic, 1 indel, and <strong>4 real missense substitutions</strong> (MASY Trp38Arg; three previously-unnamed genes: Leu82Pro, Ala350Asp, Phe207Ser). NICEM's own genome-wide single-copy substitution set, classified the same way, produced only one coding-consequence hit pair (a nonsense/missense call at two adjacent bases in the same gene) &mdash; the same adjacent-position clustering pattern already identified as a local-alignment artifact signature elsewhere in NICEM's data, not a credible independent finding.</p>
+  <div class="callout">
+    <div class="label">This is an absence, not a disagreement</div>
+    <p>Checked directly: none of our 4 real missense positions have <em>any</em> variant call in NICEM's dataset at all. All four fall inside the ~77% of the genome NICEM's unpurged, duplication-heavy assembly cannot uniquely align. NICEM's pipeline never tested these positions &mdash; it did not test them and find something different.</p>
+  </div>
+</section>
+
+<section id="genome-rescreen">
+  <div class="section-head"><span class="section-num">06</span><h2>Genome-wide re-screen for new candidates</h2></div>
+  <p>Beyond checking our own candidates, NICEM's full HS-vs-ALE comparison (947 substitutions, ~5,340 indels) was screened for additional credible candidates of any kind.</p>
+  <div class="stat-grid">
+    <div class="stat"><div class="k">NICEM raw event density</div><div class="v">239<small>/Mb</small></div><div class="delta">vs. our clean 84.1/Mb</div></div>
+    <div class="stat"><div class="k">Ts/Tv, all substitutions</div><div class="v">0.308</div></div>
+    <div class="stat"><div class="k">Ts/Tv, restricted to single-copy regions</div><div class="v">0.122</div><div class="delta">gets worse, not better</div></div>
+    <div class="stat"><div class="k">Indels in GC-homopolymer runs</div><div class="v">82%</div><div class="delta">known alignment artifact signature</div></div>
+  </div>
+  <p>Restricting to single-copy regions should improve signal quality if the remaining variants were real; instead Ts/Tv dropped further below the random-chance floor (0.5), and the overwhelming majority of indels sit in homopolymer tracts &mdash; a textbook alignment artifact, not biology. By contrast, our own ALE-specific substitution set is enriched to 44% for the C&gt;A/G&gt;T oxidative-damage signature (chance level: 33% for 2 of 6 transversion classes) &mdash; a real, non-random mutational fingerprint. No additional credible candidates survive NICEM's genome-wide data.</p>
+</section>
+
+<section id="verdict">
+  <div class="section-head"><span class="section-num">07</span><h2>Summary verdict &amp; what remains open</h2></div>
+  <div class="callout good">
+    <div class="label">What this establishes</div>
+    <ul>
+      <li>All six original review points are resolved, and two (heterozygosity/duplication, assembly-size gap) are now independently reinforced by a second team's assembly hitting the same underlying issue.</li>
+      <li>3 of 9 point candidates and 1 of 2 structural variants are confirmed by a fully independent assembly and variant-calling pipeline, at exact coordinates.</li>
+      <li>A systematic genome-wide re-screen of NICEM's own data found no additional credible candidates &mdash; the signal-quality tests (Ts/Tv, homopolymer fraction) point the same direction our own artifact-filtering already did.</li>
+    </ul>
+  </div>
+  <div class="callout">
+    <div class="label">Honestly still open</div>
+    <ul>
+      <li>6 of 9 point candidates and 1 structural variant remain untestable by NICEM specifically, due to their assembly's limited unique-alignment fraction &mdash; not contradicted, but not independently confirmed either.</li>
+      <li>The three NICEM-confirmed point mutations (EPHA, CLPB3, SCP46) are intronic relative to the current gene models, not missense &mdash; the causal mechanism for these three is not yet established at the protein-coding level.</li>
+      <li>Wet-lab Sanger confirmation of the named candidates has not yet been performed; primers are designed but unconfirmed.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Companion document to the <a href="index.html">project summary</a> and the <a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report8.html">full technical report</a>. NICEM data: independent hifiasm assembly and Blast2GO/AUGUSTUS annotation of the same raw PacBio HiFi reads, salvaged from corrupted delivery archives and cross-checked byte-for-byte against NICEM's own reported totals before use.
+</footer>
+
+</div>
+</body>
+</html>
