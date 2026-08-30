@@ -910,6 +910,25 @@ footer{ padding:44px 0 60px; }
         <div class="fig-cap"><span class="k">g5108 Ala350 &mdash; 26% RSA, partially exposed</span>Similar partial-burial profile to g8767. Measured within the 380-residue window &mdash; the full-length protein could show this position as more buried, not less.</div>
       </figure>
     </div>
+
+    <div class="section-head reveal" style="margin-top:44px;">
+      <h3>Docking: does the mutation change interaction with 5-HMF or salt (Na<sup>+</sup>/Cl<sup>&minus;</sup>)?</h3>
+      <p>ALE was evolved under hydrolysate stress (5-HMF is one of its major inhibitory components) and separately shows salt-cross-tolerance expectations. AutoDock Vina, focused search (24&nbsp;&Aring; box) centered on each mutation's C&alpha; &mdash; not a known binding site for any of these ligands in any of these proteins. Read this tier as exploratory and hypothesis-generating, one step more speculative than the structure comparisons above: single static ESMFold structures with no conformational sampling, and Na<sup>+</sup> specifically uses a hand-built single-atom input because Vina's calibrated forcefield has no dedicated sodium parameters (Cl<sup>&minus;</sup> and 5-HMF are both natively supported and higher-confidence).</p>
+    </div>
+    <div class="fig-2col reveal">
+      <figure class="fig">
+        <img src="assets/fig_docking_summary.png" alt="Vina docking affinity comparison, WT vs mutant, for 5-HMF, sodium, and chloride, across all four missense candidates" loading="lazy">
+        <div class="fig-cap"><span class="k">Real signal on 5-HMF, essentially none on the bare ions</span>Na<sup>+</sup>/Cl<sup>&minus;</sup> shift by &lt;0.1 kcal/mol in every case &mdash; an honest negative result: none of these four mutations plausibly create or destroy a specific ion-interaction site. 5-HMF shows a real, direction-consistent effect at g8767 (+0.67 kcal/mol weaker in the mutant) and a smaller one at g1283 (+0.30) &mdash; both track the same proteins already flagged as structurally disrupted above, not a new independent signal.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/docking_g8767_L82P_HMF.png" alt="Docked pose comparison, 5-HMF, WT vs mutant g8767 L82P, showing the ligand pose shifting to a different sub-pocket" loading="lazy">
+        <div class="fig-cap"><span class="k">g8767 L82P &mdash; the pose itself moves, not just the score</span>WT (blue cartoon, gold ligand) and mutant (red cartoon, grey ligand) each settle into a different sub-pocket within the same search box &mdash; visual confirmation that the proline kink changes the local interaction landscape, consistent with this being the most disruptive candidate by every other measure on this page.</div>
+      </figure>
+    </div>
+    <div class="callout reveal" style="margin-top:28px;">
+      <div class="k">What this doesn't show</div>
+      <p>None of these four proteins has a documented biological role in 5-HMF detoxification or salt tolerance &mdash; this is blind, exploratory docking at the mutation site, not docking into a characterized active site or transporter pore. A Vina score shift of &lt;1 kcal/mol is well within the method's typical scoring noise for a single static structure. Treat this as a candidate-prioritization signal (g8767 and, more weakly, g1283 are the ones where a stress-molecule interaction plausibly changes) rather than a mechanistic claim, pending the wet-lab confirmation already planned for these sites.</p>
+    </div>
   </div>
 </section>
 
