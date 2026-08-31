@@ -551,10 +551,10 @@ footer{ padding:44px 0 60px; }
     </div>
 
     <div class="converge-hits reveal">
-      <div class="hit-card">
-        <div class="path"><span class="g">MOCOS</span> <span class="arrow">·</span> <span class="g">GLOX</span></div>
-        <p>Molybdenum cofactor sulfurase (exact-position ALE–HMF match) activates aldehyde oxidase — the same enzyme class as GLOX, one of ALE's own candidates. Two independent lineages hitting two nodes of the same aldehyde-detoxification pathway.</p>
-        <span class="tag">ALE ∩ HMF</span>
+      <div class="hit-card" style="opacity:0.6;">
+        <div class="path"><span class="g" style="text-decoration:line-through;">MOCOS</span> <span class="arrow">·</span> <span class="g" style="text-decoration:line-through;">GLOX</span></div>
+        <p><strong>Retracted below</strong> &mdash; this exact-position ALE&ndash;HMF match came from an earlier, less-complete HMF resequencing batch. Reprocessing against a fresher, fully-verified HMF dataset (&sect; below) finds no signal at this position at all &mdash; not even a raw, unfiltered call in either replicate. Kept here struck through rather than deleted, exactly as this project's other retractions are handled.</p>
+        <span class="tag">ALE ∩ HMF &mdash; NOT REPRODUCED</span>
       </div>
       <div class="hit-card">
         <div class="path"><span class="g2">YU87</span> <span class="arrow">·</span> <span class="g2">CLCN7</span></div>
@@ -565,8 +565,54 @@ footer{ padding:44px 0 60px; }
 
     <figure class="fig reveal" style="margin-top:44px;">
       <img src="assets/fig19_convergence_upset.png" alt="UpSet plot of gene-symbol convergence across ALE, HS19, and HMF" loading="lazy">
-      <div class="fig-cap"><span class="k">Set overlap</span>Gene-level convergence across all three independently-evolved lines, after equal-rigor re-calling.</div>
+      <div class="fig-cap"><span class="k">Set overlap</span>Gene-level convergence across all three independently-evolved lines, after equal-rigor re-calling. The HMF portion of this figure predates the reprocessing below and should be read alongside it, not instead of it.</div>
     </figure>
+
+    <div class="section-head reveal" style="margin-top:44px;">
+      <h3>HMF, reprocessed: a fresh, complete, verified resequencing timepoint</h3>
+      <p>HMF has been resequenced at two timepoints; the analysis above used an earlier, incomplete batch. This is a full reprocessing of the later (October 2024) timepoint, two biological replicates, from raw reads through the same funnel logic used everywhere else in this project &mdash; adapted for what short-read-only data can and can't support.</p>
+    </div>
+    <div class="funnel reveal">
+      <div class="funnel-step"><div class="v tabular">4,118 <span class="mono" style="font-size:13px;">/</span> 5,796</div><div class="l">raw GATK calls<br>(replicate 1 / replicate 2)</div></div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step"><div class="v tabular">868</div><div class="l">caller- &amp; replicate-concordant<br>(GATK + bcftools agree, both replicates)</div></div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step"><div class="v tabular">145</div><div class="l">not standing HS2<br>heterozygosity</div></div>
+      <div class="funnel-arrow">→</div>
+      <div class="funnel-step"><div class="v tabular">19</div><div class="l">sure candidates<br>(synteny/repeat/contig-cleared)</div></div>
+    </div>
+    <div class="callout reveal">
+      <div class="k">One funnel criterion HMF genuinely can't have</div>
+      <p>ALE's funnel includes a reciprocal-direction check (re-confirming each candidate using ALE's own genome as the mapping reference), which requires a long-read assembly of the mutant strain. HMF has none &mdash; it exists only as short-read data. Replicate concordance (both independent resequencing replicates must agree, on both callers) substitutes for that missing criterion; it tests the same underlying principle (a real signal should be reproducible from independent evidence) but is not identical to it, and is disclosed as a difference rather than presented as equivalent rigor.</p>
+    </div>
+    <div class="callout reveal" style="border-color:var(--accent-hs2);">
+      <div class="k">A real artifact caught mid-analysis, not swept past</div>
+      <p>The first pass of this funnel produced 71 "sure candidates" &mdash; but 52 of them sat in dense clusters (up to 30 calls within 28 kb) entirely on short, fragmentary contigs (10&ndash;40 kb, versus 267 kb+ for every other candidate's contig). That's the signature of a repeat-attractor artifact, not real biology, so a contig-length filter (&ge;100 kb) was added and disclosed here rather than left in the final count.</p>
+    </div>
+
+    <table class="mono" style="width:100%;border-collapse:collapse;font-size:13px;margin-top:28px;">
+      <thead>
+        <tr style="border-bottom:1px solid var(--rule);text-align:left;">
+          <th style="padding:8px 10px;">Position</th><th style="padding:8px 10px;">Change</th><th style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">Gene / putative function (Swiss-Prot, e&le;1e-5)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">ptg000002l:670664</td><td style="padding:8px 10px;">CG&gt;C</td><td style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">Digalactosyldiacylglycerol synthase 1, chloroplastic (thylakoid lipid biosynthesis)</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">ptg000004l:750684 / :750693</td><td style="padding:8px 10px;">T&gt;C / C&gt;A</td><td style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">Ribosomal oxygenase 1 (lysine-demethylase / histidyl-hydroxylase)</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">ptg000005l:686136</td><td style="padding:8px 10px;">CG&gt;C</td><td style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">Transaldolase (pentose phosphate pathway)</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">ptg000012l:1230377</td><td style="padding:8px 10px;">AG&gt;A</td><td style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">Phospholipid-transporting ATPase (P4-ATPase flippase)</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">ptg000013l:779733</td><td style="padding:8px 10px;">CGG&gt;C</td><td style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">ATP-dependent zinc metalloprotease FTSH10, mitochondrial</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">ptg000021l:230005</td><td style="padding:8px 10px;">C&gt;G</td><td style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">Extracellular sulfatase Sulf-1 homolog</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">ptg000057l:1409</td><td style="padding:8px 10px;">A&gt;AC</td><td style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">Structural maintenance of chromosomes protein 3 (cohesin complex)</td></tr>
+        <tr><td style="padding:8px 10px;" colspan="3">+ 11 more sure candidates, 5 intergenic and 6 in genes with no Swiss-Prot hit at this threshold &mdash; see the reviewer comparison page for the complete list.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout reveal good" style="margin-top:28px;">
+      <div class="k">Convergence check: zero overlap, at either resolution</div>
+      <p>None of these 19 HMF sure candidates share an exact position with any of ALE's 30 sure candidates. None fall inside the same AUGUSTUS gene body as any of ALE's 9 named candidates or 3 named missense sites either &mdash; checked directly against the gene models, not just by symbol. Combined with the MOCOS/GLOX retraction above, this reprocessed, more complete HMF dataset shows no reproducible convergence with ALE at all, at either the position or gene level.</p>
+      <p style="margin-top:12px;">Read plainly against the project's original 5-HMF-driver hypothesis: if ALE's candidate mutations were primarily a response to the 5-HMF component of hydrolysate stress specifically, adapting to 5-HMF alone should hit at least some of the same genes. It doesn't &mdash; which argues that ALE's specific candidate set is more likely shaped by other components of the hydrolysate mixture (sugars, other inhibitory compounds, osmotic load) than by 5-HMF in isolation. That's a real, useful negative result, not an absence of one.</p>
+    </div>
   </div>
 </section>
 
