@@ -618,6 +618,54 @@ footer{ padding:44px 0 60px; }
       <div class="k">Coding consequence: no folding targets in this set</div>
       <p>Each of the 19 HMF sure candidates was run through the same CDS-splicing / codon-translation classifier used for ALE's 30 (gene model &rarr; strand-aware CDS assembly &rarr; codon lookup &rarr; translation, with indels separately checked for frame effect). Result: <strong>13 intronic, 6 intergenic &mdash; zero missense, zero synonymous, zero nonsense.</strong> None of HMF's candidates alter a coding sequence, so unlike ALE's four missense hits, none warrant ESM2/ESMFold structural comparison. Combined with the zero position/gene overlap above, HMF's adaptation to 5-HMF alone appears to run almost entirely through non-coding sites &mdash; a different molecular route than ALE's, not just a different gene set.</p>
     </div>
+
+    <div class="section-head reveal" style="margin-top:44px;">
+      <h3>Global mutation spectrum: does HMF mutate differently, not just at different places?</h3>
+      <p>Beyond gene identity, does 5-HMF-only stress leave a different chemical/mechanistic signature on the genome than full hydrolysate stress? Comparing ALE's 30 and HMF's 19 sure candidates directly, base for base.</p>
+    </div>
+    <div class="stat-grid reveal" style="grid-template-columns:repeat(2,1fr);">
+      <div class="stat-cell"><div class="v">97% vs 58%</div><div class="l">of sure candidates are simple SNVs (ALE vs HMF) &mdash; HMF carries far more small indels (42% vs 3%). Fisher's exact OR=21.1, <strong>p=0.001</strong></div></div>
+      <div class="stat-cell"><div class="v">Ti/Tv 0.81 vs 1.20</div><div class="l">ALE transversion-biased, HMF trending transition-biased &mdash; but Fisher's p=0.73 on n=29/11 SNVs, so this direction is not statistically confirmed</div></div>
+    </div>
+    <table class="mono" style="width:100%;border-collapse:collapse;font-size:13px;margin-top:20px;">
+      <thead>
+        <tr style="border-bottom:1px solid var(--rule);text-align:left;">
+          <th style="padding:8px 10px;">Substitution class</th><th style="padding:8px 10px;">ALE (n=29 SNV)</th><th style="padding:8px 10px;">HMF (n=11 SNV)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">C&gt;T</td><td style="padding:8px 10px;">6.9%</td><td style="padding:8px 10px;">36.4%</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">C&gt;A</td><td style="padding:8px 10px;">17.2%</td><td style="padding:8px 10px;">27.3%</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">C&gt;G</td><td style="padding:8px 10px;">0.0%</td><td style="padding:8px 10px;">9.1%</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">T&gt;A</td><td style="padding:8px 10px;">0.0%</td><td style="padding:8px 10px;">0.0%</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">T&gt;C</td><td style="padding:8px 10px;">37.9%</td><td style="padding:8px 10px;">18.2%</td></tr>
+        <tr><td style="padding:8px 10px;">T&gt;G</td><td style="padding:8px 10px;">37.9%</td><td style="padding:8px 10px;">9.1%</td></tr>
+      </tbody>
+    </table>
+    <div class="callout reveal" style="margin-top:20px;">
+      <div class="k">A real difference in variant type, a mechanistic tell in the indels, and a suggestive (not confirmed) spectrum shift</div>
+      <p>The SNV-vs-indel split is the one result here with real statistical weight (p=0.001): ALE's candidate set is built almost entirely from point substitutions, while HMF's includes a substantial fraction of small deletions. Seven of HMF's eight indels are single-base deletions sitting immediately adjacent to a 12&ndash;14&nbsp;bp homopolymer run in the reference (mostly poly-G); the eighth, an insertion, sits in a CA-dinucleotide microsatellite &mdash; the classic signature of polymerase slippage. That said, homopolymer/microsatellite tracts are also a well-known hotspot for short-read indel-calling artifacts, so this is disclosed as a plausible mechanism, not a proven one, even though all eight passed the funnel's caller-concordance, replicate-concordance, and repeat-artifact-BED filters. The six-class substitution spectrum looks visually different too &mdash; ALE dominated by T&gt;C/T&gt;G, HMF by C&gt;T/C&gt;A (C&gt;T, the classic cytosine-deamination/oxidative-damage signature, is HMF's single largest class) &mdash; but with only 11 HMF SNVs, this is a suggestive pattern worth watching as more replicates accumulate, not a statistically confirmed spectrum shift.</p>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:44px;">
+      <h3>Extending the gene check: all 30 ALE genes, not just the named ones &mdash; and functional neighbors, not just exact matches</h3>
+      <p>The convergence check above compared HMF's 19 candidates against ALE's 9 named candidates and 3 named missense sites only. Re-run against the full AUGUSTUS gene assignment for all 30 ALE sure candidates (25 fall inside a gene body; 5 are intergenic) versus all 19 HMF candidates (12 genic, 7 intergenic): still <strong>zero exact gene-ID overlap</strong>. The more complete check gives the same answer as the narrower one.</p>
+    </div>
+    <table class="mono" style="width:100%;border-collapse:collapse;font-size:13px;margin-top:20px;">
+      <thead>
+        <tr style="border-bottom:1px solid var(--rule);text-align:left;">
+          <th style="padding:8px 10px;">Functional theme</th><th style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">ALE gene (of 25)</th><th style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">HMF gene (of 12)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:8px 10px;">Lipid / membrane handling</td><td style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">ACOX4 (fatty-acid &beta;-oxidation), TGD3 (chloroplast glycolipid transport), neutral ceramidase</td><td style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">DGDG synthase 1 (glycolipid biosynthesis), a P4-ATPase phospholipid flippase</td></tr>
+        <tr><td style="padding:8px 10px;">Organelle protein quality control</td><td style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">ClpB3 (chaperone / disaggregase)</td><td style="padding:8px 10px;font-family:'Archivo Report',sans-serif;">FTSH10 (AAA+ protease)</td></tr>
+      </tbody>
+    </table>
+    <div class="callout reveal" style="margin-top:20px;">
+      <div class="k">A functional echo at the pathway level, not the gene level &mdash; and one notable asymmetry</div>
+      <p>No shared gene, but two thematic pairs stand out on inspection of the Swiss-Prot hits: lipid/membrane-handling genes appear on both sides (different specific genes, same broad process), and both lines hit an organelle protein-quality-control gene (a different chaperone/protease system each time). This is an informal, by-eye grouping across 25 vs. 12 annotated genes &mdash; not a GO-enrichment test &mdash; and should be read as suggestive, not confirmed. The asymmetry is worth noting too: ALE's clearest salt-relevant hit, CLCN7 (a Cl<sup>&minus;</sup> channel), has no analog anywhere in HMF's 12 genes; nothing in the HMF set touches ion transport at all.</p>
+    </div>
   </div>
 </section>
 
