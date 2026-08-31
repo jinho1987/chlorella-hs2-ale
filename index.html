@@ -1105,6 +1105,18 @@ footer{ padding:44px 0 60px; }
         <div class="fig-cap"><span class="k">g8767 L82P &mdash; the pose itself moves, not just the score</span>WT (blue cartoon, gold ligand) and mutant (red cartoon, grey ligand) each settle into a different sub-pocket within the same search box &mdash; visual confirmation that the proline kink changes the local interaction landscape, consistent with this being the most disruptive candidate by every other measure on this page.</div>
       </figure>
     </div>
+
+    <p class="reveal" style="margin-top:32px;font-size:14px;color:var(--ink-dim);font-weight:600;">Rotating views: WT (blue) vs. mutant (orange) receptor overlay, WT ligand (grey) vs. mutant ligand (gold), mutated residue marked as a sphere (black = WT, yellow = mutant)</p>
+    <div class="fig-2col reveal">
+      <figure class="fig">
+        <img src="assets/docking_rotate_g8767_L82P.gif" alt="Rotating 3D animation comparing WT and mutant g8767 L82P docked with 5-HMF, showing the pose shift from every angle" loading="lazy">
+        <div class="fig-cap"><span class="k">g8767 L82P, rotating</span>The sub-pocket shift seen in the static view above holds up from every viewing angle &mdash; the two ligand poses stay visibly separated through the full rotation, not an artifact of one camera position.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/docking_rotate_g1283_F207S.gif" alt="Rotating 3D animation comparing WT and mutant g1283 F207S docked with 5-HMF" loading="lazy">
+        <div class="fig-cap"><span class="k">g1283 F207S, rotating</span>A weaker, more subtle effect than g8767's (consistent with its smaller Vina score shift, +0.30 kcal/mol) &mdash; the backbones track closely together through the full rotation, with the ligand-pose difference visible mainly near the mutated residue itself rather than as a wholesale pocket shift.</div>
+      </figure>
+    </div>
     <div class="callout reveal" style="margin-top:28px;">
       <div class="k">What this doesn't show</div>
       <p>None of these proteins has a documented biological role in 5-HMF detoxification or salt tolerance &mdash; this is blind, exploratory docking at the mutation site, not docking into a characterized active site or transporter pore. A Vina score shift of &lt;1 kcal/mol is well within the method's typical scoring noise for a single static structure. Treat this as a candidate-prioritization signal (g8767 and, more weakly, g1283 are the ones where a stress-molecule interaction plausibly changes) rather than a mechanistic claim, pending the wet-lab confirmation already planned for these sites. Note g1283 is now understood to be a fixed pre-existing HS2 variant, not a novel ALE mutation (audit callout above) &mdash; the docking result itself is unaffected, only the evolutionary timing claim.</p>
@@ -1212,6 +1224,22 @@ footer{ padding:44px 0 60px; }
     <div class="callout reveal">
       <div class="k">What's actually inside the 16 kb duplication?</div>
       <p>Six genes, identified by local BLASTp against Swiss-Prot with graded confidence. Four are a coherent, high-confidence chromatin block: core histones <strong>H3</strong> and <strong>H4</strong>, a linker histone (<strong>H1</strong>), and a <strong>Myb-family transcription factor</strong>. The remaining two are lower-confidence: <strong>g1283</strong> (24&ndash;27% identity to chitin deacetylases &mdash; below the safe-homology threshold; this is the same locus carrying the Phe207Ser variant discussed above &mdash; now understood to be a pre-existing HS2 heterozygous variant fixed in ALE, not a novel mutation, see the audit callout in &sect;11) and <strong>g1287</strong> (32.5% identity to a UBX-domain-containing protein, e-value 4.96&times;10<sup>&minus;70</sup> over a near-full-length 495 aa alignment &mdash; a moderate-confidence call, since alignment length and e-value carry more weight than raw %identity for remote homology). Flanking-sequence analysis argues against classical NAHR (non-allelic homologous recombination) as the mechanism: the sequence immediately outside the repeat unit is non-repetitive on both sides, which NAHR &mdash; which requires flanking homologous repeats to recombine against &mdash; would not produce. A replication-based (FoSTeS/MMBIR) or NHEJ-mediated origin is more consistent with what's observed.</p>
+    </div>
+
+    <div class="callout reveal" style="border-color:var(--accent-ale);">
+      <div class="k">A structural-variant folding target: the duplication doesn't just double g1283, it also truncates a second copy of it</div>
+      <p>The "six genes" above are the ones cleanly contained inside the duplicated block. Checking the exact breakpoints against the gene models turns up something not previously examined: the <strong>start</strong> breakpoint (319,003) falls <em>inside</em> g1283 rather than between genes, and the <strong>end</strong> breakpoint (335,190) falls inside a seventh gene, <strong>g1288</strong> (not part of the six-gene count above, since only its outermost 169&nbsp;bp is touched). Checking the internal copy-to-copy junction sequence directly &mdash; the base pairs where the end of the first duplicated copy joins the start of the second &mdash; shows an in-frame stop codon sitting exactly at that boundary (both breakpoints happen to fall precisely at a codon boundary, phase 0, in both genes). So no g1283&ndash;g1288 fusion protein forms; that possibility is ruled out directly rather than assumed.</p>
+      <p style="margin-top:12px;">What the duplication does produce: ALE carries <strong>two different copies of g1283</strong> side by side &mdash; one complete, normal 536-residue copy (reconstituted from the single-copy flank plus the first repeat unit, carrying the already-discussed F207S variant), and one <strong>truncated second copy, cut off after residue 341 (63.6% of the full length), missing the entire C-terminal third (195 residues)</strong> to the premature stop at the internal junction. This truncated protein doesn't exist in HS2 at all &mdash; it's a novel structural product created directly by the SV itself, not by any point mutation, and a legitimate folding target in its own right.</p>
+    </div>
+    <div class="fig-2col reveal">
+      <figure class="fig">
+        <img src="assets/fig_g1283_duplication_truncation.png" alt="ESMFold structure overlay of the truncated 341-residue duplication-junction copy of g1283 versus the full-length WT fold" loading="lazy">
+        <div class="fig-cap"><span class="k">Truncated copy (orange) vs. full-length WT (pale blue), overlaid</span>Freshly folded via ESMFold, no windowing needed (341 aa is under the API's ~400-residue cap). The retained region folds essentially identically to the corresponding stretch of the WT structure &mdash; the disruption comes entirely from what's missing beyond residue 341, not from any distortion of what's kept.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/fig_g1283_duplication_truncation_annotated.png" alt="Full-length WT g1283 structure with the truncated (retained) region colored orange and the immediately following lost region colored blue" loading="lazy">
+        <div class="fig-cap"><span class="k">Where the cut falls, on the full-length fold</span>Orange = retained (1&ndash;341); blue = lost, immediately adjacent (342&ndash;396, the limit of the existing WT structure &mdash; the true loss extends to residue 536, but no fold exists yet for 397&ndash;536). Even this partial view shows the truncation removing a structured helix packed into the core, not a floppy tail &mdash; consistent with a functionally significant loss rather than a harmless trim.</div>
+      </figure>
     </div>
 
     <p class="reveal" style="margin-top:28px;font-size:15px;"><a href="nicem_comparison.html">&rarr; Full methods comparison: our pipeline vs. NICEM's, combined with the original six-point expert review and its resolutions</a></p>
