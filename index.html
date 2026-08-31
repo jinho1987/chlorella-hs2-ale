@@ -613,6 +613,11 @@ footer{ padding:44px 0 60px; }
       <p>None of these 19 HMF sure candidates share an exact position with any of ALE's 30 sure candidates. None fall inside the same AUGUSTUS gene body as any of ALE's 9 named candidates or 3 named missense sites either &mdash; checked directly against the gene models, not just by symbol. Combined with the MOCOS/GLOX retraction above, this reprocessed, more complete HMF dataset shows no reproducible convergence with ALE at all, at either the position or gene level.</p>
       <p style="margin-top:12px;">Read plainly against the project's original 5-HMF-driver hypothesis: if ALE's candidate mutations were primarily a response to the 5-HMF component of hydrolysate stress specifically, adapting to 5-HMF alone should hit at least some of the same genes. It doesn't &mdash; which argues that ALE's specific candidate set is more likely shaped by other components of the hydrolysate mixture (sugars, other inhibitory compounds, osmotic load) than by 5-HMF in isolation. That's a real, useful negative result, not an absence of one.</p>
     </div>
+
+    <div class="callout reveal" style="margin-top:20px;">
+      <div class="k">Coding consequence: no folding targets in this set</div>
+      <p>Each of the 19 HMF sure candidates was run through the same CDS-splicing / codon-translation classifier used for ALE's 30 (gene model &rarr; strand-aware CDS assembly &rarr; codon lookup &rarr; translation, with indels separately checked for frame effect). Result: <strong>13 intronic, 6 intergenic &mdash; zero missense, zero synonymous, zero nonsense.</strong> None of HMF's candidates alter a coding sequence, so unlike ALE's four missense hits, none warrant ESM2/ESMFold structural comparison. Combined with the zero position/gene overlap above, HMF's adaptation to 5-HMF alone appears to run almost entirely through non-coding sites &mdash; a different molecular route than ALE's, not just a different gene set.</p>
+    </div>
   </div>
 </section>
 
