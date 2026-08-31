@@ -675,6 +675,24 @@ footer{ padding:44px 0 60px; }
       <div class="k">A reference mismatch caught while building this comparison &mdash; and a second, bigger problem found along the way</div>
       <p>Building the coordinate-matched comparison above required checking whether HS19's existing variant calls sit on the same footing as ALE's and HMF's. They didn't: HS19 was originally called against <code>HS2_polished.fa</code> (327 contigs, pre&ndash;purge_dups) with Trinity-transcript-based gene naming, while ALE and HMF are both called against <code>HS2_purged_v2.purged.fa</code> (78 contigs, ~249 duplicate/haplotig contigs removed) with AUGUSTUS gene IDs. HS19 has since been realigned and re-called against the corrected, shared reference, using the same funnel logic applied to HMF (results below). That re-verification is also what surfaced the CLCN7 problem: checking it properly required auditing ALE's own funnel, which turned up a real gap affecting 19 of ALE's 30 original sure candidates &mdash; see the audit callout in &sect;11 for the full account, including which candidates are retracted and which are reframed.</p>
     </div>
+
+    <div class="section-head reveal" style="margin-top:44px;">
+      <h3>HS19, reprocessed: convergence with ALE, checked properly this time</h3>
+      <p>HS19 was realigned and re-called from scratch against the corrected <code>HS2_purged_v2.purged.fa</code> reference (97.7% mapped), then run through the same GATK + bcftools funnel used for HMF. HS19 has no biological replicate, which is a bigger limitation than HMF's two-replicate design &mdash; caller-concordance alone let through a large number of short-read indel-calling artifacts in long homopolymer/microsatellite tracts (the same failure mode flagged for HMF's indels, but far more of them here). An additional homopolymer-adjacency filter (excluding indels next to a run &ge;6bp) was added and disclosed as an explicit extra criterion, the same way the contig-length filter was added for HMF.</p>
+    </div>
+    <div class="stat-grid reveal" style="grid-template-columns:repeat(3,1fr);">
+      <div class="stat-cell"><div class="v">2,951 / 2,398</div><div class="l">raw GATK / bcftools calls &rarr; 1,296 caller-concordant &rarr; 449 not standing-heterozygous &rarr; 240 clear of synteny/repeat/contig filters</div></div>
+      <div class="stat-cell"><div class="v">121</div><div class="l">final sure candidates after the homopolymer filter (119 of 240 excluded as homopolymer-adjacent indel artifacts &mdash; a much larger fraction than HMF's, consistent with the missing replicate check)</div></div>
+      <div class="stat-cell"><div class="v">0 and 0</div><div class="l">exact-position overlap and AUGUSTUS gene-ID overlap with ALE's corrected 24-candidate set. No convergence at either resolution.</div></div>
+    </div>
+    <div class="callout reveal good" style="margin-top:20px;">
+      <div class="k">Zero convergence with ALE, same as HMF &mdash; but HS19 does have its own missense mutations</div>
+      <p>Unlike HMF (zero missense among 19 candidates), HS19's 121 sure candidates classify as 99 intronic, 7 synonymous, <strong>7 missense</strong>, 5 intergenic, 1 nonsense, and 1 frameshift indel. None of the 7 missense genes (GAPDH-like g1079, La-related protein g3355, a glucuronoxylan glucuronosyltransferase g5894, a Ser/Thr kinase g6984, a receptor-like kinase g8574) overlap ALE's gene set or functional themes. So HS19 clearly does undergo coding-sequence adaptation under its own stressor &mdash; it just doesn't overlap ALE's, reinforcing that the zero-convergence result for both HMF and HS19 reflects real evolutionary specificity, not a general inability of any of these three lines to acquire missense mutations.</p>
+    </div>
+    <div class="callout reveal" style="margin-top:20px;">
+      <div class="k">A mutation-spectrum signature that matches the stressor's chemistry</div>
+      <p>HS19's mutation spectrum is dominated by <strong>C&gt;A (47.3% of 93 SNVs)</strong> &mdash; the classic signature of 8-oxoguanine oxidative DNA damage. HS19 was evolved under NaOCl (sodium hypochlorite) selection, a strong oxidizer, so this is a mechanistically coherent match between stressor chemistry and mutational signature &mdash; distinct from both ALE (T&gt;C/T&gt;G-dominant, 37.9% each) and HMF (C&gt;T-dominant, 36.4%, more consistent with deamination-type damage from a reactive aldehyde). Three independently-evolved lines, three different dominant stressors, three visibly different mutation-spectrum fingerprints &mdash; itself a form of convergent-evolution evidence, just not the kind originally being tested for (mechanism of mutagenesis, not shared target genes).</p>
+    </div>
   </div>
 </section>
 
