@@ -491,6 +491,15 @@ footer{ padding:44px 0 60px; }
     </figure>
 
     <div class="section-head reveal" style="margin-top:52px;">
+      <h3>How the 24 were narrowed down</h3>
+      <p>Two independent variant callers (bcftools mpileup/call as the primary caller, GATK HaplotypeCaller as an agreement check) are applied to the same HiFi long-read alignments, then every resulting candidate is put through four further, fully independent evidence checks &mdash; a reciprocal re-mapping/re-calling against the other genome, exclusion of duplicated/collapsed regions, a repeat/homopolymer-artifact filter, and independent Illumina short-read validation across multiple baselines. A candidate is "sure" only if it clears all of them simultaneously, not any one in isolation. This is deliberately conservative: it is why 4,146 raw genotype differences between the two assemblies narrow to 24 defensible candidates, not a claim that only 24 differences exist between the genomes.</p>
+    </div>
+    <figure class="fig reveal" style="margin-top:20px;">
+      <img src="assets/fig_variant_funnel.png" alt="Step-by-step funnel showing how 4146 raw candidates narrow to 24 confirmed mutations through six evidence criteria" loading="lazy">
+      <div class="fig-cap"><span class="k">Narrowing procedure</span>Every stage after the first is an additional requirement layered on top of the ones before it (cumulative AND, not sequential replacement) &mdash; a variant is retained only once it satisfies all criteria evaluated so far. The final step is not a technical filter but a manual correction: 6 of the original 30 "sure" candidates (including MASY and CLCN7) were found post hoc to be identical genotype in HS2 and ALE, due to a bug that skipped the short-read cleanliness check for "shifted"-category sites (&sect;11 funnel-gap audit).</div>
+    </figure>
+
+    <div class="section-head reveal" style="margin-top:52px;">
       <h3>All 24 confirmed candidates, one table</h3>
       <p>Every sure candidate that survived the funnel-gap audit (&sect;11), in one place: position, gene, category, coding consequence, and function. <strong>Novel (ale_only)</strong> means confirmed absent from HS2 across all 3 independent baselines — a genuinely new ALE mutation. <strong>Fixed standing var.</strong> means the variant was already present in HS2 as standing heterozygosity and became fixed (homozygous) in ALE — real, but not novel. Two entries are flagged with weaker or ambiguous supporting evidence; treat those with extra caution. The 6 retracted false positives (including MASY and CLCN7) are excluded entirely, not merely noted.</p>
     </div>
@@ -630,8 +639,8 @@ footer{ padding:44px 0 60px; }
     </div>
 
     <figure class="fig reveal" style="margin-top:44px;">
-      <img src="assets/fig19_convergence_upset.png" alt="UpSet plot of gene-symbol convergence across ALE, HS19, and HMF" loading="lazy">
-      <div class="fig-cap"><span class="k">Set overlap</span>Gene-level convergence across all three independently-evolved lines, after equal-rigor re-calling. The HMF portion of this figure predates the reprocessing below and should be read alongside it, not instead of it.</div>
+      <img src="assets/fig19_convergence_upset_v2.png" alt="UpSet plot of gene-symbol convergence across ALE, HS19, and HMF" loading="lazy">
+      <div class="fig-cap"><span class="k">Set overlap</span>Gene-level convergence across all three independently-evolved lines, after equal-rigor re-calling. MASY and CLCN7 removed from the ALE set (funnel-gap audit retraction, &sect;11) &mdash; both were identical genotype in HS2 and ALE, not real mutations, and their removal does not change any of the intersection counts shown. The HMF portion of this figure predates the reprocessing below and should be read alongside it, not instead of it.</div>
     </figure>
 
     <div class="section-head reveal" style="margin-top:44px;">
