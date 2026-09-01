@@ -841,8 +841,8 @@ footer{ padding:44px 0 60px; }
         <div class="fig-cap"><span class="k">Direct evidence</span>Long-read pileups at the EPHA and CLPB3 loci — not a variant caller's summary, but the actual aligned reads each call is based on.</div>
       </figure>
       <figure class="fig">
-        <img src="assets/fig16_circos_mutation_map.png" alt="Genome-wide circular map of ALE vs HS2 mutations and structural duplications" loading="lazy">
-        <div class="fig-cap"><span class="k">Genome-wide view</span>Every high-confidence candidate and structural variant plotted against its position across all HS2 contigs, with self-synteny blocks marking duplicated genome regions.</div>
+        <img src="assets/fig16_circos_mutation_map.png" alt="Genome-wide circular map of ALE vs HS2 mutations and structural duplications, corrected to 24 sure candidates" loading="lazy">
+        <div class="fig-cap"><span class="k">Genome-wide view</span>All 24 corrected sure candidates (funnel-gap audit applied — the 6 retracted false positives, including MASY and CLCN7, are excluded here, not just from the missense discussion) and both confirmed structural variants, plotted against position across all HS2 contigs, with self-synteny blocks marking the duplicated genome regions the funnel screens against.</div>
       </figure>
     </div>
   </div>
@@ -1150,8 +1150,8 @@ CTGGCAGTGCAGGGCCCTCGACTTGCTCTGCACATGCTTGTCTCGCAACCCGAAGCAGCCGTGTAACCCCTACCAAGCGC
     </div>
     <div class="fig-2col reveal">
       <figure class="fig">
-        <img src="assets/fig_docking_summary.png" alt="Vina docking affinity comparison, WT vs mutant, for 5-HMF, sodium, and chloride, across the four originally-screened candidates" loading="lazy">
-        <div class="fig-cap"><span class="k">Real signal on 5-HMF, essentially none on the bare ions</span>Na<sup>+</sup>/Cl<sup>&minus;</sup> shift by &lt;0.1 kcal/mol in every case &mdash; an honest negative result: none of these mutations plausibly create or destroy a specific ion-interaction site. 5-HMF shows a real, direction-consistent effect at g8767 (+0.67 kcal/mol weaker in the mutant) and a smaller one at g1283 (+0.30) &mdash; both track the same proteins already flagged as structurally disrupted above, not a new independent signal. MASY (shown here for completeness) has since been retracted &mdash; see the audit callout earlier in this section.</div>
+        <img src="assets/fig_docking_summary.png" alt="Vina docking affinity comparison, WT vs mutant, for 5-HMF, sodium, and chloride, across the three confirmed missense candidates" loading="lazy">
+        <div class="fig-cap"><span class="k">Real signal on 5-HMF, essentially none on the bare ions</span>Na<sup>+</sup>/Cl<sup>&minus;</sup> shift by &lt;0.1 kcal/mol in every case &mdash; an honest negative result: none of these mutations plausibly create or destroy a specific ion-interaction site. 5-HMF shows a real, direction-consistent effect at g8767 (+0.67 kcal/mol weaker in the mutant) and a smaller one at g1283 (+0.30) &mdash; both track the same proteins already flagged as structurally disrupted above, not a new independent signal. MASY, originally screened as a 4th candidate, is excluded from this figure entirely &mdash; retracted, identical genotype in HS2 and ALE (see the audit callout earlier in this section).</div>
       </figure>
       <figure class="fig">
         <img src="assets/docking_g8767_L82P_HMF.png" alt="Docked pose comparison, 5-HMF, WT vs mutant g8767 L82P, showing the ligand pose shifting to a different sub-pocket" loading="lazy">
