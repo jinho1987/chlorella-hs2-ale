@@ -949,6 +949,11 @@ footer{ padding:44px 0 60px; }
       <p>HS2 and ALE were also independently HiFi-assembled at the organelle level &mdash; both a chloroplast and a mitochondrial genome per strain &mdash; letting us ask the same question three times: how much did each genomic compartment actually change over 18 months of selection?</p>
     </div>
 
+    <figure class="fig reveal" style="margin-top:20px;">
+      <img src="assets/fig_organelle_maps.png" alt="Gene content maps of the HS2 mitochondrion and chloroplast genomes via homology-based liftover from annotated reference genomes" loading="lazy">
+      <div class="fig-cap"><span class="k">What's actually in these genomes</span>Before asking how much each organelle changed (below), a look at what's there: gene positions via homology (minimap2, mapq&ge;20) to fully-annotated reference organelle genomes from related species &mdash; <em>Chlorella variabilis</em> NC_025413.1 for the mitochondrion (the same reference used in the mutation-grammar comparison), <em>Chlorella vulgaris</em> NC_001865.1 for the chloroplast. Approximate by construction, not a de novo annotation of this assembly &mdash; gene order/spacing reflects the reference species, and some genes here may lack a clean homologous hit. The mitochondrial contig (122.3&nbsp;kb) runs to roughly 1.5&times; the reference length, consistent with retained sequence overlap from an unresolved circular assembly rather than a real size difference.</div>
+    </figure>
+
     <div class="stat-grid reveal">
       <div class="stat-cell"><div class="v">0 / Mb</div><div class="l">chloroplast (158 kb) &mdash; zero differences detected anywhere across the alignable genome</div></div>
       <div class="stat-cell"><div class="v">57 / Mb</div><div class="l">mitochondrion (122 kb) &mdash; 7 distinct events, all outside protein-coding genes</div></div>
