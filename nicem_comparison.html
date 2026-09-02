@@ -158,9 +158,9 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
     <div class="review-q"><span class="num">3</span>T2T completion isn't required for this comparison, but caution is warranted for SNPs/SVs near contig ends.</div>
     <div class="review-a">
       <p class="tag-label">Response</p>
-      <p>Agreed. Per-contig telomere classification is propagated as a confidence annotation on every reported variant. This figure was found stale during a later audit and recomputed against the corrected assembly and current 30-candidate funnel. Of 78 current HS2 contigs, none have confirmed telomere signal at both ends (24 single-end, 54 neither) &mdash; stated plainly, as expected for a draft, non-T2T assembly. Of the 30 sure candidates, 4 (all unnamed, intergenic) sit within 20kb of an unconfirmed contig end; 0 of the 9 named candidates discussed anywhere in this project are affected.</p>
+      <p>Agreed. Per-contig telomere classification is propagated as a confidence annotation on every reported variant. This figure was found stale during a later audit and recomputed against the corrected assembly and the 30-candidate funnel current at that time. Of 78 current HS2 contigs, none have confirmed telomere signal at both ends (24 single-end, 54 neither) &mdash; stated plainly, as expected for a draft, non-T2T assembly. Of the 30 sure candidates then current, 4 (all unnamed, intergenic) sit within 20kb of an unconfirmed contig end; 0 of the 9 named candidates discussed anywhere in this project are affected. <em>Not yet re-verified against the later 24-candidate set (2026-09-02) &mdash; worth checking whether any of the 4 flagged positions are among the 6 since-retracted false positives before citing this figure again.</em></p>
     </div>
-    <div class="review-rev"><b>Status:</b> <span class="pill confirmed">resolved</span> &mdash; corrected: 4/30 sure candidates flagged (0/9 named)</div>
+    <div class="review-rev"><b>Status:</b> <span class="pill confirmed">resolved</span> &mdash; as measured against the 30-candidate set; re-verification against the current 24 is an open item</div>
   </div>
 
   <div class="review-item">
@@ -215,7 +215,7 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
   </div>
   <div class="pipeline-stage">
     <div class="stage-name">Candidate validation</div>
-    <div class="stage-detail"><p><strong>Ours:</strong> explicit 5-criterion funnel (GATK agreement, reciprocal-mapping consistency, short-read support, clear-of-duplication, repeat-artifact screening) applied genome-wide, yielding 30 sure candidates.</p>
+    <div class="stage-detail"><p><strong>Ours:</strong> explicit 5-criterion funnel (GATK agreement, reciprocal-mapping consistency, short-read support, clear-of-duplication, repeat-artifact screening) applied genome-wide, yielding 24 sure candidates (originally 30; 6 retracted as false positives by a later funnel-gap audit &mdash; see the correction note above).</p>
     <p><strong>NICEM:</strong> raw <code>paftools.js</code> output, no equivalent multi-criterion funnel applied.</p></div>
   </div>
 </section>
@@ -225,6 +225,11 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
   <div class="thesis">
     <div class="label">The key connection to the original review</div>
     <p>Review point 1 asked whether an apparent second k-mer peak reflected duplication rather than heterozygosity. NICEM's raw, unpurged assembly &mdash; built with zero knowledge of our purge_dups results &mdash; shows exactly that pattern independently: massive apparent size inflation from unpurged duplicate content, which collapses once purging is applied. A second, fully independent team hit the same wall our own earlier draft hit, for the same underlying reason.</p>
+  </div>
+
+  <div class="callout" style="margin-top:1.4rem;">
+    <div class="label">Correction (2026-09-02)</div>
+    <p>This entire document originally described a 30-candidate set that included MASY as one of "4 real missense substitutions" (&sect;05, below). A subsequent funnel-gap audit (independent of NICEM, found while building an unrelated convergence comparison) determined MASY and 5 other candidates &mdash; including CLCN7 &mdash; are false positives: identical genotype in HS2 and ALE across all 3 independent HS2 baselines, most likely a reference-assembly base-call error, not real ALE-specific variants. The corrected set is <strong>24 sure candidates, 3 confirmed missense</strong> (g8767 L82P, g1283 F207S, g5108 A350D &mdash; none of them MASY). Every count, table, and claim below has been updated to match. See the funnel-gap audit callout on the <a href="index.html#genes">project summary</a> for the full retraction record.</p>
   </div>
 
   <div class="stat-grid">
@@ -244,29 +249,34 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
 
 <section id="candidate-crossval">
   <div class="section-head"><span class="section-num">04</span><h2>Candidate-level cross-validation</h2></div>
-  <p>Using NICEM's independent assembly, our named candidates were located by direct DNA sequence alignment (minimap2, 1001bp flanks lifted over from our reference into NICEM's contigs at MAPQ 60 &mdash; unique, confident placement) &mdash; not by matching gene annotations, which differ between the two pipelines. NICEM's independent <code>paftools.js</code> variant calls were then checked at each lifted-over position.</p>
+  <p>Using NICEM's independent assembly, all 24 confirmed candidates (not just the originally-named subset) were located by direct DNA sequence alignment (minimap2 asm5, mapq&ge;20, our HS2 reference against NICEM's raw HS assembly) &mdash; not by matching gene annotations, which differ between the two pipelines. NICEM's independent <code>paftools.js</code> variant calls were then checked within a 50bp window of each lifted-over position; a match with the allele as the reverse complement is still counted as confirmed, since it reflects NICEM's assembler representing that contig on the opposite strand, not a disagreement.</p>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Candidate</th><th>Type</th><th>NICEM result</th></tr></thead>
+      <thead><tr><th>Candidate</th><th>Category</th><th>NICEM result</th></tr></thead>
       <tbody>
-        <tr><td><span class="gene">EPHA</span></td><td>point mutation</td><td class="matrix-cell-yes">Confirmed &mdash; exact coordinate match</td></tr>
-        <tr><td><span class="gene">CLPB3</span></td><td>point mutation</td><td class="matrix-cell-yes">Confirmed &mdash; exact coordinate match</td></tr>
-        <tr><td><span class="gene">SCP46</span></td><td>point mutation</td><td class="matrix-cell-yes">Confirmed &mdash; exact coordinate match</td></tr>
-        <tr><td>16 kb duplication</td><td>structural variant</td><td class="matrix-cell-yes">Confirmed &mdash; exact coordinate &amp; size match (16,188bp)</td></tr>
-        <tr><td><span class="gene">UBP12, ACOX4, MASY, TLP13, CLCN7, RIMO</span></td><td>point mutations</td><td class="matrix-cell-partial">Untestable &mdash; outside NICEM's 22.6% uniquely-alignable span</td></tr>
-        <tr><td>~1.5 kb insertion</td><td>structural variant</td><td class="matrix-cell-partial">Untestable &mdash; same reason</td></tr>
+        <tr><td><span class="gene">g8143</span></td><td>novel (ale_only), intronic</td><td class="matrix-cell-yes">Confirmed &mdash; exact position, exact alleles</td></tr>
+        <tr><td><span class="gene">EPHA</span></td><td>novel (ale_only), intronic</td><td class="matrix-cell-yes">Confirmed &mdash; exact position, exact alleles</td></tr>
+        <tr><td><span class="gene">g6058</span></td><td>novel (ale_only), intronic</td><td class="matrix-cell-yes">Confirmed &mdash; 10bp offset, allele matches as reverse complement</td></tr>
+        <tr><td><span class="gene">g5066</span></td><td>novel (ale_only), intronic</td><td class="matrix-cell-yes">Confirmed &mdash; 13bp offset, allele matches as reverse complement</td></tr>
+        <tr><td><span class="gene">CLPB3</span></td><td>fixed standing variant, intronic</td><td class="matrix-cell-yes">Confirmed &mdash; 14bp offset, direct allele match</td></tr>
+        <tr><td><span class="gene">SCP46</span></td><td>fixed standing variant, intronic</td><td class="matrix-cell-yes">Confirmed &mdash; allele matches as reverse complement (one of two nearby NICEM calls)</td></tr>
+        <tr><td>16 kb duplication (g1283 locus)</td><td>structural variant</td><td class="matrix-cell-yes">Confirmed &mdash; NICEM's own independent ALE-vs-HS alignment shows the ALE side running +16,190bp longer than the matched HS span, against our discovered 16,187bp duplication</td></tr>
+        <tr><td><span class="gene">g8767</span></td><td>novel (ale_only), <strong>missense</strong></td><td class="matrix-cell-no">Not reproduced &mdash; single-copy region, no variant found. The one case among the "not reproduced" set worth real scrutiny: novel/ale_only is a clean presence-or-absence test, no heterozygosity ambiguity. Most likely explained by NICEM's assembly quality (721 fragmented, unpurged contigs vs. our 78), not a reason to doubt g8767 itself &mdash; but stated plainly rather than omitted.</td></tr>
+        <tr><td><span class="gene">g1283, g5108</span></td><td>fixed standing variant, <strong>missense</strong></td><td class="matrix-cell-partial">Inconclusive, not negative &mdash; NICEM's assembly is a single unphased consensus of a heterozygous diploid genome; at a truly heterozygous site it can represent either allele by chance</td></tr>
+        <tr><td>15 further intronic/intergenic candidates</td><td>mixed</td><td class="matrix-cell-no">Not reproduced (11) or inconclusive/in a NICEM duplicate region (3) &mdash; see full breakdown on the <a href="index.html#nicem">project summary</a></td></tr>
+        <tr><td>~1.5 kb insertion</td><td>structural variant</td><td class="matrix-cell-partial">Inconclusive &mdash; NICEM's ALE-vs-HS alignment has a genuine coverage gap at this exact locus (no aligned ALE block within 20kb on either side); the test could not run, not a negative result</td></tr>
       </tbody>
     </table>
   </div>
-  <p>3 of 9 point candidates and 1 of 2 structural variants were directly, independently confirmed. The remainder are not contradicted &mdash; they simply fall outside the fraction of the genome NICEM's raw, unpurged assembly can uniquely align.</p>
+  <p><strong>6 of 24</strong> point-mutation candidates and the 16kb duplication were directly, independently confirmed. None of the 3 missense candidates reproduced, for two different reasons (see table) &mdash; this is a real, honestly-reported gap, not smoothed over: NICEM independently corroborates the intronic/novel methodology broadly, but does not yet add independent support specifically to the missense/structural-biology narrative, which rests on this project's own long-read + 3-baseline short-read replication instead.</p>
 </section>
 
 <section id="missense-reconcile">
   <div class="section-head"><span class="section-num">05</span><h2>Why missense counts differ between the two analyses</h2></div>
-  <p>Our own funnel-validated "sure candidates" (n=30) were individually classified for coding consequence against the AUGUSTUS gene model: 20 intronic, 5 intergenic, 1 indel, and <strong>4 real missense substitutions</strong> (MASY Trp38Arg; three previously-unnamed genes: Leu82Pro, Ala350Asp, Phe207Ser). NICEM's own genome-wide single-copy substitution set, classified the same way, produced only one coding-consequence hit pair (a nonsense/missense call at two adjacent bases in the same gene) &mdash; the same adjacent-position clustering pattern already identified as a local-alignment artifact signature elsewhere in NICEM's data, not a credible independent finding.</p>
+  <p>Our own funnel-validated "sure candidates" (n=24, after the funnel-gap audit retracted 6 false positives including MASY) were individually classified for coding consequence against the AUGUSTUS gene model: 18 intronic, 3 intergenic, and <strong>3 real missense substitutions</strong> &mdash; g8767 Leu82Pro (novel), g1283 Phe207Ser (fixed standing variant), g5108 Ala350Asp (fixed standing variant). MASY (Trp38Arg), reported in an earlier version of this document as a 4th missense candidate, is retracted: HS2 is homozygous for the "mutant" allele in all 3 independent baselines, identical to ALE &mdash; not a real ALE-specific variant. NICEM's own genome-wide single-copy substitution set, classified the same way, produced only one coding-consequence hit pair (a nonsense/missense call at two adjacent bases in the same gene) &mdash; the same adjacent-position clustering pattern already identified as a local-alignment artifact signature elsewhere in NICEM's data, not a credible independent finding.</p>
   <div class="callout">
-    <div class="label">This is an absence, not a disagreement</div>
-    <p>Checked directly: none of our 4 real missense positions have <em>any</em> variant call in NICEM's dataset at all. All four fall inside the ~77% of the genome NICEM's unpurged, duplication-heavy assembly cannot uniquely align. NICEM's pipeline never tested these positions &mdash; it did not test them and find something different.</p>
+    <div class="label">One position tests clean, two are genuinely untestable this way &mdash; not the same thing</div>
+    <p>Checked directly: g8767 (novel/ale_only) has no variant call in NICEM's dataset at this exact single-copy-alignable position &mdash; a real absence worth taking seriously, most likely reflecting NICEM's lower assembly accuracy in this class of region rather than a problem with g8767 itself, but reported as an open point rather than explained away. g1283 and g5108 (both fixed standing variants) are a different, weaker kind of "absence": NICEM's raw assembly is a single unphased consensus of a heterozygous diploid genome, so a truly heterozygous site can be represented as either allele by chance &mdash; these two were not meaningfully tested by this comparison at all, independent of assembly quality.</p>
   </div>
 </section>
 
@@ -288,16 +298,16 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
     <div class="label">What this establishes</div>
     <ul>
       <li>All six original review points are resolved, and two (heterozygosity/duplication, assembly-size gap) are now independently reinforced by a second team's assembly hitting the same underlying issue.</li>
-      <li>3 of 9 point candidates and 1 of 2 structural variants are confirmed by a fully independent assembly and variant-calling pipeline, at exact coordinates.</li>
+      <li>6 of the full, corrected 24-candidate point-mutation set, plus the 16kb duplication (quantitatively, +16,190bp of independent ALE-vs-HS length difference against our discovered 16,187bp), are confirmed by a fully independent assembly and variant-calling pipeline.</li>
       <li>A systematic genome-wide re-screen of NICEM's own data found no additional credible candidates &mdash; the signal-quality tests (Ts/Tv, homopolymer fraction) point the same direction our own artifact-filtering already did.</li>
     </ul>
   </div>
   <div class="callout">
     <div class="label">Honestly still open</div>
     <ul>
-      <li>6 of 9 point candidates and 1 structural variant remain untestable by NICEM specifically, due to their assembly's limited unique-alignment fraction &mdash; not contradicted, but not independently confirmed either.</li>
-      <li>The three NICEM-confirmed point mutations (EPHA, CLPB3, SCP46) are intronic relative to the current gene models, not missense &mdash; the causal mechanism for these three is not yet established at the protein-coding level.</li>
-      <li>Wet-lab Sanger confirmation of the named candidates has not yet been performed; primers are designed but unconfirmed.</li>
+      <li>The 6 confirmed point mutations are all intronic &mdash; none of the 3 missense candidates (g8767, g1283, g5108) reproduced, for two different reasons (see &sect;05): g8767 is a genuine, unexplained absence at a fair, single-copy test; g1283/g5108 were never meaningfully testable this way due to NICEM's unphased assembly at heterozygous sites. NICEM corroborates the methodology broadly, not the missense/structural-biology narrative specifically.</li>
+      <li>The ~1.5kb insertion is inconclusive (a genuine coverage gap in NICEM's data at that exact locus), not negative &mdash; it simply couldn't be tested.</li>
+      <li>Wet-lab Sanger confirmation of the named candidates has not yet been performed; primers are designed but unconfirmed. g8767 is now the highest-priority target given its NICEM non-reproduction &mdash; direct Sanger ground-truth is the most authoritative way to resolve that open question.</li>
     </ul>
   </div>
 </section>
