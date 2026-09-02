@@ -1237,6 +1237,15 @@ CTGGCAGTGCAGGGCCCTCGACTTGCTCTGCACATGCTTGTCTCGCAACCCGAAGCAGCCGTGTAACCCCTACCAAGCGC
     </figure>
 
     <div class="section-head reveal" style="margin-top:44px;">
+      <h3>Domain-boundary check, done before (not after) planning a substrate-specific redocking</h3>
+      <p>Given g1283's identity (chitin deacetylase) and g5108's (formin), the obvious next step looked like redocking each against its real substrate &mdash; a chito-oligomer for the deacetylase, the actin-binding interface for the formin &mdash; instead of the generic HMF/ion panel below. Before spending compute on that, the actual domain boundaries were checked against each protein's closest well-annotated ortholog. Both assumptions turned out to be wrong.</p>
+    </div>
+    <figure class="fig reveal" style="margin-top:20px;">
+      <img src="assets/fig_domain_context.png" alt="Domain architecture diagrams showing the g5108 and g1283 mutation positions relative to their functional domains, revealing neither sits in the expected functional region" loading="lazy">
+      <div class="fig-cap"><span class="k">Two corrected hypotheses, one deferred redocking</span><strong>g5108 A350D</strong> sits just past the C2 (membrane-binding) domain and roughly 460 residues before the actin-nucleating FH2 domain (809&ndash;1207, by homology to <em>Arabidopsis</em> AtFH14/Q9C6S1) &mdash; not at the actin interface at all. <strong>g1283 F207S</strong> aligns exactly (verified via the conservation MSA, not an estimate) to position 163 of its closest ortholog BmCDA8, 42 residues downstream of the catalytic zinc-binding cluster (residues 63/117/121) &mdash; not at the catalytic site either. Neither mutation maps to a well-characterized functional surface, which is itself an honest, useful finding: docking against a guessed pocket for either protein would have been unjustified, so that redocking is deferred rather than run against the wrong target. The existing HMF/ion docking below remains the best-supported structural evidence for these two candidates; g8767's docking is unaffected by any of this, since BI1 proteins are broadly stress/small-molecule-interacting across their full transmembrane span.</div>
+    </figure>
+
+    <div class="section-head reveal" style="margin-top:44px;">
       <h3>Docking: does the mutation change interaction with 5-HMF or salt (Na<sup>+</sup>/Cl<sup>&minus;</sup>)?</h3>
       <p>ALE was evolved under hydrolysate stress (5-HMF is one of its major inhibitory components) and separately shows salt-cross-tolerance expectations. AutoDock Vina, focused search (24&nbsp;&Aring; box) centered on each mutation's C&alpha; &mdash; not a known binding site for any of these ligands in any of these proteins. Read this tier as exploratory and hypothesis-generating, one step more speculative than the structure comparisons above: single static ESMFold structures with no conformational sampling, and Na<sup>+</sup> specifically uses a hand-built single-atom input because Vina's calibrated forcefield has no dedicated sodium parameters (Cl<sup>&minus;</sup> and 5-HMF are both natively supported and higher-confidence).</p>
     </div>
