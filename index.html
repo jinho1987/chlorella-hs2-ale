@@ -1452,6 +1452,14 @@ CTGGCAGTGCAGGGCCCTCGACTTGCTCTGCACATGCTTGTCTCGCAACCCGAAGCAGCCGTGTAACCCCTACCAAGCGC
       </figure>
     </div>
 
+    <div class="callout reveal" style="margin-top:28px;">
+      <div class="k">Wet-lab confirmation strategy for the 16&nbsp;kb duplication: three complementary PCR/Sanger assays</div>
+      <p><strong>1&nbsp;&mdash; Junction-spanning PCR (fastest, cheapest, diagnostic).</strong> In a tandem duplication, the end of copy&nbsp;1 fuses directly to the start of copy&nbsp;2. A forward primer placed near the end breakpoint (335,190, pointing downstream) and a reverse primer near the start breakpoint (319,001, pointing upstream) point <em>away</em> from each other in single-copy HS2 &mdash; no product. In ALE, because copy&nbsp;2 restarts immediately after copy&nbsp;1 ends, the same two primers are brought together across the new junction and amplify a short (~350&ndash;450bp, tunable by primer placement), ALE-specific product. A single gel: band in ALE, no band in HS2.</p>
+      <p style="margin-top:10px;"><strong>2&nbsp;&mdash; Long-range flanking PCR (whole-duplication size-shift).</strong> Primers anchored in unique sequence outside both breakpoints (extend a few hundred bp further out from the ±600bp flanks already provided above), with a long-range polymerase (e.g. TaKaRa LA Taq, NEB LongAmp &mdash; standard Taq struggles past ~5kb). Predicted sizes: HS2 &asymp;17kb, ALE &asymp;33kb (one extra 16.2kb copy) &mdash; an unambiguous size difference on a 0.6&ndash;0.8% agarose gel, confirming the duplication is exactly one extra copy, not more.</p>
+      <p style="margin-top:10px;"><strong>3&nbsp;&mdash; Sanger sequencing of the Assay-1 junction product (the highest-value single read here).</strong> Once the short ALE-specific product from Assay 1 exists, Sanger it directly. This is the read that actually tests the computational prediction behind the truncated-protein folding target above: that the fusion creates an in-frame stop codon right at the junction, truncating the second g1283 copy at residue 341/536. Reading the real genomic DNA across the junction confirms or refutes that specific claim directly, rather than resting on the assembly alone.</p>
+      <p style="margin-top:10px;font-size:13px;color:var(--ink-dim);">The predicted ALE-specific junction sequence (copy-1 end fused to copy-2 start, marked at the fusion point) has been extracted for primer design and delivered as a standalone file.</p>
+    </div>
+
     <p class="reveal" style="margin-top:28px;font-size:15px;"><a href="nicem_comparison.html">&rarr; Full methods comparison: our pipeline vs. NICEM's, combined with the original six-point expert review and its resolutions</a></p>
     <p class="reveal" style="margin-top:10px;font-size:15px;"><a href="our_assembly_report.html">&rarr; Our own assembly &amp; annotation report, structured section-for-section to mirror NICEM's for direct side-by-side checking</a></p>
   </div>
