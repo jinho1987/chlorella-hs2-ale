@@ -896,6 +896,15 @@ footer{ padding:44px 0 60px; }
         <div class="fig-cap"><span class="k">Genome-wide view</span>All 24 corrected sure candidates (funnel-gap audit applied — the 6 retracted false positives, including MASY and CLCN7, are excluded here, not just from the missense discussion) and both confirmed structural variants, plotted against position across all HS2 contigs, with self-synteny blocks marking the duplicated genome regions the funnel screens against.</div>
       </figure>
     </div>
+
+    <div class="callout reveal" style="margin-top:36px;">
+      <div class="k">A single-reference map is not a structural comparison</div>
+      <p>The circos figure above plots ALE's mutations against HS2 alone — it cannot show whether the two genomes are collinear or rearranged relative to each other, because it never uses ALE's own independently-assembled structure. The figure below closes that gap: a direct whole-genome alignment (nucmer/MUMmer) of both de novo HiFi assemblies, HS2 and ALE, each built independently from its own long reads.</p>
+    </div>
+    <figure class="fig reveal" style="margin-top:20px;">
+      <img src="assets/fig_synteny_dotplot_v3.png" alt="Whole-genome synteny dotplot between the independently assembled HS2 and ALE genomes, with confirmed candidates and structural variants overlaid" loading="lazy">
+      <div class="fig-cap"><span class="k">Two-assembly structural comparison</span>184 alignment blocks covering 99% of the HS2 assembly by length, with all 24 confirmed candidates and both structural variants overlaid at their translated positions. Handle the near-even same-strand/reverse-strand split with care — it mostly reflects each independent assembler's arbitrary per-contig strand choice, not biological inversion; only 3 of 130 contig pairs show both orientations together (orange), the sole pattern consistent with a genuine inversion breakpoint, and even those need manual review before being called real. None of the 3 missense candidates fall in one of those ambiguous pairs.</div>
+    </figure>
   </div>
 </section>
 
