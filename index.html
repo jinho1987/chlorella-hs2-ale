@@ -527,6 +527,21 @@ footer{ padding:44px 0 60px; }
     </figure>
 
     <div class="section-head reveal" style="margin-top:52px;">
+      <h3>A fifth check: does a direct, alignment-only genome diff agree?</h3>
+      <p>The funnel's discovery step channels an assembly-to-assembly alignment (ALE contigs vs. the HS2 reference, <span class="mono">pbmm2</span>) through read-genotyping software (bcftools/GATK) rather than a plain sequence-diff tool &mdash; a reasonable question to ask of that choice. As a direct test, the same assembly alignment was independently re-diffed with <span class="mono">minimap2 -cx asm5 --cs</span> + <span class="mono">paftools.js call</span>, a standard, genotype-free, alignment-only variant caller with no read-depth or allele-frequency machinery at all.</p>
+    </div>
+    <div class="stat-grid reveal" style="margin-top:0;">
+      <div class="stat-cell"><div class="v">4,198</div><div class="l">raw variants from the independent diff tool &mdash; essentially matching the original funnel's 4,146 raw candidates from a completely different calling method</div></div>
+      <div class="stat-cell"><div class="v" style="color:var(--accent-ale);">24 / 24</div><div class="l">confirmed point-mutation candidates independently recovered, 21 at the exact base position and all 24 within a few bp (indel left/right-alignment convention differences only)</div></div>
+      <div class="stat-cell"><div class="v">1 / 1</div><div class="l">the 1.5&nbsp;kb insertion recovered too &mdash; and the diff tool reconstructs the identical inserted sequence found independently by direct extraction (&sect;14)</div></div>
+      <div class="stat-cell"><div class="v">0 / 1</div><div class="l">the 16&nbsp;kb tandem duplication is <em>not</em> recovered &mdash; expected, not a failure: a linear best-alignment diff cannot represent one reference region mapping to two places in the other genome, which is exactly why this pipeline calls SVs from alignment-depth evidence, not from a point-variant caller of any kind</div></div>
+    </div>
+    <div class="callout reveal">
+      <div class="k">What this settles, and what it doesn't</div>
+      <p>A completely independent, off-the-shelf, genotype-free diff tool run directly on the assembly alignment reproduces the point-mutation and insertion candidate set almost exactly &mdash; the discovery step is not an artifact of using bcftools/GATK specifically. What a plain diff tool structurally cannot provide, and what the funnel's read-based validation layer is retained for, is <strong>allele-frequency information</strong>: distinguishing a genuinely novel ALE mutation from a pre-existing HS2 heterozygous variant later fixed in ALE requires seeing multiple individual reads at a locus, not just a single best-alignment consensus. That distinction is precisely what the funnel-gap audit (&sect;11) used to catch MASY and CLCN7 as false positives and to correctly reframe g1283/g5108 as fixation of standing variation &mdash; a result a pure genome-vs-genome diff has no way to produce, however it's run.</p>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:52px;">
       <h3>All 24 confirmed candidates, one table</h3>
       <p>Every sure candidate that survived the funnel-gap audit (&sect;11), in one place: position, gene, category, coding consequence, and function. <strong>Novel (ale_only)</strong> means confirmed absent from HS2 across all 3 independent baselines — a genuinely new ALE mutation. <strong>Fixed standing var.</strong> means the variant was already present in HS2 as standing heterozygosity and became fixed (homozygous) in ALE — real, but not novel. Two entries are flagged with weaker or ambiguous supporting evidence; treat those with extra caution. The 6 retracted false positives (including MASY and CLCN7) are excluded entirely, not merely noted.</p>
     </div>
