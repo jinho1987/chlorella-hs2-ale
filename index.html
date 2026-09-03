@@ -1382,7 +1382,7 @@ CTGGCAGTGCAGGGCCCTCGACTTGCTCTGCACATGCTTGTCTCGCAACCCGAAGCAGCCGTGTAACCCCTACCAAGCGC
       <div class="stat-cell"><div class="v">45.8 &rarr; 45.3</div><div class="l"><span class="mono">g5108</span> pLDDT, WT&rarr;mutant (A350D). Flat, both deep in the "very low confidence" band &mdash; no destabilization signal, matching the same pattern as g1283's point mutation. This run was also the slowest by far (1220 residues, ~2 hours), a direct, expected consequence of AlphaFold2's roughly cubic runtime scaling with sequence length.</div></div>
     </div>
     <p class="reveal" style="margin-top:8px;font-size:13px;color:var(--ink-dim);">Both g1283 and g5108 land in AlphaFold2's own "low confidence" band (pLDDT 50&ndash;70) or below &mdash; a direct consequence of the shallow, hand-built MSA rather than evidence these proteins lack real structure. Read the <em>relative</em> WT-vs-mutant comparison as informative (all variants of a given protein share the same MSA handicap, so the comparison is fair), but don't over-read the absolute confidence of any single structure. g8767's high, confident score (well above the low-confidence band) shows the shallow-MSA approach still works when the underlying fold is easy.</p>
-    <div class="fig-3col reveal" style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+    <div class="fig-3col reveal" style="margin-top:20px;display:grid;grid-template-columns:repeat(2,1fr);gap:20px;">
       <figure class="fig">
         <img src="assets/fold_compare_g8767_WT_vs_L82P.gif" alt="Rotating animation comparing AlphaFold2 structures of WT and L82P mutant g8767, overlaid" loading="lazy">
         <div class="fig-cap"><span class="k">g8767, WT (blue) vs. L82P (orange)</span>Tight overlap overall (1.27&nbsp;&Aring; RMSD) with visible local displacement right at the mutation site (yellow sphere).</div>
@@ -1394,6 +1394,10 @@ CTGGCAGTGCAGGGCCCTCGACTTGCTCTGCACATGCTTGTCTCGCAACCCGAAGCAGCCGTGTAACCCCTACCAAGCGC
       <figure class="fig">
         <img src="assets/fold_compare_g1283_WT_vs_truncated.gif" alt="Rotating animation comparing AlphaFold2 structures of full-length WT g1283 and the truncated 341-residue duplication copy, overlaid" loading="lazy">
         <div class="fig-cap"><span class="k">g1283, WT (blue) vs. truncated SV copy (orange)</span>The retained region tracks the WT fold reasonably well; the missing C-terminal third drives both the RMSD and the pLDDT drop &mdash; independent, AF2-based confirmation of the ESMFold-based truncation finding earlier in this section.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/fold_compare_g5108_WT_vs_A350D.gif" alt="Rotating animation comparing AlphaFold2 structures of WT and A350D mutant g5108, overlaid" loading="lazy">
+        <div class="fig-cap"><span class="k">g5108, WT (blue) vs. A350D (orange)</span>The highest RMSD of the four pairs (5.99&nbsp;&Aring; over 5715 atoms) &mdash; but read this as noise from two very-low-confidence structures (pLDDT&nbsp;&lt;&nbsp;46 throughout), not as evidence of a large real conformational change; the flat pLDDT already reported argues against that reading.</div>
       </figure>
     </div>
 
