@@ -1337,6 +1337,42 @@ CTGGCAGTGCAGGGCCCTCGACTTGCTCTGCACATGCTTGTCTCGCAACCCGAAGCAGCCGTGTAACCCCTACCAAGCGC
       <div class="k">What this doesn't show</div>
       <p>None of these proteins has a documented biological role in 5-HMF detoxification or salt tolerance &mdash; this is blind, exploratory docking at the mutation site, not docking into a characterized active site or transporter pore. A Vina score shift of &lt;1 kcal/mol is well within the method's typical scoring noise for a single static structure. Treat this as a candidate-prioritization signal (g8767 and, more weakly, g1283 are the ones where a stress-molecule interaction plausibly changes) rather than a mechanistic claim, pending the wet-lab confirmation already planned for these sites. Note g1283 is now understood to be a fixed pre-existing HS2 variant, not a novel ALE mutation (audit callout above) &mdash; the docking result itself is unaffected, only the evolutionary timing claim.</p>
     </div>
+
+    <div class="section-head reveal" style="margin-top:44px;">
+      <h3>Docking, extended: does either sugar (hexose/pentose) bind differently?</h3>
+      <p>Same question as the HMF/ion panel, asked of the two sugars ALE would actually be metabolizing from a lignocellulosic-style hydrolysate &mdash; glucose (hexose) and xylose (pentose) &mdash; rather than the inhibitory byproduct. Same protocol: AutoDock Vina, 24&nbsp;&Aring; focused box centered on each mutation's C&alpha;, WT vs. mutant receptor.</p>
+    </div>
+    <div class="stat-grid reveal" style="margin-top:0;">
+      <div class="stat-cell"><div class="v">+0.46 / +0.39</div><div class="l"><span class="mono">g8767 L82P</span> &mdash; glucose / xylose &Delta;, kcal/mol. Same direction as the HMF result (weaker in mutant) but smaller in magnitude.</div></div>
+      <div class="stat-cell"><div class="v">&minus;0.23 / +0.04</div><div class="l"><span class="mono">g5108 A350D</span> &mdash; glucose / xylose &Delta;. Essentially flat, matching the Ca<sup>2+</sup> and Na<sup>+</sup>/Cl<sup>&minus;</sup> null results already reported for this candidate.</div></div>
+      <div class="stat-cell"><div class="v">+0.11 / +0.16</div><div class="l"><span class="mono">g1283 F207S</span> &mdash; glucose / xylose &Delta;. Flat, despite g1283's homology to a carbohydrate-active enzyme family (chitin deacetylases act on a polymer, not a free monosaccharide, which may explain the null result here).</div></div>
+    </div>
+    <p class="reveal" style="margin-top:8px;font-size:13px;color:var(--ink-dim);">All six deltas fall well under the &plusmn;1&nbsp;kcal/mol threshold used to flag a "notable shift" elsewhere on this page &mdash; an honest negative control alongside the Ca<sup>2+</sup> result: none of these three candidates plausibly changes how the protein interacts with a free sugar molecule. This is expected given none of the three is a sugar transporter or free-sugar-binding enzyme at its core, and it argues against over-interpreting these structures as directly explaining the glucose-consumption phenotype (see the "division of labor" framing below).</p>
+
+    <div class="section-head reveal" style="margin-top:44px;">
+      <h3>A second, independent fold: AlphaFold2/ColabFold with custom multiple-sequence alignments</h3>
+      <p>ESMFold (above) is a single-sequence method &mdash; it needs no alignment and can't be handicapped by one. AlphaFold2 works differently: it leans on co-evolutionary signal from a multiple-sequence alignment (MSA), and normally draws on an automated search across hundreds to thousands of homologs. Here, deliberately, it was run instead on the same small, hand-curated homolog sets already built for the cross-species conservation analysis above (9&ndash;15 sequences per protein) &mdash; a genuine test of agreement between two independent methods, not AlphaFold2 run at its usual best.</p>
+    </div>
+    <div class="stat-grid reveal" style="margin-top:0;">
+      <div class="stat-cell"><div class="v" style="color:var(--accent-hs2);">82.4 &rarr; 76.0</div><div class="l"><span class="mono">g8767</span> pLDDT, WT&rarr;mutant. A real, meaningful confidence drop &mdash; agrees with ESMFold's read of this as the most disruptive candidate. RMSD 1.27&nbsp;&Aring; over 1520 aligned atoms.</div></div>
+      <div class="stat-cell"><div class="v">52.2 &rarr; 53.5</div><div class="l"><span class="mono">g1283</span> pLDDT, WT&rarr;mutant (F207S). Essentially unchanged &mdash; no destabilization signal, consistent with the conservation analysis showing F207 isn't even the majority residue across homologs. RMSD 0.84&nbsp;&Aring; over 2926 atoms.</div></div>
+      <div class="stat-cell"><div class="v" style="color:var(--accent-ale);">52.2 &rarr; 46.6</div><div class="l"><span class="mono">g1283</span> pLDDT, WT&rarr;truncated SV copy (341aa). The clearest AF2 signal of the three &mdash; a real confidence drop when the C-terminal third is removed. RMSD 4.37&nbsp;&Aring; over 1951 atoms (largest structural divergence of any pair here, as expected for a genuinely different-length protein).</div></div>
+    </div>
+    <p class="reveal" style="margin-top:8px;font-size:13px;color:var(--ink-dim);">Both g1283 and g5108 land in AlphaFold2's own "low confidence" band (pLDDT 50&ndash;70) or below &mdash; a direct consequence of the shallow, hand-built MSA rather than evidence these proteins lack real structure. Read the <em>relative</em> WT-vs-mutant comparison as informative (all variants of a given protein share the same MSA handicap, so the comparison is fair), but don't over-read the absolute confidence of any single structure. g8767's high, confident score (well above the low-confidence band) shows the shallow-MSA approach still works when the underlying fold is easy; g5108's numbers are reported separately below once its run &mdash; the slowest of the five by a wide margin, at 1220 residues &mdash; finishes.</p>
+    <div class="fig-3col reveal" style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+      <figure class="fig">
+        <img src="assets/fold_compare_g8767_WT_vs_L82P.gif" alt="Rotating animation comparing AlphaFold2 structures of WT and L82P mutant g8767, overlaid" loading="lazy">
+        <div class="fig-cap"><span class="k">g8767, WT (blue) vs. L82P (orange)</span>Tight overlap overall (1.27&nbsp;&Aring; RMSD) with visible local displacement right at the mutation site (yellow sphere).</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/fold_compare_g1283_WT_vs_F207S.gif" alt="Rotating animation comparing AlphaFold2 structures of WT and F207S mutant g1283, overlaid" loading="lazy">
+        <div class="fig-cap"><span class="k">g1283, WT (blue) vs. F207S (orange)</span>Near-identical backbones (0.84&nbsp;&Aring; RMSD, the tightest of the three) &mdash; visual confirmation of the flat pLDDT result above.</div>
+      </figure>
+      <figure class="fig">
+        <img src="assets/fold_compare_g1283_WT_vs_truncated.gif" alt="Rotating animation comparing AlphaFold2 structures of full-length WT g1283 and the truncated 341-residue duplication copy, overlaid" loading="lazy">
+        <div class="fig-cap"><span class="k">g1283, WT (blue) vs. truncated SV copy (orange)</span>The retained region tracks the WT fold reasonably well; the missing C-terminal third drives both the RMSD and the pLDDT drop &mdash; independent, AF2-based confirmation of the ESMFold-based truncation finding earlier in this section.</div>
+      </figure>
+    </div>
   </div>
 </section>
 
