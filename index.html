@@ -731,6 +731,19 @@ footer{ padding:44px 0 60px; }
     </div>
 
     <div class="section-head reveal" style="margin-top:44px;">
+      <h3>After the Vina seed bug: are ESMFold and AlphaFold2 actually deterministic? (checked, 2026-09-04)</h3>
+      <p>The docking correction above came from discovering that a tool believed to be reproducible silently wasn't. The same question was worth asking of the two fold methods used throughout this project, rather than assumed.</p>
+    </div>
+    <div class="callout reveal">
+      <div class="k">ESMFold: empirically confirmed deterministic, byte-for-byte</div>
+      <p>The exact ESM Atlas API endpoint used for every ESMFold call in this project was called twice, independently, on two different sequences (g8767 WT, 228&nbsp;aa; the g1283 truncated duplication copy, 341&nbsp;aa). Per-residue pLDDT arrays were <strong>identical to the last decimal place across both runs, for both sequences</strong> &mdash; zero difference. ESMFold's inference is a single deterministic feedforward pass with no sampling step; this confirms it behaves that way in practice, not just on paper.</p>
+    </div>
+    <div class="callout reveal">
+      <div class="k">AlphaFold2/ColabFold: correctly configured for determinism (fixed seed, dropout off) &mdash; full empirical re-verification blocked by an unrelated environment fault</div>
+      <p>Every AF2 run in this project's saved <span class="mono">config.json</span> shows <span class="mono">use_dropout: false</span> and a genuinely <strong>fixed</strong> <span class="mono">random_seed: 0</span> with <span class="mono">num_seeds: 1</span> &mdash; categorically different from the Vina bug, where the tool's own docstring admitted its default seed was "randomly chosen." With dropout off and a fixed seed, AlphaFold2 has no documented stochastic component at inference. An empirical repeat was attempted on the fastest case (g8767, 228&nbsp;aa, local GPU ColabFold) to confirm this directly rather than take it on faith &mdash; but hit a persistent local GPU/JAX crash (traced to the same GPU session as an earlier concurrent-run test), reproducible on both GPU and CPU execution paths, that prevented a completed re-run. One partial CPU pass did get far enough to report its first-recycle pLDDT (70.9) before crashing, closely matching the original GPU run's first-recycle value (71.8) &mdash; consistent with, though not conclusive proof of, determinism given the cross-hardware/precision differences between a CPU and a bfloat16 GPU pass. <strong>Honest status: strongly expected to be deterministic on design grounds, empirically supported by a partial result, not yet fully re-verified end-to-end</strong> &mdash; flagged plainly rather than either overclaiming a clean repeat or leaving the question silently unasked. A clean GPU-vs-GPU re-run is the natural next step once the local environment fault is resolved.</p>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:44px;">
       <h3>Is HS2 actually diploid? The direct evidence, not just the inference</h3>
       <p>Every heterozygosity/coverage number elsewhere on this page assumes a diploid genome. That assumption was challenged in the original expert review (a single-peak read on the raw k-mer spectrum looked inconsistent with the reported heterozygosity) and is worth showing plainly rather than asserting. Calibration: <strong>nearly certain, not certain</strong> — three independent lines of evidence agree, but none of them individually rules out every alternative.</p>
     </div>
