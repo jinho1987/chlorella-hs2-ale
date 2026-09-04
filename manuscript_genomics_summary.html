@@ -78,6 +78,11 @@ td code, p code { font-family: var(--mono); font-size: 0.82em; background: var(-
 .gene-body { padding: 1.1rem 1.3rem; }
 .gene-body p { font-size: 0.92rem; max-width: none; }
 footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-family: var(--sans); font-size: 0.74rem; color: var(--ink-faint); }
+.ms-figure { margin: 1.8rem 0 2.2rem; }
+.ms-figure img { width: 100%; border: 1px solid var(--line); border-radius: 3px; display: block; }
+.ms-figure figcaption { font-family: var(--sans); font-size: 0.86rem; color: var(--ink-soft); margin-top: 0.7rem; line-height: 1.55; }
+.ms-figure figcaption .fig-num { font-weight: 700; color: var(--ink); }
+.ms-figure figcaption .fig-title { font-weight: 700; color: var(--ink); }
 @media (max-width: 600px) {
   .doc { padding: 2.4rem 1.2rem 4rem; }
   .masthead h1 { font-size: 1.55rem; }
@@ -125,6 +130,11 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
     <div class="stat"><div class="k">Missense (coding)</div><div class="v">3 / 24</div></div>
   </div>
 
+  <figure class="ms-figure">
+    <img src="assets/fig_variant_funnel.png" alt="Step-by-step funnel showing how 4146 raw candidates narrow to 24 confirmed mutations through six evidence criteria">
+    <figcaption><span class="fig-num">Figure 1</span> | <span class="fig-title">Narrowing 4,146 raw genotype differences to 24 confirmed candidates.</span> Every stage after the first is an additional, cumulative requirement (caller concordance, reciprocal re-mapping, exclusion of duplicated/collapsed regions, a repeat/homopolymer-artifact filter, and independent short-read validation across three resequencing baselines) rather than a sequential replacement &mdash; a candidate is retained only once it satisfies all criteria evaluated so far. The final step (30&rarr;24) is a manual correction following a funnel-gap audit, not a further technical filter.</figcaption>
+  </figure>
+
   <div class="callout good">
     <div class="label">Note</div>
     <p>The distinction between "novel" and "fixed standing variation" is established directly from allele-frequency data in the short-read validation layer &mdash; it is not recoverable from genome comparison alone (&sect;03, methodological note).</p>
@@ -141,16 +151,10 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
     <div class="stat"><div class="k">BUSCO duplication, pre&rarr;post purge_dups</div><div class="v">14.9%&rarr;0.5% / 10.1%&rarr;1.2%</div></div>
   </div>
 
-  <div class="table-wrap" style="display:flex;gap:1rem;margin:1.2rem 0;flex-wrap:wrap;">
-    <figure style="flex:1;min-width:280px;margin:0;">
-      <img src="assets/HS2_smudgeplot_real.png" alt="HS2 smudgeplot, real algorithm" style="width:100%;border:1px solid var(--line);border-radius:3px;">
-      <figcaption style="font-size:0.78rem;color:var(--ink-faint);margin-top:0.4rem;">HS2</figcaption>
-    </figure>
-    <figure style="flex:1;min-width:280px;margin:0;">
-      <img src="assets/ALE_smudgeplot_real.png" alt="ALE smudgeplot, real algorithm" style="width:100%;border:1px solid var(--line);border-radius:3px;">
-      <figcaption style="font-size:0.78rem;color:var(--ink-faint);margin-top:0.4rem;">ALE</figcaption>
-    </figure>
-  </div>
+  <figure class="ms-figure">
+    <img src="assets/FigureX_ploidy_composite.png" alt="Smudgeplot k-mer pair analysis for HS2 and ALE, real algorithm output">
+    <figcaption><span class="fig-num">Figure 2</span> | <span class="fig-title">Both strains are diploid, with quantified, purge-consistent repeat content.</span> <strong>a</strong>, HS2. <strong>b</strong>, ALE. Smudgeplot (v0.4.0dev) k-mer-pair analysis of HiFi reads (organelle-depleted nuclear read set). AB (heterozygous-diploid) is the dominant single k-mer-pair class in both strains (44% HS2, 63% ALE); the secondary AAB/AAAB/AABB smudges reflect genome-wide repeat/duplication content, independently corroborated by this project's own pre/post-<code>purge_dups</code> BUSCO duplication figures (14.9%&rarr;0.5% HS2, 10.1%&rarr;1.2% ALE).</figcaption>
+  </figure>
 
   <div class="callout good">
     <div class="label">Note</div>
@@ -175,6 +179,11 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
   </table>
   </div>
 
+  <figure class="ms-figure">
+    <img src="assets/fig_convergent_evidence.png" alt="Four-panel figure showing convergent independent evidence for the confirmed candidate set">
+    <figcaption><span class="fig-num">Figure 3</span> | <span class="fig-title">Four independent lines of evidence converge on the same 24-candidate set.</span> <strong>a</strong>, The discovery funnel restated as joint, cumulative evidence rather than a single filter. <strong>b</strong>, An independent third-party facility (NICEM), assembling the same raw reads from scratch with no access to this pipeline, reproduces 6/24 point-mutation loci and matches the 16&nbsp;kb duplication's size to within 3&nbsp;bp. <strong>c</strong>, The oxidative-damage (C&gt;A) mutational signature strengthens, not weakens, under stricter quality filtering (28%&rarr;39%) &mdash; the direction expected of real signal separating from noise. <strong>d</strong>, The nuclear/mitochondrial/chloroplast mutation-rate gradient (84/57/0 per Mb) reproduces the textbook purifying-selection pattern. No single panel is decisive alone.</figcaption>
+  </figure>
+
   <div class="callout">
     <div class="label">Methodological note</div>
     <p>A direct assembly-to-assembly diff is fully sufficient for point-mutation <em>discovery</em> (confirmed above) but cannot distinguish a genuinely novel ALE mutation from a pre-existing HS2 heterozygous variant later fixed in ALE &mdash; a distinction requiring allele-frequency information from multiple individual reads at a locus, which a single-consensus comparison cannot provide by construction. This is not a hypothetical concern: applying independent short-read allele-frequency validation identified two originally-reported candidates as false positives (identical genotype in both strains) and reclassified two others from "novel mutation" to "fixation of standing variation." The short-read validation layer is retained specifically for this class of finding.</p>
@@ -189,11 +198,21 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
   <p><strong>A ~1.5&nbsp;kb insertion</strong> sits in the likely 5&prime; regulatory region of <em>g3665</em>. No convincing coding potential across all six reading frames, consistent with a non-autonomous or repeat-derived element rather than a functional gene fragment.</p>
 
   <p>Both variants were independently reproduced in NICEM's fully separate assembly (duplication matched to within 3&nbsp;bp; the insertion locus showed a genuine coverage gap in NICEM's assembly, consistent with assembly-specific resolution limits rather than a contradicting result).</p>
+
+  <figure class="ms-figure">
+    <img src="assets/fig_duplication_locus.png" alt="Gene-track schematic comparing the 16 kb duplication locus between HS2 and ALE">
+    <figcaption><span class="fig-num">Figure 4</span> | <span class="fig-title">The 16&nbsp;kb tandem duplication at single-gene resolution.</span> HS2 (top, single copy) versus ALE (bottom, tandem duplicated), all ten genes in the locus shown to scale. Both breakpoints fall inside genes rather than between them: the start breakpoint bisects <em>g1283</em>, producing one complete copy (residues 1&ndash;536, reading through into the single-copy flank) and one truncated copy (residues 1&ndash;341, terminating at a premature stop codon exactly at the copy&ndash;copy junction); the end breakpoint touches only the outermost 169&nbsp;bp of the neighboring gene <em>g1288</em>, which is otherwise unaffected. The four fully-contained genes (histone cluster, Myb-family transcription factor) are cleanly duplicated with no sequence change.</figcaption>
+  </figure>
 </section>
 
 <section id="triage">
   <div class="section-head"><span class="section-num">05</span><h2>Structural modeling triages, rather than resolves, functional significance</h2></div>
   <p>Protein structure prediction (ESMFold and, independently, AlphaFold2 on curated MSAs) and molecular docking were used to triage the three missense candidates for wet-lab priority &mdash; not to establish a causal link to phenotype.</p>
+
+  <figure class="ms-figure">
+    <img src="assets/FigureX_triage_composite.png" alt="ESMFold vs AlphaFold2 confidence comparison and corrected multi-seed docking summary for the three missense candidates">
+    <figcaption><span class="fig-num">Figure 5</span> | <span class="fig-title">Two independent fold methods and seed-averaged docking triage the three missense candidates.</span> <strong>a</strong>, ESMFold (single-sequence) versus AlphaFold2 (shallow custom multiple-sequence alignment) pLDDT for wild type and mutant/variant, all three genes plus the <em>g1283</em> truncated duplication copy. AlphaFold2 shows its usual edge over ESMFold only for the easy fold (<em>g8767</em>); for the two harder folds it sits in its own low-confidence band, a consequence of MSA depth rather than a method failure. <strong>b</strong>, AutoDock Vina docking affinity, mean&nbsp;&plusmn;&nbsp;s.d. across five independent random seeds (asterisks mark deltas smaller than seed-to-seed noise). No ligand at any site, in any gene, shows an effect that is both seed-robust and exceeds the &plusmn;1.0&nbsp;kcal/mol notability threshold &mdash; a comprehensive null, corrected from an earlier single-seed run that falsely suggested a real 5-HMF effect for <em>g8767</em> (Methods).</figcaption>
+  </figure>
 
   <div class="gene-card">
     <div class="gene-head">g8767 &middot; BI1-family, L82P, novel to ALE <span class="tier" style="color:var(--status-confirmed);">strongest signal</span></div>
@@ -240,6 +259,12 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
       <p>Sits before the start codon, inside the first exon. RNAfold shows local rearrangement but negligible net stability change (&Delta;&Delta;G&nbsp;=&nbsp;&minus;0.20&nbsp;kcal/mol) &mdash; correctly located but without the additional support g4421 has.</p>
     </div>
   </div>
+
+  <figure class="ms-figure">
+    <img src="assets/FigureX_rnafold_composite.png" alt="RNA secondary structure arc diagrams comparing WT and ALE allele for g4421 and g6058 UTR variants">
+    <figcaption><span class="fig-num">Figure 6</span> | <span class="fig-title">RNA secondary-structure prediction distinguishes the two reclassified UTR variants.</span> <strong>a</strong>, <em>g4421</em> (3&prime; UTR): the ALE allele shows a visibly restructured local base-pairing pattern and a real, moderate destabilization (&Delta;&Delta;G&nbsp;=&nbsp;+1.30&nbsp;kcal/mol). <strong>b</strong>, <em>g6058</em> (5&prime; UTR): local rearrangement with negligible net stability change (&Delta;&Delta;G&nbsp;=&nbsp;&minus;0.20&nbsp;kcal/mol). RNAfold (ViennaRNA), minimum-free-energy structure, &plusmn;150&nbsp;nt window centered on each variant, transcript-sense RNA; red dashed line marks the variant position. The RNA-structure equivalent of the protein pLDDT comparisons in Fig.&nbsp;5a, applied to variants where protein folding is uninformative by construction.</figcaption>
+  </figure>
+
   <div class="gene-card">
     <div class="gene-head">g5066/TGD3 &middot; intron within the 3&prime; UTR <span class="tier" style="color:var(--ink-faint);">existing lipid-pathway candidate, sharpened</span></div>
     <div class="gene-body">
@@ -268,7 +293,7 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
 </section>
 
 <footer>
-  Draft for manuscript integration &middot; last updated 2026-09-04 &middot; full supporting evidence, figures, and audit trail: <a href="index.html">main project site</a>
+  Draft for manuscript integration &middot; 6 main figures (Figs. 1&ndash;6), print-resolution PNG source at 200&ndash;300&nbsp;dpi &middot; last updated 2026-09-04 &middot; full supporting evidence, additional figures, and audit trail: <a href="index.html">main project site</a>
 </footer>
 
 </div>
