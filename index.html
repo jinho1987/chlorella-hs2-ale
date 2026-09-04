@@ -284,6 +284,7 @@ footer{ padding:44px 0 60px; }
       <a href="#methylation">Epigenetics</a>
       <a href="#nicem">Independent replication</a>
       <a href="nicem_comparison.html">Reviewer comparison</a>
+      <a href="#strategy">Strategy</a>
       <a href="#econ">Why it matters</a>
       <a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report8.html" class="cta">Full report →</a>
     </div>
@@ -1850,9 +1851,49 @@ CTGGCAGTGCAGGGCCCTCGACTTGCTCTGCACATGCTTGTCTCGCAACCCGAAGCAGCCGTGTAACCCCTACCAAGCGC
   </div>
 </section>
 
+<section id="strategy">
+  <div class="wrap">
+    <div class="section-tag">15 &mdash; Strategic outlook</div>
+    <div class="section-head reveal">
+      <h2>Connecting genotype to phenotype: where the manuscript story actually is (2026-09-04)</h2>
+      <p>Everything above is confirmed, computed, and settled. This section is different on purpose &mdash; a forward-looking synthesis for the discussion section, not a new finding. The honest read after this much exhaustive, calibrated searching: no single causal mutation explains the ALE phenotype, and that absence is itself informative rather than a shortfall. Three threads below turn the existing candidate list into an argument; two more are specific, quotable discussion points already latent in the data.</p>
+    </div>
+
+    <div class="theme-list reveal">
+      <div class="theme-row">
+        <div class="theme-name">1&nbsp;&mdash; Standing-variation reuse, not new mutation</div>
+        <div class="theme-genes" style="display:block;">
+          <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-dim);">Several "sure" candidates (g1283 F207S, g5108 A350D, TLP13, SCP46, CLPB3) are already tagged in this project's own tables as <strong>fixation of pre-existing HS2 heterozygous variation</strong>, not novel ALE mutations &mdash; that categorization already <em>is</em> the finding, it just hasn't been stated as one. A short-timescale ALE campaign adapting largely by sorting existing diversity, rather than waiting on new mutation, is a real, publishable claim: count and report the standing-variation-vs-novel-mutation split explicitly, rather than leaving it as a per-candidate footnote.</p>
+        </div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-name">2&nbsp;&mdash; Distributed, polygenic architecture as the thesis</div>
+        <div class="theme-genes" style="display:block;">
+          <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-dim);">One destabilizing channel mutation (g8767, novel), one dosage-plus-truncation duplication (g1283/histones/Myb-TF), and several modest regulatory candidates (g4523, g4421, TLP13, g8143) &mdash; no single actor, but a plausible distributed contribution. This is the frame that makes the exhaustive nulls (docking, most of RNAfold) into supporting evidence rather than dead ends: a distributed architecture <em>predicts</em> that no single site should show an overwhelming effect. Lead the discussion with this claim, then let the gene-level findings slot in as evidence for pieces of it.</p>
+        </div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-name">3&nbsp;&mdash; Structural variants as the technical differentiator</div>
+        <div class="theme-genes" style="display:block;">
+          <p style="margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-dim);">The duplication and the insertion are both large-effect changes a short-read pipeline (this project's own prior surrogate-reference approach) would have missed or mis-called; both were resolved here to single-base breakpoint precision because of long reads. "Long-read assembly reveals SV-driven mechanisms invisible to short-read ALE genomics" is a legitimate, differentiated methodological claim, not just a biology result &mdash; worth stating plainly in the introduction or discussion, not left implicit.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-grid reveal" style="margin-top:32px;">
+      <div class="stat-cell"><div class="v">g8767's open question</div><div class="l">Elevate from footnote to discussion point: why would destabilizing a cytoprotective Ca&sup2;&#8314;-leak channel <em>improve</em> stress tolerance? A testable resolution already sits in the existing homology finding (YetJ, pH-gated) &mdash; partial loss-of-function reducing a costly leak under this specific stressor, vs. hitchhiking. Name the candidate resolutions explicitly rather than leaving the question open-ended.</div></div>
+      <div class="stat-cell"><div class="v">Histone dosage, speculative</div><div class="l">The duplication doubles core histones H4/H3 plus a Myb-family TF. Increased histone gene dosage subtly shifting chromatin dynamics under stress is a live line of inquiry elsewhere in the literature and currently unexplored here &mdash; worth one clearly-flagged speculative paragraph, not a claim.</div></div>
+      <div class="stat-cell"><div class="v">Cross-line divergence, as support</div><div class="l">Zero convergence between ALE and the HMF-only line, plus a separate HS19 line under different selection (&sect;05), is independent evidence the adaptation is stimulus-specific and multi-component &mdash; not a generic stress-hotspot response. Use it to support thread&nbsp;2 directly, rather than reporting it only as a standalone comparison.</div></div>
+      <div class="stat-cell"><div class="v">What doesn't need more work</div><div class="l">No further sequencing, folding, or docking is required to make this argument &mdash; every thread above draws on results already computed and confirmed elsewhere on this page. What's left is editorial: a thesis-setting paragraph, a reorder of sections around it, and one-line reframes at the existing null results.</div></div>
+    </div>
+
+    <p class="reveal" style="margin-top:20px;font-size:15px;">Where this connects forward: the techno-economic/LCA analysis below (&sect;16) is the applied payoff of whichever genotype-phenotype story gets told &mdash; the closed-loop hydrolysate-to-biomass case is strongest precisely if the adaptation is framed as robust and multi-component (thread&nbsp;2) rather than resting on one fragile point mutation.</p>
+  </div>
+</section>
+
 <section id="econ">
   <div class="wrap">
-    <div class="section-tag">15 — Why it matters</div>
+    <div class="section-tag">16 — Why it matters</div>
     <div class="section-head reveal">
       <h2>From lab bench to bioprocess: what the advantage is worth</h2>
       <p>Genotype explains the mechanism; phenotype proves it works. The last question is whether it's worth anything outside a flask. A screening-level techno-economic and carbon-footprint analysis, built from the same measured biomass yields above and literature-anchored unit costs, says yes — concentrated exactly where it should be.</p>
