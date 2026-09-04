@@ -105,9 +105,11 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
   <div class="label">Contents</div>
   <ol>
     <li><a href="#discovery">Genome-wide comparison &amp; validation funnel</a></li>
+    <li><a href="#ploidy">Genome ploidy: diploid, with quantified repeat content</a></li>
     <li><a href="#convergence">Independent validation, five ways</a></li>
     <li><a href="#svs">Two structural variants, mechanistically resolved</a></li>
     <li><a href="#triage">Structural triage of the three missense candidates</a></li>
+    <li><a href="#noncoding">Non-coding candidates: regulatory-region classification</a></li>
     <li><a href="#scope">Scope of this section's claim</a></li>
   </ol>
 </nav>
@@ -125,12 +127,39 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
 
   <div class="callout good">
     <div class="label">Note</div>
-    <p>The distinction between "novel" and "fixed standing variation" is established directly from allele-frequency data in the short-read validation layer &mdash; it is not recoverable from genome comparison alone (&sect;02, methodological note).</p>
+    <p>The distinction between "novel" and "fixed standing variation" is established directly from allele-frequency data in the short-read validation layer &mdash; it is not recoverable from genome comparison alone (&sect;03, methodological note).</p>
+  </div>
+</section>
+
+<section id="ploidy">
+  <div class="section-head"><span class="section-num">02</span><h2>Genome ploidy: diploid, with quantified, independently-corroborated repeat content</h2></div>
+  <p>Every heterozygosity/coverage figure used elsewhere in this manuscript assumes a diploid genome. This was tested directly, not assumed, with the Smudgeplot algorithm (v0.4.0dev; k-mer pair analysis of HiFi reads, organelle-depleted nuclear read set) &mdash; the purpose-built test for distinguishing genuine heterozygosity from duplicated/repeat content masquerading as it.</p>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="k">AB smudge (heterozygous-diploid signal)</div><div class="v">44% HS2 / 63% ALE</div></div>
+    <div class="stat"><div class="k">Secondary smudges (AAB/AAAB/AABB, repeat content)</div><div class="v">48% HS2 / 35% ALE</div></div>
+    <div class="stat"><div class="k">BUSCO duplication, pre&rarr;post purge_dups</div><div class="v">14.9%&rarr;0.5% / 10.1%&rarr;1.2%</div></div>
+  </div>
+
+  <div class="table-wrap" style="display:flex;gap:1rem;margin:1.2rem 0;flex-wrap:wrap;">
+    <figure style="flex:1;min-width:280px;margin:0;">
+      <img src="assets/HS2_smudgeplot_real.png" alt="HS2 smudgeplot, real algorithm" style="width:100%;border:1px solid var(--line);border-radius:3px;">
+      <figcaption style="font-size:0.78rem;color:var(--ink-faint);margin-top:0.4rem;">HS2</figcaption>
+    </figure>
+    <figure style="flex:1;min-width:280px;margin:0;">
+      <img src="assets/ALE_smudgeplot_real.png" alt="ALE smudgeplot, real algorithm" style="width:100%;border:1px solid var(--line);border-radius:3px;">
+      <figcaption style="font-size:0.78rem;color:var(--ink-faint);margin-top:0.4rem;">ALE</figcaption>
+    </figure>
+  </div>
+
+  <div class="callout good">
+    <div class="label">Note</div>
+    <p>AB is the single largest k-mer-pair class in both strains by a clear margin &mdash; the core diploidy signal. The substantial secondary-smudge content is not a competing ploidy signal: it is run on raw HiFi reads before purging, and independently matches this project's own BUSCO duplication numbers (above), which is exactly the content <code>purge_dups</code> subsequently removes. Smudgeplot is designed to separate these two axes (bulk-genome ploidy vs. localized repeat content) simultaneously, and does so consistently with the rest of the assembly QC here. Neither this nor any purely computational k-mer method is a chromosome count; "nearly certain, not certain" is the calibrated claim.</p>
   </div>
 </section>
 
 <section id="convergence">
-  <div class="section-head"><span class="section-num">02</span><h2>Independent validation, five ways</h2></div>
+  <div class="section-head"><span class="section-num">03</span><h2>Independent validation, five ways</h2></div>
   <p>Because most raw signal in any such comparison is artifact, the confirmed set was validated through five independent lines of evidence, each drawing on data or methodology the discovery funnel itself does not touch. No single line is decisive alone; the convergence across all five is the basis for confidence.</p>
 
   <div class="table-wrap">
@@ -153,7 +182,7 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
 </section>
 
 <section id="svs">
-  <div class="section-head"><span class="section-num">03</span><h2>Two structural variants, mechanistically resolved</h2></div>
+  <div class="section-head"><span class="section-num">04</span><h2>Two structural variants, mechanistically resolved</h2></div>
 
   <p><strong>A 16&nbsp;kb tandem duplication</strong> contains six genes: a core histone cluster (H3, H4, H1), a Myb-family transcription factor, and two lower-confidence calls (<em>g1283</em>, a chitin deacetylase, and <em>g1287</em>, a UBX-domain protein). Both breakpoints fall inside genes rather than between them. The start breakpoint bisects <em>g1283</em>: the first tandem copy reads through into the single-copy flank and encodes a complete, normal 536-residue protein; the second copy's reading frame crosses the junction into an out-of-frame fragment of the neighboring gene (<em>g1288</em>) and terminates at a premature stop codon 341 residues in &mdash; confirmed directly from the junction sequence. This produces a novel truncated protein product absent from HS2. The four fully-contained genes are cleanly duplicated with no sequence change (pure dosage). Flanking-sequence analysis argues against non-allelic homologous recombination (no flanking repeat homology), more consistent with a replication-based (FoSTeS/MMBIR) or NHEJ origin.</p>
 
@@ -163,33 +192,75 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
 </section>
 
 <section id="triage">
-  <div class="section-head"><span class="section-num">04</span><h2>Structural modeling triages, rather than resolves, functional significance</h2></div>
+  <div class="section-head"><span class="section-num">05</span><h2>Structural modeling triages, rather than resolves, functional significance</h2></div>
   <p>Protein structure prediction (ESMFold and, independently, AlphaFold2 on curated MSAs) and molecular docking were used to triage the three missense candidates for wet-lab priority &mdash; not to establish a causal link to phenotype.</p>
 
   <div class="gene-card">
     <div class="gene-head">g8767 &middot; BI1-family, L82P, novel to ALE <span class="tier" style="color:var(--status-confirmed);">strongest signal</span></div>
     <div class="gene-body">
-      <p>Destabilization reproduced independently by ESMFold and AlphaFold2; mutated residue sits in an invariant hydrophobic column across 10 homologs (proline is a canonical helix-breaker at transmembrane positions); docking shows a corresponding HMF-interaction shift. Foldseek structural-homology search identifies the closest solved relative as <em>B. subtilis</em> YetJ, a characterized pH-gated Ca&sup2;&#8314; channel of the same TMBIM superfamily &mdash; sharpening the hypothesis to a specific transport mechanism, though direct Ca&sup2;&#8314; docking at the mutation site itself shows no shift, indicating the effect is on channel architecture rather than a specific ion-coordination residue. <strong>Open question, stated plainly:</strong> BI1-family proteins are broadly cytoprotective, so a destabilizing mutation has no obvious a priori mechanistic link to <em>improved</em> stress tolerance; possible resolutions (autophagy-shift, partial loss-of-function, hitchhiking) are testable but not resolved by structure alone.</p>
+      <p>Destabilization reproduced independently by ESMFold and AlphaFold2 (a deterministic, seed-independent metric); mutated residue sits in an invariant hydrophobic column across 10 homologs (proline is a canonical helix-breaker at transmembrane positions). Foldseek structural-homology search identifies the closest solved relative as <em>B. subtilis</em> YetJ, a characterized pH-gated Ca&sup2;&#8314; channel of the same TMBIM superfamily &mdash; sharpening the hypothesis to a specific transport mechanism. Molecular docking (5-HMF, Na&#8314;/Cl&#8315;, Ca&sup2;&#8314;, glucose, xylose), properly averaged across 5 independent random seeds after an initial single-run result proved non-reproducible, shows <strong>no robust ligand-interaction effect</strong> at any site tested, including Ca&sup2;&#8314; at the mutation site itself &mdash; the destabilization is architectural, not localized to a specific ligand-binding or ion-coordination residue. <strong>Open question, stated plainly:</strong> BI1-family proteins are broadly cytoprotective, so a destabilizing mutation has no obvious a priori mechanistic link to <em>improved</em> stress tolerance; possible resolutions (autophagy-shift, partial loss-of-function, hitchhiking) are testable but not resolved by structure alone.</p>
     </div>
   </div>
 
   <div class="gene-card">
     <div class="gene-head">g1283 &middot; chitin deacetylase, F207S (point mutation ruled out; SV truncation strong) <span class="tier" style="color:var(--status-pending);">mixed, resolved</span></div>
     <div class="gene-body">
-      <p>The F207S point mutation shows no destabilization by either fold method despite near-complete burial (0.5% RSA); conservation analysis shows the WT phenylalanine is not even the majority residue across 9 homologs. The true catalytic zinc-binding triad (re-derived exactly from MSA columns as Asp63/His138/His142) sits 42 residues from the mutation; docking the enzyme's own reaction product (acetate) at the true catalytic site shows no WT-vs-mutant difference. Combined with allele-frequency evidence that this is fixation of standing variation, not a novel mutation, the point mutation is best treated as very likely functionally silent. The stronger finding at this locus is the duplication-derived <strong>truncated protein product</strong> (&sect;03) &mdash; independently confirmed disruptive by both fold methods, a novel ALE-specific product with no point-mutation caveat.</p>
+      <p>The F207S point mutation shows no destabilization by either fold method despite near-complete burial (0.5% RSA); conservation analysis shows the WT phenylalanine is not even the majority residue across 9 homologs. The true catalytic zinc-binding triad (re-derived exactly from MSA columns as Asp63/His138/His142) sits 42 residues from the mutation; docking the enzyme's own reaction product (acetate) at the true catalytic site shows no WT-vs-mutant difference. Combined with allele-frequency evidence that this is fixation of standing variation, not a novel mutation, the point mutation is best treated as very likely functionally silent. The stronger finding at this locus is the duplication-derived <strong>truncated protein product</strong> (&sect;04) &mdash; independently confirmed disruptive by both fold methods, a novel ALE-specific product with no point-mutation caveat.</p>
     </div>
   </div>
 
   <div class="gene-card">
     <div class="gene-head">g5108 &middot; formin-family, A350D, fixation of standing variation <span class="tier" style="color:var(--ink-faint);">weak, secondary</span></div>
     <div class="gene-body">
-      <p>Near-identical backbone structure by both fold methods; null docking against HMF, Na&#8314;/Cl&#8315;, Ca&sup2;&#8314;, glucose, and xylose. Consistent with a chemical rather than structural perturbation near a membrane-binding (C2) domain boundary, well upstream of the actin-nucleating FH2 domain. Treated as a secondary, contributing candidate.</p>
+      <p>Near-identical backbone structure by both fold methods; seed-averaged docking against HMF, Na&#8314;/Cl&#8315;, Ca&sup2;&#8314;, glucose, and xylose shows only small, sub-notability deltas. Consistent with a chemical rather than structural perturbation near a membrane-binding (C2) domain boundary, well upstream of the actin-nucleating FH2 domain. Treated as a secondary, contributing candidate.</p>
     </div>
   </div>
 </section>
 
+<section id="noncoding">
+  <div class="section-head"><span class="section-num">06</span><h2>Non-coding candidates: regulatory-region classification</h2></div>
+  <p>Structure prediction is blind to the 21 intronic/intergenic candidates by construction &mdash; none change the encoded protein sequence. Each was instead checked directly against the AUGUSTUS gene model's exon/CDS/UTR/start-stop-codon boundaries, not left as an undifferentiated "intronic" bucket.</p>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="k">Reclassified from "intronic"</div><div class="v">2 &rarr; UTR</div></div>
+    <div class="stat"><div class="k">Intron located within a UTR</div><div class="v">1 (g5066/TGD3)</div></div>
+    <div class="stat"><div class="k">Intergenic in divergent promoters</div><div class="v">2 / 3</div></div>
+    <div class="stat"><div class="k">Confirmed genuinely intronic</div><div class="v">16 / 18</div></div>
+  </div>
+
+  <div class="gene-card">
+    <div class="gene-head">g4421 &middot; 3&prime; UTR (reclassified) <span class="tier" style="color:var(--status-confirmed);">best-supported non-coding candidate</span></div>
+    <div class="gene-body">
+      <p>Sits after the stop codon, inside the final exon &mdash; not intronic as originally labeled. RNA secondary-structure prediction (RNAfold, &plusmn;150&nbsp;nt window, WT vs. ALE allele) shows a real, moderate destabilization (&Delta;&Delta;G&nbsp;=&nbsp;+1.30&nbsp;kcal/mol) with a visibly restructured local base-pairing pattern at the variant &mdash; the RNA-structure equivalent of the protein pLDDT comparisons above, and the only non-coding candidate with both a corrected location <em>and</em> independent structural support. A designed primer pair has been added to the Sanger confirmation list on this basis.</p>
+    </div>
+  </div>
+  <div class="gene-card">
+    <div class="gene-head">g6058 &middot; 5&prime; UTR (reclassified) <span class="tier" style="color:var(--ink-faint);">correct location, no structural support yet</span></div>
+    <div class="gene-body">
+      <p>Sits before the start codon, inside the first exon. RNAfold shows local rearrangement but negligible net stability change (&Delta;&Delta;G&nbsp;=&nbsp;&minus;0.20&nbsp;kcal/mol) &mdash; correctly located but without the additional support g4421 has.</p>
+    </div>
+  </div>
+  <div class="gene-card">
+    <div class="gene-head">g5066/TGD3 &middot; intron within the 3&prime; UTR <span class="tier" style="color:var(--ink-faint);">existing lipid-pathway candidate, sharpened</span></div>
+    <div class="gene-body">
+      <p>A genuine splice intron, but located entirely within the 3&prime; UTR rather than interrupting the coding sequence &mdash; a distinct, less common regulatory mechanism (UTR-intron retention) than the other 17 intronic candidates. Already annotated as Trigalactosyldiacylglycerol 3 (chloroplast lipid trafficking), previously assigned to the lipid-profile phenotype category; this refines, without changing, that existing hypothesis.</p>
+    </div>
+  </div>
+  <div class="gene-card">
+    <div class="gene-head">Two intergenic candidates &middot; divergent promoter regions <span class="tier" style="color:var(--ink-faint);">location-only, flanking-gene identity resolved</span></div>
+    <div class="gene-body">
+      <p>Both sit 1.2&ndash;1.4&nbsp;kb from the nearer of two divergently-oriented (head-to-head) genes' transcription start sites &mdash; within typical proximal-promoter range. Flanking-gene identity resolved via the existing genome-wide Swiss-Prot best-hit table: the nearer flank of one is a polyadenylate-binding protein; the farther flank of the other is a second formin-like protein, echoing g5108 elsewhere in this candidate set. A third intergenic candidate sits in a convergent (tail-to-tail) 3&prime;-flanking configuration instead &mdash; less likely to be regulatory.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="label">What this does and doesn't establish</div>
+    <p>This identifies plausible regulatory-region <em>locations</em>, and in one case (g4421) independent structural support, not confirmed regulatory <em>function</em>. RT-qPCR/RNA-seq remains the indicated next step for testing an actual expression effect; this analysis sharpens the priority order within the non-coding candidate set rather than replacing that requirement.</p>
+  </div>
+</section>
+
 <section id="scope">
-  <div class="section-head"><span class="section-num">05</span><h2>Scope of this section's claim</h2></div>
+  <div class="section-head"><span class="section-num">07</span><h2>Scope of this section's claim</h2></div>
   <div class="thesis">
     <div class="label">Thesis</div>
     <p>This analysis establishes, with independently cross-validated confidence, <em>which</em> genomic differences between HS2 and ALE are real, and provides a rigorously triaged, mechanistically-motivated shortlist of which are most likely functionally consequential. It does not establish that any specific mutation <em>causes</em> the phenotypic differences characterized elsewhere in this manuscript. That causal argument rests on the phenotypic and chemical (Raman/FTIR) evidence presented separately; the candidate list and structural hypotheses here define the specific, falsifiable predictions &mdash; copy-specific transcript ratios at the <em>g1283</em> locus, dosage-dependent expression of the duplicated chromatin genes, genotyping of the duplication breakpoints &mdash; that the wet-lab validation program is designed to test.</p>
