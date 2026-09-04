@@ -195,7 +195,7 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
 
   <p><strong>A 16&nbsp;kb tandem duplication</strong> contains six genes: a core histone cluster (H3, H4, H1), a Myb-family transcription factor, and two lower-confidence calls (<em>g1283</em>, a chitin deacetylase, and <em>g1287</em>, a UBX-domain protein). Both breakpoints fall inside genes rather than between them. The start breakpoint bisects <em>g1283</em>: the first tandem copy reads through into the single-copy flank and encodes a complete, normal 536-residue protein; the second copy's reading frame crosses the junction into an out-of-frame fragment of the neighboring gene (<em>g1288</em>) and terminates at a premature stop codon 341 residues in &mdash; confirmed directly from the junction sequence. This produces a novel truncated protein product absent from HS2. The four fully-contained genes are cleanly duplicated with no sequence change (pure dosage). Flanking-sequence analysis argues against non-allelic homologous recombination (no flanking repeat homology), more consistent with a replication-based (FoSTeS/MMBIR) or NHEJ origin.</p>
 
-  <p><strong>A ~1.5&nbsp;kb insertion</strong> sits in the likely 5&prime; regulatory region of <em>g3665</em>. No convincing coding potential across all six reading frames, consistent with a non-autonomous or repeat-derived element rather than a functional gene fragment.</p>
+  <p><strong>A ~1.5&nbsp;kb insertion</strong> sits 969&nbsp;bp downstream of the transcription end site of <em>g3665</em>, in non-transcribed 3&prime;-flanking DNA (corrected 2026-09-04: direct inspection of the AUGUSTUS gene model showed the coordinate originally cited as the CDS start is in fact the stop codon, at the opposite end of the gene; a 3&prime;-UTR location was also considered and ruled out on the same basis). No convincing coding potential across all six reading frames, consistent with a non-autonomous or repeat-derived element rather than a functional gene fragment; the corrected location makes a terminator/3&prime;-end-processing effect the more plausible mechanistic hypothesis than a promoter effect.</p>
 
   <p>Both variants were independently reproduced in NICEM's fully separate assembly (duplication matched to within 3&nbsp;bp; the insertion locus showed a genuine coverage gap in NICEM's assembly, consistent with assembly-specific resolution limits rather than a contradicting result).</p>
 
@@ -238,37 +238,57 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
 
 <section id="noncoding">
   <div class="section-head"><span class="section-num">06</span><h2>Non-coding candidates: regulatory-region classification</h2></div>
-  <p>Structure prediction is blind to the 21 intronic/intergenic candidates by construction &mdash; none change the encoded protein sequence. Each was instead checked directly against the AUGUSTUS gene model's exon/CDS/UTR/start-stop-codon boundaries, not left as an undifferentiated "intronic" bucket.</p>
+  <p>Structure prediction is blind to the 21 intronic/intergenic candidates by construction &mdash; none change the encoded protein sequence. Each was instead checked directly against the AUGUSTUS gene model's exon/CDS/UTR/start-stop-codon boundaries, not left as an undifferentiated "intronic" bucket, and then screened computationally for RNA-level consequences using RNAfold (ViennaRNA) as the RNA-structure equivalent of the protein pLDDT comparisons in Fig.&nbsp;5, applied where protein folding is uninformative by construction.</p>
 
   <div class="stat-grid">
     <div class="stat"><div class="k">Reclassified from "intronic"</div><div class="v">2 &rarr; UTR</div></div>
     <div class="stat"><div class="k">Intron located within a UTR</div><div class="v">1 (g5066/TGD3)</div></div>
     <div class="stat"><div class="k">Intergenic in divergent promoters</div><div class="v">2 / 3</div></div>
-    <div class="stat"><div class="k">Confirmed genuinely intronic</div><div class="v">16 / 18</div></div>
+    <div class="stat"><div class="k">RNAfold screened (of 18 candidates)</div><div class="v">18 / 18</div></div>
+    <div class="stat"><div class="k">Notable RNA-structure signal (|&Delta;&Delta;G|&nbsp;&ge;&nbsp;1.0)</div><div class="v">5 / 18</div></div>
+    <div class="stat"><div class="k">Within 50&nbsp;bp of a splice site</div><div class="v">5 / 16 intronic</div></div>
   </div>
 
   <div class="gene-card">
-    <div class="gene-head">g4421 &middot; 3&prime; UTR (reclassified) <span class="tier" style="color:var(--status-confirmed);">best-supported non-coding candidate</span></div>
+    <div class="gene-head">g4523 &middot; neutral ceramidase, deep intron <span class="tier" style="color:var(--status-confirmed);">top-priority non-coding candidate</span></div>
     <div class="gene-body">
-      <p>Sits after the stop codon, inside the final exon &mdash; not intronic as originally labeled. RNA secondary-structure prediction (RNAfold, &plusmn;150&nbsp;nt window, WT vs. ALE allele) shows a real, moderate destabilization (&Delta;&Delta;G&nbsp;=&nbsp;+1.30&nbsp;kcal/mol) with a visibly restructured local base-pairing pattern at the variant &mdash; the RNA-structure equivalent of the protein pLDDT comparisons above, and the only non-coding candidate with both a corrected location <em>and</em> independent structural support. A designed primer pair has been added to the Sanger confirmation list on this basis.</p>
+      <p>A solid genomic call with no confidence caveats (fixed standing variant), a real RNAfold signal (&Delta;&Delta;G&nbsp;=&nbsp;+1.70&nbsp;kcal/mol, the largest among clean calls), and a pre-existing link to the lipid-profile phenotype category via sphingolipid metabolism &mdash; the only non-coding candidate combining all three lines of evidence. Supersedes g4421 as the single best-supported candidate on the full non-coding list following the completion of RNAfold screening across all 18 intronic/UTR candidates. A designed primer pair has been added to the Sanger confirmation list on this basis.</p>
     </div>
   </div>
   <div class="gene-card">
-    <div class="gene-head">g6058 &middot; 5&prime; UTR (reclassified) <span class="tier" style="color:var(--ink-faint);">correct location, no structural support yet</span></div>
+    <div class="gene-head">g4421 &middot; 3&prime; UTR (reclassified) <span class="tier" style="color:var(--status-confirmed);">clean call, real signal, unknown function</span></div>
     <div class="gene-body">
-      <p>Sits before the start codon, inside the first exon. RNAfold shows local rearrangement but negligible net stability change (&Delta;&Delta;G&nbsp;=&nbsp;&minus;0.20&nbsp;kcal/mol) &mdash; correctly located but without the additional support g4421 has.</p>
+      <p>Sits after the stop codon, inside the final exon &mdash; not intronic as originally labeled. RNAfold shows a real, moderate destabilization (&Delta;&Delta;G&nbsp;=&nbsp;+1.30&nbsp;kcal/mol) with a visibly restructured local base-pairing pattern at the variant. Correct location and independent structural support, but no phenotype-pathway link comparable to g4523's. A designed primer pair has been added to the Sanger confirmation list.</p>
+    </div>
+  </div>
+  <div class="gene-card">
+    <div class="gene-head">g8143 &middot; intron, 38&nbsp;bp from splice donor <span class="tier" style="color:var(--status-confirmed);">clean call, real signal, unknown function</span></div>
+    <div class="gene-body">
+      <p>&Delta;&Delta;G&nbsp;=&nbsp;&minus;1.10&nbsp;kcal/mol, identified by the splice-site-proximity screen (distance from each of the 16 confirmed genuinely-intronic variants to its nearest donor/acceptor) as mechanistically plausible for local structure competing with splice-site recognition, then confirmed by RNAfold to carry a real signal.</p>
+    </div>
+  </div>
+  <div class="gene-card">
+    <div class="gene-head">TLP13 and SCP46 &middot; largest raw signals, weaker genomic confidence <span class="tier" style="color:var(--ink-faint);">read with caveat</span></div>
+    <div class="gene-body">
+      <p>TLP13 (intron, 29&nbsp;bp from splice donor) shows the single largest shift found in this screen (&Delta;&Delta;G&nbsp;=&nbsp;&minus;2.60&nbsp;kcal/mol); SCP46 (deep intron) shows +1.02&nbsp;kcal/mol. Both variants already carry a pre-existing weaker-signal flag from allele-frequency analysis (TLP13: 74&ndash;81% alt already present in the HS2 baseline, not a clean 50:50 het; SCP46: het in only 2 of 3 HS2 baselines) &mdash; the RNA-structure signal does not resolve that underlying genomic caveat and should be read alongside it, not in isolation.</p>
+    </div>
+  </div>
+  <div class="gene-card">
+    <div class="gene-head">g6058 &middot; 5&prime; UTR (reclassified) <span class="tier" style="color:var(--ink-faint);">correct location, no structural support</span></div>
+    <div class="gene-body">
+      <p>Sits before the start codon, inside the first exon. RNAfold shows local rearrangement but negligible net stability change (&Delta;&Delta;G&nbsp;=&nbsp;&minus;0.20&nbsp;kcal/mol).</p>
     </div>
   </div>
 
   <figure class="ms-figure">
-    <img src="assets/FigureX_rnafold_composite.png" alt="RNA secondary structure arc diagrams comparing WT and ALE allele for g4421 and g6058 UTR variants">
-    <figcaption><span class="fig-num">Figure 6</span> | <span class="fig-title">RNA secondary-structure prediction distinguishes the two reclassified UTR variants.</span> <strong>a</strong>, <em>g4421</em> (3&prime; UTR): the ALE allele shows a visibly restructured local base-pairing pattern and a real, moderate destabilization (&Delta;&Delta;G&nbsp;=&nbsp;+1.30&nbsp;kcal/mol). <strong>b</strong>, <em>g6058</em> (5&prime; UTR): local rearrangement with negligible net stability change (&Delta;&Delta;G&nbsp;=&nbsp;&minus;0.20&nbsp;kcal/mol). RNAfold (ViennaRNA), minimum-free-energy structure, &plusmn;150&nbsp;nt window centered on each variant, transcript-sense RNA; red dashed line marks the variant position. The RNA-structure equivalent of the protein pLDDT comparisons in Fig.&nbsp;5a, applied to variants where protein folding is uninformative by construction.</figcaption>
+    <img src="assets/FigureX_rnafold_composite.png" alt="RNA secondary structure arc diagrams comparing WT and ALE allele for g4523, g4421, g8143 and TLP13">
+    <figcaption><span class="fig-num">Figure 6</span> | <span class="fig-title">RNA secondary-structure prediction across the top-ranked non-coding candidates.</span> <strong>a</strong>, <em>g4523</em> (neutral ceramidase, deep intron): &Delta;&Delta;G&nbsp;=&nbsp;+1.70&nbsp;kcal/mol, the top-priority non-coding candidate (clean genomic call, real signal, existing lipid-pathway link). <strong>b</strong>, <em>g4421</em> (3&prime; UTR): &Delta;&Delta;G&nbsp;=&nbsp;+1.30&nbsp;kcal/mol with a visibly restructured local pairing pattern. <strong>c</strong>, <em>g8143</em> (intron, 38&nbsp;bp from splice donor): &Delta;&Delta;G&nbsp;=&nbsp;&minus;1.10&nbsp;kcal/mol. <strong>d</strong>, <em>TLP13</em> (intron, 29&nbsp;bp from splice donor): &Delta;&Delta;G&nbsp;=&nbsp;&minus;2.60&nbsp;kcal/mol, the largest shift found, but read alongside this variant's independent weaker-signal flag from allele-frequency analysis. RNAfold (ViennaRNA), minimum-free-energy structure, &plusmn;150&nbsp;nt window centered on each variant, transcript-sense RNA; red dashed line marks the variant position in each panel.</figcaption>
   </figure>
 
   <div class="gene-card">
-    <div class="gene-head">g5066/TGD3 &middot; intron within the 3&prime; UTR <span class="tier" style="color:var(--ink-faint);">existing lipid-pathway candidate, sharpened</span></div>
+    <div class="gene-head">g5066/TGD3 &middot; intron within the 3&prime; UTR <span class="tier" style="color:var(--ink-faint);">existing lipid-pathway candidate, RNAfold null</span></div>
     <div class="gene-body">
-      <p>A genuine splice intron, but located entirely within the 3&prime; UTR rather than interrupting the coding sequence &mdash; a distinct, less common regulatory mechanism (UTR-intron retention) than the other 17 intronic candidates. Already annotated as Trigalactosyldiacylglycerol 3 (chloroplast lipid trafficking), previously assigned to the lipid-profile phenotype category; this refines, without changing, that existing hypothesis.</p>
+      <p>A genuine splice intron, but located entirely within the 3&prime; UTR rather than interrupting the coding sequence &mdash; a distinct, less common regulatory mechanism (UTR-intron retention) than the other 17 intronic candidates. Already annotated as Trigalactosyldiacylglycerol 3 (chloroplast lipid trafficking), previously assigned to the lipid-profile phenotype category. RNAfold at the variant position itself is essentially null (&Delta;&Delta;G&nbsp;=&nbsp;+0.10&nbsp;kcal/mol) &mdash; an honest negative result for this specific structural hypothesis; it does not rule out a splicing-efficiency role for the retained UTR-intron more broadly, only the local base-pairing effect tested here.</p>
     </div>
   </div>
   <div class="gene-card">
@@ -277,10 +297,16 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
       <p>Both sit 1.2&ndash;1.4&nbsp;kb from the nearer of two divergently-oriented (head-to-head) genes' transcription start sites &mdash; within typical proximal-promoter range. Flanking-gene identity resolved via the existing genome-wide Swiss-Prot best-hit table: the nearer flank of one is a polyadenylate-binding protein; the farther flank of the other is a second formin-like protein, echoing g5108 elsewhere in this candidate set. A third intergenic candidate sits in a convergent (tail-to-tail) 3&prime;-flanking configuration instead &mdash; less likely to be regulatory.</p>
     </div>
   </div>
+  <div class="gene-card">
+    <div class="gene-head">Remaining 11 candidates <span class="tier" style="color:var(--ink-faint);">exhaustive null</span></div>
+    <div class="gene-body">
+      <p>ACOX4, CLPB3, EPHA, and g429 show modest shifts (&plusmn;0.5&ndash;0.7&nbsp;kcal/mol) below the notability threshold; g822, UBP12, g710, g1453, g3470, RIMO and the g2185 indel show exactly &Delta;&Delta;G&nbsp;=&nbsp;0.00, all more than 50&nbsp;bp from any splice site. Screened to the same standard as the notable candidates above, so this is a genuine, exhaustively-checked null rather than an unexamined assumption.</p>
+    </div>
+  </div>
 
   <div class="callout">
     <div class="label">What this does and doesn't establish</div>
-    <p>This identifies plausible regulatory-region <em>locations</em>, and in one case (g4421) independent structural support, not confirmed regulatory <em>function</em>. RT-qPCR/RNA-seq remains the indicated next step for testing an actual expression effect; this analysis sharpens the priority order within the non-coding candidate set rather than replacing that requirement.</p>
+    <p>This identifies plausible regulatory-region <em>locations</em>, and for 5 of 18 candidates a real predicted RNA-structure consequence, not confirmed regulatory <em>function</em>. RT-qPCR/RNA-seq remains the indicated next step for testing an actual expression effect; this analysis sharpens the priority order within the non-coding candidate set &mdash; with <em>g4523</em> now at the top &mdash; rather than replacing that requirement.</p>
   </div>
 </section>
 
