@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chlorella sp. HS2 × ALE — Genomics Results, Manuscript Draft</title>
+<style>
+:root {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", "Liberation Mono", monospace;
+  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, ui-serif, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+    --line: #263129; --line-strong: #34412F;
+    --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+    --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+    --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+    --status-open: #E08079; --status-open-wash: #2C1917;
+  }
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); margin: 0; }
+a { color: var(--accent); }
+.doc { font-family: var(--serif); color: var(--ink); max-width: 900px; margin: 0 auto; padding: 4rem 2.5rem 6rem; line-height: 1.62; }
+.doc p { max-width: 72ch; }
+h1, h2, h3 { font-family: var(--serif); color: var(--ink); }
+.backlink { font-family: var(--sans); font-size: 0.78rem; color: var(--ink-faint); text-decoration: none; margin-bottom: 1.6rem; display: inline-block; }
+.backlink:hover { color: var(--accent); }
+.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 1.4rem; margin-bottom: 2.4rem; }
+.eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent-ink); font-weight: 600; margin: 0 0 0.6rem; }
+.masthead h1 { font-size: 1.9rem; margin: 0 0 0.8rem; line-height: 1.25; }
+.masthead .dek { font-size: 1.05rem; color: var(--ink-soft); margin: 0 0 1rem; max-width: 70ch; font-family: var(--sans); }
+.meta-row { display: flex; flex-wrap: wrap; gap: 1.4rem; font-family: var(--mono); font-size: 0.76rem; color: var(--ink-faint); }
+.meta-row strong { color: var(--ink-soft); font-weight: 600; }
+nav.toc { font-family: var(--sans); font-size: 0.86rem; background: var(--paper-raised); border: 1px solid var(--line); padding: 1.1rem 1.4rem; margin: 2rem 0 3rem; border-radius: 3px; }
+nav.toc .label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.6rem; }
+nav.toc ol { margin: 0; padding-left: 1.2rem; columns: 2; }
+nav.toc a { text-decoration: none; color: var(--ink-soft); }
+nav.toc a:hover { color: var(--accent); }
+section { margin-bottom: 3.2rem; }
+.section-head { display: flex; align-items: baseline; gap: 0.7rem; margin-bottom: 1.1rem; border-bottom: 1px solid var(--line-strong); padding-bottom: 0.5rem; }
+.section-num { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.06em; }
+.thesis { background: var(--paper-raised); border-left: 3px solid var(--accent); padding: 1.3rem 1.6rem; border-radius: 2px; font-size: 1.03rem; }
+.thesis .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); font-weight: 700; margin-bottom: 0.5rem; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 1.4rem 0; font-family: var(--sans); }
+.stat { background: var(--paper-raised); padding: 1rem 1.1rem; }
+.stat .k { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.35rem; }
+.stat .v { font-variant-numeric: tabular-nums; font-size: 1.32rem; font-weight: 600; color: var(--ink); font-family: var(--serif); }
+.stat .v small { font-size: 0.62em; color: var(--ink-faint); font-weight: 400; font-family: var(--sans); }
+table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 0.85rem; }
+.table-wrap { overflow-x: auto; margin: 1.2rem 0; border: 1px solid var(--line); }
+th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { background: var(--accent-wash); color: var(--accent-ink); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--line-strong); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--paper-raised); }
+td code, p code { font-family: var(--mono); font-size: 0.82em; background: var(--accent-wash); color: var(--accent-ink); padding: 0.1em 0.35em; border-radius: 2px; }
+.pill { display: inline-flex; align-items: center; gap: 0.35em; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.22em 0.6em; border-radius: 3px; white-space: nowrap; }
+.pill.confirmed { background: var(--status-confirmed-wash); color: var(--status-confirmed); }
+.pill.pending { background: var(--status-pending-wash); color: var(--status-pending); }
+.pill.open { background: var(--status-open-wash); color: var(--status-open); }
+.pill::before { content: "\25CF"; font-size: 0.7em; }
+.callout { border: 1px solid var(--status-pending); background: var(--status-pending-wash); border-radius: 3px; padding: 1.2rem 1.5rem; margin: 1.4rem 0; }
+.callout.good { border-color: var(--accent); background: var(--accent-wash); }
+.callout .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--status-pending); margin-bottom: 0.6rem; }
+.callout.good .label { color: var(--accent-ink); }
+.callout p:last-child { margin-bottom: 0; }
+.gene-card { border: 1px solid var(--line); border-radius: 3px; margin-bottom: 1.4rem; overflow: hidden; }
+.gene-head { background: var(--paper-raised); padding: 0.9rem 1.3rem; font-family: var(--sans); font-size: 0.9rem; color: var(--ink); border-bottom: 1px solid var(--line); font-weight: 700; }
+.gene-head .tier { float: right; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; }
+.gene-body { padding: 1.1rem 1.3rem; }
+.gene-body p { font-size: 0.92rem; max-width: none; }
+footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-family: var(--sans); font-size: 0.74rem; color: var(--ink-faint); }
+@media (max-width: 600px) {
+  .doc { padding: 2.4rem 1.2rem 4rem; }
+  .masthead h1 { font-size: 1.55rem; }
+  nav.toc ol { columns: 1; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<a class="backlink" href="index.html">&larr; Back to project summary</a>
+
+<div class="masthead">
+  <p class="eyebrow">Manuscript draft &middot; genomics results section</p>
+  <h1>Genome-wide comparison identifies a rigorously validated candidate set, structurally triaged for wet-lab follow-up</h1>
+  <p class="dek">This is the <strong>compact, submission-facing version</strong> of the genomics results &mdash; distinct from the full project site, which serves as a transparent audit trail (every correction, every null result, every intermediate figure) for anyone verifying individual claims. This page states the current, validated conclusions and their evidentiary basis; it does not re-narrate the corrections that produced them. Every figure/table reference below links to the full supporting evidence on the main site.</p>
+  <div class="meta-row">
+    <span><strong>Organism:</strong> Chlorella sp. HS2 (ancestor) &amp; ALE (hydrolysate-evolved descendant)</span>
+    <span><strong>Platform:</strong> PacBio HiFi long reads (Revio, 2026)</span>
+    <span><strong>Scope:</strong> genomic discovery &amp; structural triage &mdash; not the manuscript's causal argument</span>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="label">Contents</div>
+  <ol>
+    <li><a href="#discovery">Genome-wide comparison &amp; validation funnel</a></li>
+    <li><a href="#convergence">Independent validation, five ways</a></li>
+    <li><a href="#svs">Two structural variants, mechanistically resolved</a></li>
+    <li><a href="#triage">Structural triage of the three missense candidates</a></li>
+    <li><a href="#scope">Scope of this section's claim</a></li>
+  </ol>
+</nav>
+
+<section id="discovery">
+  <div class="section-head"><span class="section-num">01</span><h2>Genome-wide comparison identifies a small, rigorously validated candidate set</h2></div>
+  <p>Both HS2 and ALE were independently assembled de novo from PacBio HiFi long reads, purged of redundant haplotig duplication, and compared directly at the assembly level rather than by mapping reads onto a single reference. This identified 4,146 raw genotype differences. The great majority (87.0%) were repeat- or homopolymer-driven alignment artifacts; removing these, together with candidates lacking two-caller agreement, candidates in duplicated/collapsed regions, and candidates without independent short-read confirmation across three resequencing baselines, narrowed the set to <strong>24 confirmed point mutations/small indels</strong> and <strong>two confirmed structural variants</strong>.</p>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="k">Raw &rarr; confirmed</div><div class="v">4,146 &rarr; 24</div></div>
+    <div class="stat"><div class="k">Novel to ALE</div><div class="v">11 / 24</div></div>
+    <div class="stat"><div class="k">Fixed standing variation</div><div class="v">13 / 24</div></div>
+    <div class="stat"><div class="k">Missense (coding)</div><div class="v">3 / 24</div></div>
+  </div>
+
+  <div class="callout good">
+    <div class="label">Note</div>
+    <p>The distinction between "novel" and "fixed standing variation" is established directly from allele-frequency data in the short-read validation layer &mdash; it is not recoverable from genome comparison alone (&sect;02, methodological note).</p>
+  </div>
+</section>
+
+<section id="convergence">
+  <div class="section-head"><span class="section-num">02</span><h2>Independent validation, five ways</h2></div>
+  <p>Because most raw signal in any such comparison is artifact, the confirmed set was validated through five independent lines of evidence, each drawing on data or methodology the discovery funnel itself does not touch. No single line is decisive alone; the convergence across all five is the basis for confidence.</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Line of evidence</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Funnel logic itself</td><td>Joint, cumulative agreement across caller concordance, reciprocal re-mapping, duplication exclusion, repeat filtering</td></tr>
+      <tr><td>Independent third-party replication (NICEM)</td><td>6/24 point-mutation loci reproduced; 16&nbsp;kb duplication size matched to within 3&nbsp;bp</td></tr>
+      <tr><td>Mutational-signature consistency</td><td>Oxidative-damage (C&gt;A) signature strengthens under stricter QC (28%&rarr;39%) &mdash; the direction expected of real signal</td></tr>
+      <tr><td>Compartment mutation-rate gradient</td><td>Nuclear/mitochondrial/chloroplast rates (84/57/0 per Mb) reproduce the textbook purifying-selection gradient</td></tr>
+      <tr><td>Direct, genotype-free assembly re-diff (<code>paftools.js call</code>)</td><td>24/24 point mutations + the insertion recovered independently; the duplication correctly not recovered (expected limit of linear-alignment diffs for copy-number variants)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout">
+    <div class="label">Methodological note</div>
+    <p>A direct assembly-to-assembly diff is fully sufficient for point-mutation <em>discovery</em> (confirmed above) but cannot distinguish a genuinely novel ALE mutation from a pre-existing HS2 heterozygous variant later fixed in ALE &mdash; a distinction requiring allele-frequency information from multiple individual reads at a locus, which a single-consensus comparison cannot provide by construction. This is not a hypothetical concern: applying independent short-read allele-frequency validation identified two originally-reported candidates as false positives (identical genotype in both strains) and reclassified two others from "novel mutation" to "fixation of standing variation." The short-read validation layer is retained specifically for this class of finding.</p>
+  </div>
+</section>
+
+<section id="svs">
+  <div class="section-head"><span class="section-num">03</span><h2>Two structural variants, mechanistically resolved</h2></div>
+
+  <p><strong>A 16&nbsp;kb tandem duplication</strong> contains six genes: a core histone cluster (H3, H4, H1), a Myb-family transcription factor, and two lower-confidence calls (<em>g1283</em>, a chitin deacetylase, and <em>g1287</em>, a UBX-domain protein). Both breakpoints fall inside genes rather than between them. The start breakpoint bisects <em>g1283</em>: the first tandem copy reads through into the single-copy flank and encodes a complete, normal 536-residue protein; the second copy's reading frame crosses the junction into an out-of-frame fragment of the neighboring gene (<em>g1288</em>) and terminates at a premature stop codon 341 residues in &mdash; confirmed directly from the junction sequence. This produces a novel truncated protein product absent from HS2. The four fully-contained genes are cleanly duplicated with no sequence change (pure dosage). Flanking-sequence analysis argues against non-allelic homologous recombination (no flanking repeat homology), more consistent with a replication-based (FoSTeS/MMBIR) or NHEJ origin.</p>
+
+  <p><strong>A ~1.5&nbsp;kb insertion</strong> sits in the likely 5&prime; regulatory region of <em>g3665</em>. No convincing coding potential across all six reading frames, consistent with a non-autonomous or repeat-derived element rather than a functional gene fragment.</p>
+
+  <p>Both variants were independently reproduced in NICEM's fully separate assembly (duplication matched to within 3&nbsp;bp; the insertion locus showed a genuine coverage gap in NICEM's assembly, consistent with assembly-specific resolution limits rather than a contradicting result).</p>
+</section>
+
+<section id="triage">
+  <div class="section-head"><span class="section-num">04</span><h2>Structural modeling triages, rather than resolves, functional significance</h2></div>
+  <p>Protein structure prediction (ESMFold and, independently, AlphaFold2 on curated MSAs) and molecular docking were used to triage the three missense candidates for wet-lab priority &mdash; not to establish a causal link to phenotype.</p>
+
+  <div class="gene-card">
+    <div class="gene-head">g8767 &middot; BI1-family, L82P, novel to ALE <span class="tier" style="color:var(--status-confirmed);">strongest signal</span></div>
+    <div class="gene-body">
+      <p>Destabilization reproduced independently by ESMFold and AlphaFold2; mutated residue sits in an invariant hydrophobic column across 10 homologs (proline is a canonical helix-breaker at transmembrane positions); docking shows a corresponding HMF-interaction shift. Foldseek structural-homology search identifies the closest solved relative as <em>B. subtilis</em> YetJ, a characterized pH-gated Ca&sup2;&#8314; channel of the same TMBIM superfamily &mdash; sharpening the hypothesis to a specific transport mechanism, though direct Ca&sup2;&#8314; docking at the mutation site itself shows no shift, indicating the effect is on channel architecture rather than a specific ion-coordination residue. <strong>Open question, stated plainly:</strong> BI1-family proteins are broadly cytoprotective, so a destabilizing mutation has no obvious a priori mechanistic link to <em>improved</em> stress tolerance; possible resolutions (autophagy-shift, partial loss-of-function, hitchhiking) are testable but not resolved by structure alone.</p>
+    </div>
+  </div>
+
+  <div class="gene-card">
+    <div class="gene-head">g1283 &middot; chitin deacetylase, F207S (point mutation ruled out; SV truncation strong) <span class="tier" style="color:var(--status-pending);">mixed, resolved</span></div>
+    <div class="gene-body">
+      <p>The F207S point mutation shows no destabilization by either fold method despite near-complete burial (0.5% RSA); conservation analysis shows the WT phenylalanine is not even the majority residue across 9 homologs. The true catalytic zinc-binding triad (re-derived exactly from MSA columns as Asp63/His138/His142) sits 42 residues from the mutation; docking the enzyme's own reaction product (acetate) at the true catalytic site shows no WT-vs-mutant difference. Combined with allele-frequency evidence that this is fixation of standing variation, not a novel mutation, the point mutation is best treated as very likely functionally silent. The stronger finding at this locus is the duplication-derived <strong>truncated protein product</strong> (&sect;03) &mdash; independently confirmed disruptive by both fold methods, a novel ALE-specific product with no point-mutation caveat.</p>
+    </div>
+  </div>
+
+  <div class="gene-card">
+    <div class="gene-head">g5108 &middot; formin-family, A350D, fixation of standing variation <span class="tier" style="color:var(--ink-faint);">weak, secondary</span></div>
+    <div class="gene-body">
+      <p>Near-identical backbone structure by both fold methods; null docking against HMF, Na&#8314;/Cl&#8315;, Ca&sup2;&#8314;, glucose, and xylose. Consistent with a chemical rather than structural perturbation near a membrane-binding (C2) domain boundary, well upstream of the actin-nucleating FH2 domain. Treated as a secondary, contributing candidate.</p>
+    </div>
+  </div>
+</section>
+
+<section id="scope">
+  <div class="section-head"><span class="section-num">05</span><h2>Scope of this section's claim</h2></div>
+  <div class="thesis">
+    <div class="label">Thesis</div>
+    <p>This analysis establishes, with independently cross-validated confidence, <em>which</em> genomic differences between HS2 and ALE are real, and provides a rigorously triaged, mechanistically-motivated shortlist of which are most likely functionally consequential. It does not establish that any specific mutation <em>causes</em> the phenotypic differences characterized elsewhere in this manuscript. That causal argument rests on the phenotypic and chemical (Raman/FTIR) evidence presented separately; the candidate list and structural hypotheses here define the specific, falsifiable predictions &mdash; copy-specific transcript ratios at the <em>g1283</em> locus, dosage-dependent expression of the duplicated chromatin genes, genotyping of the duplication breakpoints &mdash; that the wet-lab validation program is designed to test.</p>
+  </div>
+</section>
+
+<footer>
+  Draft for manuscript integration &middot; last updated 2026-09-04 &middot; full supporting evidence, figures, and audit trail: <a href="index.html">main project site</a>
+</footer>
+
+</div>
+</body>
+</html>
