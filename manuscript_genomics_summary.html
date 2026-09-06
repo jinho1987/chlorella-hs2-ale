@@ -320,8 +320,40 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
   </div>
 </section>
 
+<section id="synthesis">
+  <div class="section-head"><span class="section-num">07</span><h2>Connecting genotype to phenotype: a per-mutation synthesis (2026-09-07)</h2></div>
+  <p>Every folded or RNA-folded mutation, read against the phenotype data presented elsewhere in this manuscript, with confidence stated per candidate rather than implied uniformly.</p>
+
+  <div class="gene-card">
+    <div class="gene-head">g8767 L82P &middot; BI1-family channel, novel <span class="tier" style="color:var(--status-confirmed);">strongest single-gene signal</span></div>
+    <div class="gene-body"><p>Destabilization is reproduced by both fold methods, and the YetJ structural-homology hit gives a specific mechanistic hypothesis (pH-gated Ca&sup2;&#8314; leak) rather than an undifferentiated "misfolded" call. A partially compromised leak channel could plausibly touch general stress tolerance and growth under the hydrolysate condition. The load-bearing open question &mdash; why destabilizing a cytoprotective channel would improve rather than harm stress tolerance &mdash; is unresolved; a partial loss-of-function reducing a chronic, costly leak under this specific stressor is the leading hypothesis, not a settled answer.</p></div>
+  </div>
+  <div class="gene-card">
+    <div class="gene-head">g1283's truncated duplication copy &middot; cell-wall enzyme, novel product <span class="tier" style="color:var(--status-confirmed);">cleanest structural story</span></div>
+    <div class="gene-body"><p>A chitin deacetylase now exists in different copy-states between strains (HS2: one normal copy; ALE: one normal plus one truncated), a plausible, specific link to the smaller ALE cell size phenotype via altered cell-wall enzyme dosage/function. The NMD analysis (&sect;04) predicts this transcript is stable rather than degraded, meaning the disrupted product is likely present at the protein level &mdash; strengthening, not weakening, this link.</p></div>
+  </div>
+  <div class="gene-card">
+    <div class="gene-head">g5108 A350D &middot; formin-family, standing variation <span class="tier" style="color:var(--ink-faint);">weak alone, notable in combination</span></div>
+    <div class="gene-body"><p>No destabilization, no docking effect, and the deeper question of its true Ca&sup2;&#8314;-coordinating residues hit a fold-confidence wall rather than resolving either way (ESMFold's own confidence in that region is too low to trust a structural alignment against a reference C2 domain). Standing alone, minimal contribution; see the cumulative-effect note below, where this gene's family &mdash; not this point mutation &mdash; recurs independently elsewhere in the candidate list.</p></div>
+  </div>
+  <div class="gene-card">
+    <div class="gene-head">g4523, g4421, TLP13, g5066/TGD3 &middot; non-coding candidates <span class="tier" style="color:var(--ink-faint);">contribution varies by evidence type</span></div>
+    <div class="gene-body"><p><em>g4523</em> (neutral ceramidase) is the lead non-coding candidate on genomic-call and pathway grounds &mdash; not its RNAfold signal, which is statistically unremarkable after calibration (&sect;06) &mdash; plausibly touching membrane sphingolipid balance and the measured lipid/FAME phenotype data. <em>g4421</em> and <em>TLP13</em> are the only two of 18 candidates whose RNAfold signal actually separates from a random-substitution null, but neither gene has a known function to reason toward a specific phenotype from; their value is as the best-supported expression-change candidates for direct RT-qPCR testing. <em>g5066/TGD3</em> (chloroplast lipid trafficking) carries a strong pathway link despite a null structural test at the exact variant position &mdash; a second, independent lipid-metabolism gene alongside g4523.</p></div>
+  </div>
+
+  <div class="callout" style="border-color:var(--status-pending);">
+    <div class="label">Cumulative-effect hypotheses: where independent candidates converge on the same axis</div>
+    <p><strong>Lipid pathway, hit twice independently:</strong> g4523 (sphingolipid/ceramide signaling) and g5066/TGD3 (chloroplast glycerolipid trafficking) are mechanistically distinct genes converging on the same broad phenotype category &mdash; a stronger case together than either alone. <strong>Cytoskeleton/formin pathway, hit twice independently:</strong> g5108's point mutation is weak on its own, but a separate intergenic promoter-proximal variant sits near a second, unrelated formin-like gene (&sect;06); the family-level recurrence, not either individual variant, is the strongest existing genomic argument for a cytoskeletal contribution alongside g1283's cell-wall-enzyme dosage effect. <strong>Chromatin dosage as a possible amplifier:</strong> the duplication doubles core histones H4/H3 plus a Myb-family TF; if this measurably shifts chromatin accessibility, it could modulate how strongly any regulatory-region candidate above actually manifests at the expression level &mdash; a speculative but testable interaction effect, not something folding or docking can resolve further.</p>
+  </div>
+
+  <div class="callout">
+    <div class="label">Is the computational survey complete?</div>
+    <p>Yes, for structure: every protein-coding mutation in the confirmed candidate set (g8767, g1283 F207S, g5108 A350D, plus the duplication's truncated copy) has been folded with both ESMFold and AlphaFold2; all 18 non-coding point-mutation candidates have been RNA-folded, splice-site-screened, and motif-scored; docking covers all three missense candidates against both a generic panel and a domain-appropriate ligand. Both fold methods and the docking engine are confirmed deterministic. Two exceptions remain, and neither is a wet-lab gap: g5108's true Ca&sup2;&#8314;-coordinating residues need a better computational input (a full AlphaFold2 run with a real MSA, or an experimental structure), not a wet-lab assay; and g8767's mechanistic question needs a functional stress-response assay, not the expression-level RT-qPCR already designed for the regulatory candidates. "Wet-lab confirmation" is therefore two distinct follow-up categories, not one.</p>
+  </div>
+</section>
+
 <section id="scope">
-  <div class="section-head"><span class="section-num">07</span><h2>Scope of this section's claim</h2></div>
+  <div class="section-head"><span class="section-num">08</span><h2>Scope of this section's claim</h2></div>
   <div class="thesis">
     <div class="label">Thesis</div>
     <p>This analysis establishes, with independently cross-validated confidence, <em>which</em> genomic differences between HS2 and ALE are real, and provides a rigorously triaged, mechanistically-motivated shortlist of which are most likely functionally consequential. It does not establish that any specific mutation <em>causes</em> the phenotypic differences characterized elsewhere in this manuscript. That causal argument rests on the phenotypic and chemical (Raman/FTIR) evidence presented separately; the candidate list and structural hypotheses here define the specific, falsifiable predictions &mdash; copy-specific transcript ratios at the <em>g1283</em> locus, dosage-dependent expression of the duplicated chromatin genes, genotyping of the duplication breakpoints &mdash; that the wet-lab validation program is designed to test.</p>
@@ -329,7 +361,7 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
 </section>
 
 <footer>
-  Draft for manuscript integration &middot; 6 main figures (Figs. 1&ndash;6), print-resolution PNG source at 200&ndash;300&nbsp;dpi &middot; last updated 2026-09-04 &middot; full supporting evidence, additional figures, and audit trail: <a href="index.html">main project site</a>
+  Draft for manuscript integration &middot; 6 main figures (Figs. 1&ndash;6), print-resolution PNG source at 200&ndash;300&nbsp;dpi &middot; last updated 2026-09-07 &middot; full supporting evidence, additional figures, and audit trail: <a href="index.html">main project site</a>
 </footer>
 
 </div>
