@@ -1887,6 +1887,58 @@ CTGGCAGTGCAGGGCCCTCGACTTGCTCTGCACATGCTTGTCTCGCAACCCGAAGCAGCCGTGTAACCCCTACCAAGCGC
       <div class="stat-cell"><div class="v">What doesn't need more work</div><div class="l">No further sequencing, folding, or docking is required to make this argument &mdash; every thread above draws on results already computed and confirmed elsewhere on this page. What's left is editorial: a thesis-setting paragraph, a reorder of sections around it, and one-line reframes at the existing null results.</div></div>
     </div>
 
+    <div class="section-head reveal" style="margin-top:44px;">
+      <h3>Per-mutation phenotype contribution map (2026-09-07)</h3>
+      <p>Every folded mutation, read against the measured phenotype data above (&sect;02) rather than in isolation. Confidence is stated per-mutation, not implied uniformly &mdash; some of these are load-bearing, several are speculative-but-motivated, and that distinction matters more than the count of candidates.</p>
+    </div>
+
+    <div class="callout reveal">
+      <div class="k">g8767 L82P &middot; BI1-family channel, novel to ALE &middot; strongest single-gene signal</div>
+      <p>Destabilization is real (both fold methods agree) and the structural-homology hit (YetJ, a pH-gated Ca&sup2;&#8314; leak channel) gives a specific mechanism to reason about, not just "misfolded." <strong>Candidate contribution:</strong> a partially compromised Ca&sup2;&#8314;-leak channel could shift intracellular ion/stress signaling under the hydrolysate condition specifically &mdash; plausibly touching the general stress-tolerance and growth-under-stress phenotypes rather than one narrow metric. The open resolution (why destabilizing a cytoprotective channel would <em>help</em>) is the load-bearing uncertainty here: a partial loss-of-function reducing a costly, chronic leak under this specific stressor is the leading hypothesis, not a settled answer.</p>
+    </div>
+    <div class="callout reveal">
+      <div class="k">g1283 F207S &middot; chitin deacetylase, standing variation &middot; effectively ruled out</div>
+      <p>Four independent lines (conservation, ESMFold, AlphaFold2, catalytic-site docking) agree this point substitution is very likely functionally silent. <strong>Candidate contribution: none.</strong> Worth stating plainly rather than quietly dropping &mdash; a confirmed negative is still a result.</p>
+    </div>
+    <div class="callout reveal" style="border-color:var(--accent-ale);">
+      <div class="k">g1283's truncated duplication copy &middot; cell-wall enzyme, novel product &middot; cleanest structural story</div>
+      <p>Not a point mutation at all &mdash; a real, novel, disrupted protein product from the 16&nbsp;kb duplication, confirmed independently by both fold methods. <strong>Candidate contribution:</strong> a chitin deacetylase (cell-wall-modifying enzyme) now exists in three copy-states across the two strains (HS2: one normal copy; ALE: one normal + one truncated) &mdash; a plausible, specific link to the <strong>smaller ALE cell size</strong> phenotype already measured, via altered cell-wall enzyme dosage/function. The NMD check (&sect;11) predicts this truncated transcript is stable, not degraded, so the disrupted product is likely actually present at the protein level, not silenced post-transcriptionally &mdash; strengthening rather than weakening this link.</p>
+    </div>
+    <div class="callout reveal">
+      <div class="k">g5108 A350D &middot; formin-family, standing variation &middot; weak on its own, notable in combination</div>
+      <p>The point mutation itself shows no destabilization and no docking effect; the deeper structural question (true Ca&sup2;&#8314;-coordinating residues) hit a fold-confidence wall (&sect;11) rather than resolving either way. <strong>Candidate contribution, standing alone: minimal.</strong> But formins are core cytoskeletal regulators (actin nucleation) &mdash; see the cumulative-effect note below, where this gene's <em>family</em>, not this specific point mutation, is what recurs in the data.</p>
+    </div>
+
+    <div class="callout reveal">
+      <div class="k">g4523 &middot; neutral ceramidase, deep intron &middot; lead non-coding candidate, on genomic + phenotype grounds</div>
+      <p>The RNAfold signal itself is statistically unremarkable after calibration (&sect;03) &mdash; this candidate's strength is elsewhere. <strong>Candidate contribution:</strong> ceramidases sit at a well-characterized sphingolipid-signaling node; an expression-level change here (not yet confirmed &mdash; RT-qPCR primers are designed and waiting) could plausibly shift membrane sphingolipid balance and stress-responsive lipid signaling, directly relevant to the measured <strong>lipid/FAME and Nile-red</strong> phenotype data. The case rests on the clean genomic call and this pathway link, not on the folding evidence.</p>
+    </div>
+    <div class="callout reveal">
+      <div class="k">g4421 (3&prime; UTR) and TLP13 (splice-proximal intron) &middot; the two RNA-structure signals that survive calibration</div>
+      <p>These are the only two of 18 non-coding candidates whose &Delta;&Delta;G meaningfully separates from a random-substitution null (77.5th and 80th percentile respectively, &sect;03) &mdash; genuine computational evidence of a structural consequence, not just a plausible location. <strong>Candidate contribution:</strong> unknown, honestly &mdash; neither gene has a Swiss-Prot hit, so there's no pathway to reason toward a specific phenotype from function alone. Their value right now is as the two best-supported <em>expression-change</em> candidates to test directly by RT-qPCR; TLP13 additionally carries a genomic-confidence caveat (74&ndash;81% pre-existing AF in HS2) that tempers how much weight to put on it regardless of the RNA signal.</p>
+    </div>
+    <div class="callout reveal">
+      <div class="k">g5066/TGD3 &middot; chloroplast lipid trafficking &middot; strong pathway link, null structural test</div>
+      <p>RNAfold at the exact variant position came back null (&Delta;&Delta;G&nbsp;=&nbsp;+0.10) &mdash; an honest negative for this specific structural hypothesis. <strong>Candidate contribution:</strong> TGD-family proteins traffic lipids from the ER to the chloroplast for membrane glycerolipid synthesis &mdash; a second, independent lipid-pathway gene alongside g4523 (see cumulative note below). The null RNAfold result doesn't rule out a splicing-efficiency effect from the retained UTR-intron more broadly, only the local base-pairing test run here.</p>
+    </div>
+    <div class="callout reveal">
+      <div class="k">Two intergenic divergent-promoter variants &middot; location-only, but one flanking-gene identity is notable</div>
+      <p>No structural test applies to intergenic DNA by definition &mdash; these rest entirely on proximity to a promoter and the identity of the flanking genes. <strong>Candidate contribution:</strong> one sits 1.2&ndash;1.4&nbsp;kb from a polyadenylate-binding protein gene &mdash; PABP affects mRNA stability/translation broadly, so a promoter-proximal effect here would act as a <em>distributed modifier</em> across many transcripts rather than a single-phenotype driver, a qualitatively different kind of candidate from the rest of this list. The other sits near a <strong>second, independent formin-like gene</strong> &mdash; see immediately below.</p>
+    </div>
+
+    <div class="callout reveal" style="border-color:var(--accent-warn);">
+      <div class="k">Cumulative-effect hypotheses: where independent candidates converge on the same axis</div>
+      <p><strong>Lipid pathway, hit twice independently:</strong> g4523 (sphingolipid/ceramide) and g5066/TGD3 (chloroplast glycerolipid trafficking) sit in different pathways feeding the same broad phenotype category. Two independent, mechanistically distinct lipid-metabolism genes both altered is a stronger case for a real lipid-phenotype connection than either alone &mdash; worth testing together by RT-qPCR rather than treating as two unrelated single-gene stories.</p>
+      <p style="margin-top:10px;"><strong>Cytoskeleton/formin pathway, hit twice independently:</strong> g5108 (formin-family point mutation, weak on its own) and the second intergenic-promoter formin-like gene above are two separate genomic events both touching the same gene family. Neither is individually compelling; the family-level recurrence is what's notable, and is the strongest existing genomic argument for a cytoskeletal/cell-morphology contribution alongside g1283's cell-wall-enzyme dosage effect.</p>
+      <p style="margin-top:10px;"><strong>Chromatin dosage as a possible amplifier, not yet tested:</strong> the duplication doubles core histones H4/H3 plus a Myb-family TF (&sect;11). If this measurably shifts chromatin accessibility, it could act as a systems-level modifier that changes how strongly <em>any</em> of the regulatory-region candidates above actually manifest at the expression level &mdash; a plausible interaction effect between the two structural variants and the point-mutation candidate list, currently speculative and not something folding/docking can test further; RT-qPCR on the dosage genes (primers already designed, &sect;11) is the direct test.</p>
+    </div>
+
+    <div class="callout reveal">
+      <div class="k">Is the computational survey actually complete? (a direct answer, 2026-09-07)</div>
+      <p><strong>Close to yes, with two named exceptions that aren't wet-lab gaps.</strong> Every protein-coding mutation in the confirmed candidate set (g8767, g1283 F207S, g5108 A350D, plus the duplication's truncated copy &mdash; 4 of 4) has been folded with both ESMFold and AlphaFold2. Every one of the 18 non-coding point-mutation candidates has been RNA-folded, splice-site-screened, and PWM-scored &mdash; not a subset. Docking covers all three missense candidates against both a generic ligand panel and the domain-appropriate ligand for each (acetate at g1283's true catalytic site, Ca&sup2;&#8314; at g5108's C2 domain). Both fold methods and the docking engine are now empirically confirmed deterministic.</p>
+      <p style="margin-top:10px;">The two exceptions: <strong>(1)</strong> g5108's true Ca&sup2;&#8314;-coordinating residues remain unresolved &mdash; not because wet-lab data is needed, but because ESMFold's own confidence in that region is too low to trust a structural alignment; closing this needs a better computational input (a proper AlphaFold2 run with a real MSA, or an experimental structure), not a PCR. <strong>(2)</strong> g8767's "why does destabilization help" question isn't closed by RT-qPCR either &mdash; it needs a different wet-lab assay entirely (e.g. a stress-response or membrane-integrity readout), not an expression measurement. So "wet-lab confirmation" is doing double duty in that sentence: RT-qPCR closes the <em>regulatory-candidate</em> gap, but a separate functional assay is what would close the <em>g8767 mechanism</em> gap &mdash; worth keeping those two as distinct follow-ups rather than one undifferentiated "wet lab" bucket.</p>
+    </div>
+
     <p class="reveal" style="margin-top:20px;font-size:15px;">Where this connects forward: the techno-economic/LCA analysis below (&sect;16) is the applied payoff of whichever genotype-phenotype story gets told &mdash; the closed-loop hydrolysate-to-biomass case is strongest precisely if the adaptation is framed as robust and multi-component (thread&nbsp;2) rather than resting on one fragile point mutation.</p>
   </div>
 </section>
