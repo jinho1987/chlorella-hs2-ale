@@ -115,6 +115,8 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
     <li><a href="#svs">Two structural variants, mechanistically resolved</a></li>
     <li><a href="#triage">Structural triage of the three missense candidates</a></li>
     <li><a href="#noncoding">Non-coding candidates: regulatory-region classification</a></li>
+    <li><a href="#synthesis">Connecting genotype to phenotype: a per-mutation synthesis</a></li>
+    <li><a href="#bioprocess">From lab bench to bioprocess: TEA/LCA screening</a></li>
     <li><a href="#scope">Scope of this section's claim</a></li>
   </ol>
 </nav>
@@ -352,8 +354,56 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
   </div>
 </section>
 
+<section id="bioprocess">
+  <div class="section-head"><span class="section-num">08</span><h2>From lab bench to bioprocess: techno-economic and carbon-footprint screening (2026-09-07)</h2></div>
+  <p>Genotype and phenotype explain mechanism; the last question is whether the ALE advantage is worth anything outside a flask. A screening-level techno-economic analysis (TEA) and life-cycle assessment (LCA), built from this project's own measured HS2/ALE dry-cell-weight and lipid yields combined with literature-anchored unit costs and GWP factors, addresses this directly across three tiers of increasing scope and decreasing confidence: cultivation only (well-anchored), extension to crude algal oil (one additional literature stage), and a supplementary illustrative extension to finished biodiesel/SAF (multiple compounding literature-only assumptions, read as an innovation roadmap rather than a validated result).</p>
+
+  <div class="gene-card">
+    <div class="gene-head">Tier 1: cultivation stage &mdash; feedstock through biomass harvest <span class="tier" style="color:var(--status-confirmed);">well-anchored</span></div>
+    <div class="gene-body">
+      <p>System boundary: feedstock choice through biomass harvest only; no downstream processing, harvesting capital cost, or discounted-cashflow modeling. Hydrolysate feedstock (from acid-treated <em>defatted</em> <em>Chlorella</em> biomass, the leftover solids after lipid extraction) is 6&ndash;190&times; cheaper per liter than conventional media regardless of strain &mdash; the baseline waste-valorization case, true for both HS2 and ALE. ALE's productivity advantage compounds this specifically at severe stress: <strong>$156/kg (HS2) vs. $32/kg (ALE)</strong> cultivation cost (a ~4.9&times; gap, driven entirely by biomass yield: 0.35 vs. 8.34&nbsp;g/L DCW, not by any cost input changing) and <strong>175 vs. 93&nbsp;kgCO<sub>2</sub>e/kg</strong> carbon footprint under a waste-stream cut-off allocation (ISO&nbsp;14044). At mild stress the strains are cost- and footprint-equivalent &mdash; ALE's economic and environmental edge is concentrated exactly where HS2's tolerance fails, not present uniformly.</p>
+    </div>
+  </div>
+
+  <figure class="ms-figure">
+    <img src="assets/fig29_cultivation_tea.png" alt="Cultivation-stage techno-economic screening comparing hydrolysate feedstock and strain productivity for HS2 and ALE">
+    <figcaption><span class="fig-num">Figure 7</span> | <span class="fig-title">Cultivation-stage cost and carbon footprint, hydrolysate feedstock &times; measured strain productivity.</span> Literature-anchored unit costs and GWP factors &times; this project's own measured HS2/ALE dry-cell-weight yields across a dose series (mild/moderate/severe hydrolysate dilution) and light/dark culture. No downstream processing modeled. See companion carbon-footprint figure (main site, &sect;16) for the parallel LCA panel under the same boundary.</figcaption>
+  </figure>
+
+  <div class="callout" style="border-color:var(--status-confirmed);">
+    <div class="label">The sharpest claim this data actually supports: a closed-loop, recirculating substrate</div>
+    <p>Every hydrolysate used in this screen comes from acid-treating <em>defatted</em> <em>Chlorella</em> biomass &mdash; the leftover solids after lipid extraction, not a separately-sourced feedstock. ALE grows substantially better than HS2 specifically on the byproduct of its own biomass's lipid extraction, at every hydrolysate concentration tested, in both light and dark. This supports a closed-loop, recirculating mixotrophic/heterotrophic cultivation scheme &mdash; defatted residual biomass hydrolyzed back into growth substrate for the next cultivation cycle &mdash; as the conservative claim this dataset actually establishes: it requires neither the furanic/salt inhibition mechanism nor any specific causal mutation to be resolved.</p>
+  </div>
+
+  <div class="gene-card">
+    <div class="gene-head">Tier 2: extension to crude algal oil <span class="tier" style="color:var(--status-confirmed);">most defensible extension beyond cultivation</span></div>
+    <div class="gene-body">
+      <p>The same measured DCW and total-lipid yield, chained through two additional literature-anchored stages (dewatering/centrifugation, solvent extraction) to crude algal oil, the actual sellable intermediate. Illumination energy dominates cost and footprint in every light condition; dark hydrolysate culture is the clear low-cost/low-carbon regime (dark 1:1 ALE oil = <strong>$17/kg</strong> vs. YM-light ALE oil = <strong>$5,168/kg</strong>, a &gt;100&times; range set almost entirely by cultivation regime, not strain). ALE's yield/lipid-content advantage compounds rather than dilutes through the added stages, since unit downstream costs apply per kg processed and ALE simply produces more kg per liter.</p>
+    </div>
+  </div>
+
+  <figure class="ms-figure">
+    <img src="assets/fig40_algal_oil_tea_lca.png" alt="Full-chain techno-economic and carbon-footprint screening to crude algal oil, comparing HS2 and ALE across cultivation regimes">
+    <figcaption><span class="fig-num">Figure 8</span> | <span class="fig-title">Full-chain screening to crude algal oil: cultivation &rarr; harvest &rarr; extraction.</span> Own measured DCW and total-lipid yield chained through two literature-anchored stages only (dewatering, solvent extraction); no upgrading/conversion assumptions. Dark hydrolysate culture is the clear low-cost/low-carbon regime at every strain and dose tested.</figcaption>
+  </figure>
+
+  <div class="gene-card">
+    <div class="gene-head">Tier 3 (supplementary): biodiesel vs. SAF <span class="tier" style="color:var(--ink-faint);">illustrative, lower-confidence extension</span></div>
+    <div class="gene-body">
+      <p>A finished-fuel extension requires distinguishing three genuinely different products: crude oil needs no upgrading; <strong>biodiesel (FAME)</strong> requires transesterification and competes with fossil road diesel (RED&nbsp;II baseline, 94&nbsp;gCO<sub>2</sub>e/MJ); <strong>SAF</strong> requires hydroprocessing &mdash; either dedicated HEFA or refinery co-processing &mdash; and competes with fossil jet fuel (ICAO CORSIA baseline, 89&nbsp;gCO<sub>2</sub>e/MJ). This tier stacks roughly 15 literature-only parameters across three unvalidated sequential stages; every parameter has now been checked directly against primary or regulatory sources rather than left as an internal assertion (Methods).</p>
+      <p style="margin-top:10px;"><strong>Confirmed accurate:</strong> the RED&nbsp;II and CORSIA baselines match their respective regulatory documents exactly; transesterification yield, FAME/oil heating-value ratios, and extraction unit cost all sit inside well-documented literature ranges. <strong>Two parameters were found to be miscalibrated and have been corrected, not merely flagged:</strong> HEFA and co-processing mass yields (originally 0.87 and 0.85) had been applied directly as oil&rarr;SAF yields, but published data on real oilseed/waste-oil feedstocks shows jet-range product is only ~60% of total HEFA output (dedicated HEFA) or 10&ndash;35% (co-processing, consistent with reduced process control in a shared refinery unit) &mdash; the remainder splits to diesel-range and naphtha co-products. The model now applies an explicit jet-fraction selectivity factor on top of each total-conversion yield. H<sub>2</sub> demand's range was separately widened from 0.03&ndash;0.05 to 0.03&ndash;0.08&nbsp;kg&nbsp;H<sub>2</sub>/kg oil (central retained at 0.04) based on two further literature comparisons.</p>
+      <p style="margin-top:10px;"><strong>Effect, re-run end to end:</strong> at the single best-case condition in the dataset (dark, 1:1 hydrolysate, ALE), corrected HEFA SAF costs $34.5/kg with a footprint of 578&nbsp;gCO<sub>2</sub>e/MJ (gray H<sub>2</sub>; sensitivity range 534&ndash;665) &mdash; a ~6.5&times; gap to the CORSIA baseline, versus roughly 4&times; before correction. Co-processing is worse: $103.9/kg, 1,789&nbsp;gCO<sub>2</sub>e/MJ, a ~20&times; gap. No pathway or condition modeled here reaches its fossil baseline yet; the correction widens this gap and properly distinguishes the two SAF routes rather than treating them as similarly close to viable &mdash; it reinforces, rather than undermines, the tier's original conclusion. This identifies illumination-energy decarbonization and heterotrophic scale-up as the highest-leverage levers for closing the gap, ahead of any choice between upgrading chemistries.</p>
+    </div>
+  </div>
+
+  <figure class="ms-figure">
+    <img src="assets/fig41_saf_biodiesel_supplementary.png" alt="Supplementary illustrative comparison of biodiesel and SAF production pathways, HEFA versus co-processing, benchmarked against CORSIA and RED II fossil baselines">
+    <figcaption><span class="fig-num">Figure 9</span> | <span class="fig-title">Biodiesel vs. SAF, illustrative supplementary tier, post yield-split and H<sub>2</sub>-range correction.</span> HEFA and co-processing jet-fuel yields now separate total deoxygenation conversion from jet-range selectivity (previously conflated); H<sub>2</sub> demand range widened to 0.03&ndash;0.08&nbsp;kg/kg oil. No pathway or condition reaches its respective fossil baseline (RED&nbsp;II 94&nbsp;gCO<sub>2</sub>e/MJ for biodiesel; CORSIA 89&nbsp;gCO<sub>2</sub>e/MJ for SAF) under current assumptions; read as an innovation roadmap identifying the highest-leverage levers, not a validated techno-economic case.</figcaption>
+  </figure>
+</section>
+
 <section id="scope">
-  <div class="section-head"><span class="section-num">08</span><h2>Scope of this section's claim</h2></div>
+  <div class="section-head"><span class="section-num">09</span><h2>Scope of this section's claim</h2></div>
   <div class="thesis">
     <div class="label">Thesis</div>
     <p>This analysis establishes, with independently cross-validated confidence, <em>which</em> genomic differences between HS2 and ALE are real, and provides a rigorously triaged, mechanistically-motivated shortlist of which are most likely functionally consequential. It does not establish that any specific mutation <em>causes</em> the phenotypic differences characterized elsewhere in this manuscript. That causal argument rests on the phenotypic and chemical (Raman/FTIR) evidence presented separately; the candidate list and structural hypotheses here define the specific, falsifiable predictions &mdash; copy-specific transcript ratios at the <em>g1283</em> locus, dosage-dependent expression of the duplicated chromatin genes, genotyping of the duplication breakpoints &mdash; that the wet-lab validation program is designed to test.</p>
@@ -361,7 +411,7 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
 </section>
 
 <footer>
-  Draft for manuscript integration &middot; 6 main figures (Figs. 1&ndash;6), print-resolution PNG source at 200&ndash;300&nbsp;dpi &middot; last updated 2026-09-07 &middot; full supporting evidence, additional figures, and audit trail: <a href="index.html">main project site</a>
+  Draft for manuscript integration &middot; 9 main figures (Figs. 1&ndash;9: 1&ndash;6 genomics, 7&ndash;9 techno-economic/carbon-footprint screening), print-resolution PNG source at 200&ndash;300&nbsp;dpi &middot; last updated 2026-09-07 &middot; full supporting evidence, additional figures, and audit trail: <a href="index.html">main project site</a>
 </footer>
 
 </div>
