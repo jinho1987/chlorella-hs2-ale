@@ -278,6 +278,7 @@ footer{ padding:44px 0 60px; }
       <a href="#phenotype">Phenotype</a>
       <a href="#genes">Genotype</a>
       <a href="#convergence">HS19 &amp; HMF</a>
+      <a href="hs19_comparison.html">HS19 corrected report</a>
       <a href="#organelle">Organelle</a>
       <a href="#sanger">Wet-lab</a>
       <a href="#landing">Landing pads</a>
@@ -836,7 +837,8 @@ footer{ padding:44px 0 60px; }
         <div class="role">Independent line · Illumina short-read</div>
         <h3 style="font-size:19px;">HS19</h3>
         <p>Selected under NaOCl (oxidative-chlorine) stress — a different chemistry entirely from hydrolysate. Re-called with the same GATK + repeat-artifact funnel used for ALE.</p>
-        <p style="margin-top:14px;"><a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report7.html" class="btn btn-ghost" style="padding:8px 14px; font-size:13px;">Full HS19 report →</a></p>
+        <p style="margin-top:14px;"><a href="hs19_comparison.html" class="btn btn-ghost" style="padding:8px 14px; font-size:13px;">Corrected HS19 report (2026-09-11) →</a></p>
+        <p style="margin-top:8px;"><a href="https://jinho1987.github.io/schizochytrium-metabolic-maps/report7.html" class="btn btn-ghost" style="padding:8px 14px; font-size:13px;">Original HS19 report (superseded) →</a></p>
       </div>
       <div class="exp-arrow" style="visibility:hidden;">·</div>
       <div class="strain-card ale">
@@ -984,11 +986,15 @@ footer{ padding:44px 0 60px; }
     </div>
     <div class="callout reveal" style="border-color:var(--accent-hs2);margin-top:20px;">
       <div class="k">The same single-baseline bug found in HMF's funnel, caught here too</div>
-      <p>This funnel originally checked only HS2 baseline b2 for standing heterozygosity, the same gap found in HMF's funnel above. Checking all three independent HS2 batches found 26 of the original 121 candidates present in at least one of the other two &mdash; the corrected numbers here (344 &rarr; 196 &rarr; 95) reflect that fix; the original single-baseline run had produced 449 &rarr; 240 &rarr; 121. All HS19 statistics on this page use the corrected 95-candidate set.</p>
+      <p>This funnel originally checked only HS2 baseline b2 for standing heterozygosity, the same gap found in HMF's funnel above. Checking all three independent HS2 batches found 26 of the original 121 candidates present in at least one of the other two &mdash; the corrected numbers here (344 &rarr; 196 &rarr; 95) reflect that fix; the original single-baseline run had produced 449 &rarr; 240 &rarr; 121.</p>
+    </div>
+    <div class="callout reveal" style="border-color:var(--accent-warn, #c65d00);margin-top:20px;">
+      <div class="k">Correction (2026-09-11): a second, deeper funnel bug — the "95" above is not the final count</div>
+      <p>The all-3-baseline fix above checks whether a variant is <em>called</em> in each baseline's VCF — it never checks whether the alt allele is actually present in the raw reads below the genotyper's calling threshold. A direct read-level audit (<code>samtools mpileup</code> at all 95 positions, all 4 samples) found <strong>20 of 95 (21%) with real background signal in at least one baseline</strong> despite passing the VCF-based check, mostly short-tandem-repeat indels showing stutter noise in every sample. <strong>The true corrected count is 75</strong>, and of the 5 missense + 1 frameshift below, only <strong>2 survive as confirmed</strong> (g3355, g8574); one is downgraded to low-confidence (g1079) and two are retracted (g5894, g5858). Full accounting, plus an independent NICEM-assembly cross-check of the reference itself and protein/RNA structural analysis of every candidate: <a href="hs19_comparison.html">&rarr; dedicated HS19 page</a>.</p>
     </div>
     <div class="callout reveal good" style="margin-top:20px;">
       <div class="k">Zero convergence with ALE, same as HMF &mdash; but HS19 does have its own missense mutations</div>
-      <p>Unlike HMF (zero missense among 7 candidates), HS19's 95 sure candidates classify as 80 intronic, 4 synonymous, <strong>5 missense</strong>, 5 intergenic, and 1 frameshift indel. None of the missense genes (GAPDH-like g1079, La-related protein g3355, a glucuronoxylan glucuronosyltransferase g5894, a receptor-like kinase g8574) overlap ALE's gene set or functional themes. So HS19 clearly does undergo coding-sequence adaptation under its own stressor &mdash; it just doesn't overlap ALE's, reinforcing that the zero-convergence result for both HMF and HS19 reflects real evolutionary specificity, not a general inability of any of these three lines to acquire missense mutations.</p>
+      <p>Unlike HMF (zero missense among 7 candidates), HS19's sure candidates (95 pre-audit, 75 after the read-level correction above) classify with intronic/synonymous/intergenic majorities and a small missense set. None of the missense genes (GAPDH-like g1079, La-related protein g3355, a glucuronoxylan glucuronosyltransferase g5894, a receptor-like kinase g8574) overlap ALE's gene set or functional themes — though see the correction above before treating all four as confirmed HS19 mutations; only g3355 and g8574 hold up at the read level. HS19 clearly does undergo its own coding-sequence adaptation; it just doesn't overlap ALE's, reinforcing that zero convergence reflects real evolutionary specificity, not an inability of these lines to acquire missense mutations.</p>
     </div>
     <div class="callout reveal" style="margin-top:20px;">
       <div class="k">A mutation-spectrum signature that matches the stressor's chemistry</div>
@@ -1006,11 +1012,11 @@ footer{ padding:44px 0 60px; }
 
     <div class="section-head reveal" style="margin-top:44px;">
       <h3>Structural variants: do either of ALE's two confirmed SVs recur in HMF or HS19?</h3>
-      <p>ALE carries two confirmed structural variants (&sect;14): a 16&nbsp;kb tandem duplication and a ~1.5&nbsp;kb insertion. Checked in HMF (both replicates) and HS19 two ways: read-depth at the breakpoint vs. single-copy flanking controls (a real duplication should show roughly double the flanking depth; a real deletion, roughly half), and independently with Delly v0.8.3, a dedicated short-read SV caller, run on HMF1.</p>
+      <p>ALE carries two confirmed structural variants (&sect;14): a 16&nbsp;kb tandem duplication and a ~1.5&nbsp;kb insertion. Checked in HMF (both replicates) and HS19 two ways: read-depth at the breakpoint vs. single-copy flanking controls (a real duplication should show roughly double the flanking depth; a real deletion, roughly half), and independently with Delly v0.8.3, a dedicated short-read SV caller, run on HMF1 and (2026-09-11) on HS19 against all three HS2 baselines.</p>
     </div>
     <div class="callout reveal good" style="margin-top:12px;">
       <div class="k">No evidence of either SV in HMF or HS19, by either method</div>
-      <p><strong>Duplication locus</strong> (ptg000004l:319003&ndash;335190): depth is flat and matches the flanking single-copy controls in HMF1, HMF2, and HS19 alike (e.g. HS19: 140.5&times; in the region vs. 133.5&ndash;140.0&times; in the flanks) &mdash; no doubling, in any of the three. <strong>Insertion locus</strong> (ptg000012l:2064929): depth is likewise close to flanking controls in all three samples, with no consistent, direction-matching signal. Delly, run independently on both HMF replicates, agrees: HMF1 produced 24,897 raw SV calls, HMF2 38,965 (both dominated by low-support inversions &mdash; typical unfiltered short-read SV noise, not usable as a clean list without substantial further filtering), and neither calls anything precise at either exact ALE breakpoint. Three independent methods, two replicates, two loci, all converging on the same answer: these two SVs are ALE-specific, not shared with either independently-evolved line, consistent with the zero convergence already found at the SNV/indel level.</p>
+      <p><strong>Duplication locus</strong> (ptg000004l:319003&ndash;335190): depth is flat and matches the flanking single-copy controls in HMF1, HMF2, and HS19 alike (e.g. HS19: 140.5&times; in the region vs. 133.5&ndash;140.0&times; in the flanks) &mdash; no doubling, in any of the three. <strong>Insertion locus</strong> (ptg000012l:2064929): depth is likewise close to flanking controls in all three samples, with no consistent, direction-matching signal. Delly, run independently on both HMF replicates, agrees: HMF1 produced 24,897 raw SV calls, HMF2 38,965 (both dominated by low-support inversions &mdash; typical unfiltered short-read SV noise). <strong>HS19's own Delly run (2026-09-11), now against all three HS2 baselines rather than one ad hoc control:</strong> 226 PASS calls (204 inversions, the same artifact class), 118 HS19-specific after baseline subtraction, only 10 non-inversion &mdash; and 4 of those 10 (the largest, spanning 27.5&ndash;50kb and multiple genes) fail a depth sanity check and are not treated as confirmed (see the <a href="hs19_comparison.html">dedicated HS19 page</a> for the full breakdown). None of HS19's calls, confirmed or not, land near either ALE breakpoint. Four independent lines of evidence (two depth checks, two Delly runs) now converge on the same answer: these two SVs are ALE-specific, not shared with either independently-evolved line.</p>
     </div>
   </div>
 </section>

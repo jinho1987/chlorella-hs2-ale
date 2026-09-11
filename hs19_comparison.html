@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HS19 vs. HS2 — Variant Calling, Corrected and Doubly Audited</title>
+<style>
+:root {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", "Liberation Mono", monospace;
+  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, ui-serif, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+    --line: #263129; --line-strong: #34412F;
+    --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+    --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+    --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+    --status-open: #E08079; --status-open-wash: #2C1917;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+  --line: #263129; --line-strong: #34412F;
+  --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+  --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+  --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+  --status-open: #E08079; --status-open-wash: #2C1917;
+}
+:root[data-theme="light"] {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); margin: 0; }
+a { color: var(--accent); }
+.doc { font-family: var(--serif); color: var(--ink); max-width: 900px; margin: 0 auto; padding: 4rem 2.5rem 6rem; line-height: 1.62; }
+.doc p { max-width: 68ch; }
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--ink); }
+.backlink { font-family: var(--sans); font-size: 0.78rem; color: var(--ink-faint); text-decoration: none; margin-bottom: 1.6rem; display: inline-block; }
+.backlink:hover { color: var(--accent); }
+.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 1.4rem; margin-bottom: 2.4rem; }
+.eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent-ink); font-weight: 600; margin: 0 0 0.6rem; }
+.masthead h1 { font-size: 1.9rem; margin: 0 0 0.8rem; line-height: 1.25; }
+.masthead .dek { font-size: 1.05rem; color: var(--ink-soft); margin: 0 0 1rem; max-width: 68ch; font-family: var(--sans); }
+.meta-row { display: flex; flex-wrap: wrap; gap: 1.4rem; font-family: var(--mono); font-size: 0.76rem; color: var(--ink-faint); }
+.meta-row strong { color: var(--ink-soft); font-weight: 600; }
+nav.toc { font-family: var(--sans); font-size: 0.86rem; background: var(--paper-raised); border: 1px solid var(--line); padding: 1.1rem 1.4rem; margin: 2rem 0 3rem; border-radius: 3px; }
+nav.toc .label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.6rem; }
+nav.toc ol { margin: 0; padding-left: 1.2rem; columns: 2; }
+nav.toc a { text-decoration: none; color: var(--ink-soft); }
+nav.toc a:hover { color: var(--accent); }
+section { margin-bottom: 3.2rem; }
+.section-head { display: flex; align-items: baseline; gap: 0.7rem; margin-bottom: 1.1rem; border-bottom: 1px solid var(--line-strong); padding-bottom: 0.5rem; }
+.section-num { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.06em; }
+.thesis { background: var(--paper-raised); border-left: 3px solid var(--accent); padding: 1.3rem 1.6rem; border-radius: 2px; font-size: 1.03rem; }
+.thesis .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); font-weight: 700; margin-bottom: 0.5rem; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 1.4rem 0; font-family: var(--sans); }
+.stat { background: var(--paper-raised); padding: 1rem 1.1rem; }
+.stat .k { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.35rem; }
+.stat .v { font-variant-numeric: tabular-nums; font-size: 1.32rem; font-weight: 600; color: var(--ink); font-family: var(--serif); }
+.stat .v small { font-size: 0.62em; color: var(--ink-faint); font-weight: 400; font-family: var(--sans); }
+.stat .delta { font-size: 0.76rem; color: var(--accent-ink); margin-top: 0.2rem; }
+table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 0.85rem; }
+.table-wrap { overflow-x: auto; margin: 1.2rem 0; border: 1px solid var(--line); }
+th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { background: var(--accent-wash); color: var(--accent-ink); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--line-strong); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--paper-raised); }
+td .locus { font-family: var(--mono); font-size: 0.79rem; color: var(--ink-soft); white-space: nowrap; }
+td .gene { font-family: var(--mono); font-weight: 700; color: var(--ink); }
+td code { font-family: var(--mono); font-size: 0.82em; background: var(--accent-wash); color: var(--accent-ink); padding: 0.1em 0.35em; border-radius: 2px; }
+.pill { display: inline-flex; align-items: center; gap: 0.35em; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.22em 0.6em; border-radius: 3px; white-space: nowrap; }
+.pill.confirmed { background: var(--status-confirmed-wash); color: var(--status-confirmed); }
+.pill.pending { background: var(--status-pending-wash); color: var(--status-pending); }
+.pill.open { background: var(--status-open-wash); color: var(--status-open); }
+.pill::before { content: "\25CF"; font-size: 0.7em; }
+.matrix-cell-yes { color: var(--status-confirmed); font-weight: 700; text-align: center; }
+.matrix-cell-partial { color: var(--status-pending); font-weight: 700; text-align: center; }
+.matrix-cell-no { color: var(--ink-faint); text-align: center; }
+.callout { border: 1px solid var(--status-pending); background: var(--status-pending-wash); border-radius: 3px; padding: 1.2rem 1.5rem; margin: 1.4rem 0; }
+.callout.good { border-color: var(--accent); background: var(--accent-wash); }
+.callout.bad { border-color: var(--status-open); background: var(--status-open-wash); }
+.callout .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--status-pending); margin-bottom: 0.6rem; }
+.callout.good .label { color: var(--accent-ink); }
+.callout.bad .label { color: var(--status-open); }
+.callout ul { margin: 0; padding-left: 1.2rem; } .callout li { margin-bottom: 0.5rem; } .callout li:last-child { margin-bottom: 0; }
+.gene-card { border: 1px solid var(--line); border-radius: 3px; padding: 1.1rem 1.4rem; margin-bottom: 1rem; background: var(--paper-raised); }
+.gene-card.retracted { opacity: 0.6; }
+.gene-card h4 { margin: 0 0 0.3rem; font-size: 1.05rem; }
+.gene-card .strike { text-decoration: line-through; }
+.gene-card .desc { font-family: var(--sans); font-size: 0.86rem; color: var(--ink-soft); margin-bottom: 0.7rem; }
+.metric-row { display: flex; flex-wrap: wrap; gap: 1.2rem; font-family: var(--sans); }
+.metric-row .m { }
+.metric-row .m .mv { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; }
+.metric-row .m .ml { font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.03em; }
+.pipeline-stage { display: grid; grid-template-columns: 190px 1fr; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--line); align-items: start; }
+.pipeline-stage:first-child { border-top: none; }
+.pipeline-stage .stage-name { font-family: var(--sans); font-size: 0.78rem; font-weight: 700; color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.03em; padding-top: 0.15rem; }
+.pipeline-stage .stage-detail { font-family: var(--sans); font-size: 0.88rem; color: var(--ink-soft); }
+.pipeline-stage .stage-detail p { max-width: none; font-size: inherit; margin-bottom: 0.4rem; }
+.pipeline-stage code { font-family: var(--mono); font-size: 0.82em; background: var(--paper-raised); border: 1px solid var(--line); color: var(--ink); padding: 0.12em 0.4em; border-radius: 2px; }
+footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-family: var(--sans); font-size: 0.74rem; color: var(--ink-faint); }
+@media (max-width: 600px) {
+  .doc { padding: 2.4rem 1.2rem 4rem; }
+  .masthead h1 { font-size: 1.55rem; }
+  nav.toc ol { columns: 1; }
+  .pipeline-stage { grid-template-columns: 1fr; gap: 0.3rem; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<a class="backlink" href="index.html">&larr; Back to project summary</a>
+
+<div class="masthead">
+  <p class="eyebrow">Companion mutant line &middot; NaOCl selection &middot; corrected 2026-09-11</p>
+  <h1>HS19 vs. HS2: variant calling, corrected and doubly audited</h1>
+  <p class="dek">HS19 is a separate <i>Chlorella</i> sp. HS2-derived mutant line, selected under sodium hypochlorite (NaOCl/bleach) exposure &mdash; a different stressor from ALE's hydrolysate adaptation, sharing only the HS2 reference and pipeline infrastructure. This page documents the full, current-reference reanalysis: a funnel bug that let 20 of 95 candidates through as false positives, an independent-assembly cross-check of the reference itself, and what survives of the coding mutations once both are applied &mdash; including protein and RNA structural analysis of every candidate that changes a protein sequence.</p>
+  <div class="meta-row">
+    <span><strong>Selection pressure:</strong> NaOCl (oxidative/chlorinating stress)</span>
+    <span><strong>Reference:</strong> HS2_purged_v2.purged.fa (PacBio HiFi/Revio, current project reference)</span>
+    <span><strong>Data:</strong> short-read Illumina only, no HS19 long-read assembly</span>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="label">Contents</div>
+  <ol>
+    <li><a href="#selection">Selection pressure &amp; why HS19 is analyzed separately</a></li>
+    <li><a href="#funnel">Variant calling on the current reference</a></li>
+    <li><a href="#af-audit">The funnel's second bug: a read-level allele-frequency audit</a></li>
+    <li><a href="#nicem">NICEM independent-assembly reference cross-check</a></li>
+    <li><a href="#missense">What survives: confirmed, downgraded, and retracted mutations</a></li>
+    <li><a href="#folding">Protein &amp; RNA structural analysis</a></li>
+    <li><a href="#sv">Structural variants on the current reference</a></li>
+    <li><a href="#convergence">Convergence with ALE and HMF</a></li>
+    <li><a href="#prior">Comparison to the prior (BioTo) analysis</a></li>
+    <li><a href="#verdict">Summary verdict</a></li>
+  </ol>
+</nav>
+
+<section id="selection">
+  <div class="section-head"><span class="section-num">01</span><h2>Selection pressure &amp; why HS19 is analyzed separately</h2></div>
+  <p>HS19's defining selective pressure was <b>NaOCl treatment</b> &mdash; an oxidative, chlorinating stress that damages proteins, membranes, and DNA through reactive chlorine/oxygen species. This is mechanistically distinct from ALE's hydrolysate-derived stress (furanic compounds, organic acids, osmotic/salinity) and from HMF's single-compound stress, both discussed on the <a href="index.html">main project page</a>. All three mutant lines share the HS2 reference genome and pipeline infrastructure but are analyzed independently throughout &mdash; shared infrastructure does not imply shared biology.</p>
+  <div class="thesis">
+    <div class="label">Candidate functional categories considered for NaOCl adaptation</div>
+    <p>Oxidative/chlorine-radical detoxification (catalase, SOD, glutathione system, peroxiredoxin, thioredoxin) &middot; DNA repair (glycosylases, mismatch repair, recombinases) &middot; Chaperones/heat-shock proteins &middot; Membrane and cell-wall remodeling &middot; Efflux/ABC transporters &middot; Photosystem II D1 repair machinery.</p>
+  </div>
+</section>
+
+<section id="funnel">
+  <div class="section-head"><span class="section-num">02</span><h2>Variant calling on the current reference</h2></div>
+  <p>HS19's existing short reads were realigned to <code>HS2_purged_v2.purged.fa</code> (the same PacBio HiFi assembly every other current page on this site uses) and re-called with GATK + bcftools, joint-genotyped against three independent HS2 baselines &mdash; the same framework validated for ALE and HMF.</p>
+  <div class="stat-grid">
+    <div class="stat"><div class="k">GATK / bcftools raw calls</div><div class="v">2,951 <small>/ 2,398</small></div></div>
+    <div class="stat"><div class="k">Caller-concordant</div><div class="v">1,296</div></div>
+    <div class="stat"><div class="k">Clear of standing HS2 heterozygosity (VCF check)</div><div class="v">344 &rarr; 196</div></div>
+    <div class="stat"><div class="k">After homopolymer-adjacent indel filter</div><div class="v">95</div><div class="delta">the "corrected" count as first published</div></div>
+  </div>
+  <div class="callout">
+    <div class="label">This funnel already fixed one bug &mdash; requiring all 3 baselines, not just one</div>
+    <p>An earlier pass of this funnel checked only one HS2 baseline for standing heterozygosity; requiring absence from all three independent baselines dropped the count from 121 to 95 (26 candidates were present in at least one of the other two baselines). That fix is real and still holds. What follows is a second, deeper bug the first fix didn't catch.</p>
+  </div>
+</section>
+
+<section id="af-audit">
+  <div class="section-head"><span class="section-num">03</span><h2>The funnel's second bug: a read-level allele-frequency audit</h2></div>
+  <p>The "clear of standing HS2 heterozygosity" step above checks whether a variant is <i>called</i> in each baseline's VCF. That is not the same as checking whether the alt allele is actually present in the baseline's raw reads &mdash; a real allele sitting below the genotyper's calling threshold (typically needing roughly 20%+ support to trigger a confident heterozygous call) is invisible to a VCF-presence check even though it shows up plainly in a pileup.</p>
+  <p>This was checked directly: exact alt-allele read counts were pulled with <code>samtools mpileup</code> at all 95 candidate positions, in HS19 and all three HS2 baselines independently, parsing SNV, insertion, and deletion signals separately.</p>
+  <div class="stat-grid">
+    <div class="stat"><div class="k">Candidates with &ge;5% raw alt-read support in &ge;1 baseline</div><div class="v">20 <small>/ 95 (21%)</small></div></div>
+    <div class="stat"><div class="k">Doubly-confirmed candidates remaining</div><div class="v">75</div></div>
+    <div class="stat"><div class="k">Corrected coding breakdown</div><div class="v">64/4/4/3 <small>intronic/syn/missense/intergenic</small></div></div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Position</th><th>Change</th><th>Gene</th><th>Category</th><th>HS19 AF</th><th>B1</th><th>B2</th><th>B3</th></tr></thead>
+      <tbody>
+        <tr><td class="locus">ptg000018l:3090452</td><td>G&gt;T</td><td class="gene">g5894</td><td>missense</td><td>0.229</td><td>0.172</td><td>0.106</td><td>0.056</td></tr>
+        <tr><td class="locus">ptg000018l:2854899</td><td>A&gt;AGT</td><td class="gene">g5858</td><td>frameshift</td><td>0.182</td><td>0.053</td><td>0.200</td><td>0.125</td></tr>
+        <tr><td class="locus">ptg000014l:1544958</td><td>G&gt;A</td><td class="gene">g4674</td><td>intronic</td><td>0.411</td><td>0.079</td><td>0.089</td><td>0.0</td></tr>
+        <tr><td class="locus">ptg000001l:307523</td><td>G&gt;GCA</td><td class="gene">g35</td><td>intronic</td><td>0.220</td><td>0.156</td><td>0.132</td><td>0.082</td></tr>
+        <tr><td colspan="8" style="font-size:0.78rem;color:var(--ink-faint);text-align:center;">+ 16 more, mostly short-tandem-repeat/homopolymer-adjacent indels showing stutter noise in every sample</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout bad">
+    <div class="label">What the flagged 20 look like</div>
+    <p>Most are indels in di-/tri-nucleotide short-tandem-repeat contexts (<code>GGT&gt;G</code>, <code>GCA&gt;G</code>, <code>AAC&gt;A</code>-style calls) &mdash; a repeat-slippage signature affecting every sample, including HS2 itself, that the existing homopolymer filter didn't catch because it only screens single-base runs &ge;6bp, not short tandem repeats generally. A few are SNPs (g5894, g4674) with graded background across the three baselines rather than a clean on/off signal &mdash; more consistent with standing variation shifting gradually than a discrete new mutation.</p>
+  </div>
+  <p style="font-size:0.86rem;color:var(--ink-soft);font-family:var(--sans);">This is a targeted correctness check at candidates already identified, not a from-scratch re-calling, and it has not yet been extended to ALE's or HMF's candidate funnels &mdash; both use structurally similar baseline-subtraction logic and could plausibly show the same failure mode. Worth checking before treating those lists as immune to it.</p>
+</section>
+
+<section id="nicem">
+  <div class="section-head"><span class="section-num">04</span><h2>NICEM independent-assembly reference cross-check</h2></div>
+  <p>HS19 has no independent long-read assembly of its own, so it cannot be cross-validated the way <a href="nicem_comparison.html">ALE's candidates were against NICEM's independent ALE assembly</a>. What can be checked is whether <b>our HS2 reference itself</b> is trustworthy at each candidate position, by comparing it to NICEM's separately-assembled HS2 genome. If our reference had an error at a given position, an "HS19 mutation" called there could be an artifact of the reference, not a real HS19-specific change.</p>
+  <p>A first attempt, using simple linear interpolation across whole-genome alignment blocks to translate coordinates, produced an implausible 38% mismatch rate &mdash; traced to the interpolation's own imprecision inside blocks with internal indels, not real disagreement. The check was redone with an indel-tolerant anchor: a 25bp window of our sequence is located as an exact substring inside a wider window of NICEM's assembly before comparing bases.</p>
+  <div class="stat-grid">
+    <div class="stat"><div class="k">Confirmed match</div><div class="v">78</div></div>
+    <div class="stat"><div class="k">Confirmed mismatch</div><div class="v">0</div></div>
+    <div class="stat"><div class="k">Inconclusive (NICEM's own duplicated region)</div><div class="v">12</div></div>
+    <div class="stat"><div class="k">No reliable anchor</div><div class="v">5</div></div>
+  </div>
+  <div class="callout good">
+    <div class="label">Zero mismatches at every resolvable position</div>
+    <p>Including all confirmed missense positions and the retracted frameshift site. Our HS2 reference is not the source of any signal, real or spurious, discussed on this page. The naive first-pass result is reported here rather than discarded &mdash; a useful lesson that PAF-block linear interpolation isn't precise enough for single-base comparisons without an anchor-based correction step.</p>
+  </div>
+</section>
+
+<section id="missense">
+  <div class="section-head"><span class="section-num">05</span><h2>What survives: confirmed, downgraded, and retracted mutations</h2></div>
+  <p>Six sites were originally identified as protein-sequence-altering (5 missense + 1 frameshift indel). Applying the read-level audit above, only two hold up as clean, confident HS19-specific calls.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Gene</th><th>Change</th><th>Best Swiss-Prot hit</th><th>HS19 AF / baselines</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="gene">g3355</td><td>P1044L</td><td>La-related protein 1A</td><td>40% / 0%, 0%, 0%</td><td><span class="pill confirmed">confirmed</span></td></tr>
+        <tr><td class="gene">g8574</td><td>R562Q</td><td>Receptor-like Ser/Thr kinase</td><td>54% / 0%, 0%, 0%</td><td><span class="pill confirmed">confirmed</span></td></tr>
+        <tr><td class="gene">g1079</td><td>A331V + L332P</td><td>GAPDH, cytosolic</td><td>~10% / 1.6%, 0%, 3.4%</td><td><span class="pill pending">low confidence</span></td></tr>
+        <tr><td class="gene">g5894</td><td>S384Y</td><td>FRA8 glucuronosyltransferase</td><td>23% / 17%, 11%, 6% <small>(graded)</small></td><td><span class="pill open">retracted</span></td></tr>
+        <tr><td class="gene">g5858</td><td>frameshift, res. 195/421</td><td>no hit on file</td><td>18% / 5%, 20%, 13%</td><td><span class="pill open">retracted</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><b>g3355 and g8574</b> show 40&ndash;54% allele fraction in HS19 (consistent with a real heterozygous call) and a clean 0% in every baseline. <b>g1079</b>'s two adjacent substitutions (3bp apart in the genome, 1 codon apart in the protein, same haplotype) show only ~10% allele fraction in HS19 itself &mdash; too weak for a confident heterozygous call. <b>g5894</b> shows a graded background rising smoothly across all three baselines into HS19, inconsistent with a discrete event. <b>g5858</b> sits in a GT-repeat microsatellite tract at very low depth (7&ndash;18&times; vs. ~108&times; genome-wide) with both insertion and deletion signals scattered across every sample &mdash; including one baseline showing the identical insertion HS19 has &mdash; a repeat-instability signature, not a confident novel frameshift.</p>
+  <div class="callout">
+    <div class="label">Both original ABC-transporter "hits" are also flagged</div>
+    <p>A keyword search against six NaOCl-relevant functional categories found only two non-generic hits &mdash; g3459 and g4674, both ABC-transporter family homologs. Both are also among the 20 candidates flagged by the allele-frequency audit (g3459: 14.3% in HS19 vs. 5&ndash;7% in baselines; g4674: 41% vs. 8&ndash;9%/0%). Neither is a clean, discrete HS19-specific call. After both rounds of correction, the NaOCl functional-category search's honest bottom line is a clean negative across the core oxidative-detox, DNA-repair, chaperone, and PSII-repair categories.</p>
+  </div>
+</section>
+
+<section id="folding">
+  <div class="section-head"><span class="section-num">06</span><h2>Protein &amp; RNA structural analysis</h2></div>
+  <p>All six originally-identified sites were folded before this audit existed. Every result is kept here, labeled with its post-audit status, rather than quietly dropped.</p>
+
+  <div class="gene-card">
+    <h4>g3355 &mdash; P1044L <span class="pill confirmed">confirmed</span></h4>
+    <div class="desc">La-related protein 1A homolog &mdash; RNA-binding, cap-dependent translational control in other systems.</div>
+    <div class="metric-row">
+      <div class="m"><div class="mv">&minus;2.47</div><div class="ml">ESM2 score</div></div>
+      <div class="m"><div class="mv">+1.50 kcal/mol</div><div class="ml">RNAfold &Delta;&Delta;G (65th pct., unremarkable)</div></div>
+      <div class="m"><div class="mv">0.71 / 0.70</div><div class="ml">ESMFold pLDDT, WT/mut</div></div>
+    </div>
+  </div>
+
+  <div class="gene-card">
+    <h4>g8574 &mdash; R562Q <span class="pill confirmed">confirmed</span></h4>
+    <div class="desc">Receptor-like Ser/Thr protein kinase &mdash; a signal-transduction family, plausible for general stress-sensing but no specific category match.</div>
+    <div class="metric-row">
+      <div class="m"><div class="mv">&minus;1.26</div><div class="ml">ESM2 score</div></div>
+      <div class="m"><div class="mv">&minus;1.00 kcal/mol</div><div class="ml">RNAfold &Delta;&Delta;G (51st pct., unremarkable)</div></div>
+      <div class="m"><div class="mv">0.88 / 0.88</div><div class="ml">ESMFold pLDDT (highest confidence)</div></div>
+    </div>
+  </div>
+
+  <div class="gene-card retracted">
+    <h4><span class="strike">g1079 &mdash; A331V + L332P</span> <span class="pill pending">low confidence</span></h4>
+    <div class="desc">Cytosolic GAPDH &mdash; a core glycolytic enzyme whose catalytic cysteine is a well-documented redox/electrophile sensor in many organisms generally. This was reported as the standout finding of the first analysis pass; it no longer should be.</div>
+    <div class="metric-row">
+      <div class="m"><div class="mv">&minus;0.91</div><div class="ml">ESM2 score, combined (as computed)</div></div>
+      <div class="m"><div class="mv">&minus;6.10 kcal/mol</div><div class="ml">RNAfold &Delta;&Delta;G, joint haplotype &mdash; 99th pct. of null (as computed)</div></div>
+      <div class="m"><div class="mv">0.59 / 0.58</div><div class="ml">ESMFold pLDDT (lowest confidence fold)</div></div>
+    </div>
+  </div>
+
+  <div class="gene-card retracted">
+    <h4><span class="strike">g5894 &mdash; S384Y</span> <span class="pill open">retracted</span></h4>
+    <div class="desc">FRA8 glucuronoxylan glucuronosyltransferase &mdash; cell-wall hemicellulose biosynthesis. Previously framed as "a real NaOCl-category hit"; does not survive the allele-frequency audit.</div>
+    <div class="metric-row">
+      <div class="m"><div class="mv">+6.42</div><div class="ml">ESM2 score, strongly tolerated (as computed)</div></div>
+      <div class="m"><div class="mv">+3.60 kcal/mol</div><div class="ml">RNAfold &Delta;&Delta;G, 92nd pct. (as computed)</div></div>
+    </div>
+  </div>
+
+  <div class="gene-card retracted">
+    <h4><span class="strike">g5858 &mdash; frameshift</span> <span class="pill open">retracted</span></h4>
+    <div class="desc">No Swiss-Prot hit on file. Sits in a GT-repeat microsatellite tract; a classic stutter-noise signature, not a confident novel truncation.</div>
+    <div class="metric-row">
+      <div class="m"><div class="mv">421 &rarr; 250 aa</div><div class="ml">WT &rarr; mutant length (as computed)</div></div>
+      <div class="m"><div class="mv">&minus;0.10 kcal/mol</div><div class="ml">RNAfold &Delta;&Delta;G at indel site (as computed)</div></div>
+    </div>
+  </div>
+
+  <div class="callout bad">
+    <div class="label">What actually survives</div>
+    <p>Of six sites folded, only g3355 and g8574 are confirmed real HS19-specific missense mutations &mdash; and neither shows a notable structural or RNA signal beyond being real. The site with the most striking computational signal (g1079) has the weakest genetic support; the two sites with a plausible functional story (g5894's cell-wall link, g5858's novel truncation) are the two that don't survive read-level scrutiny at all.</p>
+  </div>
+</section>
+
+<section id="sv">
+  <div class="section-head"><span class="section-num">07</span><h2>Structural variants on the current reference</h2></div>
+  <p>Delly v0.8.3 was re-run on the current reference &mdash; HS19 and, this time, <b>all three</b> independent HS2 baselines (the original analysis used only one ad hoc baseline), matching the same standard now applied to the SNV/indel funnel.</p>
+  <div class="stat-grid">
+    <div class="stat"><div class="k">HS19 PASS calls</div><div class="v">226</div><div class="delta">204 INV, 11 BND, 9 DEL, 2 DUP</div></div>
+    <div class="stat"><div class="k">Baseline PASS calls, B1/B2/B3</div><div class="v">4,948 / 9,059 / 6,189</div><div class="delta">each &ge;96% inversion calls</div></div>
+    <div class="stat"><div class="k">HS19-specific (not in any baseline)</div><div class="v">118</div></div>
+    <div class="stat"><div class="k">HS19-specific, non-inversion</div><div class="v">10</div></div>
+  </div>
+  <div class="callout bad">
+    <div class="label">The same inversion artifact found elsewhere in this project shows up here too</div>
+    <p>Inversions dominate every call set (204/226 in HS19, 96&ndash;98% in each baseline) &mdash; a known short-read split-read-calling artifact (QUAL as a deterministic function of split-read count, no paired-end support). 108 of the 118 "HS19-specific" calls are inversions and carry no evidential weight; the 10 non-inversion calls are what's actually worth reporting.</p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Type</th><th>Region</th><th>Size</th><th>Genes</th><th>Depth check</th></tr></thead>
+      <tbody>
+        <tr><td>DEL</td><td class="locus">ptg000002l:2223857</td><td>34bp</td><td class="gene">g672</td><td>too small for depth to inform</td></tr>
+        <tr><td>DEL</td><td class="locus">ptg000010l:137135</td><td>136bp</td><td class="gene">g2832</td><td>too small for depth to inform</td></tr>
+        <tr><td>DEL</td><td class="locus">ptg000018l:1898265</td><td>51bp</td><td class="gene">g5684</td><td>too small for depth to inform</td></tr>
+        <tr><td>DEL</td><td class="locus">ptg000047l:574827</td><td>40bp</td><td class="gene">g7745</td><td>too small for depth to inform</td></tr>
+        <tr><td>BND</td><td class="locus">ptg000008l:333025</td><td>&mdash;</td><td class="gene">g2485</td><td>n/a (breakend)</td></tr>
+        <tr><td>BND</td><td class="locus">ptg000026l:174077</td><td>&mdash;</td><td>none</td><td>n/a (breakend)</td></tr>
+        <tr style="background:var(--status-pending-wash);"><td>DEL</td><td class="locus">ptg000003l:221655-249185</td><td>27.5kb</td><td>7 genes</td><td>HS19 54.6&times; vs. baselines 88-154&times; &mdash; not ~0&times;</td></tr>
+        <tr style="background:var(--status-pending-wash);"><td>DUP</td><td class="locus">ptg000010l:1506476-1546422</td><td>40kb</td><td>11 genes</td><td>HS19 103.3&times; vs. baselines 90-147&times; &mdash; no ~2&times; signal</td></tr>
+        <tr style="background:var(--status-pending-wash);"><td>DEL</td><td class="locus">ptg000016l:1179924-1216854</td><td>37kb</td><td>4 genes</td><td>HS19 64.2&times; vs. baselines 87-152&times; &mdash; not ~0&times;</td></tr>
+        <tr style="background:var(--status-pending-wash);"><td>DEL</td><td class="locus">ptg000050l:575854-626305</td><td>50kb</td><td>9 genes</td><td>HS19 88.6&times; vs. baselines 86-153&times; &mdash; no reduction</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout bad">
+    <div class="label">The 4 large, multi-gene calls fail a basic depth sanity check</div>
+    <p>A real homozygous deletion should approach 0&times; depth across its span; a real duplication should show roughly 2&times; the flanking depth. None of the four large (27.5&ndash;50kb) calls show either signature &mdash; not treated as confirmed. Most likely Delly's paired-end/coverage evidence responding to genuinely patchy short-read coverage (baseline depth itself varies 85&ndash;154&times; across these same regions) rather than four real events removing or doubling 4&ndash;11 complete genes. The 6 small events (4 short deletions, 2 breakends) are more plausible single-caller candidates.</p>
+  </div>
+  <div class="callout good">
+    <div class="label">Confirms the earlier depth-based finding: HS19 does not carry either ALE-specific SV</div>
+    <p>Zero HS19-specific calls of any type fall near ALE's 16kb duplication or its ~1.5kb insertion. An actual independent SV caller now agrees with the earlier raw-depth check, reinforcing the zero-convergence result at the SNV/indel level too.</p>
+  </div>
+</section>
+
+<section id="convergence">
+  <div class="section-head"><span class="section-num">08</span><h2>Convergence with ALE and HMF</h2></div>
+  <p>Using the corrected 75-candidate set: <b>0 shared positions, 0 shared genes</b> with ALE's 24 confirmed candidates (21 genes), and <b>0 shared genes</b> with HMF's 7 candidates. Three independent stress-adaptation experiments on the same HS2 background, three non-overlapping mutation sets &mdash; see the <a href="index.html#convergence">main convergence section</a> for the full three-way comparison including HMF vs. HS19 directly.</p>
+  <div class="callout good">
+    <div class="label">A mutation-spectrum signature that still matches the stressor's chemistry</div>
+    <p>HS19's spectrum remains C&gt;A-dominant (a classic 8-oxoguanine oxidative-damage signature, mechanistically coherent with NaOCl exposure) after the audit correction &mdash; distinct from ALE's T&gt;G/T&gt;C-dominant spectrum. This finding is unaffected by the missense retractions above, since it's computed from the full corrected SNV set, not just the coding subset.</p>
+  </div>
+</section>
+
+<section id="prior">
+  <div class="section-head"><span class="section-num">09</span><h2>Comparison to the prior (BioTo) analysis</h2></div>
+  <p>BioTo's 2025-09-11 report analyzed the same comparison using a ~52Mb/52-scaffold filtered subset of the seeders.co.kr assembly and SAMtools v0.1.16 (a 2011-era caller). Two points of agreement and one caution, unaffected by everything above:</p>
+  <ul style="font-family:var(--sans);font-size:0.92rem;">
+    <li><b>Agreement &mdash; SV calling.</b> BioTo's three-caller analysis (BreakDancer, Pindel, Delly) found nothing confirmed by all three, matching this project's own finding that raw short-read SV signal is dominated by a known-unreliable inversion-calling artifact.</li>
+    <li><b>Caution &mdash; SNP calling.</b> BioTo's 99% heterozygous SNP call rate is very likely a caller artifact given this project's own finding that HS2's true heterozygosity is ~0.0036%.</li>
+    <li><b>Mapping quality.</b> HS19 reads map at 97.89% to this project's complete reference vs. BioTo's 93.18% against their smaller reference.</li>
+  </ul>
+</section>
+
+<section id="verdict">
+  <div class="section-head"><span class="section-num">10</span><h2>Summary verdict</h2></div>
+  <div class="callout good">
+    <div class="label">What holds up</div>
+    <ul>
+      <li>The HS2 reference itself is independently validated by NICEM's separately-assembled genome &mdash; zero mismatches at every resolvable candidate position.</li>
+      <li>75 doubly-confirmed HS19-specific SNV/indel candidates, absent from all 3 HS2 baselines both by formal genotype call and by raw read support.</li>
+      <li>Two confirmed missense mutations (g3355 P1044L, g8574 R562Q), both structurally and computationally unremarkable but genuinely real.</li>
+      <li>Zero convergence with ALE or HMF at position or gene level, holding across two independent correction passes now &mdash; three separately-evolved lines on the same background, three genuinely distinct routes.</li>
+      <li>A mutation-spectrum signature (C&gt;A-dominant) mechanistically consistent with NaOCl's oxidative chemistry.</li>
+    </ul>
+  </div>
+  <div class="callout bad">
+    <div class="label">Honestly still open</div>
+    <ul>
+      <li>Two of six originally-reported protein-altering mutations are retracted (g5894, g5858) and one is downgraded (g1079) &mdash; this page exists specifically to keep that correction visible rather than silently fixed.</li>
+      <li>HS19 has short-read data only; no independent long-read assembly exists to cross-validate its calls the way ALE's were against NICEM's ALE assembly. The NICEM cross-check here validates the reference, not HS19's specific calls.</li>
+      <li>The same VCF-presence-vs-raw-read-support gap that produced this correction has not yet been checked in ALE's or HMF's candidate funnels.</li>
+      <li>With only 2 confirmed missense mutations, the NaOCl functional-category search is operating on a genuinely thin base &mdash; underpowered by construction, independent of whether the search itself is sound.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Companion page to the <a href="index.html">project summary</a> (see <a href="index.html#convergence">&sect; HS19 &amp; HMF</a>) and to the <a href="nicem_comparison.html">NICEM independent replication</a> document for ALE. Corrected 2026-09-11 following a direct request to verify calling correctness before trusting downstream structural analysis &mdash; a request that caught a real, previously-unflagged funnel gap.
+</footer>
+
+</div>
+</body>
+</html>
