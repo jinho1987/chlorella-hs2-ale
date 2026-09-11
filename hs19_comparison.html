@@ -182,8 +182,13 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
   <p>This was checked directly: exact alt-allele read counts were pulled with <code>samtools mpileup</code> at all 95 candidate positions, in HS19 and all three HS2 baselines independently, parsing SNV, insertion, and deletion signals separately.</p>
   <div class="stat-grid">
     <div class="stat"><div class="k">Candidates with &ge;5% raw alt-read support in &ge;1 baseline</div><div class="v">20 <small>/ 95 (21%)</small></div></div>
-    <div class="stat"><div class="k">Doubly-confirmed candidates remaining</div><div class="v">75</div></div>
-    <div class="stat"><div class="k">Corrected coding breakdown</div><div class="v">64/4/4/3 <small>intronic/syn/missense/intergenic</small></div></div>
+    <div class="stat"><div class="k">Doubly-confirmed (manual pass)</div><div class="v">75</div></div>
+    <div class="stat"><div class="k">Final, hardened v3 pipeline</div><div class="v">71</div></div>
+    <div class="stat"><div class="k">Final coding breakdown (v3)</div><div class="v">60/4/4/3 <small>intronic/syn/missense/intergenic</small></div></div>
+  </div>
+  <div class="callout">
+    <div class="label">Update, same day: hardened into a permanent pipeline stage (v3)</div>
+    <p>This audit has been built into the funnel itself rather than left as a one-off script: the raw-pileup check above now runs automatically, and the old homopolymer-only indel filter (single-base runs &ge;6bp) has been replaced with a general short-tandem-repeat filter (mono&ndash;hexanucleotide repeat units, &ge;3 repetitions) &mdash; STR contexts broadly, not just homopolymers, were the dominant false-positive source. Re-run from scratch: <b>71 final candidates</b>, superseding both the original 95 and the 75 from the manual pass above (the improved STR filter alone catches several of the manually-flagged candidates, including the g5858 frameshift below, automatically). The missense set relevant to folding is unaffected: g3355 and g8574 remain confirmed, g1079 remains downgraded, g5894 and g5858 are now excluded by the pipeline itself.</p>
   </div>
   <div class="table-wrap">
     <table>
@@ -342,7 +347,7 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
 
 <section id="convergence">
   <div class="section-head"><span class="section-num">08</span><h2>Convergence with ALE and HMF</h2></div>
-  <p>Using the corrected 75-candidate set: <b>0 shared positions, 0 shared genes</b> with ALE's 24 confirmed candidates (21 genes), and <b>0 shared genes</b> with HMF's 7 candidates. Three independent stress-adaptation experiments on the same HS2 background, three non-overlapping mutation sets &mdash; see the <a href="index.html#convergence">main convergence section</a> for the full three-way comparison including HMF vs. HS19 directly.</p>
+  <p>Using the final, hardened 71-candidate set: <b>0 shared positions, 0 shared genes</b> with ALE's 24 confirmed candidates (21 genes), and <b>0 shared genes</b> with HMF's own hardened set (which dropped from 7 to just 1 confirmed candidate under the same fix &mdash; see the <a href="index.html#convergence">main convergence section</a>). Three independent stress-adaptation experiments on the same HS2 background, three non-overlapping mutation sets &mdash; see the <a href="index.html#convergence">main convergence section</a> for the full three-way comparison including HMF vs. HS19 directly.</p>
   <div class="callout good">
     <div class="label">A mutation-spectrum signature that still matches the stressor's chemistry</div>
     <p>HS19's spectrum remains C&gt;A-dominant (a classic 8-oxoguanine oxidative-damage signature, mechanistically coherent with NaOCl exposure) after the audit correction &mdash; distinct from ALE's T&gt;G/T&gt;C-dominant spectrum. This finding is unaffected by the missense retractions above, since it's computed from the full corrected SNV set, not just the coding subset.</p>
@@ -365,7 +370,7 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
     <div class="label">What holds up</div>
     <ul>
       <li>The HS2 reference itself is independently validated by NICEM's separately-assembled genome &mdash; zero mismatches at every resolvable candidate position.</li>
-      <li>75 doubly-confirmed HS19-specific SNV/indel candidates, absent from all 3 HS2 baselines both by formal genotype call and by raw read support.</li>
+      <li>71 final HS19-specific SNV/indel candidates (hardened v3 pipeline), absent from all 3 HS2 baselines both by formal genotype call and by raw read support, with a general short-tandem-repeat filter replacing the original homopolymer-only check.</li>
       <li>Two confirmed missense mutations (g3355 P1044L, g8574 R562Q), both structurally and computationally unremarkable but genuinely real.</li>
       <li>Zero convergence with ALE or HMF at position or gene level, holding across two independent correction passes now &mdash; three separately-evolved lines on the same background, three genuinely distinct routes.</li>
       <li>A mutation-spectrum signature (C&gt;A-dominant) mechanistically consistent with NaOCl's oxidative chemistry.</li>
