@@ -105,6 +105,11 @@ td code { font-family: var(--mono); font-size: 0.82em; background: var(--accent-
 .metric-row .m { }
 .metric-row .m .mv { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; }
 .metric-row .m .ml { font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.03em; }
+.fold-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.9rem; margin: 0.9rem 0 0.3rem; }
+.fold-gallery figure { margin: 0; }
+.fold-gallery img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 3px; background: #fff; }
+.fold-gallery figcaption { font-family: var(--sans); font-size: 0.66rem; color: var(--ink-faint); text-align: center; margin-top: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.gallery-label { font-family: var(--sans); font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.05em; margin: 0.8rem 0 0.2rem; font-weight: 600; }
 .pipeline-stage { display: grid; grid-template-columns: 190px 1fr; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--line); align-items: start; }
 .pipeline-stage:first-child { border-top: none; }
 .pipeline-stage .stage-name { font-family: var(--sans); font-size: 0.78rem; font-weight: 700; color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.03em; padding-top: 0.15rem; }
@@ -259,6 +264,17 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
       <div class="m"><div class="mv">+1.50 kcal/mol</div><div class="ml">RNAfold &Delta;&Delta;G (65th pct., unremarkable)</div></div>
       <div class="m"><div class="mv">0.71 / 0.70</div><div class="ml">ESMFold pLDDT, WT/mut</div></div>
     </div>
+    <div class="gallery-label">Protein fold, WT (blue) vs P1044L (red), local &plusmn;190aa window</div>
+    <div class="fold-gallery">
+      <figure><img src="assets/hs19_g3355_fold_wide.png" alt="g3355 ESMFold overlay, WT vs P1044L mutant, wide view" loading="lazy"><figcaption>Overlay, wide</figcaption></figure>
+      <figure><img src="assets/hs19_g3355_fold_closeup.png" alt="g3355 ESMFold overlay closeup at residue 1044" loading="lazy"><figcaption>Closeup at site</figcaption></figure>
+      <figure><img src="assets/hs19_g3355_fold_rotate.gif" alt="g3355 ESMFold overlay, rotating 360 degrees" loading="lazy"><figcaption>360&deg; rotation</figcaption></figure>
+    </div>
+    <div class="gallery-label">RNA secondary structure, RNAfold MFE, &plusmn;150bp local window</div>
+    <div class="fold-gallery">
+      <figure><img src="assets/hs19_g3355_rna_WT.svg" alt="g3355 RNAfold MFE secondary structure, WT" loading="lazy"><figcaption>WT</figcaption></figure>
+      <figure><img src="assets/hs19_g3355_rna_mut.svg" alt="g3355 RNAfold MFE secondary structure, mutant" loading="lazy"><figcaption>Mutant</figcaption></figure>
+    </div>
   </div>
 
   <div class="gene-card">
@@ -268,6 +284,17 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
       <div class="m"><div class="mv">&minus;1.26</div><div class="ml">ESM2 score</div></div>
       <div class="m"><div class="mv">&minus;1.00 kcal/mol</div><div class="ml">RNAfold &Delta;&Delta;G (51st pct., unremarkable)</div></div>
       <div class="m"><div class="mv">0.88 / 0.88</div><div class="ml">ESMFold pLDDT (highest confidence)</div></div>
+    </div>
+    <div class="gallery-label">Protein fold, WT (blue) vs R562Q (red), local &plusmn;190aa window</div>
+    <div class="fold-gallery">
+      <figure><img src="assets/hs19_g8574_fold_wide.png" alt="g8574 ESMFold overlay, WT vs R562Q mutant, wide view" loading="lazy"><figcaption>Overlay, wide</figcaption></figure>
+      <figure><img src="assets/hs19_g8574_fold_closeup.png" alt="g8574 ESMFold overlay closeup at residue 562" loading="lazy"><figcaption>Closeup at site</figcaption></figure>
+      <figure><img src="assets/hs19_g8574_fold_rotate.gif" alt="g8574 ESMFold overlay, rotating 360 degrees" loading="lazy"><figcaption>360&deg; rotation</figcaption></figure>
+    </div>
+    <div class="gallery-label">RNA secondary structure, RNAfold MFE, &plusmn;150bp local window</div>
+    <div class="fold-gallery">
+      <figure><img src="assets/hs19_g8574_rna_WT.svg" alt="g8574 RNAfold MFE secondary structure, WT" loading="lazy"><figcaption>WT</figcaption></figure>
+      <figure><img src="assets/hs19_g8574_rna_mut.svg" alt="g8574 RNAfold MFE secondary structure, mutant" loading="lazy"><figcaption>Mutant</figcaption></figure>
     </div>
   </div>
 
@@ -279,6 +306,13 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
       <div class="m"><div class="mv">&minus;6.10 kcal/mol</div><div class="ml">RNAfold &Delta;&Delta;G, joint haplotype &mdash; 99th pct. of null (as computed)</div></div>
       <div class="m"><div class="mv">0.59 / 0.58</div><div class="ml">ESMFold pLDDT (lowest confidence fold)</div></div>
     </div>
+    <div class="gallery-label">Protein fold, WT (blue) vs A331V+L332P (red), local &plusmn;190aa window</div>
+    <div class="fold-gallery">
+      <figure><img src="assets/hs19_g1079_fold_wide.png" alt="g1079 ESMFold overlay, WT vs double-substitution mutant, wide view" loading="lazy"><figcaption>Overlay, wide</figcaption></figure>
+      <figure><img src="assets/hs19_g1079_fold_closeup.png" alt="g1079 ESMFold overlay closeup at residues 331-332" loading="lazy"><figcaption>Closeup at site</figcaption></figure>
+      <figure><img src="assets/hs19_g1079_fold_rotate.gif" alt="g1079 ESMFold overlay, rotating 360 degrees" loading="lazy"><figcaption>360&deg; rotation</figcaption></figure>
+    </div>
+    <p style="font-family: var(--sans); font-size: 0.8rem; color: var(--ink-faint); margin: 0.4rem 0 0;">RNA structure image not re-rendered here &mdash; the &minus;6.10 kcal/mol figure above uses the joint two-substitution haplotype, which needs separate window handling from the single-substitution sites below.</p>
   </div>
 
   <div class="gene-card retracted">
@@ -288,6 +322,17 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
       <div class="m"><div class="mv">+6.42</div><div class="ml">ESM2 score, strongly tolerated (as computed)</div></div>
       <div class="m"><div class="mv">+3.60 kcal/mol</div><div class="ml">RNAfold &Delta;&Delta;G, 92nd pct. (as computed)</div></div>
     </div>
+    <div class="gallery-label">Protein fold, WT (blue) vs S384Y (red), local &plusmn;190aa window</div>
+    <div class="fold-gallery">
+      <figure><img src="assets/hs19_g5894_fold_wide.png" alt="g5894 ESMFold overlay, WT vs S384Y mutant, wide view" loading="lazy"><figcaption>Overlay, wide</figcaption></figure>
+      <figure><img src="assets/hs19_g5894_fold_closeup.png" alt="g5894 ESMFold overlay closeup at residue 384" loading="lazy"><figcaption>Closeup at site</figcaption></figure>
+      <figure><img src="assets/hs19_g5894_fold_rotate.gif" alt="g5894 ESMFold overlay, rotating 360 degrees" loading="lazy"><figcaption>360&deg; rotation</figcaption></figure>
+    </div>
+    <div class="gallery-label">RNA secondary structure, RNAfold MFE, &plusmn;150bp local window</div>
+    <div class="fold-gallery">
+      <figure><img src="assets/hs19_g5894_rna_WT.svg" alt="g5894 RNAfold MFE secondary structure, WT" loading="lazy"><figcaption>WT</figcaption></figure>
+      <figure><img src="assets/hs19_g5894_rna_mut.svg" alt="g5894 RNAfold MFE secondary structure, mutant" loading="lazy"><figcaption>Mutant</figcaption></figure>
+    </div>
   </div>
 
   <div class="gene-card retracted">
@@ -296,6 +341,17 @@ footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--li
     <div class="metric-row">
       <div class="m"><div class="mv">421 &rarr; 250 aa</div><div class="ml">WT &rarr; mutant length (as computed)</div></div>
       <div class="m"><div class="mv">&minus;0.10 kcal/mol</div><div class="ml">RNAfold &Delta;&Delta;G at indel site (as computed)</div></div>
+    </div>
+    <div class="gallery-label">Protein fold, WT (blue) vs frameshift (red), local &plusmn;190aa window</div>
+    <div class="fold-gallery">
+      <figure><img src="assets/hs19_g5858_fold_wide.png" alt="g5858 ESMFold overlay, WT vs frameshift mutant, wide view" loading="lazy"><figcaption>Overlay, wide</figcaption></figure>
+      <figure><img src="assets/hs19_g5858_fold_closeup.png" alt="g5858 ESMFold overlay closeup at the frameshift divergence point" loading="lazy"><figcaption>Closeup at site</figcaption></figure>
+      <figure><img src="assets/hs19_g5858_fold_rotate.gif" alt="g5858 ESMFold overlay, rotating 360 degrees" loading="lazy"><figcaption>360&deg; rotation</figcaption></figure>
+    </div>
+    <div class="gallery-label">RNA secondary structure, RNAfold MFE, &plusmn;150bp local window at indel site</div>
+    <div class="fold-gallery">
+      <figure><img src="assets/hs19_g5858_rna_WT.svg" alt="g5858 RNAfold MFE secondary structure, WT" loading="lazy"><figcaption>WT</figcaption></figure>
+      <figure><img src="assets/hs19_g5858_rna_mut.svg" alt="g5858 RNAfold MFE secondary structure, frameshift" loading="lazy"><figcaption>Frameshift</figcaption></figure>
     </div>
   </div>
 
