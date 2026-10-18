@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methylation hints in HS2 and ALE — what the data can and cannot say</title>
+<style>
+:root {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", "Liberation Mono", monospace;
+  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, ui-serif, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+    --line: #263129; --line-strong: #34412F;
+    --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+    --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+    --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+    --status-open: #E08079; --status-open-wash: #2C1917;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+  --line: #263129; --line-strong: #34412F;
+  --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+  --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+  --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+  --status-open: #E08079; --status-open-wash: #2C1917;
+}
+:root[data-theme="light"] {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); margin: 0; }
+a { color: var(--accent); }
+.doc { font-family: var(--serif); color: var(--ink); max-width: 900px; margin: 0 auto; padding: 4rem 2.5rem 6rem; line-height: 1.62; }
+.doc p { max-width: 68ch; }
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--ink); }
+.backlink { font-family: var(--sans); font-size: 0.78rem; color: var(--ink-faint); text-decoration: none; margin-bottom: 1.6rem; display: inline-block; }
+.backlink:hover { color: var(--accent); }
+.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 1.4rem; margin-bottom: 2.4rem; }
+.eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent-ink); font-weight: 600; margin: 0 0 0.6rem; }
+.masthead h1 { font-size: 1.9rem; margin: 0 0 0.8rem; line-height: 1.25; }
+.masthead .dek { font-size: 1.05rem; color: var(--ink-soft); margin: 0 0 1rem; max-width: 68ch; font-family: var(--sans); }
+.meta-row { display: flex; flex-wrap: wrap; gap: 1.4rem; font-family: var(--mono); font-size: 0.76rem; color: var(--ink-faint); }
+.meta-row strong { color: var(--ink-soft); font-weight: 600; }
+nav.toc { font-family: var(--sans); font-size: 0.86rem; background: var(--paper-raised); border: 1px solid var(--line); padding: 1.1rem 1.4rem; margin: 2rem 0 3rem; border-radius: 3px; }
+nav.toc .label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.6rem; }
+nav.toc ol { margin: 0; padding-left: 1.2rem; columns: 2; }
+nav.toc a { text-decoration: none; color: var(--ink-soft); }
+nav.toc a:hover { color: var(--accent); }
+section { margin-bottom: 3.2rem; }
+.section-head { display: flex; align-items: baseline; gap: 0.7rem; margin-bottom: 1.1rem; border-bottom: 1px solid var(--line-strong); padding-bottom: 0.5rem; }
+.section-num { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.06em; }
+.thesis { background: var(--paper-raised); border-left: 3px solid var(--accent); padding: 1.3rem 1.6rem; border-radius: 2px; font-size: 1.03rem; }
+.thesis .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); font-weight: 700; margin-bottom: 0.5rem; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 1.4rem 0; font-family: var(--sans); }
+.stat { background: var(--paper-raised); padding: 1rem 1.1rem; }
+.stat .k { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.35rem; }
+.stat .v { font-variant-numeric: tabular-nums; font-size: 1.32rem; font-weight: 600; color: var(--ink); font-family: var(--serif); }
+.stat .v small { font-size: 0.62em; color: var(--ink-faint); font-weight: 400; font-family: var(--sans); }
+.stat .delta { font-size: 0.76rem; color: var(--accent-ink); margin-top: 0.2rem; }
+table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 0.85rem; }
+.table-wrap { overflow-x: auto; margin: 1.2rem 0; border: 1px solid var(--line); }
+th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { background: var(--accent-wash); color: var(--accent-ink); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--line-strong); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--paper-raised); }
+td .locus { font-family: var(--mono); font-size: 0.79rem; color: var(--ink-soft); white-space: nowrap; }
+td .gene { font-family: var(--mono); font-weight: 700; color: var(--ink); }
+td code { font-family: var(--mono); font-size: 0.82em; background: var(--accent-wash); color: var(--accent-ink); padding: 0.1em 0.35em; border-radius: 2px; }
+.pill { display: inline-flex; align-items: center; gap: 0.35em; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.22em 0.6em; border-radius: 3px; white-space: nowrap; }
+.pill.confirmed { background: var(--status-confirmed-wash); color: var(--status-confirmed); }
+.pill.pending { background: var(--status-pending-wash); color: var(--status-pending); }
+.pill.open { background: var(--status-open-wash); color: var(--status-open); }
+.pill::before { content: "\25CF"; font-size: 0.7em; }
+.matrix-cell-yes { color: var(--status-confirmed); font-weight: 700; text-align: center; }
+.matrix-cell-partial { color: var(--status-pending); font-weight: 700; text-align: center; }
+.matrix-cell-no { color: var(--ink-faint); text-align: center; }
+.callout { border: 1px solid var(--status-pending); background: var(--status-pending-wash); border-radius: 3px; padding: 1.2rem 1.5rem; margin: 1.4rem 0; }
+.callout.good { border-color: var(--accent); background: var(--accent-wash); }
+.callout.bad { border-color: var(--status-open); background: var(--status-open-wash); }
+.callout .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--status-pending); margin-bottom: 0.6rem; }
+.callout.good .label { color: var(--accent-ink); }
+.callout.bad .label { color: var(--status-open); }
+.callout ul { margin: 0; padding-left: 1.2rem; } .callout li { margin-bottom: 0.5rem; } .callout li:last-child { margin-bottom: 0; }
+.gene-card { border: 1px solid var(--line); border-radius: 3px; padding: 1.1rem 1.4rem; margin-bottom: 1rem; background: var(--paper-raised); }
+.gene-card.retracted { opacity: 0.6; }
+.gene-card h4 { margin: 0 0 0.3rem; font-size: 1.05rem; }
+.gene-card .strike { text-decoration: line-through; }
+.gene-card .desc { font-family: var(--sans); font-size: 0.86rem; color: var(--ink-soft); margin-bottom: 0.7rem; }
+.metric-row { display: flex; flex-wrap: wrap; gap: 1.2rem; font-family: var(--sans); }
+.metric-row .m { }
+.metric-row .m .mv { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; }
+.metric-row .m .ml { font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.03em; }
+.fold-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.9rem; margin: 0.9rem 0 0.3rem; }
+.fold-gallery figure { margin: 0; }
+.fold-gallery img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 3px; background: #fff; }
+.fold-gallery figcaption { font-family: var(--sans); font-size: 0.66rem; color: var(--ink-faint); text-align: center; margin-top: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.gallery-label { font-family: var(--sans); font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.05em; margin: 0.8rem 0 0.2rem; font-weight: 600; }
+.pipeline-stage { display: grid; grid-template-columns: 190px 1fr; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--line); align-items: start; }
+.pipeline-stage:first-child { border-top: none; }
+.pipeline-stage .stage-name { font-family: var(--sans); font-size: 0.78rem; font-weight: 700; color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.03em; padding-top: 0.15rem; }
+.pipeline-stage .stage-detail { font-family: var(--sans); font-size: 0.88rem; color: var(--ink-soft); }
+.pipeline-stage .stage-detail p { max-width: none; font-size: inherit; margin-bottom: 0.4rem; }
+.pipeline-stage code { font-family: var(--mono); font-size: 0.82em; background: var(--paper-raised); border: 1px solid var(--line); color: var(--ink); padding: 0.12em 0.4em; border-radius: 2px; }
+footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-family: var(--sans); font-size: 0.74rem; color: var(--ink-faint); }
+@media (max-width: 600px) {
+  .doc { padding: 2.4rem 1.2rem 4rem; }
+  .masthead h1 { font-size: 1.55rem; }
+  nav.toc ol { columns: 1; }
+  .pipeline-stage { grid-template-columns: 1fr; gap: 0.3rem; }
+}
+
+.fig { margin: 1.6rem 0; } .fig img { width: 100%; border: 1px solid var(--line); border-radius: 3px; background: #fff; }
+.fig figcaption { font-family: var(--sans); font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.5rem; }
+.fig figcaption b { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="doc">
+
+<a class="backlink" href="index.html#methylation">&larr; Back to project summary (&sect;13, Epigenetic signature)</a>
+
+<div class="masthead">
+  <p class="eyebrow">Exploratory &middot; HS2 vs. ALE &middot; 2026 HiFi data &middot; 2026-10-19</p>
+  <h1>Methylation hints in HS2 and ALE: what the current data can and cannot say</h1>
+  <p class="dek">No direct methylation calls exist yet: the 5mC tags were lost when the Revio reads were exported to FASTQ. This page collects every indirect, sequence-level hint we could extract from the 2026 HiFi assemblies and the HiFi heterozygous calls. The honest summary is that the hints are weak, they are not specific to either strain, and they cannot separate ALE from HS2. They are best read as a reason to request the original instrument BAMs, not as findings.</p>
+  <div class="meta-row">
+    <span><strong>Strains:</strong> HS2 (ancestor), ALE (descendant); HS19 not assessable</span>
+    <span><strong>Data:</strong> HiFi assemblies (hifiasm + purge_dups), HiFi heterozygous SNVs</span>
+    <span><strong>Status:</strong> indirect proxies only</span>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="label">Contents</div>
+  <ol>
+    <li><a href="#data">What data we have, and what is missing</a></li>
+    <li><a href="#depletion">Hint 1: CpG depletion with TpG/CpA excess</a></li>
+    <li><a href="#uniform">Hint 2: depletion is uniform, not two-state</a></li>
+    <li><a href="#hypermut">Hint 3: transitions are enriched at CpG in HS2 heterozygous sites</a></li>
+    <li><a href="#strains">HS2 vs. ALE vs. HS19</a></li>
+    <li><a href="#next">What would make this conclusive</a></li>
+  </ol>
+</nav>
+
+<section id="verdict">
+  <div class="callout">
+    <div class="label">Bottom line</div>
+    <ul>
+      <li><b>Direct methylation is not available locally.</b> The Revio run produced a &ldquo;Methylation&rdquo; report for both strains, but every file we hold (FASTQ/FASTA exports and 70+ BAMs) carries no base-modification tags, and no original HiFi BAM exists on this machine or on the attached D: and E: drives.</li>
+      <li><b>Indirect hints are weak and mutually consistent with low-level, uniform CpG methylation in the lineage</b>: mild CpG depletion with a TpG/CpA excess, no two-state structure, and a modest transition enrichment at CpG in heterozygous sites. None is diagnostic.</li>
+      <li><b>None of this can distinguish ALE from HS2.</b> Their genome composition is identical by these measures, and sequence history cannot register epigenetic change over the span of the experiment.</li>
+      <li><b>HS19 cannot be assessed</b>: it exists only as Illumina short reads, which carry no methylation information.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="data">
+  <div class="section-head"><span class="section-num">01</span><h2>What data we have, and what is missing</h2></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Data</th><th>Methylation information?</th></tr></thead>
+      <tbody>
+        <tr><td>HS2 and ALE reads, FASTQ/FASTA exports (SMRT Link &ldquo;Export Reads&rdquo;)</td><td>No. Read headers are only <code>movie/zmw/ccs</code>; modification tags were not exported.</td></tr>
+        <tr><td>All local alignments (HS2/ALE on HS2 and on ALE, 70+ BAMs checked)</td><td>No. Zero reads carry <code>MM</code>/<code>ML</code> tags.</td></tr>
+        <tr><td>Revio SMRT Link analysis outputs (jobs 658 HS2, 659 ALE)</td><td>The page lists a &ldquo;Methylation&rdquo; JsonReport for each, which implies the instrument called CpG 5mC. The report contents are not on our machines.</td></tr>
+        <tr><td>Original demultiplexed HiFi BAMs</td><td>Not found on C:, WSL, D: or E:. They would have to come from the sequencing facility.</td></tr>
+        <tr><td>HS19 and HMF</td><td>Illumina short reads only; no methylation information without bisulfite/EM-seq or HiFi re-sequencing.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Even when the BAMs are recovered, Revio&rsquo;s on-instrument calling covers CpG 5mC only. Non-CpG methylation and 6mA, reported in some green algae, would need the underlying kinetics and a different tool.</p>
+</section>
+
+<figure class="fig">
+  <img src="assets/methylation_hints.png" alt="Three panels: dinucleotide observed/expected by genomic region, per-gene CpG depletion histogram, and CpG enrichment of heterozygous SNVs for transitions versus transversions" loading="lazy">
+  <figcaption><b>Figure.</b> <b>A</b>, observed/expected dinucleotide ratios in HS2 by region (repeat-masked; the GpC bar is the compositional control). <b>B</b>, per-gene CpG o/e across 8,064 coding sequences. <b>C</b>, enrichment of HS2 heterozygous SNVs at CpG-involved positions, relative to the fraction of such positions in the genome (dashed line = 1); Ti = transitions, Tv = transversions; error bars are 95% Wilson intervals.</figcaption>
+</figure>
+
+<section id="depletion">
+  <div class="section-head"><span class="section-num">02</span><h2>Hint 1: CpG depletion with a TpG/CpA excess</h2></div>
+  <p>Methylated cytosines deaminate to thymine, so DNA with a long methylation history loses CpG and gains TpG and CpA. In the HS2 assembly (repeat-masked, GC 64.6%) CpG is observed at 0.72 of expectation while the reverse dinucleotide GpC, which is not subject to that decay, is at 1.33; TpG and CpA are both at about 1.5.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Region</th><th>Mb</th><th>GC</th><th>CpG o/e</th><th>GpC o/e</th><th>TpG o/e</th><th>CpA o/e</th><th>CpG / GpC</th></tr></thead>
+      <tbody>
+        <tr><td>Intergenic</td><td>6.8</td><td>61.1%</td><td>0.71</td><td>1.35</td><td>1.44</td><td>1.44</td><td>0.52</td></tr>
+        <tr><td>Intron</td><td>22.6</td><td>64.5%</td><td>0.65</td><td>1.32</td><td>1.58</td><td>1.58</td><td>0.49</td></tr>
+        <tr><td>UTR</td><td>4.2</td><td>58.8%</td><td>0.70</td><td>1.35</td><td>1.41</td><td>1.42</td><td>0.52</td></tr>
+        <tr><td>Coding sequence</td><td>16.0</td><td>67.7%</td><td>0.81</td><td>1.32</td><td>1.47</td><td>1.47</td><td>0.62</td></tr>
+        <tr><td><b>All</b></td><td>51.2</td><td>64.6%</td><td><b>0.72</b></td><td>1.33</td><td>1.50</td><td>1.51</td><td><b>0.54</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Reading it carefully:</p>
+  <ul>
+    <li>The pattern (CpG down, TpG/CpA up) is the classic decay signature, so it is <b>compatible with</b> historical CpG methylation.</li>
+    <li>It is <b>not diagnostic</b>. GpC is itself overrepresented, which shows a GC-rich-genome composition bias, and residual (GT)n/(CA)n microsatellites inflate TpG/CpA even after masking.</li>
+    <li>Introns are the most depleted (0.65) and coding sequence the least (0.81). That is the opposite of &ldquo;methylation sits in gene bodies&rdquo;, but coding CpG is also shaped by codon usage and amino-acid constraints, so this does not separate the two explanations. It also qualifies the genic-vs-repeat reading in &sect;13, where the 1.4% gap between the two window classes was small.</li>
+  </ul>
+</section>
+
+<section id="uniform">
+  <div class="section-head"><span class="section-num">03</span><h2>Hint 2: depletion is uniform, not two-state</h2></div>
+  <p>Genomes with mosaic methylation (some genes or domains methylated, others not) tend to show two populations of CpG o/e. We see one.</p>
+  <ul>
+    <li><b>Genes:</b> across 8,064 coding sequences of at least 600 bp, median CpG o/e is 0.81 (5th&ndash;95th percentile 0.68&ndash;0.93); only 0.5% fall below 0.6. The bimodality coefficient is 0.17 (values above 0.555 suggest two modes).</li>
+    <li><b>Windows:</b> across 10,211 non-overlapping 5 kb windows the median is 0.71 (5th&ndash;95th percentile 0.63&ndash;0.79), none is below 0.5, and the bimodality coefficient is 0.16.</li>
+    <li>CpG o/e correlates only weakly with GC (r = 0.23 for genes, 0.29 for windows).</li>
+  </ul>
+  <p>So there is no sequence-level sign of distinct methylated and unmethylated compartments. That fits either a genome with little methylation or one with uniform low-level methylation; this test cannot tell which.</p>
+</section>
+
+<section id="hypermut">
+  <div class="section-head"><span class="section-num">04</span><h2>Hint 3: transitions are enriched at CpG in HS2 heterozygous sites</h2></div>
+  <p>CpG sites mutate faster, mostly through C&rarr;T transitions. HS2 is diploid, so its heterozygous SNVs are a snapshot of segregating mutations. We took HiFi heterozygous SNVs, excluded repeat-masked positions, and asked how often they fall at &ldquo;CpG-involved&rdquo; positions (a C followed by G, a G preceded by C, or the T/A that would pair into one), compared with the 32.0% of unmasked positions that are CpG-involved. Because the ancestral allele is unknown, a site counts if either allele forms a CpG.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Call set</th><th>Transitions: enrichment (95% CI)</th><th>Transversions: enrichment (95% CI)</th></tr></thead>
+      <tbody>
+        <tr><td>Called by both bcftools and GATK, depth/quality filtered (n = 145)</td><td>1.40 (1.09&ndash;1.73), n = 89</td><td>1.06 (0.72&ndash;1.47), n = 56</td></tr>
+        <tr><td>bcftools, depth 80&ndash;350, QUAL &ge; 50 (n = 584)</td><td><b>1.50 (1.33&ndash;1.67)</b>, n = 319</td><td>1.15 (0.98&ndash;1.34), n = 265</td></tr>
+        <tr><td>bcftools, relaxed: depth 60&ndash;400, QUAL &ge; 30 (n = 602)</td><td>1.50 (1.33&ndash;1.66), n = 330</td><td>1.13 (0.95&ndash;1.31), n = 272</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The direction is the one a CpG-specific transition effect predicts, and it is stable across filters: transitions are enriched about 1.5-fold and transversions about 1.1-fold. The magnitude is modest compared with the roughly 10-fold CpG hypermutability seen in heavily methylated vertebrate genomes, which points at most to low-level methylation or an older, diluted history. Two cautions: the transition and transversion intervals nearly touch, and within coding sequence alone (n = 102 in the two-caller set) both classes are enriched equally (1.37 and 1.36), so there the effect is not transition-specific. This is a suggestive hint from a few hundred SNVs in one individual, not a result.</p>
+</section>
+
+<section id="strains">
+  <div class="section-head"><span class="section-num">05</span><h2>HS2 vs. ALE vs. HS19</h2></div>
+  <ul>
+    <li><b>HS2 vs. ALE, composition:</b> identical by every measure above (overall CpG o/e 0.716 in both; region-level values within 0.01). As expected for two assemblies of one lineage, this proxy is blind to any epigenetic change that arose during the experiment.</li>
+    <li><b>ALE-specific mutations:</b> of the 91 HiFi-supported novel SNVs, 55 are at a reference C or G, and only 5 (9.1%) sit in a CpG, below the 22.7% expected. Among 14 C&gt;T/G&gt;A transitions, 4 (29%) are at CpG against 22.7% expected (p = 0.40). So there is no sign of CpG-deamination-driven mutation. The spectrum is transversion-heavy instead (C&gt;A 38%, T&gt;G 25%, C&gt;T 15%; Ti/Tv 0.34). The numbers are small, and this says nothing about whether ALE methylation differs.</li>
+    <li><b>HS19 (and HMF):</b> Illumina-only, so no methylation information is recoverable. Re-sequencing HS19 with HiFi would add methylation and would also address its variant-calling confidence gap.</li>
+  </ul>
+</section>
+
+<section id="next">
+  <div class="section-head"><span class="section-num">06</span><h2>What would make this conclusive</h2></div>
+  <ol>
+    <li><b>Recover the original data:</b> demultiplexed HiFi BAMs with CpG 5mC (MM/ML) tags for HS2 and ALE from run 260610_26_B328-Cell2, plus the two &ldquo;Methylation&rdquo; JSON reports.</li>
+    <li><b>Call it directly:</b> realign with pbmm2 (which preserves the tags), run pb-CpG-tools for per-CpG methylation, then compare global CpG methylation, gene-body and promoter profiles, and differentially methylated regions between HS2 and ALE.</li>
+    <li><b>Intersect with the genetics:</b> overlap differentially methylated regions with the 24 candidates, the 16 kb duplication, and genes with RNA-seq evidence (RNA-seq is available for HS2 only).</li>
+    <li><b>Design limits to plan for:</b> one colony per strain means clonal differences cannot be separated from adaptation, so replicates would be needed for any claim; methylation can follow genotype; and CpG-only calling misses non-CpG methylation and 6mA.</li>
+  </ol>
+</section>
+
+<footer>
+  Analysis scripts and outputs: <code>chlorella_hifi/epigenetics/</code> (methylation_hints.json, methylation_sensitivity.json). Region classes come from the AUGUSTUS annotation; repeat masking removes homopolymers (&ge;6), dinucleotide (&ge;5), trinucleotide (&ge;4) and tetranucleotide (&ge;3) repeats plus 2 bp of flank. Heterozygous SNVs are from HS2 HiFi reads mapped to the HS2 assembly (median depth 191&times;). Generated 2026-10-19 as an exploratory analysis; nothing here replaces direct methylation calling.
+</footer>
+
+</div>
+</body>
+</html>
