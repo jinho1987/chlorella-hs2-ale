@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Follow-up studies: epigenetics and HS19 validation targets</title>
+<style>
+:root {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", "Liberation Mono", monospace;
+  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, ui-serif, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+    --line: #263129; --line-strong: #34412F;
+    --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+    --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+    --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+    --status-open: #E08079; --status-open-wash: #2C1917;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+  --line: #263129; --line-strong: #34412F;
+  --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+  --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+  --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+  --status-open: #E08079; --status-open-wash: #2C1917;
+}
+:root[data-theme="light"] {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); margin: 0; }
+a { color: var(--accent); }
+.doc { font-family: var(--serif); color: var(--ink); max-width: 900px; margin: 0 auto; padding: 4rem 2.5rem 6rem; line-height: 1.62; }
+.doc p { max-width: 68ch; }
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--ink); }
+.backlink { font-family: var(--sans); font-size: 0.78rem; color: var(--ink-faint); text-decoration: none; margin-bottom: 1.6rem; display: inline-block; }
+.backlink:hover { color: var(--accent); }
+.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 1.4rem; margin-bottom: 2.4rem; }
+.eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent-ink); font-weight: 600; margin: 0 0 0.6rem; }
+.masthead h1 { font-size: 1.9rem; margin: 0 0 0.8rem; line-height: 1.25; }
+.masthead .dek { font-size: 1.05rem; color: var(--ink-soft); margin: 0 0 1rem; max-width: 68ch; font-family: var(--sans); }
+.meta-row { display: flex; flex-wrap: wrap; gap: 1.4rem; font-family: var(--mono); font-size: 0.76rem; color: var(--ink-faint); }
+.meta-row strong { color: var(--ink-soft); font-weight: 600; }
+nav.toc { font-family: var(--sans); font-size: 0.86rem; background: var(--paper-raised); border: 1px solid var(--line); padding: 1.1rem 1.4rem; margin: 2rem 0 3rem; border-radius: 3px; }
+nav.toc .label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.6rem; }
+nav.toc ol { margin: 0; padding-left: 1.2rem; columns: 2; }
+nav.toc a { text-decoration: none; color: var(--ink-soft); }
+nav.toc a:hover { color: var(--accent); }
+section { margin-bottom: 3.2rem; }
+.section-head { display: flex; align-items: baseline; gap: 0.7rem; margin-bottom: 1.1rem; border-bottom: 1px solid var(--line-strong); padding-bottom: 0.5rem; }
+.section-num { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.06em; }
+.thesis { background: var(--paper-raised); border-left: 3px solid var(--accent); padding: 1.3rem 1.6rem; border-radius: 2px; font-size: 1.03rem; }
+.thesis .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); font-weight: 700; margin-bottom: 0.5rem; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 1.4rem 0; font-family: var(--sans); }
+.stat { background: var(--paper-raised); padding: 1rem 1.1rem; }
+.stat .k { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.35rem; }
+.stat .v { font-variant-numeric: tabular-nums; font-size: 1.32rem; font-weight: 600; color: var(--ink); font-family: var(--serif); }
+.stat .v small { font-size: 0.62em; color: var(--ink-faint); font-weight: 400; font-family: var(--sans); }
+.stat .delta { font-size: 0.76rem; color: var(--accent-ink); margin-top: 0.2rem; }
+table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 0.85rem; }
+.table-wrap { overflow-x: auto; margin: 1.2rem 0; border: 1px solid var(--line); }
+th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { background: var(--accent-wash); color: var(--accent-ink); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--line-strong); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--paper-raised); }
+td .locus { font-family: var(--mono); font-size: 0.79rem; color: var(--ink-soft); white-space: nowrap; }
+td .gene { font-family: var(--mono); font-weight: 700; color: var(--ink); }
+td code { font-family: var(--mono); font-size: 0.82em; background: var(--accent-wash); color: var(--accent-ink); padding: 0.1em 0.35em; border-radius: 2px; }
+.pill { display: inline-flex; align-items: center; gap: 0.35em; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.22em 0.6em; border-radius: 3px; white-space: nowrap; }
+.pill.confirmed { background: var(--status-confirmed-wash); color: var(--status-confirmed); }
+.pill.pending { background: var(--status-pending-wash); color: var(--status-pending); }
+.pill.open { background: var(--status-open-wash); color: var(--status-open); }
+.pill::before { content: "\25CF"; font-size: 0.7em; }
+.matrix-cell-yes { color: var(--status-confirmed); font-weight: 700; text-align: center; }
+.matrix-cell-partial { color: var(--status-pending); font-weight: 700; text-align: center; }
+.matrix-cell-no { color: var(--ink-faint); text-align: center; }
+.callout { border: 1px solid var(--status-pending); background: var(--status-pending-wash); border-radius: 3px; padding: 1.2rem 1.5rem; margin: 1.4rem 0; }
+.callout.good { border-color: var(--accent); background: var(--accent-wash); }
+.callout.bad { border-color: var(--status-open); background: var(--status-open-wash); }
+.callout .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--status-pending); margin-bottom: 0.6rem; }
+.callout.good .label { color: var(--accent-ink); }
+.callout.bad .label { color: var(--status-open); }
+.callout ul { margin: 0; padding-left: 1.2rem; } .callout li { margin-bottom: 0.5rem; } .callout li:last-child { margin-bottom: 0; }
+.gene-card { border: 1px solid var(--line); border-radius: 3px; padding: 1.1rem 1.4rem; margin-bottom: 1rem; background: var(--paper-raised); }
+.gene-card.retracted { opacity: 0.6; }
+.gene-card h4 { margin: 0 0 0.3rem; font-size: 1.05rem; }
+.gene-card .strike { text-decoration: line-through; }
+.gene-card .desc { font-family: var(--sans); font-size: 0.86rem; color: var(--ink-soft); margin-bottom: 0.7rem; }
+.metric-row { display: flex; flex-wrap: wrap; gap: 1.2rem; font-family: var(--sans); }
+.metric-row .m { }
+.metric-row .m .mv { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; }
+.metric-row .m .ml { font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.03em; }
+.fold-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.9rem; margin: 0.9rem 0 0.3rem; }
+.fold-gallery figure { margin: 0; }
+.fold-gallery img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 3px; background: #fff; }
+.fold-gallery figcaption { font-family: var(--sans); font-size: 0.66rem; color: var(--ink-faint); text-align: center; margin-top: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.gallery-label { font-family: var(--sans); font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.05em; margin: 0.8rem 0 0.2rem; font-weight: 600; }
+.pipeline-stage { display: grid; grid-template-columns: 190px 1fr; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--line); align-items: start; }
+.pipeline-stage:first-child { border-top: none; }
+.pipeline-stage .stage-name { font-family: var(--sans); font-size: 0.78rem; font-weight: 700; color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.03em; padding-top: 0.15rem; }
+.pipeline-stage .stage-detail { font-family: var(--sans); font-size: 0.88rem; color: var(--ink-soft); }
+.pipeline-stage .stage-detail p { max-width: none; font-size: inherit; margin-bottom: 0.4rem; }
+.pipeline-stage code { font-family: var(--mono); font-size: 0.82em; background: var(--paper-raised); border: 1px solid var(--line); color: var(--ink); padding: 0.12em 0.4em; border-radius: 2px; }
+footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-family: var(--sans); font-size: 0.74rem; color: var(--ink-faint); }
+@media (max-width: 600px) {
+  .doc { padding: 2.4rem 1.2rem 4rem; }
+  .masthead h1 { font-size: 1.55rem; }
+  nav.toc ol { columns: 1; }
+  .pipeline-stage { grid-template-columns: 1fr; gap: 0.3rem; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<a class="backlink" href="index.html">&larr; Back to project summary</a>
+
+<div class="masthead">
+  <p class="eyebrow">Follow-up studies &middot; HS2 vs. ALE vs. HS19 &middot; 2026-10-19</p>
+  <h1>Follow-up studies: epigenetics and HS19 validation targets</h1>
+  <p class="dek">Two questions came out of the first Sanger round. Can the 2026 HiFi data say anything about methylation in HS2 and ALE, and what would it take to validate it at the bench? And for HS19, which of its mutations are worth sequencing, and which genes should be measured by qPCR? The short answers are: only weak, indirect hints so far, and two missense mutations in HS19 (g8574 and g3355) plus a 13-gene expression panel. All primers below are designed and screened in silico; none has been tested at the bench.</p>
+  <div class="meta-row">
+    <span><strong>Strains:</strong> HS2 (ancestor), ALE, HS19 (NaOCl-selected)</span>
+    <span><strong>Data:</strong> 2026 PacBio HiFi (HS2, ALE); Illumina only for HS19</span>
+    <span><strong>Status:</strong> designs ready; no bench data yet</span>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="label">Contents</div>
+  <ol>
+    <li><a href="#epi">Epigenetics: what the data support, and how Sanger could test it</a></li>
+    <li><a href="#sanger">HS19: which mutations are worth Sanger sequencing</a></li>
+    <li><a href="#qpcr">HS19: the qPCR panel</a></li>
+    <li><a href="#next">Limits and next steps</a></li>
+  </ol>
+</nav>
+
+<section id="verdict">
+  <div class="callout">
+    <div class="label">Bottom line</div>
+    <ul>
+      <li><b>Epigenetics:</b> no ALE-versus-HS2 methylation signal can be called from the data we hold. The HiFi exports lack the modification tags, so the sequence-composition hints (see the <a href="methylation_hints.html">methylation-hints page</a>) describe HS2's history, not a difference between strains. Sanger can validate methylation only after bisulfite conversion, and only at specific loci, which we do not have yet. The sensible order is to recover the instrument's 5mC calls first, then test a few differentially methylated regions.</li>
+      <li><b>HS19 Sanger:</b> two missense mutations are worth validating, g8574 (R562Q) and g3355 (P1044L). Both are absent from all three HS2 Illumina baselines and from HS2 HiFi, and both sit near 0.5 allele fraction. Two further sites (one synonymous, one intronic) serve as template controls. None of the other candidates is worth Sanger as it stands (g4745, flagged only for GC content, is a possible extra reserve).</li>
+      <li><b>HS19 evidence ceiling:</b> HS19 has short reads only, so these calls have no long-read confirmation. Sanger is the first independent check.</li>
+      <li><b>HS19 qPCR:</b> 13 new exon-junction assays (the two mutated genes plus 11 oxidative-stress genes), run with the three reference genes already designed. The stress genes test regulation, because HS19's variants contain no oxidative-defence gene hits.</li>
+    </ul>
+  </div>
+  <p>Primer sets for everything below are in one workbook: <a href="assets/HS19_Sanger_qPCR_primers.xlsx">HS19_Sanger_qPCR_primers.xlsx</a> (order sheet, Sanger sheet with 500 bp flanks, qPCR sheet with amplicon sequences).</p>
+</section>
+
+<section id="epi">
+  <div class="section-head"><span class="section-num">01</span><h2>Epigenetics: what the data support, and how Sanger could test it</h2></div>
+  <p><b>What we can say.</b> The Revio run lists a methylation report for both strains, so the instrument probably called CpG 5mC, but every read file and alignment we hold lacks the modification tags. We checked more than 70 alignments and the FASTQ exports; none carries them, and no original HiFi BAM exists on the machines or drives we have. From sequence composition alone, HS2 shows mild CpG depletion (CpG observed/expected 0.72, against 1.33 for the GpC control) and a TpG/CpA excess, and heterozygous sites at CpG show about 1.5-fold more transitions than expected (versus about 1.1-fold for transversions). ALE and HS2 have identical composition. These are weak hints about HS2's evolutionary history, not a measurement of what changed during the selection, and they cannot distinguish ALE from HS2. HS19 cannot be assessed at all (Illumina only, and standard sequencing does not read methylation).</p>
+  <p><b>Can Sanger validate an epigenetic fingerprint?</b> Not directly: Sanger reads sequence, and 5mC and C look the same. It works after a chemical or enzymatic step that converts the methylation state into a sequence or a cut-site difference:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Approach</th><th>What it reads</th><th>Strength</th><th>Limit here</th></tr></thead>
+      <tbody>
+        <tr><td>Bisulfite PCR, then Sanger (direct or cloned)</td><td>Methylated C stays C; unmethylated C becomes T. The C/T peak ratio at each CpG estimates the methylated fraction.</td><td>Base-level, quantitative to roughly 10&ndash;15% by direct trace; cloning 10+ amplicons gives single-molecule patterns.</td><td>Needs a chosen locus. The genome is 65% GC, which makes bisulfite primers harder. Needs a conversion control in the same amplicon (non-CpG C must read as T).</td></tr>
+        <tr><td>Methylation-sensitive digest plus PCR (HpaII vs. MspI, or COBRA)</td><td>Whether a restriction site survives digestion.</td><td>Cheap, no conversion.</td><td>Only sites inside enzyme recognition sequences; no per-CpG resolution.</td></tr>
+        <tr><td>Revio 5mC calls, then the two above</td><td>Per-CpG methylation from PacBio kinetics.</td><td>Genome-wide, finds the loci worth testing.</td><td>Needs the original BAMs or the methylation report from the sequencing facility. Covers CpG 5mC only, not non-CpG or 6mA.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><b>Why we have not designed a bisulfite assay.</b> Both strains were sequenced from one colony each, and no locus currently stands out. A bisulfite pilot at an arbitrary locus would be a fishing trip whose negative result tells us little. Once the facility's 5mC calls are in hand, the plan is to call differentially methylated regions between HS2 and ALE, pick 3&ndash;5 regions (plus a methylated and an unmethylated control), and test them by bisulfite-Sanger or HpaII/MspI on biological replicates. With one colony per strain, any difference found in the sequencing data is exploratory until replicates agree.</p>
+</section>
+
+<section id="sanger">
+  <div class="section-head"><span class="section-num">02</span><h2>HS19: which mutations are worth Sanger sequencing</h2></div>
+  <p>HS19 passes through the hardened v3 funnel with 71 final candidates. For Sanger we asked of each: is the alt allele well supported in HS19 (depth at least 30, allele fraction at least 0.30), absent from the three HS2 Illumina baselines and from HS2 HiFi, outside long homopolymers and short tandem repeats, and in an unremarkable GC context? Five candidates pass cleanly (tier A) and ten carry at least one flag (tier B; for g3355 and g4745 the only flag is GC content, while the others have allele fractions near 0.1 with background reads in the baselines). The remaining 56 fail: two are indels, and the 54 single-base changes all sit within 40 bp of a homopolymer of six or more bases, with a median HS19 depth of 2 reads.</p>
+  <p>Of the four missense calls in the final list, two are worth testing. The other two, both in g1079, have an allele fraction near 0.10 and baseline alt reads (1/0/1); we do not recommend them.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Gene</th><th>Best hit (identity)</th><th>Change</th><th>Role</th><th>Primers F / R</th><th>Product</th></tr></thead>
+      <tbody>
+<tr><td class="gene">g8574</td><td>Receptor-like serine/threonine-protein kinase At1g78530 (33.8% id)</td><td>C>T, Arg562Gln</td><td><span class="pill confirmed">primary - missense</span></td><td><code>CCACACGGTTGTCTTCAAAGC</code><br><code>ATCAGCATTGCATTGGCTTCC</code></td><td>477 bp<br>SNP 217 bp from F, 219 bp from R</td></tr>
+<tr><td class="gene">g3355</td><td>La-related protein 1A (34.2% id)</td><td>C>T, Pro1044Leu</td><td><span class="pill confirmed">primary - missense</span></td><td><code>AGAAGGAGGAGAAGGAGGGTG</code><br><code>TAGTAGTCGATCTGGTTGCGC</code></td><td>616 bp<br>SNP 454 bp from F, 121 bp from R</td></tr>
+<tr><td class="gene">g1875</td><td>Polyprenal reductase 1 (31.9% id)</td><td>C>T, synonymous</td><td><span class="pill pending">control - synonymous</span></td><td><code>AGCAGGTTCAGAACACGTAGG</code><br><code>GCAAACAGGCGTACAGGATTC</code></td><td>634 bp<br>SNP 273 bp from F, 320 bp from R</td></tr>
+<tr><td class="gene">g6126</td><td>2-oxoisovalerate dehydrogenase subunit beta 2, mitochondrial (68.5% id)</td><td>C>A, intronic</td><td><span class="pill pending">control - intronic</span></td><td><code>GCGATCCCAAATGGTGTCTTC</code><br><code>AATGATGCACAGGTGGAGGAG</code></td><td>685 bp<br>SNP 262 bp from F, 382 bp from R</td></tr>
+<tr><td class="gene">g4365</td><td>Chlorophyll a-b binding protein AB80, chloroplastic (75.7% id)</td><td>C>T, intronic</td><td><span class="pill open">reserve - intronic</span></td><td><code>TGTGCTCCCATCATCATCGTC</code><br><code>AATTCGCAAATCCAGCCAACC</code></td><td>583 bp<br>SNP 389 bp from F, 153 bp from R</td></tr>
+<tr><td class="gene">g422</td><td>Phosphopentomutase (38.5% id)</td><td>G>A, intronic</td><td><span class="pill open">reserve - intronic</span></td><td><code>CTTTAGTGCCTCGTTGCCAAG</code><br><code>GATGGTGGAGCTCTGTGACAG</code></td><td>738 bp<br>SNP 108 bp from F, 589 bp from R</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><b>Evidence for the two missense sites.</b> g8574: 29 of 54 HS19 reads carry the alt allele (0.54), against 0 alt reads in all three HS2 Illumina baselines and 0 of 45 HS2 HiFi reads. g3355: 26 of 64 reads (0.41), against zero in the baselines and 0 of 185 HS2 HiFi reads; this site is GC-rich (0.74), so its primers were designed with relaxed GC limits and the PCR will probably need betaine or DMSO. Both fractions are near 0.5, which fits a heterozygous site in a diploid genome. The best hits are weak (about 34% identity), so the functions named are suggestive only.</p>
+  <p><b>How to read the result.</b> Expect a double peak at roughly half height in HS19 (the alt base under the reference base) and a single reference peak in HS2. Run HS2 DNA beside HS19 DNA in every reaction. The ALE trial showed that a template can silently read as the wrong strain, so the synonymous control (g1875) and the intronic control (g6126) matter: if they are not clean double peaks in HS19, the template, not the missense call, is the problem. For g3355 sequence from the reverse primer (the SNP is 121 bp from it). Primer pairs were screened by mismatch-tolerant in-silico PCR across four assemblies and gave exactly one product in each purged assembly, with all primer footprints free of HiFi and HS19 variants.</p>
+</section>
+
+<section id="qpcr">
+  <div class="section-head"><span class="section-num">03</span><h2>HS19: the qPCR panel</h2></div>
+  <p>HS19 has no transcriptome, so this panel has two jobs. First, the two mutated genes: is the transcript expressed, and is its level unchanged? A missense change does not have to alter expression, so an unchanged level is expected and does not argue against the mutation. Second, a stress-response panel. The NaOCl keyword search over HS19's variants found no oxidative-defence, chaperone or efflux genes, so these assays test regulation (constitutive priming or altered induction in HS19), not a mutation. A difference is a lead, not a mechanism.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Gene</th><th>Best hit (identity)</th><th>Role</th><th>Tier</th><th>Primers F / R</th><th>Product</th></tr></thead>
+      <tbody>
+<tr><td class="gene">g8574</td><td>Receptor-like serine/threonine-protein kinase At1g78530 (33.8% id)</td><td>mutated gene (HS19 R562Q)</td><td><span class="pill confirmed">core</span></td><td><code>TCAAGGTGGGAAACGAGACG</code><br><code>CAGGTAGTAGATGGCCGCTG</code></td><td>134 bp<br>12 exons</td></tr>
+<tr><td class="gene">g3355</td><td>La-related protein 1A (34.2% id)</td><td>mutated gene (HS19 P1044L)</td><td><span class="pill confirmed">core</span></td><td><code>CGACGACTTCCGCAAGTTTG</code><br><code>AGTAGAAGCGGAACAGGCAC</code></td><td>83 bp<br>25 exons</td></tr>
+<tr><td class="gene">g6186</td><td>Catalase isozyme C (73.3% id)</td><td>oxidant detox</td><td><span class="pill confirmed">core</span></td><td><code>ACAGCTACGACTTTGACCCG</code><br><code>ATCGCTGTAGTGGATGCCAG</code></td><td>173 bp<br>15 exons</td></tr>
+<tr><td class="gene">g2068</td><td>2-Cys peroxiredoxin BAS1, chloroplastic (76.9% id)</td><td>peroxide/Cys redox</td><td><span class="pill confirmed">core</span></td><td><code>GACCTGAAGCGCGAGATCAG</code><br><code>GTCAATGATGAACAGGCCGC</code></td><td>81 bp<br>10 exons</td></tr>
+<tr><td class="gene">g8501</td><td>Superoxide dismutase (61.2% id)</td><td>ROS dismutation (mito)</td><td><span class="pill confirmed">core</span></td><td><code>GCCCAAGGAGTATGAGGAGC</code><br><code>GACCAGCTTCTTTGTTGCCG</code></td><td>163 bp<br>8 exons</td></tr>
+<tr><td class="gene">g4143</td><td>Superoxide dismutase (58.1% id)</td><td>ROS dismutation (plastid)</td><td><span class="pill open">extended</span></td><td><code>TTGTCGAGGCCTTCAAGACC</code><br><code>TCCAGGTAGTAGGCGTGCTC</code></td><td>178 bp<br>12 exons</td></tr>
+<tr><td class="gene">g4547</td><td>Probable phospholipid hydroperoxide glutathione peroxidase (60.1% id)</td><td>lipid-peroxide repair</td><td><span class="pill confirmed">core</span></td><td><code>TTCCCCTGCAACCAGTTTGG</code><br><code>GGCCCTTCAGGTAGTCGAAC</code></td><td>151 bp<br>8 exons</td></tr>
+<tr><td class="gene">g1159</td><td>Glutathione reductase, chloroplastic (56.3% id)</td><td>glutathione recycling</td><td><span class="pill open">extended</span></td><td><code>CAACACCATCAGCGGCAATC</code><br><code>TGCATGATCTCGGCAGAGTC</code></td><td>114 bp<br>22 exons</td></tr>
+<tr><td class="gene">g5886</td><td>Peptide methionine sulfoxide reductase (63.9% id)</td><td>Met-sulfoxide repair (HOCl target)</td><td><span class="pill confirmed">core</span></td><td><code>GGCAGAGGTGTCCTTTGACC</code><br><code>AGTCGTGTAGTAGATGCCGC</code></td><td>121 bp<br>14 exons</td></tr>
+<tr><td class="gene">g772</td><td>Heat shock 70 kDa protein 6, chloroplastic (77.4% id)</td><td>chaperone (plastid HSP70)</td><td><span class="pill confirmed">core</span></td><td><code>AAGATCTCCCACAAGCAGCC</code><br><code>AGCACGATGTCAGACACCTC</code></td><td>110 bp<br>14 exons</td></tr>
+<tr><td class="gene">g9201</td><td>Heat shock protein 81-1 (75.7% id)</td><td>chaperone (HSP90)</td><td><span class="pill open">extended</span></td><td><code>TCAAGGATTACGTGACCCGC</code><br><code>TCGGTCATGAACAGCACCTC</code></td><td>139 bp<br>20 exons</td></tr>
+<tr><td class="gene">g2243</td><td>Chaperone protein ClpB3, chloroplastic (64.7% id)</td><td>chaperone/disaggregase (plastid)</td><td><span class="pill open">extended</span></td><td><code>GACCGACACCATCTCCATCC</code><br><code>AGGTCAATCGCCTTGTCTGG</code></td><td>150 bp<br>28 exons</td></tr>
+<tr><td class="gene">g4913</td><td>ATP-dependent zinc metalloprotease FTSH 2, chloroplastic (76.0% id)</td><td>PSII D1 repair protease</td><td><span class="pill open">extended</span></td><td><code>TCAAGCACATCCGGGAGAAC</code><br><code>AATGTTCTCCTGGGGCATGG</code></td><td>131 bp<br>18 exons</td></tr>
+<tr><td class="gene">g6008</td><td>Tubulin alpha chain (98.4% id)</td><td>reference gene (existing pair)</td><td><span class="pill pending">reference</span></td><td><code>CATGATGGCCAAGTGCGAC</code><br><code>TGGTAGTTGATGCCGCACTT</code></td><td>174 bp</td></tr>
+<tr><td class="gene">g2864</td><td>TATA-box-binding protein (78.1% id)</td><td>reference gene (existing pair)</td><td><span class="pill pending">reference</span></td><td><code>CATCTACCGGATGGCTGACC</code><br><code>CTATCATGCCTCCCTTGCGG</code></td><td>152 bp</td></tr>
+<tr><td class="gene">g900</td><td>60S ribosomal protein L18a-2 (68% id)</td><td>reference gene (existing pair)</td><td><span class="pill pending">reference</span></td><td><code>CGTCTCTCACGCCTCCAATT</code><br><code>CGATCTCCTCGGGCTGAATC</code></td><td>113 bp</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><b>Design.</b> Each pair is built on the spliced mRNA with one primer spanning an exon&ndash;exon junction, and gives exactly one predicted product against all 9,388 spliced transcripts at up to three mismatches (so no paralog cross-amplification) and none on genomic DNA. No primer overlaps any of the 71 HS19 candidate sites. A first round of eight assays (&ldquo;core&rdquo;) plus the references is enough to see whether anything moves.</p>
+  <p><b>Suggested experiment.</b> HS2 and HS19, with and without a sublethal NaOCl exposure, three biological replicates, relative quantification against the best-ranked reference genes. Rank g6008, g2864 and g900 under NaOCl first (geNorm or NormFinder): oxidants can move genes normally used as references. The stress genes were chosen from the HS2 annotation by function (catalase, 2-Cys peroxiredoxin, superoxide dismutases, phospholipid hydroperoxide glutathione peroxidase, glutathione reductase, methionine sulfoxide reductase, HSP70/HSP90/ClpB, and the FtsH protease that repairs photosystem II); the identities are 56&ndash;77% to the named proteins.</p>
+</section>
+
+<section id="next">
+  <div class="section-head"><span class="section-num">04</span><h2>Limits and next steps</h2></div>
+  <ol>
+    <li><b>Request the original Revio BAMs</b> (with kinetics and 5mC tags) and the methylation JSON reports from the sequencing facility. Everything epigenetic that is stronger than the present hints depends on this.</li>
+    <li><b>Run the HS19 Sanger set</b>: g8574 and g3355 first, g1875 and g6126 as template controls, g4365 and g422 held in reserve. Confirm the DNA really is HS19 before reading negatives.</li>
+    <li><b>Run the core qPCR round</b> after ranking the reference genes under NaOCl.</li>
+    <li><b>Recognise the ceiling.</b> HS19 mutations rest on short reads; a HiFi run of HS19 would settle all of them at once and would also give its methylation calls. Without HS19 RNA-seq, the qPCR panel is a targeted probe, not an unbiased survey.</li>
+  </ol>
+</section>
+
+<footer>
+  HS19 allele counts come from the HS19 Illumina alignment on the HS2 purged assembly; HS2 controls are three Illumina baselines and the 2026 HiFi reads. Updated 2026-10-19.
+</footer>
+
+</div>
+</body>
+</html>

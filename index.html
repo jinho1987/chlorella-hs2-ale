@@ -281,6 +281,7 @@ footer{ padding:44px 0 60px; }
       <a href="hs19_comparison.html">HS19 corrected report</a>
       <a href="#organelle">Organelle</a>
       <a href="#sanger">Wet-lab</a>
+      <a href="followup_studies.html">Follow-ups</a>
       <a href="#landing">Landing pads</a>
       <a href="#methylation">Epigenetics</a>
       <a href="#nicem">Independent replication</a>
@@ -1004,6 +1005,7 @@ footer{ padding:44px 0 60px; }
     <div class="callout reveal" style="border-color:var(--accent-warn, #c65d00);margin-top:20px;">
       <div class="k">Correction (2026-09-11): a second, deeper funnel bug — the "95" above is not the final count</div>
       <p>The all-3-baseline fix above checks whether a variant is <em>called</em> in each baseline's VCF — it never checks whether the alt allele is actually present in the raw reads below the genotyper's calling threshold. A direct read-level audit (<code>samtools mpileup</code> at all 95 positions, all 4 samples) found <strong>20 of 95 (21%) with real background signal in at least one baseline</strong> despite passing the VCF-based check, mostly short-tandem-repeat indels showing stutter noise in every sample. <strong>Update, same day: this audit and a general short-tandem-repeat filter (replacing the old homopolymer-only check) have been built into the funnel itself as permanent stages (v3) and re-run from scratch — the authoritative final count is 71</strong>, superseding the "75" from the original manual pass. Of the 5 missense + 1 frameshift originally reported, only <strong>2 survive as confirmed</strong> (g3355, g8574); one is downgraded to low-confidence (g1079) and two (g5894, g5858) are now excluded by the pipeline itself, not just flagged. Full accounting, plus an independent NICEM-assembly cross-check of the reference itself and protein/RNA structural analysis of every candidate: <a href="hs19_comparison.html">&rarr; dedicated HS19 page</a>.</p>
+      <p style="margin-top:12px;"><strong>Validation targets (2026-10-19):</strong> two HS19 missense mutations, g8574 (R562Q) and g3355 (P1044L), are worth Sanger sequencing, with a synonymous and an intronic site as template controls; a 13-gene exon-junction qPCR panel (the two mutated genes plus 11 oxidative-stress genes) is designed. HS19 has short reads only, so none of these calls has long-read support. Primers and reasoning: <a href="followup_studies.html">&rarr; follow-up studies page</a>.</p>
     </div>
     <div class="callout reveal good" style="margin-top:20px;">
       <div class="k">Zero convergence with ALE, same as HMF &mdash; but HS19 does have its own missense mutations</div>
@@ -1768,7 +1770,7 @@ CTGGCAGTGCAGGGCCCTCGACTTGCTCTGCACATGCTTGTCTCGCAACCCGAAGCAGCCGTGTAACCCCTACCAAGCGC
     <div class="section-tag">13 — Epigenetic signature</div>
     <div class="section-head reveal">
       <h2>A sequence-only trace of where methylation has concentrated</h2>
-      <p>Direct methylation calling needs PacBio kinetics data (IPD/PW values) preserved in the original instrument BAM &mdash; this project's raw reads exist only as FASTQ, so that signal is gone and no direct 5mC call is possible here. What sequence composition alone can still show is an indirect, historical proxy: CpG observed/expected ratio (CpG O/E). Methylated cytosines spontaneously deaminate to thymine over evolutionary time, so regions with a long history of methylation accumulate a measurable CpG deficit &mdash; a mutational scar, not a live readout.</p>
+      <p>Direct methylation calling needs PacBio kinetics data (IPD/PW values) preserved in the original instrument BAM &mdash; this project's raw reads exist only as FASTQ, so the files we hold carry no direct 5mC call (the instrument-called 5mC may still be recoverable from the sequencing facility; see the update below). What sequence composition alone can still show is an indirect, historical proxy: CpG observed/expected ratio (CpG O/E). Methylated cytosines spontaneously deaminate to thymine over evolutionary time, so regions with a long history of methylation accumulate a measurable CpG deficit &mdash; a mutational scar, not a live readout.</p>
     </div>
 
     <div class="stat-grid reveal">
@@ -1780,12 +1782,17 @@ CTGGCAGTGCAGGGCCCTCGACTTGCTCTGCACATGCTTGTCTCGCAACCCGAAGCAGCCGTGTAACCCCTACCAAGCGC
 
     <div class="callout reveal">
       <div class="k">What this does and doesn't say</div>
-      <p>The genome-wide split (genic vs. repeat) is real and consistent with the general pattern documented in green algae: methylation concentrating on repetitive/duplicated DNA more than on genes. It says nothing about whether ALE and HS2 differ from each other &mdash; 18 months of divergence is far too short for a new CpG-depletion signature to accumulate, so this proxy is structurally blind to any real epigenetic change that may have happened during the ALE selection experiment itself, in either direction. We also checked whether the landing-pad candidates specifically carry a favorable (gene-like) signature: they don't, one way or the other &mdash; a neutral result, reported as neutral rather than left unchecked.</p>
+      <p>The genome-wide split (genic vs. repeat) is real and consistent with the general pattern documented in green algae: methylation concentrating on repetitive/duplicated DNA more than on genes. It says nothing about whether ALE and HS2 differ from each other &mdash; the divergence during the ALE experiment is far too short for a new CpG-depletion signature to accumulate, so this proxy is structurally blind to any real epigenetic change that may have happened during the ALE selection experiment itself, in either direction. We also checked whether the landing-pad candidates specifically carry a favorable (gene-like) signature: they don't, one way or the other &mdash; a neutral result, reported as neutral rather than left unchecked.</p>
     </div>
 
     <div class="callout reveal" style="border-color:var(--accent-ale);">
       <div class="k">Update (2026-10-19): more indirect hints, and where the direct data stand</div>
       <p>Direct calling may still be recoverable: the Revio SMRT Link analyses list a &ldquo;Methylation&rdquo; report for both strains, so the instrument appears to have called CpG 5mC, but every file we hold lacks the modification tags and the original HiFi BAMs are not on this machine or the attached drives; they would have to be requested from the sequencing facility. In the meantime a finer sequence-level pass finds three weak, mutually consistent hints in HS2: mild CpG depletion with a TpG/CpA excess (CpG o/e 0.72, GpC control 1.33), no two-state structure across 8,064 genes or 10,211 windows, and a modest enrichment of transitions at CpG in heterozygous sites (about 1.5-fold, versus about 1.1-fold for transversions). The finer partition also qualifies the genic-vs-repeat reading above: introns are the most CpG-depleted (0.65) and coding sequence the least (0.81). None of this distinguishes ALE from HS2, HS19 (Illumina-only) cannot be assessed, and the hints are not diagnostic. Full breakdown: <a href="methylation_hints.html">&rarr; dedicated methylation-hints page</a>.</p>
+    </div>
+
+    <div class="callout reveal" style="border-color:var(--accent-ale);">
+      <div class="k">Follow-up (2026-10-19): can Sanger validate an epigenetic fingerprint?</div>
+      <p>Only after bisulfite conversion (or a methylation-sensitive digest), and only at specific loci, which we do not have yet. The plan is to recover the instrument's 5mC calls first, then test 3&ndash;5 differentially methylated regions on biological replicates. Details: <a href="followup_studies.html#epi">&rarr; follow-up studies page</a>.</p>
     </div>
   </div>
 </section>
