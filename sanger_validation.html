@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanger validation of the ALE candidates: first wet-lab results</title>
+<style>
+:root {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", "Liberation Mono", monospace;
+  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, ui-serif, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+    --line: #263129; --line-strong: #34412F;
+    --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+    --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+    --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+    --status-open: #E08079; --status-open-wash: #2C1917;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+  --line: #263129; --line-strong: #34412F;
+  --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+  --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+  --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+  --status-open: #E08079; --status-open-wash: #2C1917;
+}
+:root[data-theme="light"] {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); margin: 0; }
+a { color: var(--accent); }
+.doc { font-family: var(--serif); color: var(--ink); max-width: 900px; margin: 0 auto; padding: 4rem 2.5rem 6rem; line-height: 1.62; }
+.doc p { max-width: 68ch; }
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--ink); }
+.backlink { font-family: var(--sans); font-size: 0.78rem; color: var(--ink-faint); text-decoration: none; margin-bottom: 1.6rem; display: inline-block; }
+.backlink:hover { color: var(--accent); }
+.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 1.4rem; margin-bottom: 2.4rem; }
+.eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent-ink); font-weight: 600; margin: 0 0 0.6rem; }
+.masthead h1 { font-size: 1.9rem; margin: 0 0 0.8rem; line-height: 1.25; }
+.masthead .dek { font-size: 1.05rem; color: var(--ink-soft); margin: 0 0 1rem; max-width: 68ch; font-family: var(--sans); }
+.meta-row { display: flex; flex-wrap: wrap; gap: 1.4rem; font-family: var(--mono); font-size: 0.76rem; color: var(--ink-faint); }
+.meta-row strong { color: var(--ink-soft); font-weight: 600; }
+nav.toc { font-family: var(--sans); font-size: 0.86rem; background: var(--paper-raised); border: 1px solid var(--line); padding: 1.1rem 1.4rem; margin: 2rem 0 3rem; border-radius: 3px; }
+nav.toc .label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.6rem; }
+nav.toc ol { margin: 0; padding-left: 1.2rem; columns: 2; }
+nav.toc a { text-decoration: none; color: var(--ink-soft); }
+nav.toc a:hover { color: var(--accent); }
+section { margin-bottom: 3.2rem; }
+.section-head { display: flex; align-items: baseline; gap: 0.7rem; margin-bottom: 1.1rem; border-bottom: 1px solid var(--line-strong); padding-bottom: 0.5rem; }
+.section-num { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.06em; }
+.thesis { background: var(--paper-raised); border-left: 3px solid var(--accent); padding: 1.3rem 1.6rem; border-radius: 2px; font-size: 1.03rem; }
+.thesis .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); font-weight: 700; margin-bottom: 0.5rem; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 1.4rem 0; font-family: var(--sans); }
+.stat { background: var(--paper-raised); padding: 1rem 1.1rem; }
+.stat .k { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.35rem; }
+.stat .v { font-variant-numeric: tabular-nums; font-size: 1.32rem; font-weight: 600; color: var(--ink); font-family: var(--serif); }
+.stat .v small { font-size: 0.62em; color: var(--ink-faint); font-weight: 400; font-family: var(--sans); }
+.stat .delta { font-size: 0.76rem; color: var(--accent-ink); margin-top: 0.2rem; }
+table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 0.85rem; }
+.table-wrap { overflow-x: auto; margin: 1.2rem 0; border: 1px solid var(--line); }
+th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { background: var(--accent-wash); color: var(--accent-ink); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--line-strong); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--paper-raised); }
+td .locus { font-family: var(--mono); font-size: 0.79rem; color: var(--ink-soft); white-space: nowrap; }
+td .gene { font-family: var(--mono); font-weight: 700; color: var(--ink); }
+td code { font-family: var(--mono); font-size: 0.82em; background: var(--accent-wash); color: var(--accent-ink); padding: 0.1em 0.35em; border-radius: 2px; }
+.pill { display: inline-flex; align-items: center; gap: 0.35em; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.22em 0.6em; border-radius: 3px; white-space: nowrap; }
+.pill.confirmed { background: var(--status-confirmed-wash); color: var(--status-confirmed); }
+.pill.pending { background: var(--status-pending-wash); color: var(--status-pending); }
+.pill.open { background: var(--status-open-wash); color: var(--status-open); }
+.pill::before { content: "\25CF"; font-size: 0.7em; }
+.matrix-cell-yes { color: var(--status-confirmed); font-weight: 700; text-align: center; }
+.matrix-cell-partial { color: var(--status-pending); font-weight: 700; text-align: center; }
+.matrix-cell-no { color: var(--ink-faint); text-align: center; }
+.callout { border: 1px solid var(--status-pending); background: var(--status-pending-wash); border-radius: 3px; padding: 1.2rem 1.5rem; margin: 1.4rem 0; }
+.callout.good { border-color: var(--accent); background: var(--accent-wash); }
+.callout.bad { border-color: var(--status-open); background: var(--status-open-wash); }
+.callout .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--status-pending); margin-bottom: 0.6rem; }
+.callout.good .label { color: var(--accent-ink); }
+.callout.bad .label { color: var(--status-open); }
+.callout ul { margin: 0; padding-left: 1.2rem; } .callout li { margin-bottom: 0.5rem; } .callout li:last-child { margin-bottom: 0; }
+.gene-card { border: 1px solid var(--line); border-radius: 3px; padding: 1.1rem 1.4rem; margin-bottom: 1rem; background: var(--paper-raised); }
+.gene-card.retracted { opacity: 0.6; }
+.gene-card h4 { margin: 0 0 0.3rem; font-size: 1.05rem; }
+.gene-card .strike { text-decoration: line-through; }
+.gene-card .desc { font-family: var(--sans); font-size: 0.86rem; color: var(--ink-soft); margin-bottom: 0.7rem; }
+.metric-row { display: flex; flex-wrap: wrap; gap: 1.2rem; font-family: var(--sans); }
+.metric-row .m { }
+.metric-row .m .mv { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; }
+.metric-row .m .ml { font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.03em; }
+.fold-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.9rem; margin: 0.9rem 0 0.3rem; }
+.fold-gallery figure { margin: 0; }
+.fold-gallery img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 3px; background: #fff; }
+.fold-gallery figcaption { font-family: var(--sans); font-size: 0.66rem; color: var(--ink-faint); text-align: center; margin-top: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.gallery-label { font-family: var(--sans); font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.05em; margin: 0.8rem 0 0.2rem; font-weight: 600; }
+.pipeline-stage { display: grid; grid-template-columns: 190px 1fr; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--line); align-items: start; }
+.pipeline-stage:first-child { border-top: none; }
+.pipeline-stage .stage-name { font-family: var(--sans); font-size: 0.78rem; font-weight: 700; color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.03em; padding-top: 0.15rem; }
+.pipeline-stage .stage-detail { font-family: var(--sans); font-size: 0.88rem; color: var(--ink-soft); }
+.pipeline-stage .stage-detail p { max-width: none; font-size: inherit; margin-bottom: 0.4rem; }
+.pipeline-stage code { font-family: var(--mono); font-size: 0.82em; background: var(--paper-raised); border: 1px solid var(--line); color: var(--ink); padding: 0.12em 0.4em; border-radius: 2px; }
+footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-family: var(--sans); font-size: 0.74rem; color: var(--ink-faint); }
+@media (max-width: 600px) {
+  .doc { padding: 2.4rem 1.2rem 4rem; }
+  .masthead h1 { font-size: 1.55rem; }
+  nav.toc ol { columns: 1; }
+  .pipeline-stage { grid-template-columns: 1fr; gap: 0.3rem; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<a class="backlink" href="index.html#sanger">&larr; Back to project summary (&sect;11, Sanger/PCR primers)</a>
+
+<div class="masthead">
+  <p class="eyebrow">Wet-lab validation &middot; HS2 vs. ALE &middot; first results 2026-10-07</p>
+  <h1>Sanger validation of the ALE candidates: first wet-lab results</h1>
+  <p class="dek">The 15 Sanger/PCR assays from &sect;11 have now been run once. One missense candidate (g8767) is confirmed and two repeat-bound intronic SNPs are partly confirmed. At three loci with clean traces, the ALE DNA used reads like HS2 rather than like the sequenced ALE colony, so the origin of that template is being checked before any of the negative calls are interpreted. Everything below is stated against the 2026 PacBio HiFi data only.</p>
+  <div class="meta-row">
+    <span><strong>Assays:</strong> 13 point-mutation + 2 structural-variant junctions</span>
+    <span><strong>Expected alleles from:</strong> 2026 HiFi reads (HS2 and ALE)</span>
+    <span><strong>Status:</strong> first round; template source under review</span>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="label">Contents</div>
+  <ol>
+    <li><a href="#summary">Where each assay stands</a></li>
+    <li><a href="#traces">What the raw traces show</a></li>
+    <li><a href="#repeat">Repeat-bound loci and what a negative can mean</a></li>
+    <li><a href="#sv">The two structural-variant assays</a></li>
+    <li><a href="#primers">Primer problems found and replacement designs</a></li>
+    <li><a href="#next">Open questions and next steps</a></li>
+  </ol>
+</nav>
+
+<section id="verdict">
+  <div class="callout">
+    <div class="label">Bottom line</div>
+    <ul>
+      <li><b>Confirmed:</b> g8767 (L82P), the strongest candidate. SCP46 and RIMO are confirmed only partly, because both sit at repeat boundaries. g5108/D344 is a confirmatory identity match, not a SNP.</li>
+      <li><b>Not confirmed, with a specific reason:</b> the ALE traces for g1283, g5108 and g4421 look like HS2 (peak-height ratios unchanged), although the long reads show those alleles at 94&ndash;100% in the sequenced ALE colony. The g4421 locus is clean and repeat-free, so this is a template question, not a reading problem.</li>
+      <li><b>The validation rate is therefore thin:</b> one clean confirmation (g8767) out of 13. We do not treat the other results as evidence against the HiFi calls until the ALE DNA source is settled.</li>
+      <li><b>One design error of ours</b> was found (the EPHA reverse primer is a CA repeat), and replacement primers are listed below. None of them has been tested at the bench.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="summary">
+  <div class="section-head"><span class="section-num">01</span><h2>Where each assay stands</h2></div>
+  <p>HiFi columns give the alt-allele fraction in the 2026 reads (HS2 | ALE, reads supporting alt / total). The bench results are as reported by the collaborating lab; raw traces for the rows marked &ldquo;reviewed&rdquo; were read directly.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Gene</th><th>HiFi alt fraction<br>HS2 | ALE</th><th>Bench result</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="gene">g8767</td><td>0% (0/29) | 100% (28/28)</td><td>SNP confirmed</td><td><span class="pill confirmed">confirmed</span></td></tr>
+        <tr><td>2</td><td class="gene">g1283</td><td>49% (113/232) | 98% (360/369)</td><td>ALE reads as HS2 (trace reviewed)</td><td><span class="pill pending">template question</span></td></tr>
+        <tr><td>3</td><td class="gene">g5108</td><td>48% (69/144) | 94% (178/190)</td><td>ALE reads as HS2 (trace reviewed)</td><td><span class="pill pending">template question</span></td></tr>
+        <tr><td>4</td><td class="gene">UBP12</td><td>0% (0/124) | 93% (129/138)</td><td>multiband PCR</td><td><span class="pill pending">new primers</span></td></tr>
+        <tr><td>5</td><td class="gene">ACOX4</td><td>1% (1/79) | 61% (28/46)</td><td>multiband PCR</td><td><span class="pill pending">new primer</span></td></tr>
+        <tr><td>6</td><td class="gene">EPHA</td><td>0% (0/87) | 75% (84/112)</td><td>multiband / no HS2 product</td><td><span class="pill pending">new primers</span></td></tr>
+        <tr><td>7</td><td class="gene">g4421</td><td>0% (0/507) | 100% (327/327)</td><td>ALE reads as HS2 (both traces reviewed)</td><td><span class="pill pending">template question</span></td></tr>
+        <tr><td>8</td><td class="gene">g4523</td><td>14% (54/396) | 61% (171/281)</td><td>SNP region unreadable</td><td><span class="pill open">repeat-limited, dropped</span></td></tr>
+        <tr><td>9</td><td class="gene">CLPB3</td><td>26% (12/47) | 79% (37/47)</td><td>no SNP seen</td><td><span class="pill open">repeat-limited</span></td></tr>
+        <tr><td>10</td><td class="gene">TLP13</td><td>22% (64/289) | 86% (175/204)</td><td>no SNP seen</td><td><span class="pill open">repeat-limited</span></td></tr>
+        <tr><td>11</td><td class="gene">SCP46</td><td>33% (13/39) | 91% (39/43)</td><td>SNP seen; flank reads as poly-T in HS2</td><td><span class="pill confirmed">partial</span></td></tr>
+        <tr><td>12</td><td class="gene">RIMO</td><td>17% (69/397) | 37% (156/417)</td><td>SNP seen</td><td><span class="pill confirmed">partial</span></td></tr>
+        <tr><td>13</td><td class="gene">g5108 / D344</td><td>n/a (codon check)</td><td>identical in both strains, as expected</td><td><span class="pill confirmed">confirmed</span></td></tr>
+        <tr><td>14</td><td class="gene">16 kb duplication junction</td><td>127 HiFi reads span the junction in ALE</td><td>no band in ALE or HS2</td><td><span class="pill pending">rerun with control</span></td></tr>
+        <tr><td>15</td><td class="gene">Insertion (long-range)</td><td>HS2 17,489 bp | ALE 19,003 bp</td><td>bands present; ladder only to 10 kb</td><td><span class="pill pending">needs larger ladder</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="traces">
+  <div class="section-head"><span class="section-num">02</span><h2>What the raw traces show</h2></div>
+  <p>Six forward-read traces were reviewed (mean quality Q48&ndash;54 across each read, Q61 at the g4421 SNP). Peak heights were measured at the SNP position and compared with what the HiFi data predict.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Locus</th><th>Sample</th><th>Expected from HiFi</th><th>Observed peak heights</th><th>Alt fraction</th></tr></thead>
+      <tbody>
+        <tr><td class="gene">g1283</td><td>HS2</td><td>A/G double peak, about 50:50</td><td>A 956, G 649</td><td>40% G</td></tr>
+        <tr><td class="gene">g1283</td><td><b>ALE</b></td><td>single G (98%)</td><td>A 933, G 635</td><td><b>40% G</b></td></tr>
+        <tr><td class="gene">g5108</td><td>HS2</td><td>C/A double peak, about 50:50</td><td>C 393, A 1017</td><td>72% A</td></tr>
+        <tr><td class="gene">g5108</td><td><b>ALE</b></td><td>mostly A (94%)</td><td>C 429, A 1139</td><td><b>73% A</b></td></tr>
+        <tr><td class="gene">g4421</td><td>HS2</td><td>single C</td><td>C 1010, T 2</td><td>0% T</td></tr>
+        <tr><td class="gene">g4421</td><td><b>ALE</b></td><td>single T (100%)</td><td>C 1097, T 0</td><td><b>0% T</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li><b>The HS2 traces behave as the long reads predict</b>: g1283 and g5108 are heterozygous in HS2.</li>
+    <li><b>The ALE traces are indistinguishable from HS2 at all three loci.</b> If the template carried the sequenced colony&rsquo;s alleles, the g1283 and g5108 ratios should shift sharply toward alt; they do not move (40% vs 40%, 72% vs 73%).</li>
+    <li><b>g4421 is the cleanest case.</b> It has no repeat nearby and the best-supported HiFi difference in the set (every HS2 read is C, every ALE read is T, and every amplifiable ALE assembly copy carries T). The ALE trace shows no T at all, so a sequencing artifact or a mixed sample cannot explain it.</li>
+    <li><b>Interpretation:</b> three independent loci agree that the ALE template in these reactions carries the HS2 alleles. That is a statement about the template, not about the HiFi calls or the primers. The same DNA did show the expected ALE allele at g8767. The origin of the ALE DNA (colony, culture, passage) is being established, and DNA from the PacBio colony would be the decisive control.</li>
+  </ul>
+</section>
+
+<section id="repeat">
+  <div class="section-head"><span class="section-num">03</span><h2>Repeat-bound loci and what a negative can mean</h2></div>
+  <p>Several SNPs sit at the end of homopolymer or dinucleotide repeats, where Sanger reads degrade and a one-base change can be indistinguishable from polymerase slippage.</p>
+  <ul>
+    <li><b>g4523:</b> the &plusmn;300 bp around the SNP is 70% GC and 38% low-complexity or GC-rich; the SNP sits inside a 62 bp block of (GT)n, an 18-G run and GC-rich sequence. There is no clean site for a PCR or sequencing primer within &plusmn;220 bp, so redesign is not possible and the locus is dropped from the Sanger list. The HiFi evidence stands.</li>
+    <li><b>SCP46, RIMO, CLPB3, TLP13:</b> all repeat-adjacent. SCP46 and RIMO were seen but only partly informative; RIMO is only 37% alt in the sequenced ALE colony, and CLPB3 and TLP13 reads are 15&ndash;19% ambiguous in HiFi too. For these, a failure to confirm is not a refutation.</li>
+    <li><b>g1283 and g5108 are frequency shifts of an allele HS2 already carries</b> (49% and 48% in HS2), so &ldquo;same base called&rdquo; is the wrong test; the peak-height ratio is the right one.</li>
+  </ul>
+  <p>HiFi triage of all 24 candidates found only three that are clean, single-copy, fixed novel SNPs and not yet tried: <span class="mono">ptg000005l:14125</span>, g8143 and g6058. They were set aside as optional control loci, not mechanistic targets (both genes are intronic with no Swiss-Prot hit).</p>
+</section>
+
+<section id="sv">
+  <div class="section-head"><span class="section-num">04</span><h2>The two structural-variant assays</h2></div>
+  <ul>
+    <li><b>16 kb duplication junction (#14).</b> No band appeared in ALE, and none is expected in HS2. The original primer pair matches the ALE assembly exactly (397 bp) and 127 uniquely mapped HiFi reads span the whole junction at 135&times; depth, so the duplication is real in the sequenced colony. The junction sits at ALE <span class="mono">ptg000030l:209,756</span>. The old reverse primer also carried a GTGTGT repeat. Two repeat-free replacement pairs are below. They should be run in the same tube as the g8767 pair, so that HS2 always shows 479 bp and ALE shows 479 bp plus the junction band: a control-only ALE lane means the duplication is absent from that DNA, and no control band means a PCR or template failure. Given the g1283 result above, an ALE lane without the junction band would fit the template question rather than a missing duplication.</li>
+    <li><b>Insertion junction (#15).</b> Bands appear, but the 17.5 kb (HS2) and 19.0 kb (ALE) products exceed the 10 kb ladder. A ladder reaching beyond 20 kb and a low-percentage, low-voltage gel are needed, and the 8.5% size difference will be subtle. The first and last 900 bp readable from each primer are on file for sequencing.</li>
+  </ul>
+</section>
+
+<section id="primers">
+  <div class="section-head"><span class="section-num">05</span><h2>Primer problems found and replacement designs</h2></div>
+  <p>One genuine design error surfaced: the EPHA reverse primer (<span class="mono">CACACACACCACACACACAC</span>) is a CA repeat with about 1,000 near-matches genome-wide, which explains the multiband result. Our earlier uniqueness audit tested exact matches only and missed it. The replacement designs were screened for off-target products at up to 3 mismatches per primer in the HS2 and ALE purged and unpurged assemblies, and for variants at the primer sites in the HiFi reads (at most 2%). <b>None has been tested at the bench.</b></p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Assay</th><th>Forward (5&prime;&rarr;3&prime;)</th><th>Reverse (5&prime;&rarr;3&prime;)</th><th>Product</th></tr></thead>
+      <tbody>
+        <tr><td>#4 UBP12</td><td class="mono">TGTGTTTGCCATCCAACCTTG</td><td class="mono">AGAGCATGATGTCGGACTTGG</td><td>407 bp</td></tr>
+        <tr><td>#5 ACOX4</td><td class="mono">CCTTGTTCGTGTCGCCAAAG</td><td class="mono">CTTCCCTCTTGACTGGCTGAG</td><td>541 bp</td></tr>
+        <tr><td>#6 EPHA</td><td class="mono">TGCTGCTGCACAAAGTCAATC</td><td class="mono">TGCTCAACTACCGCACCTTTG</td><td>916 bp</td></tr>
+        <tr><td>#14 junction, pair A</td><td class="mono">CCTGCTTGGTGTTGAATTCCG</td><td class="mono">TGTGATTCTTTGTGCCGCTTG</td><td>389 bp (ALE only)</td></tr>
+        <tr><td>#14 junction, pair B</td><td class="mono">TCCCTCGTTATTCAGCTGAGC</td><td class="mono">CATCTTTGTGCACACCACCTG</td><td>411 bp (ALE only)</td></tr>
+        <tr><td>Control for #14 (g8767 pair)</td><td class="mono">GGCACAATAAAGAGCGCTCG</td><td class="mono">GTCTGCTTCGTTCACTTGCG</td><td>479 bp (both strains)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Shorter alternatives for UBP12, ACOX4 and EPHA exist in the working files. Because the old UBP12 and ACOX4 primers had no predicted off-target product, their multibands may come from repeats inside the amplicons, and replacement helps only if the primers were the cause. New primers cannot change a genotype call, so they will not resolve the template question.</p>
+</section>
+
+<section id="next">
+  <div class="section-head"><span class="section-num">06</span><h2>Open questions and next steps</h2></div>
+  <ol>
+    <li><b>Settle the ALE DNA source:</b> which colony or culture it came from and whether it matches the PacBio colony. The most informative test uses primers already in hand: re-extract DNA from the PacBio colony stock (or several single colonies of the current ALE culture) and run g4421 and g8767. If g4421 then reads T, the DNA source was the issue.</li>
+    <li><b>Collect the remaining traces:</b> g8767, SCP46 and RIMO, to confirm those three results are clean (the raw trace for g1283 reverse, g5108 and g4421 reverse reads would also help).</li>
+    <li><b>Rerun #14</b> with pair A or B plus the g8767 control; get the larger ladder for #15.</li>
+    <li><b>For the manuscript:</b> report g8767 as the one clean Sanger confirmation, describe the repeat-bound loci as repeat-limited rather than refuted, and hold any claim about the other candidates until the template question is closed.</li>
+  </ol>
+</section>
+
+<footer>
+  Expected alleles and fractions come from the 2026 HiFi reads (HS2 on the HS2 assembly, ALE on the HS2 and ALE assemblies); peak heights were measured from the raw chromatogram files. Bench results other than the six reviewed traces are as reported by the collaborating laboratory. Updated 2026-10-19.
+</footer>
+
+</div>
+</body>
+</html>
