@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>g8767 re-analysis: CDS, protein family and L82P</title>
+<style>
+:root {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", "Liberation Mono", monospace;
+  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, ui-serif, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+    --line: #263129; --line-strong: #34412F;
+    --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+    --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+    --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+    --status-open: #E08079; --status-open-wash: #2C1917;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10160F; --paper-raised: #161D15; --ink: #E7ECE4; --ink-soft: #A9B7AD; --ink-faint: #748078;
+  --line: #263129; --line-strong: #34412F;
+  --accent: #4FBFA0; --accent-ink: #8AD9C0; --accent-wash: #173029;
+  --status-confirmed: #4FBFA0; --status-confirmed-wash: #173029;
+  --status-pending: #D99B5C; --status-pending-wash: #2B2216;
+  --status-open: #E08079; --status-open-wash: #2C1917;
+}
+:root[data-theme="light"] {
+  --paper: #F6F7F3; --paper-raised: #FFFFFF; --ink: #16211D; --ink-soft: #4B5A50; --ink-faint: #7C8A80;
+  --line: #DCE2DA; --line-strong: #C7D0C3;
+  --accent: #1E6E5C; --accent-ink: #14503F; --accent-wash: #E4EFEA;
+  --status-confirmed: #1E6E5C; --status-confirmed-wash: #E4EFEA;
+  --status-pending: #B8763A; --status-pending-wash: #F5E7D8;
+  --status-open: #A8433A; --status-open-wash: #F5E0DD;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); margin: 0; }
+a { color: var(--accent); }
+.doc { font-family: var(--serif); color: var(--ink); max-width: 900px; margin: 0 auto; padding: 4rem 2.5rem 6rem; line-height: 1.62; }
+.doc p { max-width: 68ch; }
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--ink); }
+.backlink { font-family: var(--sans); font-size: 0.78rem; color: var(--ink-faint); text-decoration: none; margin-bottom: 1.6rem; display: inline-block; }
+.backlink:hover { color: var(--accent); }
+.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 1.4rem; margin-bottom: 2.4rem; }
+.eyebrow { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent-ink); font-weight: 600; margin: 0 0 0.6rem; }
+.masthead h1 { font-size: 1.9rem; margin: 0 0 0.8rem; line-height: 1.25; }
+.masthead .dek { font-size: 1.05rem; color: var(--ink-soft); margin: 0 0 1rem; max-width: 68ch; font-family: var(--sans); }
+.meta-row { display: flex; flex-wrap: wrap; gap: 1.4rem; font-family: var(--mono); font-size: 0.76rem; color: var(--ink-faint); }
+.meta-row strong { color: var(--ink-soft); font-weight: 600; }
+nav.toc { font-family: var(--sans); font-size: 0.86rem; background: var(--paper-raised); border: 1px solid var(--line); padding: 1.1rem 1.4rem; margin: 2rem 0 3rem; border-radius: 3px; }
+nav.toc .label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.6rem; }
+nav.toc ol { margin: 0; padding-left: 1.2rem; columns: 2; }
+nav.toc a { text-decoration: none; color: var(--ink-soft); }
+nav.toc a:hover { color: var(--accent); }
+section { margin-bottom: 3.2rem; }
+.section-head { display: flex; align-items: baseline; gap: 0.7rem; margin-bottom: 1.1rem; border-bottom: 1px solid var(--line-strong); padding-bottom: 0.5rem; }
+.section-num { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); letter-spacing: 0.06em; }
+.thesis { background: var(--paper-raised); border-left: 3px solid var(--accent); padding: 1.3rem 1.6rem; border-radius: 2px; font-size: 1.03rem; }
+.thesis .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); font-weight: 700; margin-bottom: 0.5rem; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 1.4rem 0; font-family: var(--sans); }
+.stat { background: var(--paper-raised); padding: 1rem 1.1rem; }
+.stat .k { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 0.35rem; }
+.stat .v { font-variant-numeric: tabular-nums; font-size: 1.32rem; font-weight: 600; color: var(--ink); font-family: var(--serif); }
+.stat .v small { font-size: 0.62em; color: var(--ink-faint); font-weight: 400; font-family: var(--sans); }
+.stat .delta { font-size: 0.76rem; color: var(--accent-ink); margin-top: 0.2rem; }
+table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 0.85rem; }
+.table-wrap { overflow-x: auto; margin: 1.2rem 0; border: 1px solid var(--line); }
+th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { background: var(--accent-wash); color: var(--accent-ink); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--line-strong); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--paper-raised); }
+td .locus { font-family: var(--mono); font-size: 0.79rem; color: var(--ink-soft); white-space: nowrap; }
+td .gene { font-family: var(--mono); font-weight: 700; color: var(--ink); }
+td code { font-family: var(--mono); font-size: 0.82em; background: var(--accent-wash); color: var(--accent-ink); padding: 0.1em 0.35em; border-radius: 2px; }
+.pill { display: inline-flex; align-items: center; gap: 0.35em; font-family: var(--sans); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 0.22em 0.6em; border-radius: 3px; white-space: nowrap; }
+.pill.confirmed { background: var(--status-confirmed-wash); color: var(--status-confirmed); }
+.pill.pending { background: var(--status-pending-wash); color: var(--status-pending); }
+.pill.open { background: var(--status-open-wash); color: var(--status-open); }
+.pill::before { content: "\25CF"; font-size: 0.7em; }
+.matrix-cell-yes { color: var(--status-confirmed); font-weight: 700; text-align: center; }
+.matrix-cell-partial { color: var(--status-pending); font-weight: 700; text-align: center; }
+.matrix-cell-no { color: var(--ink-faint); text-align: center; }
+.callout { border: 1px solid var(--status-pending); background: var(--status-pending-wash); border-radius: 3px; padding: 1.2rem 1.5rem; margin: 1.4rem 0; }
+.callout.good { border-color: var(--accent); background: var(--accent-wash); }
+.callout.bad { border-color: var(--status-open); background: var(--status-open-wash); }
+.callout .label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--status-pending); margin-bottom: 0.6rem; }
+.callout.good .label { color: var(--accent-ink); }
+.callout.bad .label { color: var(--status-open); }
+.callout ul { margin: 0; padding-left: 1.2rem; } .callout li { margin-bottom: 0.5rem; } .callout li:last-child { margin-bottom: 0; }
+.gene-card { border: 1px solid var(--line); border-radius: 3px; padding: 1.1rem 1.4rem; margin-bottom: 1rem; background: var(--paper-raised); }
+.gene-card.retracted { opacity: 0.6; }
+.gene-card h4 { margin: 0 0 0.3rem; font-size: 1.05rem; }
+.gene-card .strike { text-decoration: line-through; }
+.gene-card .desc { font-family: var(--sans); font-size: 0.86rem; color: var(--ink-soft); margin-bottom: 0.7rem; }
+.metric-row { display: flex; flex-wrap: wrap; gap: 1.2rem; font-family: var(--sans); }
+.metric-row .m { }
+.metric-row .m .mv { font-family: var(--serif); font-weight: 700; font-size: 1.05rem; }
+.metric-row .m .ml { font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.03em; }
+.fold-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.9rem; margin: 0.9rem 0 0.3rem; }
+.fold-gallery figure { margin: 0; }
+.fold-gallery img { width: 100%; display: block; border: 1px solid var(--line); border-radius: 3px; background: #fff; }
+.fold-gallery figcaption { font-family: var(--sans); font-size: 0.66rem; color: var(--ink-faint); text-align: center; margin-top: 0.35rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.gallery-label { font-family: var(--sans); font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.05em; margin: 0.8rem 0 0.2rem; font-weight: 600; }
+.pipeline-stage { display: grid; grid-template-columns: 190px 1fr; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--line); align-items: start; }
+.pipeline-stage:first-child { border-top: none; }
+.pipeline-stage .stage-name { font-family: var(--sans); font-size: 0.78rem; font-weight: 700; color: var(--accent-ink); text-transform: uppercase; letter-spacing: 0.03em; padding-top: 0.15rem; }
+.pipeline-stage .stage-detail { font-family: var(--sans); font-size: 0.88rem; color: var(--ink-soft); }
+.pipeline-stage .stage-detail p { max-width: none; font-size: inherit; margin-bottom: 0.4rem; }
+.pipeline-stage code { font-family: var(--mono); font-size: 0.82em; background: var(--paper-raised); border: 1px solid var(--line); color: var(--ink); padding: 0.12em 0.4em; border-radius: 2px; }
+footer { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-family: var(--sans); font-size: 0.74rem; color: var(--ink-faint); }
+@media (max-width: 600px) {
+  .doc { padding: 2.4rem 1.2rem 4rem; }
+  .masthead h1 { font-size: 1.55rem; }
+  nav.toc ol { columns: 1; }
+  .pipeline-stage { grid-template-columns: 1fr; gap: 0.3rem; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<a class="backlink" href="index.html#methylation">&larr; Back to project summary</a>
+
+<div class="masthead">
+  <p class="eyebrow">Follow-up &middot; ALE candidate g8767 &middot; 2026-11-04</p>
+  <h1>g8767 re-analysis: CDS, protein family and the L82P change</h1>
+  <p class="dek">g8767 is the one ALE missense candidate with a clean Sanger confirmation. A collaborator asked for its full coding sequence and an in silico comparison with related proteins. The gene model is complete and L82P is its only coding change. The protein belongs to the LIFEGUARD branch of the TMBIM family, and no relative has proline at this position, so L82P is a poorly tolerated change in a transmembrane helix. In silico analysis cannot say whether activity goes up or down.</p>
+  <div class="meta-row">
+    <span><strong>Gene:</strong> g8767, ptg000061l (minus strand), 8 exons</span>
+    <span><strong>Change:</strong> c.245T&gt;C, CTG&rarr;CCG, Leu82Pro</span>
+    <span><strong>Evidence:</strong> 2026 HiFi genome, 28-sequence alignment, ESM2, predicted structures</span>
+  </div>
+</div>
+
+<nav class="toc">
+  <div class="label">Contents</div>
+  <ol>
+    <li><a href="#cds">The full coding sequence</a></li>
+    <li><a href="#family">Which protein family</a></li>
+    <li><a href="#l82">Residue 82 across the family</a></li>
+    <li><a href="#limits">What this supports and what it cannot say</a></li>
+    <li><a href="#next">Experiments that would answer the open question</a></li>
+  </ol>
+</nav>
+
+<section id="verdict">
+  <div class="callout">
+    <div class="label">Bottom line</div>
+    <ul>
+      <li><b>Gene model:</b> complete. 8 exons, a 687 bp coding sequence, 228 amino acids, starting with ATG and ending with TGA, with no internal stop. L82P (c.245T&gt;C) is the only coding difference between HS2 and ALE.</li>
+      <li><b>Family:</b> the closest relatives are the Arabidopsis LIFEGUARD proteins (about 41&ndash;43% identity), not the classical Bax inhibitor 1. Both belong to the TMBIM superfamily that includes the bacterial pH-gated Ca<sup>2+</sup> channel YetJ.</li>
+      <li><b>Residue 82:</b> across 28 related proteins the aligned residue is serine (13), leucine (8), alanine (5) or valine (2). None has proline, here or within two positions. The Chlorella protein already has proline at 81, so L82P creates a Pro&ndash;Pro pair inside a predicted transmembrane helix.</li>
+      <li><b>Direction of effect:</b> not decided by any of this. The evidence says the change is poorly tolerated, which points to altered stability or gating. It does not say gain or loss of function, and a coding change does not by itself change expression level.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="cds">
+  <div class="section-head"><span class="section-num">01</span><h2>The full coding sequence</h2></div>
+  <p>The AUGUSTUS gene model for g8767 was re-extracted from the HS2 purged assembly and checked: the exons join into a 687 bp reading frame that translates to 228 residues, begins with methionine, ends at a stop codon, and contains no internal stop. In ALE, the only coding change in the gene is the single-base substitution at ptg000061l:329542 (A to G on the forward strand, T to C on the coding strand), which turns codon 82 from CTG (leucine) into CCG (proline). One poly-G length difference in an intron (ptg000061l:328249) does not touch the coding sequence.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>CDS exon (5&prime;&rarr;3&prime;)</th><th>Genomic span, ptg000061l</th><th>Length (bp)</th></tr></thead>
+      <tbody>
+<tr><td>1</td><td>329,923&ndash;329,958</td><td>36</td></tr>
+<tr><td>2</td><td>329,534&ndash;329,750</td><td>217</td></tr>
+<tr><td>3</td><td>329,188&ndash;329,317</td><td>130</td></tr>
+<tr><td>4</td><td>328,891&ndash;328,981</td><td>91</td></tr>
+<tr><td>5</td><td>328,736&ndash;328,800</td><td>65</td></tr>
+<tr><td>6</td><td>328,496&ndash;328,539</td><td>44</td></tr>
+<tr><td>7</td><td>328,177&ndash;328,218</td><td>42</td></tr>
+<tr><td>8</td><td>327,927&ndash;327,988</td><td>62</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Sequences for HS2 and ALE, nucleotide and protein: <a href="assets/g8767_CDS_protein_WT_vs_ALE.fasta">g8767_CDS_protein_WT_vs_ALE.fasta</a>. The mutation was confirmed by Sanger sequencing (see the <a href="sanger_validation.html">Sanger validation page</a>), which is consistent with the explanation given in the independent-replication section for why NICEM&rsquo;s assembly did not reproduce this change (assembly quality).</p>
+</section>
+
+<section id="family">
+  <div class="section-head"><span class="section-num">02</span><h2>Which protein family</h2></div>
+  <p>Searching the g8767 protein against Swiss-Prot returns the Arabidopsis LIFEGUARD proteins first (LFG5, then LFG4, LFG2, LFG3 and LFG1), followed by animal and fungal TMBIM proteins. The classical Bax inhibitor 1 proteins are further away. This sharpens the earlier &ldquo;BI1-like&rdquo; label: g8767 sits on the LIFEGUARD branch of the TMBIM family. A structure search had already placed its closest solved relative as the Bacillus subtilis YetJ channel, and the same alignment maps YetJ&rsquo;s pH-sensing aspartates D171 and D195 onto g8767 D186 and D209.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Accession</th><th>Protein</th><th>Organism</th><th>Identity to g8767*</th><th>Residue aligned to L82</th></tr></thead>
+      <tbody>
+<tr><td class="gene">Q94A20</td><td>LIFEGUARD 5 (BI1-like)</td><td>Arabidopsis thaliana</td><td>44%</td><td><b>S</b></td></tr>
+<tr><td class="gene">Q9SA63</td><td>LIFEGUARD 4</td><td>Arabidopsis thaliana</td><td>40%</td><td><b>A</b></td></tr>
+<tr><td class="gene">Q9M1V9</td><td>LIFEGUARD 2</td><td>Arabidopsis thaliana</td><td>42%</td><td><b>A</b></td></tr>
+<tr><td class="gene">Q9ZQX7</td><td>LIFEGUARD 3</td><td>Arabidopsis thaliana</td><td>42%</td><td><b>A</b></td></tr>
+<tr><td class="gene">F4JIE8</td><td>LIFEGUARD 1</td><td>Arabidopsis thaliana</td><td>40%</td><td><b>S</b></td></tr>
+<tr><td class="gene">Q9LD45</td><td>Bax inhibitor 1</td><td>Arabidopsis thaliana</td><td>23%</td><td><b>L</b></td></tr>
+<tr><td class="gene">Q9MBD8</td><td>Bax inhibitor 1</td><td>Oryza sativa</td><td>20%</td><td><b>L</b></td></tr>
+<tr><td class="gene">P55061</td><td>Bax inhibitor 1 (TMBIM6)</td><td>Homo sapiens</td><td>23%</td><td><b>L</b></td></tr>
+<tr><td class="gene">Q9HC24</td><td>LIFEGUARD 4 (TMBIM4)</td><td>Homo sapiens</td><td>31%</td><td><b>L</b></td></tr>
+<tr><td class="gene">O74888</td><td>Bax inhibitor 1</td><td>S. pombe</td><td>32%</td><td><b>L</b></td></tr>
+<tr><td class="gene">P48558</td><td>Bax inhibitor 1</td><td>S. cerevisiae</td><td>29%</td><td><b>S</b></td></tr>
+<tr><td class="gene">Q11080</td><td>TMBIM4</td><td>C. elegans</td><td>29%</td><td><b>V</b></td></tr>
+<tr><td class="gene">O31539</td><td>YetJ, pH-sensitive Ca2+ channel</td><td>Bacillus subtilis</td><td>22%</td><td><b>V</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>* Identity over aligned positions in the 28-sequence MAFFT alignment (<a href="assets/g8767_family_alignment_MAFFT.fasta">FASTA</a>). BLAST identities for the top hits are 37&ndash;43%.</p>
+</section>
+
+<section id="l82">
+  <div class="section-head"><span class="section-num">03</span><h2>Residue 82 across the family</h2></div>
+  <figure>
+    <img src="assets/g8767_L82_conservation_esm2.png" alt="Left: alignment of the region around residue 82 in 18 related proteins, with the aligned position boxed. Right: ESM2 score for every possible residue at position 82, with proline highlighted." loading="lazy" style="max-width:100%;height:auto;">
+    <figcaption>Left: alignment around residue 82 (boxed). Right: ESM2 score for each residue at position 82 relative to the wild-type leucine (0 = no change; more negative = less tolerated).</figcaption>
+  </figure>
+  <p><b>Conservation.</b> Position 82 is not invariant: the LIFEGUARD relatives carry serine or alanine and the classical Bax inhibitors carry leucine, so a small or hydrophobic side chain is what the family accepts here. What it never carries is proline, in any of 28 sequences. The Chlorella protein also has proline at position 81, directly before it, where its relatives have valine, alanine, leucine, phenylalanine or threonine. L82P therefore makes a Pro&ndash;Pro pair. This replaces and extends the earlier ten-sequence check (60% leucine at this position), which used only classical Bax inhibitor proteins.</p>
+  <p><b>Language-model score.</b> ESM2 (650M parameters) scores L82P at -8.6; it ranks 13 of 20 residues at this site, against only &minus;1 to &minus;3 for the conservative changes (isoleucine, valine, phenylalanine, alanine). Of all 4,332 possible single substitutions in this protein, about 20% score worse than L82P, so it sits in the most damaging fifth.</p>
+  <p><b>Predicted structure.</b> Residue 82 lies in a predicted transmembrane helix (residues 69&ndash;93, supported by hydropathy) and its side chain packs against L51, L54, C78 and W79. The ColabFold models of wild type and mutant keep the helix (local C&alpha; RMSD 0.56&nbsp;&Aring; over residues 70&ndash;95), but model confidence at the site falls from pLDDT 89 to 81, and the mean from 82 to 76. These models are known to under-report the helix-breaking effect of proline, so the intact helix is not reassuring on its own. The change is far in sequence from the pH-sensing aspartates (it aligns to YetJ V76), so it is not a change in the sensor itself.</p>
+</section>
+
+<section id="limits">
+  <div class="section-head"><span class="section-num">04</span><h2>What this supports and what it cannot say</h2></div>
+  <p><b>Supported:</b> L82P is a poorly tolerated substitution in a conserved transmembrane helix of a TMBIM-family protein, which fits the fold-confidence drop already reported on the main page and points to altered stability or channel gating.</p>
+  <p><b>Not supported by any of this:</b></p>
+  <ul>
+    <li><b>Gain versus loss of function.</b> The analyses say the change is disfavoured, not which way activity moves. The partial loss-of-function reading on the main page remains a prediction to test.</li>
+    <li><b>Over-expression.</b> An amino-acid substitution does not change how much transcript is made; higher or lower expression would have to come from a regulatory difference. Expression has not been measured for g8767.</li>
+    <li><b>Causality.</b> A single ALE-specific change is not shown to cause the stress tolerance. Only introducing it into HS2, or reverting it in ALE, tests that.</li>
+  </ul>
+</section>
+
+<section id="next">
+  <div class="section-head"><span class="section-num">05</span><h2>Experiments that would answer the open question</h2></div>
+  <ol>
+    <li><b>Transcript level:</b> RT-qPCR for g8767 in HS2 and ALE. Two exon-junction pairs were designed; each gives one predicted product among all 9,388 spliced transcripts and none on genomic DNA, and neither overlaps the mutation, so efficiency should match in the two strains.</li>
+  </ol>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Assay</th><th>Primers F / R</th><th>Product</th><th>Tm F / R (&deg;C)</th></tr></thead>
+      <tbody>
+<tr><td>Pair 1</td><td><code>CACCCAGCTCCTAATCCAGC</code><br><code>ACAGGTTGATGACGTCGAGG</code></td><td>83 bp</td><td>60.2 / 59.8</td></tr>
+<tr><td>Pair 2</td><td><code>ATGGCCTGCAGTTTCTACCC</code><br><code>TCGGTGCCATGAATCCGAAG</code></td><td>133 bp</td><td>60.0 / 60.5</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ol start="2">
+    <li><b>Activity:</b> the Ca<sup>2+</sup> readout already proposed on the main page (a cell-permeant dye under the hydrolysate dose series). It tests the prediction that L82P reduces a chronic Ca<sup>2+</sup> leak.</li>
+    <li><b>Function in a heterologous system:</b> a yeast Bax-suppression or Ca<sup>2+</sup> flux assay with the wild-type and L82P proteins, which separates the protein&rsquo;s own activity from everything else that differs between the strains.</li>
+    <li><b>Causality:</b> introduce L82P into HS2, or revert it in ALE, and re-measure stress tolerance.</li>
+  </ol>
+</section>
+
+<footer>
+  Gene model from the AUGUSTUS annotation of the HS2 purged assembly; ALE sequence from the 2026 HiFi alignment. Alignment: MAFFT L-INS-i; structures: ColabFold (AlphaFold2); language model: ESM2 650M. Updated 2026-11-04.
+</footer>
+
+</div>
+</body>
+</html>

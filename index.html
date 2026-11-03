@@ -1618,6 +1618,10 @@ CTGGCAGTGCAGGGCCCTCGACTTGCTCTGCACATGCTTGTCTCGCAACCCGAAGCAGCCGTGTAACCCCTACCAAGCGC
     <div class="callout reveal">
       <div class="k">What this means for the candidate list</div>
       <p>g8767's case for being the strongest candidate now rests entirely on <strong>fold-confidence destabilization</strong> (ESMFold and AlphaFold2 both independently show a real pLDDT drop &mdash; that metric is deterministic, not seed-dependent, and is unaffected by this correction) and on its Foldseek-derived structural-homology hypothesis (the YetJ/Ca<sup>2+</sup>-channel connection). The claim that its mutation <em>also</em> changes small-molecule ligand interaction is retracted. Across all three genes and every ligand tested, properly seed-averaged docking now shows <strong>no robust ligand-interaction effect anywhere</strong> &mdash; a comprehensive, honest null result, not a source of candidate-prioritization signal the way it was previously framed. The static pose-comparison images and rotating GIFs below are kept for illustration of the search space and pocket geometry, but the score differences they visualize should not be read as reproducible findings.</p>
+      <div class="callout reveal" style="border-color:var(--accent-ale);">
+        <div class="k">Update (2026-11-04): g8767 re-analysed against a 28-protein family alignment</div>
+        <p>The gene model is complete (687 bp, 228 aa) and L82P is its only coding change. g8767 sits on the LIFEGUARD branch of the TMBIM family (closest relatives about 41&ndash;43% identical), and none of 28 relatives has proline at position 82, while the Chlorella protein already has proline at 81, so L82P makes a Pro&ndash;Pro pair in a transmembrane helix. This is consistent with the fold-confidence drop above, but it cannot say whether activity rises or falls, and expression has not been measured. Details and qPCR primers: <a href="g8767_analysis.html">&rarr; g8767 re-analysis page</a>.</p>
+      </div>
     </div>
 
     <div class="fig-2col reveal">
